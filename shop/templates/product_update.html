@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <main class="add-product">
+        <div class="form-header">
+        <h1 class="form-title">Update {{ product.name }}</h1>
+        </div>
+        <form class="product-update-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form-name form-group mb-2 col-3 p-3">
+                <label for="{{ product_form.name.id_for_label }}">{{ product_form.name.label }}</label>
+                {{ product_form.name }}
+            </div>
+            <div class="form-name form-group p-3 col-sm-9">
+                <label for="{{ product_form.price.id_for_label }}">{{ product_form.price.label }}</label>
+                £{{ product_form.price }}
+            </div>
+            <div class="form-group mb-2 col-3 p-3 form-category">
+                <label for="{{ product_form.category.id_for_label }}">{{ product_form.category.label }}</label>
+                {{ product_form.category }}
+                <a class="nav-link active" target="_blank" href="{% url 'add_category' %}" class="btn btn-secondary">Add New Category</a>
+            </div>
+            <div class="form-group mb-2 col-3 p-3 form-description">
+                <label for="{{ product_form.description.id_for_label }}">{{ product_form.description.label }}</label>
+                {{ product_form.description }}
+            </div>
+            <div class="form-group mb-2 col-3 p-3 form-image">
+                <label for="{{ product_form.image.id_for_label }}">{{ product_form.image.label }}</label>
+                {{ product_form.image }}
+            </div>
+            <div class="form-group mb-2 col-3 p-3 form-quantity">
+                <label for="{{ product_form.quantity.id_for_label }}">{{ product_form.quantity.label }}</label>
+                {{ product_form.quantity }}
+            </div>
+            <div class="form-group mb-2 col-3 p-3 form-sale">
+                <label for="{{ product_form.is_sale.id_for_label }}">{{ product_form.is_sale.label }}</label>
+                {{ product_form.is_sale }}
+                <br>
+                <label for="{{ product_form.sale_price.id_for_label }}">{{ product_form.sale_price.label }}</label>
+                £{{ product_form.sale_price }}
+            </div>
+            <div class="form-group mb-2 col-3 p-3 form-sale">
+                <label for="{{ product_form.is_sold_out.id_for_label }}">{{ product_form.is_sold_out.label }}</label>
+                {{ product_form.is_sold_out }}
+            </div>
+            <button type="submit" class="publish-button">Update Product</button>
+        </form>
+    </main>
+{% endblock %}

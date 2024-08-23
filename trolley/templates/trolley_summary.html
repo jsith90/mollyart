@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load trolley_filters %}
+{% block content %}
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Shopping Trolley</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">View your Trolley</p>
+                </div>
+            </div>
+        </header>
+        <br><br><br>
+        <div class="container">
+            {% if trolley_products %}
+            {% for product in trolley_products %}
+                <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description }}.</p>
+        {% if product.is_sale %}
+        <!-- Product price-->
+                                    <strike>
+                                    £{{ product.price }}
+                                    </strike>
+                                    &nbsp;
+                                    £{{ product.sale_price }}
+                                    <br>
+        {% else %}
+        <!-- Product price-->
+                                    £{{ product.price }}
+                                    <br>
+        {% endif %}
+        <br><br><br>
+        <div class="row justify-content-center">
+          <div class="col-md-4">Quantity:</div>
+          <div class="col-md-3">
+        <select id="select{{product.id}}" class="form-select form-select-sm">
+    <option selected>
+        {% for key, value in quantities.items %}
+
+            {% if key == product.id|slugify %}
+                {{ value }}
+
+
+            {% endif %}
+
+        {% endfor %}
+    </option>
+
+          {% for i in product.quantity|range %}
+  <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+          {% endfor %}
+</select>
+</div>
+</div>
+<br>
+        <a href="{% url 'index' %}" class="btn btn-secondary">Home</a>
+        <button type="button" data-index="{{ product.id }}" class="btn btn-secondary update-trolley">Update</button>
+        <button type="button" data-index="{{ product.id }}" class="btn btn-danger delete-product">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+            {% endfor %}
+            <div align="right">
+            <h3>Total: ${{ totals }}</h3>
+            <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+            </div>
+            {% else %}
+            There's nothing in your trolley...
+            {% endif %}
+        </div>
+       <br><br><br><br><br>
+
+
+       
+
+        <script>
+              // Update trolley
+  $(document).on('click', '.update-trolley', function(e){
+    e.preventDefault();
+    var productid = $(this).data('index');
+
+    $.ajax({
+    type: 'POST',
+    url: '{% url 'trolley_update' %}',
+    data: {
+        product_id: $(this).data('index'),
+        product_qty: $('#select' + productid + ' option:selected').text(),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+    },
+
+        success: function(json){
+          //console.log(json)
+          // document.getElementById('trolley_quantity').textContent = json.qty
+          location.reload();
+        },
+        error: function(xhr, errmsg, err){
+
+        }
+  });
+
+});
+
+  // delete item from trolley
+
+   $(document).on('click', '.delete-product', function(e){
+    e.preventDefault();
+    // var productid = $(this).data('index');
+
+    $.ajax({
+    type: 'POST',
+    url: '{% url 'trolley_delete' %}',
+    data: {
+        product_id: $(this).data('index'),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        action: 'post'
+    },
+
+        success: function(json){
+          //console.log(json)
+          // document.getElementById('trolley_quantity').textContent = json.qty
+          location.reload();
+        },
+        error: function(xhr, errmsg, err){
+
+        }
+  });
+
+});
+        </script>
+
+         {% endblock %}

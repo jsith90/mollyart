@@ -1,0 +1,26 @@
+{% load static %}
+<!-- navbar goes here -->
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Shop</a></li>
+ <form class="d-flex">
+                        <a href="{% url 'trolley_summary' %}" class="btn btn-outline-dark">
+                            <i class="bi-trolley-fill me-1">
+                            </i>
+                            Trolley
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="trolley_quantity">{{ trolley | length }}</span>
+                        </a>
+                    </form>
+                        {% if user.is_superuser %}
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_product' %}">Add Product</a></li>
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_category' %}">Add Category</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Orders</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'shipped_dash' %}">Shipped Orders</a></li>
+                                <li><hr class="dropdown-divider" /></li><a class="dropdown-item" href="{% url 'not_shipped_dash' %}">Unshipped Orders</a></li>
+                            </ul>
+                        </li>
+                        <a class="dropdown-item drop-list" aria-label="Logout of User account" href="{% url 'logout' %}" class="active">Logout</a>
+                        {% endif %}
+                        {% if not user.is_authenticated %}
+                        <a class="copythat" href="{% url 'login_user' %}">Login</a>
+                        {% endif %}

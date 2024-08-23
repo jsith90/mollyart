@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- login page -->
+	<main class="login">
+		<!-- login form -->
+		<section id="login-main">
+			<h2 id="login-heading">Login</h2>
+			<hr class="line-break">
+			<form id="login-form" method=POST aria-label="login form">
+				{% csrf_token %}
+  					<div class="mb-3">
+    					<label for="username" class="form-label">Username:</label>
+    					<input id="username" type="text" class="form-control" name="username">
+  					</div>
+  					<div class="mb-3">
+    					<label for="password" class="form-label">Password:</label>
+    					<input id="password" type="password" class="form-control" name="password">
+  					</div>
+					<hr class="line-break">
+					<button type="submit" value="Submit" id="login-button" aria-label="click to login">Submit</button>
+			</form>
+		</section>
+	</main>	
+{% endblock %}
