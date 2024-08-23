@@ -36,7 +36,7 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 print(f"DEBUG (after conversion): {DEBUG}")
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mollyart-production.up.railway.app', 'https://mollyart-production.up.railway.app']
+ALLOWED_HOSTS = ['mollyart-production.up.railway.app', 'https://mollyart-production.up.railway.app', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://mollyart-production.up.railway.app']
 
 
