@@ -37,7 +37,7 @@ print(f"DEBUG (after conversion): {DEBUG}")
 
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mollyart-production.up.railway.app', 'https://mollyart-production.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['mollyart-production.up.railway.app', 'https://mollyart-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://mollyart-production.up.railway.app']
 
 
 # Application definition
