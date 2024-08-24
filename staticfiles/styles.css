@@ -1,0 +1,238 @@
+{% load static %}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3 {
+	font-family: "Karla", sans-serif;
+	font-weight: 800;
+	font-style: normal;
+}
+
+p, a {
+	font-family: "Space Grotesk", sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	text-decoration: none;
+	color: black;
+}
+
+.shop-header {
+	display: flex;
+	justify-content: center;
+	margin: 0 0 2rem 0;
+}
+
+.shop-header > div > h1 {
+	text-transform: uppercase;
+	font-size: 4rem;
+}
+
+.category-display {
+	display: flex;
+	justify-content: center;
+	margin: 0 0 6rem 0;
+}
+
+.category-display > div {
+	width: 100%;
+	text-align: center;
+}
+
+.category-display > div > h2 {
+	display: inline;
+	padding: 1rem;
+}
+
+.category-display > div > h2 > a {
+	text-decoration: none;
+	color: black;
+}
+
+.category-display > div > h2 > a:hover {
+	cursor: pointer;
+	color: #4eb2ff;
+}
+
+.shop-display {
+	padding: 0 2rem 2rem 5rem;
+}
+
+.shop-display > div {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.shop-item {
+	display: flex;
+	width: 50%;
+	margin: 3rem 0 3rem 0;
+}
+
+.item-image-box {
+	width: 50%;
+	position: relative;
+}
+
+.sold-out-badge {
+	position: absolute;
+	right: 10px;
+	top: 8px;
+	text-align: center;
+	color: white;
+    padding: 2px;
+    background: black;
+    width: 30%;
+    text-transform: uppercase;
+}
+
+.sale-badge {
+	position: absolute;
+	right: 10px;
+	top: 8px;
+	text-align: center;
+	color: white;
+    padding: 2px;
+    background: red;
+    width: 20%;
+    text-transform: uppercase;
+}
+
+.shop-image {
+	width: 100%;
+}
+
+.item-detail {
+	width: 50%;
+	margin: 0 0 0 3rem;
+}
+
+.line-through {
+	text-decoration: line-through;
+}
+
+.item-detail > h3 {
+	text-transform: uppercase;
+	margin: 0 0 3rem 0;
+}
+
+.item-detail p {
+	text-transform: uppercase;
+}
+
+.price {
+	font-family: "Karla", sans-serif;
+	font-size: 1.75rem;
+	font-weight: 800;
+	margin: 0 0 1rem 0;
+}
+
+.view-product-button {
+	background: black;
+	border: black solid;
+	text-align: center;
+	padding: 0.2rem;
+	width: 40%;
+}
+
+.view-product-button:hover {
+	background: #4eb2ff;
+	cursor: pointer;
+}
+
+.view-product-button > a {
+	color: white;
+	text-transform: uppercase;
+	padding: 0.2rem;
+}
+
+
+@media only screen and (max-width: 1386px) {
+  .view-product-button > a, .sold-out-badge {
+  	font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 1188px) {
+  .view-product-button > a, .sold-out-badge {
+  	font-size: 0.7rem;
+  }
+  .sale-badge {
+  	font-size: 0.8rem;
+  }
+
+  .view-product-button {
+  	width: 60%;
+  }
+}
+
+@media only screen and (max-width: 1060px) {
+  .shop-display {
+  	padding: 0 2rem 2rem 2rem;
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  
+  .category-display {
+  	margin: 0 0 1rem 0;
+  }
+
+  .shop-item {
+  	width: 100%;
+  	flex-direction: column;
+  	align-items: center;
+  }
+
+  .item-image-box, .item-detail {
+  	width: 70%;
+  	margin: 0;
+  }
+
+  .item-detail {
+  	margin: 1rem 0 0 0;
+  }
+
+  .sale-badge {
+  	width: 15%;
+  }
+
+  .sold-out-badge {
+  	width: 20%;
+  }
+
+  .view-product-button {
+  	width: 30%;
+
+  }
+}
+
+@media only screen and (max-width: 530px) {
+	.item-image-box, .item-detail {
+  		width: 90%;
+  	}
+
+  	.shop-header > div > h1 {
+  		font-size: 2rem;
+  	}
+
+  	.category-display > div > h2 > a {
+  		font-size: 1.2rem;
+  	}
+
+  	.sold-out-badge {
+  		font-size: 0.5rem;
+  	}
+  .sale-badge {
+  		font-size: 0.6rem;
+  	}
+
+  	.view-product-button {
+  		width: 40%;
+  	}
+
+}
+
