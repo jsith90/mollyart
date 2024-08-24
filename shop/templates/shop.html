@@ -2,114 +2,89 @@
 
 {% block content %}
         <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Shop in style</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
-                </div>
+        <header class="shop-header">
+            <div>
+                <h1 class="shop-heading">Molly's Shop</h1>
             </div>
         </header>
         <!-- Section-->
-        <section class="py-5">
-            <div class="container">
-                <div class="row">
-                    <center>
-                        <div class="col-8">
-                            <br />
-                            {% for category in categories %}
-                            <h3><a href="{% url 'category' category %}">{{ category }}</a></h3>
-                            {% endfor %}
-                            <br />
-                        </div>
-                    </center>
-                </div>
-            </div>
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">    
-                    {% for product in products %}
-                        {% if product.is_sale %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- sale badge -->
-                            <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ product.name }}</h5>
-                                    <!-- Product price-->
-                                    <strike>
-                                    £{{ product.price }}
-                                    </strike>
-                                    &nbsp;
-                                    £{{ product.sale_price }}
-                                    <br>
-                                    <p>{{ product.description }}</p>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View product</a></div>
-                            </div>
-                        </div>
-                    </div>
-                        {% elif product.is_sold_out %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- sale badge -->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sold Out</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <strike>
-                                    <h5 class="fw-bolder">{{ product.name }}</h5>
-                                    </strike>
-                                    <!-- Product price-->
-                                    £{{ product.price }}
-                                    &nbsp;
-                                    <p>SOLD OUT</p>
-                                    <br>
-                                    <p>{{ product.description }}</p>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View product</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                        {% else %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ product.name }}</h5>
-                                    <!-- Product price-->
-                                    £{{ product.price }}
-                                    <br>
-                                    <p>{{ product.description }}</p>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View product</a></div>
-                            </div>
-                        </div>
-                    </div>
+        <section class="category-display">
+            <div>
+                {% for category in categories %}
+                    <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
+                    {% if not forloop.last  %}
+                    <h2>·</h2>
                     {% endif %}
-                    {% endfor %}
-                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="shop-display">
+            <div>    
+                {% for product in products %}
+                    {% if product.is_sale %}
+                        <div class="shop-item">
+                            <div class="item-image-box">
+                                <!-- sale badge -->
+                                <p class="sale-badge">Sale</p>
+                                <!-- Product image-->
+                                <img class="shop-image" src="{{ product.image.url }}" alt="..." />
+                            </div>
+                            <!-- Product details-->
+                            <div class="item-detail">
+                                <!-- Product name-->
+                                <h3>{{ product.name }}</h3>
+                                <!-- Product price-->
+                                <p>{{ product.description }}</p>
+                                <p class="line-through">£{{ product.price }}</p>
+                                <h4 class="price">£{{ product.sale_price }}</h4>
+                            
+                                <!-- Product actions-->
+                                <div class="view-product-button">
+                                    <a href="{% url 'product' product.id %}">Look At This</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif product.is_sold_out %}
+                        <div class="shop-item">
+                            <div class="item-image-box">
+                                <!-- sold out badge -->
+                                <p class="sold-out-badge">Sold Out</p>
+                                <!-- Product image-->
+                                <img class="shop-image" src="{{ product.image.url }}" alt="..." />
+                            </div>
+                            <!-- Product details-->
+                            <div class="item-detail">
+                                <h3 class="line-through">{{ product.name }}</h3>
+                                <!-- Product price-->
+                                <p>{{ product.description }}</p>
+                                <h4 class="price">£{{ product.price }}</h4>
+                                <!-- Product actions-->
+                                <div class="view-product-button">
+                                    <a href="{% url 'product' product.id %}">Look At This</a>
+                                </div>    
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="shop-item">
+                            <div class="item-image-box">
+                                <!-- Product image-->
+                                <img class="shop-image" src="{{ product.image.url }}" alt="..." />
+                            </div>
+                            <!-- Product details-->
+                            <div class="item-detail">
+                                <!-- Product name-->
+                                <h3>{{ product.name }}</h3>
+                                <!-- Product price-->
+                                <p>{{ product.description }}</p>
+                                <h4 class="price">£{{ product.price }}</h4>
+                                <!-- Product actions-->
+                                <div class="view-product-button">
+                                    <a href="{% url 'product' product.id %}">Look At This</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </section>
 
