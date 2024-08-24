@@ -35,6 +35,9 @@ class Product(models.Model):
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
 	description = models.CharField(max_length=250, default='', blank=True, null=True)
 	image = CloudinaryField('image', blank=True, null=True)
+	image2 = CloudinaryField('image', blank=True, null=True)
+	image3 = CloudinaryField('image', blank=True, null=True)
+	image4 = CloudinaryField('image', blank=True, null=True)
 	quantity = models.IntegerField(default=1)
 	# Add sale stuff
 	is_sale = models.BooleanField(default=False)

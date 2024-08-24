@@ -23,9 +23,9 @@
                             Product: {{ product.name }}
                             <br>
                             {% if product.is_sale %}
-                               Price: ${{ product.sale_price }}
+                               Price: £{{ product.sale_price }}
                                 {% else %}
-                               Price: ${{ product.price }}
+                               Price: £{{ product.price }}
                             {% endif %}
                             <br>
                             Quantity:
@@ -37,7 +37,7 @@
                             <br>
                             <hr>
                         {% endfor %}
-                         Total: ${{ totals }}
+                         Total: £{{ totals }}
                          <br>
                          <br>
                          <a href="{% url 'trolley_summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
