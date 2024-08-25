@@ -1,75 +1,80 @@
 {% extends 'base.html' %}
 {% load shop_filters %}
 {% block content %}
-<br><br>
-<center>
-<div class="container">
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
+  <section class="shop-display">
+    <div class="product">    
+      <div class="product-item">
         {% if product.is_sale %}
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">{{ product.description }}.</p>
-        <!-- Product price-->
-                                    <strike>
-                                    £{{ product.price }}
-                                    </strike>
-                                    &nbsp;
-                                    £{{ product.sale_price }}
-                                    <br>
+          <div class="item-image-box">
+            <!-- sale badge -->
+            <p class="sale-badge">Sale</p>
+            <!-- Product image-->
+            <img class="shop-image" src="{{ product.image.url }}" alt="{{ product.name }}" />
+          </div>
+          <!-- Product details-->
+          <div class="item-detail">
+            <!-- Product name-->
+            <h3>{{ product.name }}</h3>
+            <!-- Product price-->
+            <p>{{ product.description }}</p>
+            <p class="line-through">£{{ product.price }}</p>
+            <h4 class="price">£{{ product.sale_price }}</h4>
         {% elif product.is_sold_out %}
-                                    <!-- Product name-->
-                                    <strike>
-                                    <h5 class="fw-bolder">{{ product.name }}</h5>
-                                    <p class="card-text">{{ product.description }}.</p>
-                                    </strike>
-                                    <!-- Product price-->
-                                    £{{ product.price }}
-                                    &nbsp;
-                                    <p>SOLD OUT</p>
-                                    <br>
+          <div class="item-image-box">
+            <!-- sold out badge -->
+            <p class="sold-out-badge">Sold Out</p>
+            <!-- Product image-->
+            <img class="shop-image" src="{{ product.image.url }}" alt="{{ product.name }}" />
+          </div>
+          <!-- Product details-->
+          <div class="item-detail">
+            <h3 class="line-through">{{ product.name }}</h3>
+            <!-- Product price-->
+            <p>{{ product.description }}</p>
+            <h4 class="price">£{{ product.price }}</h4>
         {% else %}
-        <!-- Product price-->
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">{{ product.description }}.</p>
-                                    £{{ product.price }}
-                                    <br>
-                                    <!-- <br>ID: {{ product.id }} -->
+          <div class="item-image-box">  
+            <!-- Product image-->
+            <img class="shop-image" src="{{ product.image.url }}" alt="{{ product.name }}" />
+          </div>
+          <!-- Product details-->
+          <div class="item-detail">
+            <!-- Product name-->
+            <h3>{{ product.name }}</h3>
+            <!-- Product price-->
+            <p>{{ product.description }}</p>
+            <h4 class="price">£{{ product.price }}</h4>
         {% endif %}
-        <br>
         {% if not product.is_sold_out %}
-        <div class="row justify-content-center">
-          <div class="col-md-4">Quantity:</div>
-          <div class="col-md-3">
-        <select id="qty-trolley" class="form-select form-select-sm">
-          {% for i in product.quantity|range %}
-  <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
-          {% endfor %}
-</select>
-</div>
-</div>
-{% endif %}
-        <br><br>
-        {% if product.is_sold_out %}
-        <a href="{% url 'index' %}" class="btn btn-secondary">Home</a>
-        <a class="nav-link active" href="{% url 'product_update' product.id %}" class="btn btn-secondary">Edit</a>
-        <a class="nav-link active" href="{% url 'delete_product' product.id %}" class="btn btn-secondary">Delete</a>
-        {% else %}
-        <a href="{% url 'index' %}" class="btn btn-secondary">Home</a>
-        <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-trolley">Add to Trolley</button>
-        <a class="nav-link active" href="{% url 'product_update' product.id %}" class="btn btn-secondary">Edit</a>
-        <a class="nav-link active" href="{% url 'delete_product' product.id %}" class="btn btn-secondary">Delete</a>
+          <div class="quantity-box">
+            <h5 class="price">Quantity:</h5>
+              <select id="qty-trolley" class="quantity-form">
+                {% for i in product.quantity|range %}
+                  <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+                {% endfor %}
+              </select>
+          </div>
         {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="product-buttons">
+          {% if not product.is_sold_out %}
+            <button type="button" value="{{ product.id }}" class="trolley-button" id="add-trolley">Add to Trolley</button>
+          {% endif %}
+          <div class="product-button">
+            <a href="{% url 'shop' %}">Molly's Shop</a>
+          </div>
+          {% if user.is_superuser %}
+            <div class="product-button edit">
+              <a class="edit" href="{% url 'product_update' product.id %}">Edit</a>
+            </div>
+            <div class="product-button delete">
+              <a class="delete" href="{% url 'delete_product' product.id %}">Delete</a>
+            </div>
+          {% endif %}
         </div>
-        </center> 
+          </div>
+      </div>
+    </div>     
+  </section>
 
 <script>
   // Check if button pressed

@@ -5,13 +5,13 @@
 	padding: 0;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
 	font-family: "Karla", sans-serif;
 	font-weight: 800;
 	font-style: normal;
 }
 
-p, a {
+p, a, button {
 	font-family: "Space Grotesk", sans-serif;
 	font-weight: 600;
 	font-style: normal;
@@ -44,6 +44,7 @@ p, a {
 .category-display > div > h2 {
 	display: inline;
 	padding: 1rem;
+	white-space: nowrap;
 }
 
 .category-display > div > h2 > a {
@@ -149,9 +150,82 @@ p, a {
 	padding: 0.2rem;
 }
 
+.shop-display > .product {
+	display: flex;
+	justify-content: center;
+}
+
+.product-item {
+	display: flex;
+	width: 80%;
+	margin: 3rem 0 3rem 0;
+}
+
+.quantity-box {
+	margin: 60px 0 0 0;	
+}
+
+.quantity-form {
+	width: 30%;
+	background: black;
+	color: white;
+	font-size: large;
+}
+
+.product-buttons {
+	margin: 2rem 0 0 0;
+}
+
+.product-button {
+	margin: 1rem 0 1rem 0;
+	background: white;
+	border: black solid;
+	text-align: center;
+	padding: 0.2rem;
+	width: 40%;
+}
+
+.product-button:hover {
+	background: #4eb2ff;
+	cursor: pointer;
+}
+
+.product-button > a {
+	color: black;
+	text-transform: uppercase;
+	padding: 0.2rem;
+}
+
+.trolley-button {
+	background: white;
+	border: black solid;
+	text-align: center;
+	padding: 0.2rem;
+	width: 40%;
+	color: black;
+	text-transform: uppercase;
+	margin: 1rem 0 1rem 0;
+}
+
+.trolley-button:hover {
+	background: #4eb2ff;
+	cursor: pointer;
+}
+
+.edit > .edit {
+	color: green;
+}
+
+.delete > .delete {
+	color: red;
+}
 
 @media only screen and (max-width: 1386px) {
   .view-product-button > a, .sold-out-badge {
+  	font-size: 0.8rem;
+  }
+
+  .product-button > a, .trolley-button {
   	font-size: 0.8rem;
   }
 }
@@ -160,13 +234,18 @@ p, a {
   .view-product-button > a, .sold-out-badge {
   	font-size: 0.7rem;
   }
+
+  .product-button > a, .trolley-button {
+  	font-size: 0.7rem;
+  }
+
   .sale-badge {
   	font-size: 0.8rem;
   }
 
-  .view-product-button {
+  .view-product-button, .product-button, .trolley-button  {
   	width: 60%;
-  }
+	}
 }
 
 @media only screen and (max-width: 1060px) {
@@ -204,9 +283,14 @@ p, a {
   	width: 20%;
   }
 
-  .view-product-button {
+  .view-product-button, .product-button, .trolley-button {
   	width: 30%;
+  }
 
+  .product-item {
+  	width: 100%;
+  	flex-direction: column;
+  	align-items: center;
   }
 }
 
@@ -230,9 +314,8 @@ p, a {
   		font-size: 0.6rem;
   	}
 
-  	.view-product-button {
+  	.view-product-button, .product-button, .trolley-button {
   		width: 40%;
   	}
-
 }
 
