@@ -123,7 +123,8 @@ def process_order(request):
 					product_obj = Product.objects.get(id=product_id)
 					product_obj.quantity -= value  # Subtract the purchased quantity
 					if product_obj.quantity == 0:
-						product_obj.is_sold_out = True 
+						product_obj.is_sold_out = True
+						product_obj.is_sale = False 
 					product_obj.save()  # Save the updated product
 
 			# delete our trolley

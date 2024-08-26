@@ -132,6 +132,25 @@ def add_category(request):
         return redirect('index')
 
 
+# Create your views here.
+def category_update(request, category_id):
+	user = request.user
+	if user.is_superuser:
+		category = get_object_or_404(Category, id=category_id)
+		if request.method == 'POST':
+			category_form = CategoryForm(request.POST, request.FILES, instance=category)
+			if category_form.is_valid():
+				category_form.save()
+				return redirect('index')
+			# Redirect to a suitable page after updating
+			else:
+				return render(request, 'category_update.html', { 'category':category, 'category_form': category_form, 'category': category})
+		else:
+			category_form = CategoryForm(instance=category)
+			return render(request, 'category_update.html', { 'category': category, 'category_form': category_form })
+	else:
+		return redirect('index')
+
 
 def delete_product(request, pk):
     user = request.user

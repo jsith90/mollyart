@@ -96,8 +96,12 @@
                     {% endif %}
                     {% endfor %}
                 </div>
+                {% if user.is_superuser %}
+            <a href="{% url 'category_update' category.id %}" class="btn btn-secondary">Edit Category</a>
+            <a href="{% url 'delete_category' category.id %}" class="btn btn-secondary">Delete Category</a>
+            {% endif %}
             </div>
-            <a class="nav-link active" href="{% url 'delete_category' category.id %}" class="btn btn-secondary">Delete Category</a>
+
         </section>
 
         {% endblock %}

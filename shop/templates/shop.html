@@ -23,6 +23,7 @@
                 {% for product in products %}
                     {% if product.is_sale %}
                         <div class="shop-item">
+                        <a href="{% url 'product' product.id %}">
                             <div class="item-image-box">
                                 <!-- sale badge -->
                                 <p class="sale-badge">Sale</p>
@@ -39,18 +40,20 @@
                                 <h4 class="price">£{{ product.sale_price }}</h4>
                             
                                 <!-- Product actions-->
-                                <div class="view-product-button">
-                                    <a href="{% url 'product' product.id %}">Look At This</a>
+                                <div class="view-product-sale">
+                                <p>Sale</p>
                                 </div>
                             </div>
+                        </a>
                         </div>
                     {% elif product.is_sold_out %}
                         <div class="shop-item">
+                            <a href="{% url 'product' product.id %}">
                             <div class="item-image-box">
                                 <!-- sold out badge -->
                                 <p class="sold-out-badge">Sold Out</p>
                                 <!-- Product image-->
-                                <img class="shop-image" src="{{ product.image.url }}" alt="..." />
+                                <img class="shop-image" src="{{ product.image.url }}" alt="{{ product.name }}" />
                             </div>
                             <!-- Product details-->
                             <div class="item-detail">
@@ -59,13 +62,15 @@
                                 <p>{{ product.description }}</p>
                                 <h4 class="price">£{{ product.price }}</h4>
                                 <!-- Product actions-->
-                                <div class="view-product-button">
-                                    <a href="{% url 'product' product.id %}">Look At This</a>
+                                <div class="view-product-sold">
+                                    <p>Sold Out</p>
                                 </div>    
                             </div>
+                        </a>
                         </div>
                     {% else %}
                         <div class="shop-item">
+                            <a href="{% url 'product' product.id %}">
                             <div class="item-image-box">
                                 <!-- Product image-->
                                 <img class="shop-image" src="{{ product.image.url }}" alt="..." />
@@ -78,10 +83,11 @@
                                 <p>{{ product.description }}</p>
                                 <h4 class="price">£{{ product.price }}</h4>
                                 <!-- Product actions-->
-                                <div class="view-product-button">
-                                    <a href="{% url 'product' product.id %}">Look At This</a>
+                                <div class="view-product-available">
+                                    <p>Available</p>
                                 </div>
                             </div>
+                        </a>
                         </div>
                     {% endif %}
                 {% endfor %}
