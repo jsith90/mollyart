@@ -2,81 +2,65 @@
 {% load trolley_filters %}
 {% block content %}
         <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Shopping Trolley</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">View your Trolley</p>
-                </div>
+        <header class="shop-header">
+            <div>
+                <h1 class="shop-heading">Your Trolley</h1>
             </div>
         </header>
-        <br><br><br>
-        <div class="container">
+        <section class="shop-display">
             {% if trolley_products %}
             {% for product in trolley_products %}
-                <div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">{{ product.description }}.</p>
-        {% if product.is_sale %}
-        <!-- Product price-->
-                                    <strike>
-                                    £{{ product.price }}
-                                    </strike>
-                                    &nbsp;
-                                    £{{ product.sale_price }}
-                                    <br>
-        {% else %}
-        <!-- Product price-->
-                                    £{{ product.price }}
-                                    <br>
-        {% endif %}
-        <br><br><br>
-        <div class="row justify-content-center">
-          <div class="col-md-4">Quantity:</div>
-          <div class="col-md-3">
-        <select id="select{{product.id}}" class="form-select form-select-sm">
-    <option selected>
-        {% for key, value in quantities.items %}
-
-            {% if key == product.id|slugify %}
-                {{ value }}
-
-
-            {% endif %}
-
-        {% endfor %}
-    </option>
-
-          {% for i in product.quantity|range %}
-  <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
-          {% endfor %}
-</select>
-</div>
-</div>
-<br>
-        <a href="{% url 'index' %}" class="btn btn-secondary">Home</a>
-        <button type="button" data-index="{{ product.id }}" class="btn btn-secondary update-trolley">Update</button>
-        <button type="button" data-index="{{ product.id }}" class="btn btn-danger delete-product">Remove</button>
-      </div>
-    </div>
-  </div>
-</div>
+                <div class="checkout-product">
+                    <div class="product-item">
+                        <div class="item-image-box">  
+                            <!-- Product image-->
+                            <img class="shop-image" src="{{ product.image.url }}" alt="{{ product.name }}" />
+                        </div>
+                        <!-- Product details-->
+                        <div class="item-detail">
+                            <!-- Product name-->
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}.</p>
+                            {% if product.is_sale %}
+                                <!-- Product price-->
+                                <p class="line-through">£{{ product.price }}</p>
+                                <h4 class="price">£{{ product.sale_price }}</h4>
+                            {% else %}
+                                <!-- Product price-->
+                                <h4 class="price">£{{ product.price }}</h4>
+                            {% endif %}
+                            <div class="quantity-box">
+                                <h5 class="price">Quantity:</h5>
+                                <select id="qty-trolley" class="quantity-form">
+                                    <option selected>
+                                        {% for key, value in quantities.items %}
+                                            {% if key == product.id|slugify %}
+                                                {{ value }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </option>
+                                    {% for i in product.quantity|range %}
+                                        <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="product-buttons">
+                                <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
+                                <button type="button" data-index="{{ product.id }}" class="product-button update-trolley">Update</button>
+                                <button type="button" data-index="{{ product.id }}" class="product-button delete-product">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-            <div align="right">
-            <h3>Total: £{{ totals }}</h3>
-            <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+            <div class="checking-out">
+                <h3>Total: £{{ totals }}</h3>
+                <a href="{% url 'checkout' %}" class="view-product-available">Checkout</a>
             </div>
             {% else %}
-            There's nothing in your trolley...
+                <p>There's nothing in your trolley...</p>
             {% endif %}
-        </div>
-       <br><br><br><br><br>
+        </section>
 
 
        

@@ -152,8 +152,8 @@ p, a, button {
 }
 
 .view-product-available {
-	background: green;
-	border: green solid;
+	background: #3f9c44;
+	border: #3f9c44 solid;
 	text-align: center;
 	padding: 0.2rem;
 	width: 40%;
@@ -204,8 +204,11 @@ p, a, button {
 	background: white;
 	border: black solid;
 	text-align: center;
-	padding: 0.2rem;
+	padding: 0.4rem;
 	width: 40%;
+	color: black;
+	text-transform: uppercase;
+	display: block;
 }
 
 .product-button:hover {
@@ -213,7 +216,7 @@ p, a, button {
 	cursor: pointer;
 }
 
-.product-button > a {
+.product-button  {
 	color: black;
 	text-transform: uppercase;
 	padding: 0.2rem;
@@ -236,19 +239,39 @@ p, a, button {
 }
 
 .edit > .edit {
-	color: green;
+	color: #3f9c44;
 }
 
 .delete > .delete {
 	color: red;
 }
 
+.shop-display > .checkout-product {
+	display: flex;
+	justify-content: center;
+}
+
+.shop-display > .checkout-product > .product-item {
+	width: 50%;
+}
+
+.checking-out {
+	display: flex;
+	width: 90%;
+	justify-content: space-between;
+}
+
+.checking-out > .view-product-available {
+	width: 20%;
+	color: white;
+} 
+
 @media only screen and (max-width: 1386px) {
   .view-product-sale > p, .view-product-sold > p, .view-product-available > p, .sold-out-badge {
   	font-size: 0.8rem;
   }
 
-  .product-button > a, .trolley-button {
+  .product-button, .trolley-button {
   	font-size: 0.8rem;
   }
 }
@@ -258,7 +281,7 @@ p, a, button {
   	font-size: 0.7rem;
   }
 
-  .product-button > a, .trolley-button {
+  .product-button, .trolley-button {
   	font-size: 0.7rem;
   }
 
@@ -321,6 +344,22 @@ p, a, button {
   	flex-direction: column;
   	align-items: center;
   }
+
+  .shop-display > .checkout-product > .product-item {
+		width: 90%;
+	}
+
+}
+
+@media only screen and (max-width: 700px) {
+	.checking-out {
+    flex-direction: column;
+	}
+
+	.checking-out > .view-product-available {
+		margin-top: 1rem;
+    width: 40%;
+	}
 }
 
 @media only screen and (max-width: 530px) {
@@ -347,4 +386,5 @@ p, a, button {
   		width: 40%;
   	}
 }
+
 

@@ -55,20 +55,14 @@
               </select>
           </div>
         {% endif %}
-        <div class="product-buttons">
+        <div class="product-buttons edit delete"">
           {% if not product.is_sold_out %}
             <button type="button" value="{{ product.id }}" class="trolley-button" id="add-trolley">Add to Trolley</button>
           {% endif %}
-          <div class="product-button">
-            <a href="{% url 'shop' %}">Molly's Shop</a>
-          </div>
+            <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
           {% if user.is_superuser %}
-            <div class="product-button edit">
-              <a class="edit" href="{% url 'product_update' product.id %}">Edit</a>
-            </div>
-            <div class="product-button delete">
-              <a class="delete" href="{% url 'delete_product' product.id %}">Delete</a>
-            </div>
+            <a class="edit product-button" href="{% url 'product_update' product.id %}">Edit</a>
+            <a class="delete product-button" href="{% url 'delete_product' product.id %}">Delete</a>
           {% endif %}
         </div>
           </div>
