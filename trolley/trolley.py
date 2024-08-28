@@ -7,8 +7,6 @@ class Trolley():
 		self.request = request
 		# get current session key if it exists
 		trolley = self.session.get('session_key')
-
-		# if yuo user is new, no session key! Create one!
 		if 'session_key' not in request.session:
 			trolley = self.session['session_key'] = {}
 
@@ -46,8 +44,10 @@ class Trolley():
 	def trolley_total(self):
 		# get product ids
 		product_ids = self.trolley.keys()
+		print(product_ids)
 		# look up keys in our products database model
 		products = Product.objects.filter(id__in=product_ids)
+		print(f'this is {product_ids}') 
 		# get quantities
 		quantities = self.trolley
 		# start counting at 0
@@ -65,7 +65,7 @@ class Trolley():
 
 
 	def __len__(self):
-		return len(self.trolley)
+		return sum(self.trolley.values())
 
 	def get_prods(self):
 		# get ids from trolley
@@ -81,12 +81,9 @@ class Trolley():
 	def update(self, product, quantity):
 		product_id = str(product)
 		product_qty = int(quantity)
-
 		ourtrolley = self.trolley
 		ourtrolley[product_id] = product_qty
-
 		self.session.modified = True
-		
 		thing = self.trolley
 		return thing
 

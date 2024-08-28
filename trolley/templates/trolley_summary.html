@@ -31,7 +31,7 @@
                             {% endif %}
                             <div class="quantity-box">
                                 <h5 class="price">Quantity:</h5>
-                                <select id="qty-trolley" class="quantity-form">
+                                <select id="select{{ product.id }}" class="quantity-form">
                                     <option selected>
                                         {% for key, value in quantities.items %}
                                             {% if key == product.id|slugify %}
@@ -55,19 +55,15 @@
             {% endfor %}
             <div class="checking-out">
                 <h3>Total: £{{ totals }}</h3>
-                <a href="{% url 'checkout' %}" class="view-product-available">Checkout</a>
+                <a href="{% url 'checkout' %}" id="checkout" class="view-product-available">Checkout</a>
             </div>
             {% else %}
                 <p>There's nothing in your trolley...</p>
             {% endif %}
         </section>
-
-
-       
-
-        <script>
-              // Update trolley
-  $(document).on('click', '.update-trolley', function(e){
+<script>
+    // Update trolley
+    $(document).on('click', '.update-trolley', function(e){
     e.preventDefault();
     var productid = $(this).data('index');
 
@@ -82,7 +78,7 @@
     },
 
         success: function(json){
-          //console.log(json)
+          console.log(json)
           // document.getElementById('trolley_quantity').textContent = json.qty
           location.reload();
         },
@@ -119,6 +115,7 @@
   });
 
 });
-        </script>
 
-         {% endblock %}
+</script>
+
+{% endblock %}
