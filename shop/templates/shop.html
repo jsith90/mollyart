@@ -28,7 +28,7 @@
                                 <!-- sale badge -->
                                 <p class="sale-badge">Sale</p>
                                 <!-- Product image-->
-                                <img class="shop-image" src="{{ product.image.url }}" alt="..." />
+                                <img class="shop-image modal-img" src="{{ product.image.url }}" alt="..." />
                             </div>
                             <!-- Product details-->
                             <div class="item-detail">
@@ -38,7 +38,6 @@
                                 <p>{{ product.description }}</p>
                                 <p class="line-through">£{{ product.price }}</p>
                                 <h4 class="price">£{{ product.sale_price }}</h4>
-                            
                                 <!-- Product actions-->
                                 <div class="view-product-sale">
                                 <p>Sale</p>
@@ -53,7 +52,7 @@
                                 <!-- sold out badge -->
                                 <p class="sold-out-badge">Sold Out</p>
                                 <!-- Product image-->
-                                <img class="shop-image" src="{{ product.image.url }}" alt="{{ product.name }}" />
+                                <img class="shop-image modal-img" src="{{ product.image.url }}" alt="{{ product.name }}" />
                             </div>
                             <!-- Product details-->
                             <div class="item-detail">
@@ -73,7 +72,7 @@
                             <a href="{% url 'product' product.id %}">
                             <div class="item-image-box">
                                 <!-- Product image-->
-                                <img class="shop-image" src="{{ product.image.url }}" alt="..." />
+                                <img class="shop-image modal-img" src="{{ product.image.url }}" alt="..." />
                             </div>
                             <!-- Product details-->
                             <div class="item-detail">
@@ -93,5 +92,4 @@
                 {% endfor %}
             </div>
         </section>
-
-        {% endblock %}
+{% endblock %}
