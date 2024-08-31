@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
         <!-- Header-->
-                <header class="checkout-header">
+                <header class="shop-header">
              <div>
                 <h1 class="shop-heading">Payment Options</h1>
             </div>
         </header>
+        <main class="checkout-main">
         <section class="order-display">
             <div class="order-product">
                 <div class="order-summary">
@@ -39,8 +40,7 @@
                     <h3>£{{ totals }}</h3>
                 </div>
             </div>
-        </section>
-        <section class="order-display">
+            <br>
             <div class="order-product">
                 <div class="order-summary">
                     <h2>Shipping Info</h2>
@@ -68,6 +68,9 @@
                     <a href="{% url 'checkout' %}" class="return-button trolley-button">Update Shipping</a>
                 </div>
             </div>
+        </section>
+        <section class="order-display">
+            {{ paypal_form.render }}
         </section>
         <section class="order-display">
             <div class="order-product">
@@ -122,5 +125,5 @@
                 </div>
             </div>
         </section>
-
+        <main class="checkout-main">
 {% endblock %}

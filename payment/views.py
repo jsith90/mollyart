@@ -6,6 +6,11 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from shop.models import Product
 import datetime
+# paypal stuff
+from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
+from django.conf import settings
+import uuid #unique user id for duplicate orders
 
 
 def orders(request, pk):
@@ -141,7 +146,6 @@ def process_order(request):
 
 def billing_info(request):
 	if request.POST:
-
 		# get trolley
 		trolley = Trolley(request)
 		trolley_products = trolley.get_prods
@@ -151,9 +155,27 @@ def billing_info(request):
 		# create a session with shipping info
 		my_shipping = request.POST
 		request.session['my_shipping'] = my_shipping
+
+		# paypal form dictionary and stuff
+		host = request.get_host()
+		paypal_dict = {
+			'business': settings.PAYPAL_RECEIVER_EMAIL,
+			'amount': totals,
+			'item_name': "Molly's Art Order",
+			'no_shipping': '2',
+			'invoice': str(uuid.uuid4()),
+			'currency_code': 'GBP',
+			'notify_url': 'https://{}{}'.format(host, reverse('paypal-ipn')),
+			'return_url': 'https://{}{}'.format(host, reverse('payment_success')),
+			'cancel_return': 'https://{}{}'.format(host, reverse('payment_failed')),
+		}
+
+		# create paypal button
+		paypal_form = PayPalPaymentsForm(initial=paypal_dict)	
+
 		# Not logged in
-		billing_form = PaymentForm()
-		return render(request, 'payment/billing_info.html', {'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_info':request.POST, 'billing_form': billing_form})
+		billing_form = PaymentForm() 
+		return render(request, 'payment/billing_info.html', { 'paypal_form':paypal_form, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_info':request.POST, 'billing_form': billing_form})
 
 
 		shipping_info = request.POST
@@ -176,3 +198,7 @@ def checkout(request):
 
 def payment_success(request):
 	return render(request, 'payment/payment_success.html', {})
+
+
+def payment_failed(request):
+	return render(request, 'payment/payment_failed.html', {})

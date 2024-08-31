@@ -11,13 +11,13 @@
             <!-- Product image-->
             <img class="shop-image modal-img" src="{{ product.image.url }}" alt="{{ product.name }}" />
             {% if product.image2 %}
-              <img class="img-no-display modal-img" src="{{ product.image2.url }}" alt="..." />
+              <img class="img-no-display modal-img" src="{{ product.image2.url }}" alt="{{ product.name }}" />
             {% endif %}
             {% if product.image3 %}
-              <img class="img-no-display modal-img" src="{{ product.image3.url }}" alt="..." />
+              <img class="img-no-display modal-img" src="{{ product.image3.url }}" alt="{{ product.name }}" />
             {% endif %}
             {% if product.image4 %}
-              <img class="img-no-display modal-img" src="{{ product.image4.url }}" alt="..." />
+              <img class="img-no-display modal-img" src="{{ product.image4.url }}" alt="{{ product.name }}" />
             {% endif %}
           </div>
           <!-- Product details-->
@@ -35,13 +35,13 @@
             <!-- Product image-->
             <img class="shop-image modal-img" src="{{ product.image.url }}" alt="{{ product.name }}" />
             {% if product.image2 %}
-              <img class="img-no-display modal-img cursor" src="{{ product.image2.url }}" alt="..." />
+              <img class="img-no-display modal-img cursor" src="{{ product.image2.url }}" alt="{{ product.name }}" />
             {% endif %}
             {% if product.image3 %}
-              <img class="img-no-display modal-img cursor" src="{{ product.image3.url }}" alt="..." />
+              <img class="img-no-display modal-img cursor" src="{{ product.image3.url }}" alt="{{ product.name }}" />
             {% endif %}
             {% if product.image4 %}
-              <img class="img-no-display modal-img cursor" src="{{ product.image4.url }}" alt="..." />
+              <img class="img-no-display modal-img cursor" src="{{ product.image4.url }}" alt="{{ product.name }}" />
             {% endif %}
           </div>
           <!-- Product details-->
@@ -55,13 +55,13 @@
             <!-- Product image-->
             <img class="shop-image modal-img" src="{{ product.image.url }}" alt="{{ product.name }}" />
             {% if product.image2 %}
-              <img class="img-no-display modal-img cursor" src="{{ product.image2.url }}" alt="..." />
+              <img class="img-no-display modal-img cursor" src="{{ product.image2.url }}" alt="{{ product.name }}" />
             {% endif %}
             {% if product.image3 %}
-              <img class="img-no-display modal-img cursor" src="{{ product.image3.url }}" alt="..." />
+              <img class="img-no-display modal-img cursor" src="{{ product.image3.url }}" alt="{{ product.name }}" />
             {% endif %}
             {% if product.image4 %}
-              <img class="img-no-display modal-img cursor" src="{{ product.image4.url }}" alt="..." />
+              <img class="img-no-display modal-img cursor" src="{{ product.image4.url }}" alt="{{ product.name }}" />
             {% endif %}
           </div>
           <!-- Product details-->
@@ -72,7 +72,7 @@
             <p>{{ product.description }}</p>
             <h4 class="price">£{{ product.price }}</h4>
         {% endif %}
-        {% if not product.is_sold_out %}
+        {% if not product.is_sold_out and product.id|stringformat:"s" not in trolley.trolley %}
           <div class="quantity-box">
             <h5 class="price">Quantity:</h5>
               <select id="qty-trolley" class="quantity-form">

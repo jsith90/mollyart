@@ -25,6 +25,10 @@ p, a, button {
 	margin: 0 0 2rem 0;
 }
 
+.shop-header > div {
+	text-align: center;
+}
+
 .shop-header > div > h1 {
 	text-transform: uppercase;
 	font-size: 4rem;
@@ -412,12 +416,17 @@ p, a, button {
 	justify-content: space-between;
 }
 
+.checking-out > h3 {
+	font-size: 2rem;
+}
+
 .checking-out > .view-product-available {
 	width: 20%;
 	color: white;
 	display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 2rem;
 }
 
 .checkout-header {
@@ -431,18 +440,28 @@ p, a, button {
     font-size: 4rem;
 }
 
-.order-display {
-	padding: 0 2rem 2rem 2rem;
+.checkout-main {
+	display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 100%;
+}
+
+.checkout-main > .order-display {
+	padding: 0 2rem 2rem 2rem;/*
+	*/
 	display: flex;
   flex-direction: column;
   align-items: center;
+  width: 40%;
 }
 
 .order-display > .order-product {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 50%;
+	width: 100%;
 }
 
 .order-summary {
@@ -634,6 +653,10 @@ form {
 		width: 90%;
 	}
 
+	.checkout-main > .order-display {
+    width: 80%;
+}
+
 }
 
 @media only screen and (max-width: 700px) {
@@ -652,24 +675,37 @@ form {
   		width: 90%;
   	}
 
-  	.shop-header > div > h1 {
-  		font-size: 2rem;
-  	}
+  .shop-header > div > h1 {
+  	font-size: 2rem;
+  }
 
-  	.category-display > div > h2 > a {
-  		font-size: 1.2rem;
-  	}
+  .category-display > div > h2 > a {
+  	font-size: 1.2rem;
+  }
 
-  	.sold-out-badge {
-  		font-size: 0.5rem;
-  	}
+ 	.sold-out-badge {
+  	font-size: 0.5rem;
+  }
   .sale-badge {
-  		font-size: 0.6rem;
-  	}
+  	font-size: 0.6rem;
+  }
 
-  	.view-product-sold, .view-product-sale, .view-product-available, .product-button, .trolley-button {
-  		width: 40%;
-  	}
+  .view-product-sold, .view-product-sale, .view-product-available, .product-button, .trolley-button {
+  	width: 40%;
+  }
+
+  .checking-out > .view-product-available, .checking-out > h3 {
+  	font-size: 1rem;
+	}
+
+	.checkout-main > .order-display {
+		width: 100%;
+	}
+
+	.shipping-detail > form > .trolley-button {
+		width: 90%;
+	}
+
 }
 
 

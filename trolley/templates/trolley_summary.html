@@ -45,8 +45,8 @@
                                 </select>
                             </div>
                             <div class="product-buttons">
+                                <button type="button" data-index="{{ product.id }}" class="product-button update-trolley">Update Quantity</button>
                                 <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
-                                <button type="button" data-index="{{ product.id }}" class="product-button update-trolley">Update</button>
                                 <button type="button" data-index="{{ product.id }}" class="product-button delete-product">Remove</button>
                             </div>
                         </div>

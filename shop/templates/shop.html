@@ -28,7 +28,7 @@
                                 <!-- sale badge -->
                                 <p class="sale-badge">Sale</p>
                                 <!-- Product image-->
-                                <img class="shop-image modal-img" src="{{ product.image.url }}" alt="..." />
+                                <img class="shop-image modal-img" src="{{ product.image.url }}" alt="{{ product.name }}" />
                             </div>
                             <!-- Product details-->
                             <div class="item-detail">
@@ -83,7 +83,7 @@
                                 <h4 class="price">£{{ product.price }}</h4>
                                 <!-- Product actions-->
                                 <div class="view-product-available">
-                                    <p>Available</p>
+                                    <p>In Stock</p>
                                 </div>
                             </div>
                         </a>
