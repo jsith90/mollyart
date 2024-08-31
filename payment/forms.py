@@ -27,3 +27,7 @@ class PaymentForm(forms.Form):
 	card_region = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Region'}), required=True)
 	card_postcode = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Postcode'}), required=True)
 	card_country = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Country'}), required=True)
+
+	class Meta:
+		model = ShippingAddress
+		fields = ['card_name',]

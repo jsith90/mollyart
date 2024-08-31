@@ -73,7 +73,8 @@ def category(request, foo):
 
 def product(request, pk):
 	product = Product.objects.get(id=pk)
-	return render(request, 'product.html', {'product':product})
+	trolley = Trolley(request)
+	return render(request, 'product.html', {'product':product, 'trolley':trolley})
 
 
 def add_product(request):

@@ -1,84 +1,126 @@
 {% extends 'base.html' %}
 {% block content %}
         <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Billing Info</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Enter your payment info...</p>
-                </div>
+                <header class="checkout-header">
+             <div>
+                <h1 class="shop-heading">Payment Options</h1>
             </div>
         </header>
-        <br><br><br>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <center>
-                    <div class="card">
-                    <div class="card-header">
-                        Order Summary
-                    </div>
-                    <div class="card-body">
-                        {% for product in trolley_products %}
-                            Product: {{ product.name }}
-                            <br>
-                            {% if product.is_sale %}
-                               Price: £{{ product.sale_price }}
-                                {% else %}
-                               Price: £{{ product.price }}
-                            {% endif %}
-                            <br>
-                            Quantity:
+        <section class="order-display">
+            <div class="order-product">
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                </div>
+                <div class="order-detail">
+                    {% for product in trolley_products %}
+                        <p>Product:</p>
+                        <h3>{{ product.name }}</h3>
+                        {% if product.is_sale %}
+                            <p>Price:</p> 
+                            <h3 class="price">£{{ product.sale_price }}</h3>
+                        {% else %}
+                            <p>Price:</p> 
+                            <h3 class="price">£{{ product.price }}</h3>
+                        {% endif %}
+                        <p>Quantity:</p>
                             {% for key, value in quantities.items %}
                                 {% if key == product.id|slugify %}
-                                    {{ value }}
+                                    <h3>{{ value }}</h3>
+                                {% endif %}
+                                {% if forloop.last  %}
+                                    </br>
                                 {% endif %}
                             {% endfor %}
-                            <br>
-                            <hr>
-                        {% endfor %}
-                         Total: £{{ totals }}
-                         <br>
-                         <br>
-                         <a href="{% url 'trolley_summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
-                    </div>
-                    </div>
-                    <br><br><br>
-<div class="card">
-  <div class="card-header">
-    Shipping Info
-  </div>
-  <div class="card-body">
-
-       Name: {{ shipping_info.shipping_full_name }}<br>
-       Email:  {{ shipping_info.shipping_email}}<br>
-       Address 1: {{ shipping_info.shipping_address1 }}<br>
-       Address 2: {{ shipping_info.shipping_address2 }}<br>
-       City: {{ shipping_info.shipping_city }}<br>
-       Region: {{ shipping_info.shipping_region }}<br>
-       Postcode: {{ shipping_info.shipping_postcode }}<br>
-       Country: {{ shipping_info.shipping_country }} <br><br>
-       <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">Update Shipping</a>
-        
-  </div>
-</div>
-<br><br>
-<div class="card">
-  <div class="card-header">
-    Billing Info
-  </div>
-  <div class="card-body">
-    <form method="POST" action="{% url 'process_order' %}">
-        {% csrf_token %}
-        {{ billing_form.as_p }}
-  </div>
-</div>
-<br><br>
-<button type="submit" class="btn btn-secondary">Pay Now</button>
-</form>
-<br><br>
-                    </center>
+                    {% endfor %}
+                    <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
+                </div>
+                <div class="order-total">
+                    <p>Total:</p> 
+                    <h3>£{{ totals }}</h3>
                 </div>
             </div>
-        </div>
+        </section>
+        <section class="order-display">
+            <div class="order-product">
+                <div class="order-summary">
+                    <h2>Shipping Info</h2>
+                </div>
+                <div class="order-detail">
+                    <p>Name:</p>
+                    <h4>{{ shipping_info.shipping_full_name }}</h3>
+                    <p>Email:</p> 
+                    <h4>{{ shipping_info.shipping_email }}</h3>
+                    <p>Address 1:</p> 
+                    <h4>{{ shipping_info.shipping_address1 }}</h3>
+                    {% if shipping_info.shipping_address2 %}
+                        <p>Address 2:</p>
+                        <h3>{{ shipping_info.shipping_address2 }}</h3>
+                    {% endif %}
+                    <p>City:</p>
+                    <h4>{{ shipping_info.shipping_city }}</h3>
+                    <p>Region:</p> 
+                    <h4>{{ shipping_info.shipping_region }}</h3>
+                    <p>Postcode:</p> 
+                    <h4>{{ shipping_info.shipping_postcode }}</h3>
+                    <p>Country:</p>
+                    <h4>{{ shipping_info.shipping_country }}</h3>
+                    </br>
+                    <a href="{% url 'checkout' %}" class="return-button trolley-button">Update Shipping</a>
+                </div>
+            </div>
+        </section>
+        <section class="order-display">
+            <div class="order-product">
+                <div class="shipping-summary">
+                    <h2>Billing Info</h2>
+                </div>
+                <div class="shipping-detail">
+                    <form method="POST" action="{% url 'process_order' %}">
+                        {% csrf_token %}
+                            <div class="form">
+                                <label for="{{ billing_form.card_name.id_for_label }}">{{ billing_form.card_name.label }}</label>
+                                {{ billing_form.card_name }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_number.id_for_label }}">{{ billing_form.card_number.label }}</label>
+                                {{ billing_form.card_number }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_exp_date.id_for_label }}">{{ billing_form.card_exp_date.label }}</label>
+                                {{ billing_form.card_exp_date }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_cvv_number.id_for_label }}">{{ billing_form.card_cvv_number.label }}</label>
+                                {{ billing_form.card_cvv_number }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_address1.id_for_label }}">{{ billing_form.card_address1.label }}</label>
+                                {{ billing_form.card_address1 }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_address2.id_for_label }}">{{ billing_form.card_address2.label }}</label>
+                                {{ billing_form.card_address2 }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_city.id_for_label }}">{{ billing_form.card_city.label }}</label>
+                                {{ billing_form.card_city }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_region.id_for_label }}">{{ billing_form.card_region.label }}</label>
+                                {{ billing_form.card_region }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_postcode.id_for_label }}">{{ billing_form.card_postcode.label }}</label>
+                                {{ billing_form.card_postcode }}
+                            </div>
+                            <div class="form">
+                                <label for="{{ billing_form.card_country.id_for_label }}">{{ billing_form.card_country.label }}</label>
+                                {{ billing_form.card_country }}
+                            </div>
+                            <button type="submit" class="return-button trolley-button">Continue to Billing</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
 {% endblock %}
