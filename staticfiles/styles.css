@@ -45,7 +45,11 @@ nav {
   text-align: left;
   margin-left: 1rem;
   position: absolute;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.nav-toggle-open:hover {
+	transform: translateY(-10px);
 }
 
 .nav-toggle-open > i {
@@ -74,7 +78,7 @@ nav {
   overflow: hidden;
   transition: var(--transition);
   text-align: center;
-  margin: 0 0 4rem 0;
+  margin: 5rem 0 4rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,11 +105,15 @@ nav {
 	display: flex;
 }
 
+#logo-name:hover {
+	transform: translateY(-10px);
+}
+
 #logo-name {
 	text-align: center;
 	transition: opacity 0.5s ease;
 	width: 100%;
-/*	transition: transform 0.5s ease;*/
+	transition: transform 0.5s ease;
 }
 
 /*#logo-man {
