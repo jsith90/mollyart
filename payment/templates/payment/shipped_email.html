@@ -1,0 +1,16 @@
+<h1>Hello {{ order.full_name }}</h1>
+<pre>Your order has been shipped and will arrive soon.</pre>
+<pre>Please see the details of your order below:</pre>
+<div>
+    <pre>Order Total: £{{ order.amount_paid }}</pre>
+</div>
+ <div>
+    <pre>Date Shipped: {{ order.date_shipped }}</pre><br>
+    <pre>{{ order.full_name }}</pre>
+    <pre>{{ order.shipping_address }}</pre><br>
+    {% for item in items %}
+    <pre>Item: {{ item.product }}</pre>
+    <pre>Quantity: {{ item.quantity }}
+    Price: £{{ item.price }}</pre>
+    {% endfor %}
+</div>

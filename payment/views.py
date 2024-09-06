@@ -21,6 +21,8 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 
 logger = logging.getLogger(__name__)
@@ -66,18 +68,42 @@ def not_shipped_dash(request):
 			status = request.POST['shipping_status']
 			num = request.POST['num']
 			# get order
-			order = Order.objects.filter(id=num)
+			order = Order.objects.get(id=num)
 			# Update the status
 			now = datetime.datetime.now()
-			order.update(shipped=True, date_shipped=now)
-
+			order.shipped=True
+			order.date_shipped=now
+			order.save()
+			order_shipped_email(request, order)
 			messages.success(request, "Shipping Status Updated")
-			return redirect('index')
+			return redirect('not_shipped_dash')
 			
 		return render(request, 'payment/not_shipped_dash.html', {'orders':orders})
 	else:
 		messages.success(request, 'Access Denied.')
 		return redirect('index')
+
+def order_shipped_email(request, order):
+	items = OrderItem.objects.filter(order=order)
+	order_email = order.email
+	is_valid_email = True
+	try:
+		validate_email(order_email)
+	except ValidationError:
+		is_valid_email = False
+	if is_valid_email:
+		subject = "Your order has been shipped!"
+		from_email = "j.sinclairthomson@gmail.com"
+		to_email = [order_email] 
+		html_template = get_template('payment/shipped_email.html')
+		html_content = html_template.render({'order': order, 'items': items})
+		email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
+		email_message.attach_alternative(html_content, "text/html")
+		email_message.send()
+	else:
+		messages.error(request, 'email address was invalid and and a shipping confirmation could not be sent.')
+		return redirect('not_shipped_dash')
+
 	
 
 def shipped_dash(request):
@@ -87,10 +113,12 @@ def shipped_dash(request):
 			status = request.POST['shipping_status']
 			num = request.POST['num']
 			# get order
-			order = Order.objects.filter(id=num)
+			order = Order.objects.get(id=num)
 			# Update the status
 			now = datetime.datetime.now()
-			order.update(shipped=False)
+			order.shipped = False
+			order.date_shipped = None
+			order.save()
 
 			messages.success(request, "Shipping Status Updated")
 			return redirect('index')
