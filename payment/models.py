@@ -25,6 +25,12 @@ class ShippingAddress(models.Model):
 
 # create order model
 class Order(models.Model):
+	PAYMENT_METHOD_CHOICES = [
+		('unpaid', 'Unpaid'),
+		('paypal', 'PayPal'),
+		('stripe', 'Stripe'),
+	]
+
 	full_name = models.CharField(max_length=250)
 	email = models.EmailField(max_length=250)
 	shipping_address = models.TextField(max_length=15000)
@@ -32,9 +38,17 @@ class Order(models.Model):
 	date_ordered = models.DateTimeField(auto_now_add=True)
 	shipped = models.BooleanField(default=False)
 	date_shipped = models.DateTimeField(blank=True, null=True)
+	# paypal invoice and paid t/f
+	invoice = models.CharField(max_length=250, null=True, blank=True)
+	payment_intent_id = models.CharField(max_length=255, blank=True, null=True)  # For Stripe payment intent ID
+	paid = models.BooleanField(default=False)
+	# payer id retreived for order display in payment success
+	payer_id = models.CharField(max_length=255, null=True, blank=True)
+	payment_method = models.CharField(blank="True", null="True", max_length=10, choices=PAYMENT_METHOD_CHOICES, default='unpaid')
 
 	def __str__(self):
 		return f'Order - {str(self.id)} | Shipped - {self.shipped}'
+
 
 # Auto add shipping date
 @receiver(pre_save, sender=Order)

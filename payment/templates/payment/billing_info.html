@@ -47,83 +47,154 @@
                 </div>
                 <div class="order-detail">
                     <p>Name:</p>
-                    <h4>{{ shipping_info.shipping_full_name }}</h3>
+                    <h4>{{ shipping_info.shipping_full_name }}</h4>
                     <p>Email:</p> 
-                    <h4>{{ shipping_info.shipping_email }}</h3>
+                    <h4>{{ shipping_info.shipping_email }}</h4>
                     <p>Address 1:</p> 
-                    <h4>{{ shipping_info.shipping_address1 }}</h3>
+                    <h4>{{ shipping_info.shipping_address1 }}</h4>
                     {% if shipping_info.shipping_address2 %}
                         <p>Address 2:</p>
-                        <h3>{{ shipping_info.shipping_address2 }}</h3>
+                        <h4>{{ shipping_info.shipping_address2 }}</h4>
                     {% endif %}
                     <p>City:</p>
-                    <h4>{{ shipping_info.shipping_city }}</h3>
+                    <h4>{{ shipping_info.shipping_city }}</h4>
                     <p>Region:</p> 
-                    <h4>{{ shipping_info.shipping_region }}</h3>
+                    <h4>{{ shipping_info.shipping_region }}</h4>
                     <p>Postcode:</p> 
-                    <h4>{{ shipping_info.shipping_postcode }}</h3>
+                    <h4>{{ shipping_info.shipping_postcode }}</h4>
                     <p>Country:</p>
-                    <h4>{{ shipping_info.shipping_country }}</h3>
+                    <h4>{{ shipping_info.shipping_country }}</h4>
                     </br>
                     <a href="{% url 'checkout' %}" class="return-button trolley-button">Update Shipping</a>
                 </div>
             </div>
         </section>
-        <section class="order-display">
-            {{ paypal_form.render }}
+        <section class=order-display>
+            <div class="order-product">
+                <form id="payment-form" data-secret="{{ client_secret }}">
+                    {% csrf_token %}
+                    <div id="payment-element">
+                    <!-- placeholder for Elements -->
+                    </div>
+                    <button id="submit">Submit</button>
+                    <div id="error-message">
+                    <!-- Display error message to your customers here -->
+                    </div>
+                </form>
+            </div>
         </section>
         <section class="order-display">
             <div class="order-product">
-                <div class="shipping-summary">
-                    <h2>Billing Info</h2>
-                </div>
-                <div class="shipping-detail">
-                    <form method="POST" action="{% url 'process_order' %}">
-                        {% csrf_token %}
-                            <div class="form">
-                                <label for="{{ billing_form.card_name.id_for_label }}">{{ billing_form.card_name.label }}</label>
-                                {{ billing_form.card_name }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_number.id_for_label }}">{{ billing_form.card_number.label }}</label>
-                                {{ billing_form.card_number }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_exp_date.id_for_label }}">{{ billing_form.card_exp_date.label }}</label>
-                                {{ billing_form.card_exp_date }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_cvv_number.id_for_label }}">{{ billing_form.card_cvv_number.label }}</label>
-                                {{ billing_form.card_cvv_number }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_address1.id_for_label }}">{{ billing_form.card_address1.label }}</label>
-                                {{ billing_form.card_address1 }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_address2.id_for_label }}">{{ billing_form.card_address2.label }}</label>
-                                {{ billing_form.card_address2 }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_city.id_for_label }}">{{ billing_form.card_city.label }}</label>
-                                {{ billing_form.card_city }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_region.id_for_label }}">{{ billing_form.card_region.label }}</label>
-                                {{ billing_form.card_region }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_postcode.id_for_label }}">{{ billing_form.card_postcode.label }}</label>
-                                {{ billing_form.card_postcode }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ billing_form.card_country.id_for_label }}">{{ billing_form.card_country.label }}</label>
-                                {{ billing_form.card_country }}
-                            </div>
-                            <button type="submit" class="return-button trolley-button">Continue to Billing</button>
-                    </form>
-                </div>
+                {% csrf_token %}
+                {{ paypal_form.render }}
             </div>
         </section>
-        <main class="checkout-main">
+    </main>
+    <!-- Stripe.js -->
+    <script>
+        const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+        const options = {
+            clientSecret: '{{ client_secret }}',
+            // Fully customizable with appearance API.
+            appearance: {
+                theme: 'flat',
+                variables: {
+                    fontFamily: 'Verdana',
+                    fontLineHeight: '1.5',
+                    borderRadius: '0',
+                    colorBackground: '#fff',
+                    focusBoxShadow: 'none',
+                    focusOutline: '-webkit-focus-ring-color auto 1px',
+                    tabIconSelectedColor: 'var(--colorText)'
+                },
+                rules: {
+                    '.Input, .CheckboxInput, .CodeInput': {
+                    transition: 'none',
+                    boxShadow: 'inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080'
+                    },
+                    '.Input': {
+                      padding: '12px'
+                    },
+                    '.Input--invalid': {
+                      color: '#DF1B41'
+                    },
+                    '.Tab, .Block, .PickerItem--selected': {
+                      backgroundColor: '#dfdfdf',
+                      boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'
+                    },
+                    '.Tab': {
+                      transition: 'none'
+                    },
+                    '.Tab:hover': {
+                      backgroundColor: '#eee'
+                    },
+                    '.Tab--selected, .Tab--selected:focus, .Tab--selected:hover': {
+                      color: 'var(--colorText)',
+                      backgroundColor: '#ccc'
+                    },
+                    '.Tab:focus, .Tab--selected:focus': {
+                      boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf',
+                      outline: 'none'
+                    },
+                    '.Tab:focus-visible': {
+                      outline: 'var(--focusOutline)'
+                    },
+                    '.PickerItem': {
+                      backgroundColor: '#dfdfdf',
+                      boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf',
+                      transition: 'none'
+                    },
+                    '.PickerItem:hover': {
+                      backgroundColor: '#eee'
+                    },
+                    '.PickerItem--highlight': {
+                      outline: '1px solid blue'
+                    },
+                    '.PickerItem--selected:hover': {
+                      backgroundColor: '#dfdfdf'
+                    }
+                }
+            },
+        };
+        console.log('Client Secret:', options.clientSecret); 
+
+
+        // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in a previous step
+        const elements = stripe.elements(options);
+
+        // Create and mount the Payment Element
+        const paymentElement = elements.create('payment');
+        paymentElement.mount('#payment-element');
+
+        const form = document.getElementById('payment-form');
+
+        form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        const {error} = await stripe.confirmPayment({
+            //`Elements` instance that was used to create the Payment Element
+            elements,
+            confirmParams: {
+              return_url: 'https://mollyart-production.up.railway.app/payment/payment_success',
+            },
+            headers: {
+            'X-CSRFToken': csrftoken, // Include the CSRF token in the headers
+            }
+        });
+
+        if (error) {
+            // This point will only be reached if there is an immediate error when
+            // confirming the payment. Show error to your customer (for example, payment
+            // details incomplete)
+            const messageContainer = document.querySelector('#error-message');
+            messageContainer.textContent = error.message;
+        } else {
+            // Your customer will be redirected to your `return_url`. For some payment
+            // methods like iDEAL, your customer will be redirected to an intermediate
+            // site first to authorize the payment, then redirected to the `return_url`.
+        }
+        });
+    </script>
 {% endblock %}

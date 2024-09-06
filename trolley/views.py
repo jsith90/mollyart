@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .trolley import Trolley
 from shop.models import Product
 from django.http import JsonResponse
 from django.contrib import messages
+import shop.urls
 
 # Create your views here.
 def trolley_summary(request):
@@ -24,17 +25,26 @@ def trolley_add(request):
 		product_qty = int(request.POST.get('product_qty')) 
 		# look up product in DB
 		product = get_object_or_404(Product, id=product_id)
-		# save to session
-		trolley.add(product=product, quantity=product_qty)
+		if not product.is_sold_out:
+			# save to session
+			trolley.add(product=product, quantity=product_qty)
 
-		# get trolley quantity
-		trolley_quantity = trolley.__len__()
+			# get trolley quantity
+			trolley_quantity = trolley.__len__()
 
-		# return response
-		# response = JsonResponse({'Product Name: ': product.name})
-		response = JsonResponse({'qty': trolley_quantity})
-		messages.success(request, ('Product added to trolley.'))
-		return response
+			# return response
+			# response = JsonResponse({'Product Name: ': product.name})
+			response = JsonResponse({'qty': trolley_quantity})
+			messages.success(request, ('This was added to your trolley.'))
+			return response
+		else:
+			trolley_quantity = trolley.__len__()
+
+			# return response
+			# response = JsonResponse({'Product Name: ': product.name})
+			response = JsonResponse({'qty': trolley_quantity})
+			messages.error(request, ("Sorry that one isn't available at the moment."))
+			return response
 
 
 def trolley_delete(request):

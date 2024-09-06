@@ -1,1 +1,23 @@
-<h1>Payment Successful</h1>
+{% extends 'base.html' %}
+{% block content %}
+        <!-- Header-->
+    <header class="shop-header">
+        <div>
+          	<h1 class="shop-heading">Payment Success</h1>
+        </div>
+    </header>
+    <main class="checkout-main">
+      	<section class="order-display">
+          	<div class="order-product">
+              	<div class="order-summary">
+                  	<h2>Thank you for your purchase! <br>An email has been sent to the address you provided confirming your order.</h2>
+              	</div>
+              	<div class="order-detail">
+                    <div class="product-buttons edit delete">
+                        <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
+                    </div>
+              	</div>
+            </div>
+      	</section>
+    <main class="checkout-main">
+{% endblock %}

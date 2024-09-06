@@ -156,8 +156,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 PAYPAL_TEST = True
 
 # sandbox business email
-PAYPAL_RECEIVER_EMAIL = 'businessjoshthegod@email.com'
+PAYPAL_RECEIVER_EMAIL = os.environ['PAYPAL_EMAIL']
 
+# Stripe keys
+STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET_YO']
+STRIPE_PUBLIC_KEY = os.environ['STRIPE_PUBLIC_YO']
+STRIPE_WEBHOOK_SECRET = os.environ['STRIPE_ENDPOINT_YO']
 
 # cloudinary
 cloudinary.config(
@@ -165,3 +169,11 @@ cloudinary.config(
     api_key = os.environ['API_KEY_YO'],
     api_secret = os.environ['API_SECRET_YO'],
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # SMTP server
+EMAIL_PORT = 587  # Port number
+EMAIL_USE_TLS = True  # Use TLS
+EMAIL_HOST_USER = 'j.sinclairthomson@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = os.environ['HOST_EMAIL']  # Your email password (use app password for Gmail)
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

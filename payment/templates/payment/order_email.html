@@ -1,0 +1,16 @@
+<h1>Thank you {{ order.full_name }} for your purchase!</h1>
+<pre>Your order has been made and will now be processed.</pre>
+<pre>Please see the details of your order below:</pre>
+<div>
+    <pre>Order Total: £{{ order.amount_paid }}</pre>
+</div>
+ <div>
+    <pre>Date Ordered: {{ order.date_ordered }}</pre><br>
+    <pre>{{ order.full_name }}</pre>
+    <pre>{{ order.shipping_address }}</pre><br>
+    {% for item in items %}
+    <pre>Item: {{ item.product }}</pre>
+    <pre>Quantity: {{ item.quantity }}
+    Price: £{{ item.price }}</pre>
+    {% endfor %}
+</div>
