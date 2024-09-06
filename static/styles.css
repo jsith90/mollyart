@@ -5,6 +5,10 @@
 	padding: 0;
 }
 
+:root {
+	--transition: all 0.3s linear;
+}
+
 h1, h2, h3, h4, h5 {
 	font-family: "Karla", sans-serif;
 	font-weight: 800;
@@ -541,6 +545,92 @@ form {
 	padding: 0.9rem;
 }
 
+.payment-main {
+	display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 100%;
+  margin-top: 4rem;
+}
+
+.payment-main > .payment-display {
+	padding: 0 2rem 2rem 2rem;
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.payment-display > .payment-product {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50%;
+	margin-top: 1rem;
+}
+
+.payment-summary {
+	text-transform: uppercase;
+	padding: 1rem;
+	width: 60%;
+	text-align: center;
+	border: solid;
+}
+
+.payment-detail {
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	width: 60%;
+	text-align: center;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease
+}
+
+.payment-detail-display {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	max-height: 2000px; /* Set a maximum height large enough to fit content */
+  opacity: 1;
+}
+
+.payment-detail > h3 {
+	text-transform: uppercase;
+}
+
+.payment-total {
+    width: 60%;
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-left: solid;
+    border-right: solid;
+    border-bottom: solid;
+}
+
+.stripe-box {
+	border-left: solid;
+	border-right: solid;
+	border-bottom: solid;
+	width: 60%;
+}
+
+.stripe-box > form > button {
+  width: 40%;
+  text-transform: uppercase;
+  margin: 2rem 0 1rem 0;
+  background: white;
+  transition: transform 0.5s ease;
+}
+
+.stripe-box > form > button:hover {
+  background: rgb(78, 178, 255);
+  transform: translateY(-10px);
+}
+
 @media only screen and (max-width: 1386px) {
   .view-product-sale > p, .view-product-sold > p, .view-product-available > p, .sold-out-badge {
   	font-size: 0.8rem;
@@ -602,6 +692,18 @@ form {
   .shop-display {
   	padding: 0 2rem 2rem 2rem;
   }
+  
+  .payment-display > .payment-product {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		margin-top: 1rem;
+	}
+
+	.payment-summary, .payment-detail, .payment-total, .stripe-box {
+		width: 90%;
+	}
 }
 
 @media only screen and (max-width: 1020px) {

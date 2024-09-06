@@ -44,7 +44,7 @@
         <section class="order-display">
             <div class="order-product">
                 <div class="shipping-summary">
-                    <h2>Shipping Info</h2>
+                    <h2>Delivery Info</h2>
                 </div>
                 <div class="shipping-detail">
                     <form method="POST" action="{% url 'billing_info' %}">
@@ -81,7 +81,7 @@
                                 <label for="{{ shipping_form.shipping_country.id_for_label }}">{{ shipping_form.shipping_country.label }}</label>
                                 {{ shipping_form.shipping_country }}
                             </div>
-                            <button type="submit" class="return-button trolley-button">Continue to Billing</button>
+                            <button type="submit" class="return-button trolley-button">Continue to Payment</button>
                     </form>
                 </div>
             </div>

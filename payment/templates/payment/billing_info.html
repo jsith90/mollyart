@@ -3,16 +3,16 @@
         <!-- Header-->
                 <header class="shop-header">
              <div>
-                <h1 class="shop-heading">Payment Options</h1>
+                <h1 class="shop-heading">Make Payment</h1>
             </div>
         </header>
-        <main class="checkout-main">
-        <section class="order-display">
-            <div class="order-product">
-                <div class="order-summary">
+        <main class="payment-main">
+        <section class="payment-display">
+            <div class="payment-product">
+                <div class="payment-summary summary-toggle">
                     <h2>Order Summary</h2>
                 </div>
-                <div class="order-detail">
+                <div class="payment-detail">
                     {% for product in trolley_products %}
                         <p>Product:</p>
                         <h3>{{ product.name }}</h3>
@@ -35,17 +35,17 @@
                     {% endfor %}
                     <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
                 </div>
-                <div class="order-total">
+                <div class="payment-total">
                     <p>Total:</p> 
                     <h3>£{{ totals }}</h3>
                 </div>
             </div>
             <br>
-            <div class="order-product">
-                <div class="order-summary">
-                    <h2>Shipping Info</h2>
+            <div class="payment-product">
+                <div class="payment-summary summary-toggle">
+                    <h2>Review Delivery Details</h2>
                 </div>
-                <div class="order-detail">
+                <div class="payment-detail">
                     <p>Name:</p>
                     <h4>{{ shipping_info.shipping_full_name }}</h4>
                     <p>Email:</p> 
@@ -69,24 +69,32 @@
                 </div>
             </div>
         </section>
-        <section class=order-display>
-            <div class="order-product">
-                <form id="payment-form" data-secret="{{ client_secret }}">
-                    {% csrf_token %}
-                    <div id="payment-element">
-                    <!-- placeholder for Elements -->
-                    </div>
-                    <button id="submit">Submit</button>
-                    <div id="error-message">
-                    <!-- Display error message to your customers here -->
-                    </div>
-                </form>
+        <section class=payment-display>
+            <div class="payment-product">
+                <div class="payment-summary">
+                    <h2>Pay by Card</h2>
+                </div>
+                <div class="stripe-box">
+                    <form id="payment-form" data-secret="{{ client_secret }}">
+                        {% csrf_token %}
+                        <div id="payment-element">
+                        <!-- placeholder for Elements -->
+                        </div>
+                        <button id="submit">Pay £{{ totals }}</button>
+                        <div id="error-message">
+                        <!-- Display error message to your customers here -->
+                        </div>
+                    </form>
+                </div>
             </div>
-        </section>
-        <section class="order-display">
-            <div class="order-product">
+            <div class="payment-product">
+                <div class="payment-summary">
+                    <h2>Pay with Paypal</h2>
+                </div>
+                <div class="stripe-box">
                 {% csrf_token %}
                 {{ paypal_form.render }}
+                </div>
             </div>
         </section>
     </main>
@@ -97,63 +105,7 @@
             clientSecret: '{{ client_secret }}',
             // Fully customizable with appearance API.
             appearance: {
-                theme: 'flat',
-                variables: {
-                    fontFamily: 'Verdana',
-                    fontLineHeight: '1.5',
-                    borderRadius: '0',
-                    colorBackground: '#fff',
-                    focusBoxShadow: 'none',
-                    focusOutline: '-webkit-focus-ring-color auto 1px',
-                    tabIconSelectedColor: 'var(--colorText)'
-                },
-                rules: {
-                    '.Input, .CheckboxInput, .CodeInput': {
-                    transition: 'none',
-                    boxShadow: 'inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080'
-                    },
-                    '.Input': {
-                      padding: '12px'
-                    },
-                    '.Input--invalid': {
-                      color: '#DF1B41'
-                    },
-                    '.Tab, .Block, .PickerItem--selected': {
-                      backgroundColor: '#dfdfdf',
-                      boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf'
-                    },
-                    '.Tab': {
-                      transition: 'none'
-                    },
-                    '.Tab:hover': {
-                      backgroundColor: '#eee'
-                    },
-                    '.Tab--selected, .Tab--selected:focus, .Tab--selected:hover': {
-                      color: 'var(--colorText)',
-                      backgroundColor: '#ccc'
-                    },
-                    '.Tab:focus, .Tab--selected:focus': {
-                      boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf',
-                      outline: 'none'
-                    },
-                    '.Tab:focus-visible': {
-                      outline: 'var(--focusOutline)'
-                    },
-                    '.PickerItem': {
-                      backgroundColor: '#dfdfdf',
-                      boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf',
-                      transition: 'none'
-                    },
-                    '.PickerItem:hover': {
-                      backgroundColor: '#eee'
-                    },
-                    '.PickerItem--highlight': {
-                      outline: '1px solid blue'
-                    },
-                    '.PickerItem--selected:hover': {
-                      backgroundColor: '#dfdfdf'
-                    }
-                }
+                theme: 'flat'
             },
         };
         console.log('Client Secret:', options.clientSecret); 

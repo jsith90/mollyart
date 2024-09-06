@@ -67,6 +67,34 @@ function initCheckoutButton() {
     }
 }
 
+function togglePaymentPageInfo() {
+    // Select all elements with the class 'summary-toggle'
+    const summaryToggles = document.querySelectorAll(".summary-toggle");
+    
+    summaryToggles.forEach((toggle) => {
+        toggle.addEventListener("mouseover", function() {
+            
+            // const shopText = item.querySelectorAll('.item-detail > h3, .item-detail > p, .item-detail > h4');
+            toggle.style.cursor = "pointer";
+            toggle.style.background = "#4eb2ff";
+        });
+
+        toggle.addEventListener("mouseout", function() {
+            toggle.style.background = ""; // Reset background on mouse out
+        });
+        // Add click event listener to each summary-toggle
+        toggle.addEventListener("click", function () {
+            // Find the next sibling element with the class 'payment-detail'
+            const paymentDetail = this.nextElementSibling;
+            
+            // Toggle the 'payment-detail-display' class to show/hide the details
+            if (paymentDetail) {
+                paymentDetail.classList.toggle("payment-detail-display");
+            }
+        });
+    });
+}
+
 // Move the functions outside to make them globally accessible
 let slideIndex = 1;
 const modalImg = document.getElementById("img01");
@@ -127,3 +155,4 @@ function initModal() {
 initShopItemEvents();
 initCheckoutButton();
 initModal();
+togglePaymentPageInfo();
