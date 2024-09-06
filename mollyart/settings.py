@@ -156,7 +156,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 PAYPAL_TEST = True
 
 # sandbox business email
-PAYPAL_RECEIVER_EMAIL = os.environ['PAYPAL_EMAIL']
+PAYPAL_RECEIVER_EMAIL = 'businessjoshthegod@email.com'
 
 # Stripe keys
 STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET_YO']
