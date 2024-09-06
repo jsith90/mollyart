@@ -1,3 +1,55 @@
+function navBar() {
+    const navToggleOpen = document.querySelector(".nav-toggle-open");
+    const navToggleClose = document.querySelector(".nav-toggle-close");
+    const links = document.querySelector(".nav-options");
+    const navName = document.getElementById("logo-name");
+    const navMan = document.getElementById("logo-man");
+
+
+    navToggleOpen.addEventListener("click", function () {
+        // console.log(links.classList);
+        // console.log(links.classList.contains("random"));
+        // console.log(links.classList.contains("links"));
+        // if (links.classList.contains("show-links")) {
+        //   links.classList.remove("show-links");
+        // } else {
+        //   links.classList.add("show-links");
+        // }
+        links.classList.add("show-options");
+        navToggleOpen.style.opacity = "0";
+        navToggleClose.style.opacity = "1";
+        navToggleOpen.style.zIndex = "0";
+        navToggleClose.style.zIndex = "1";
+    });
+
+    navToggleClose.addEventListener("click", function () {
+        // console.log(links.classList);
+        // console.log(links.classList.contains("random"));
+        // console.log(links.classList.contains("links"));
+        // if (links.classList.contains("show-links")) {
+        //   links.classList.remove("show-links");
+        // } else {
+        //   links.classList.add("show-links");
+        // }
+        links.classList.remove("show-options");
+        navToggleOpen.style.opacity = "1";
+        navToggleClose.style.opacity = "0";
+        navToggleOpen.style.zIndex = "1";
+        navToggleClose.style.zIndex = "0";
+    });
+
+    // navName.addEventListener("mouseover", function () {
+    //     navMan.style.opacity = "1";
+    //     navMan.style.zIndex = "100";
+    // });
+
+    // navName.addEventListener("mouseout", function () {
+    //     navMan.style.opacity = "0";
+    //     navMan.style.zIndex = "0";
+    // });
+}
+
+
 function initShopItemEvents() {
     const shopItem = document.querySelectorAll('.shop-item');
     
@@ -156,3 +208,4 @@ initShopItemEvents();
 initCheckoutButton();
 initModal();
 togglePaymentPageInfo();
+navBar();
