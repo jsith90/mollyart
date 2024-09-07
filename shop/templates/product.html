@@ -22,12 +22,14 @@
           </div>
           <!-- Product details-->
           <div class="item-detail">
+          <div class="mobile-view">
             <!-- Product name-->
             <h3>{{ product.name }}</h3>
             <!-- Product price-->
             <p>{{ product.description }}</p>
             <p class="line-through">£{{ product.price }}</p>
             <h4 class="price">£{{ product.sale_price }}</h4>
+          </div>
         {% elif product.is_sold_out %}
           <div class="item-image-box">
             <!-- sold out badge -->
@@ -46,10 +48,12 @@
           </div>
           <!-- Product details-->
           <div class="item-detail">
+            <div class="mobile-view">
             <h3 class="line-through">{{ product.name }}</h3>
             <!-- Product price-->
             <p>{{ product.description }}</p>
             <h4 class="price">£{{ product.price }}</h4>
+          </div>
         {% else %}
           <div class="item-image-box">  
             <!-- Product image-->
@@ -66,13 +70,16 @@
           </div>
           <!-- Product details-->
           <div class="item-detail">
+          <div class="mobile-view">
             <!-- Product name-->
             <h3>{{ product.name }}</h3>
             <!-- Product price-->
             <p>{{ product.description }}</p>
             <h4 class="price">£{{ product.price }}</h4>
+          </div>
         {% endif %}
         {% if not product.is_sold_out and product.id|stringformat:"s" not in trolley.trolley %}
+          <div class=mobile-view>
           <div class="quantity-box">
             <h5 class="price">Quantity:</h5>
               <select id="qty-trolley" class="quantity-form">
@@ -94,6 +101,7 @@
             <a class="edit product-button" href="{% url 'product_update' product.id %}">Edit</a>
             <a class="delete product-button" href="{% url 'delete_product' product.id %}">Delete</a>
           {% endif %}
+        </div>
         </div>
           </div>
       </div>

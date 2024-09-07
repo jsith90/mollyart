@@ -1,4 +1,5 @@
 function navBar() {
+    const toggleDiv = document.querySelector(".toggle-div");
     const navToggleOpen = document.querySelector(".nav-toggle-open");
     const navToggleClose = document.querySelector(".nav-toggle-close");
     const links = document.querySelector(".nav-options");

@@ -45,12 +45,14 @@ nav {
   text-align: left;
   margin-left: 1rem;
   position: absolute;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+  z-index: 1;
 }
 
-.nav-toggle-open:hover {
+/*.nav-toggle-open:hover {
 	transform: translateY(-10px);
-}
+}*/
 
 .nav-toggle-open > i {
 	font-size: 3rem;
@@ -78,7 +80,8 @@ nav {
   overflow: hidden;
   transition: var(--transition);
   text-align: center;
-  margin: 5rem 0 4rem 0;
+  margin: 4rem 0 2rem 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -147,12 +150,18 @@ nav {
 	display: flex;
 	width: 30%;
 	justify-content: flex-start;
+	padding: 0;
 }
 
 .trolley-form > a {
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
+	transition: transform 0.5s ease;
+}
+
+.trolley-form > a:hover {
+	transform: translateY(-10px);
 }
 
 .trolley-form > a > i {
@@ -288,7 +297,7 @@ color: #ff9a26
 	text-decoration: line-through;
 }
 
-.product > .product-item > .item-detail > h3 {
+.product > .product-item > .item-detail > .mobile-view > h3 {
 	text-transform: uppercase;
 	margin: 0 0 3rem 0;
 	font-size: 3rem;
@@ -791,6 +800,28 @@ form {
   transform: translateY(-10px);
 }
 
+.paid-display {
+	width: 60%;
+  padding: 0 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paid-product {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+
+.paid-buttons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 @media only screen and (max-width: 1386px) {
   .view-product-sale > p, .view-product-sold > p, .view-product-available > p, .sold-out-badge {
   	font-size: 0.8rem;
@@ -849,6 +880,14 @@ form {
 }
 
 @media only screen and (max-width: 1060px) {
+	#logo-name > img {
+		max-width: 100%;
+	}
+
+	.nav-options {
+		margin: 2rem 0 0 0;
+	}
+
   .shop-display {
   	padding: 0 2rem 2rem 2rem;
   }
@@ -902,7 +941,7 @@ form {
   }
 
   .view-product-sale, .view-product-sold, .view-product-available, .product-button, .trolley-button {
-  	width: 30%;
+  	width: 40%;
   }
 
   .product-item {
@@ -917,11 +956,37 @@ form {
 
 	.checkout-main > .order-display {
     width: 80%;
-}
+	}
+
+	.checking-out > .view-product-available {
+    width: 30%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+	}
+
 
 }
 
 @media only screen and (max-width: 700px) {
+	.nav-toggle-close > i {
+		font-size: 2rem;
+	}
+
+	.nav-toggle-open > i {
+		font-size: 2rem;
+	}
+
+	.trolley-form > a > i {
+		font-size: 2rem;
+	}
+
+	.trolley-form > a > span {
+		font-size: 1rem;
+	}
+
 	.checking-out {
     flex-direction: column;
 	}
@@ -930,15 +995,74 @@ form {
 		margin-top: 1rem;
     width: 40%;
 	}
+
+
+  .product > .product-item > .item-detail {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+  	width: 100%;
+  }
+
+  .checkout-product > .product-item > .item-detail {
+  	width: 100%;
+  	text-align: center;
+  }
+
+  .mobile-view {
+  	width: 100%;
+  	text-align: center;
+  }
+
+  .product-buttons {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+  	justify-content: center;
+  }
+
+	.checkout-product >  .product-item > .item-detail > .product-buttons > .product-button {
+  	width: 50%;
+  }
+
+  .product >  .product-item > .item-detail > .product-buttons > .product-button {
+  	width: 100%;
+  }
+
+  .checking-out {
+  	width: 100%;
+  	align-items: center;
+  }
+
+  .checking-out > .view-product-available, .checking-out > h3 {
+  	font-size: 1rem;
+	}
 }
 
 @media only screen and (max-width: 530px) {
+
+	.logo-div {
+		width: 60%;
+	}
+
+	.nav-options {
+		margin-bottom: 1rem;
+	}
+
+	.nav-options > li {
+		font-size: 1.5rem;
+	}
+
 	.item-image-box, .item-detail {
   		width: 90%;
   	}
 
   .shop-header > div > h1 {
   	font-size: 2rem;
+  }
+
+   .category-display > div > h2 {
+  	padding: 0.5rem;
   }
 
   .category-display > div > h2 > a {
@@ -952,13 +1076,14 @@ form {
   	font-size: 0.6rem;
   }
 
-  .view-product-sold, .view-product-sale, .view-product-available, .product-button, .trolley-button {
+	.product > .product-item > .item-detail > .mobile-view > h3 {
+		font-size: 2rem;
+	}
+
+
+  .view-product-sold, .view-product-sale, .view-product-available, .trolley-button {
   	width: 40%;
   }
-
-  .checking-out > .view-product-available, .checking-out > h3 {
-  	font-size: 1rem;
-	}
 
 	.checkout-main > .order-display {
 		width: 100%;
