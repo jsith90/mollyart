@@ -570,6 +570,14 @@ color: #ff9a26
 	color: red;
 }
 
+.edit {
+	color: #3f9c44;
+}
+
+.delete {
+	color: red;
+}
+
 .shop-display > .checkout-product {
 	display: flex;
 	justify-content: center;
@@ -826,6 +834,39 @@ form {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.category-header {
+	display: flex;
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+}
+
+.category-header > div {
+	text-align: center;
+  padding: 1rem;
+  /* border-radius: 5px; */
+}
+
+.category-heading {
+  text-transform: uppercase;
+  font-size: 4rem;
+  color: #ffb256;
+}
+
+.shop-display > .product-buttons {
+	margin: 2rem 0 0 0;
+	width: 100%;
+	justify-content: center;
+	display: flex;
+}
+
+.shop-display > .product-buttons > div {
+	width: 50%;
+	display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media only screen and (max-width: 1386px) {
@@ -1117,6 +1158,22 @@ form {
 
 	.paid-display {
 		width: 100%;
+	}
+
+	.category-header {
+  	margin-bottom: 0;
+  }
+
+  .category-header > div > h1 {
+  	font-size: 2rem;
+  }
+
+	.shop-display > .product-buttons > div {
+		width: 100%;
+	}
+
+	.shop-display > .product-buttons > div > a {
+		width: 80%;
 	}
 
 }
