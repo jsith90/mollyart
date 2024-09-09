@@ -58,7 +58,9 @@
                 <a href="{% url 'checkout' %}" id="checkout" class="view-product-available">Checkout</a>
             </div>
             {% else %}
+            <div class="no-items">
                 <p>There's nothing in your trolley...</p>
+            </div>
             {% endif %}
         </section>
 <script>

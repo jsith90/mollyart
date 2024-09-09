@@ -12,7 +12,7 @@
         </div>
         <div class="logo-div">
         <a id="logo-name" href="{% url 'index' %}"><img src="{% static 'images/logo-type.png' %}"></a>
-        <!-- <a id="logo-man" href="{% url 'index' %}"><img src="{% static 'images/hatman-image.gif' %}"></a> -->
+        <a id="logo-man" class="logo-man" href="{% url 'index' %}"><img src="{% static 'images/hatman-image.gif' %}"></a>
         </div>
         <form class="trolley-form">
             <a href="{% url 'trolley_summary' %}">
@@ -21,22 +21,24 @@
             </a>
         </form>
     </div>
+    <ul class="nav-options">    
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Shop</a></li>
+            {% if user.is_superuser %}
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_product' %}">Add Product</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_category' %}">Add Category</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Orders</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'shipped_dash' %}">Shipped Orders</a></li>
+                        <li><hr class="dropdown-divider" /></li><a class="dropdown-item" href="{% url 'not_shipped_dash' %}">Unshipped Orders</a></li>
+                    </ul>
+                </li>
+                <li><a class="dropdown-item drop-list" aria-label="Logout of User account" href="{% url 'logout' %}" class="active">Logout</a></li>
+            {% endif %}
+            {% if not user.is_authenticated %}
+                <li><a class="copythat" href="{% url 'login_user' %}">Login</a></li>
+            {% endif %}
+    </ul>
 </nav>
-<ul class="nav-options">    
-    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Shop</a></li>
-        {% if user.is_superuser %}
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_product' %}">Add Product</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_category' %}">Add Category</a></li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Orders</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'shipped_dash' %}">Shipped Orders</a></li>
-                    <li><hr class="dropdown-divider" /></li><a class="dropdown-item" href="{% url 'not_shipped_dash' %}">Unshipped Orders</a></li>
-                </ul>
-            </li>
-            <li><a class="dropdown-item drop-list" aria-label="Logout of User account" href="{% url 'logout' %}" class="active">Logout</a></li>
-        {% endif %}
-        {% if not user.is_authenticated %}
-            <li><a class="copythat" href="{% url 'login_user' %}">Login</a></li>
-        {% endif %}
-</ul>
+
+

@@ -36,8 +36,7 @@ p, a, button {
 
 nav {
 /*	transform: translateY(-200px);*/
-	margin: 2rem 0 2rem 0;
-	max-height: 200px;
+	margin: 2rem 0 4rem 0;
 	transition: opacity 2s ease-out;
 /*	transition: transform 0.9s ease-out;*/
 }
@@ -152,7 +151,7 @@ nav {
   overflow: hidden;
   transition: var(--transition);
   text-align: center;
-  margin: 4rem 0 2rem 0;
+/*  margin: 4rem 0 2rem 0;*/
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -178,6 +177,7 @@ nav {
 .logo-div {
 	width: 30%;
 	display: flex;
+	position: relative;
 /*	opacity: 0;*/
 }
 
@@ -189,6 +189,7 @@ nav {
 	text-align: center;
 	transition: transform 0.5s ease;
 	width: 100%;
+	position: absolute;
 }
 
 .nav-scroll {
@@ -217,6 +218,28 @@ nav {
 	max-width: 80%;
 	height: auto;
 	margin: 0 auto 0 auto;
+}
+
+.logo-man {
+	width: 50%;
+	position: relative;
+	right: -25%;
+	z-index: -9;	
+	opacity: 0;
+	transition: opacity 2s ease-in, transform 0.5s ease;
+}
+
+.man-appear {
+	z-index: 1;
+	opacity: 1;
+}
+
+.logo-man:hover {
+	transform: translateY(-10px);
+}
+
+#logo-man > img {
+	width: 100%;
 }
 
 /*#logo-man > img {
@@ -258,15 +281,14 @@ nav {
   display: flex;
   justify-content: center;
   opacity: 0;
-  width: 100%;
+  width: 5%;
   transition: opacity 2s ease, transform 2s ease;
+  position: absolute;
 }
 
 .landing-scroll {
 	opacity: 1;
-	transform: translateY(-350px);
-	position: fixed;
-  top: 60%;
+	width: 100%;
 }
 
 .landing > div {
@@ -355,6 +377,12 @@ color: #ff9a26
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+}
+
+.shop-display > .no-items {
+  justify-content: center;
+  margin: 40px 40px 0 0;
+  display: flex;
 }
 
 .shop-item {
@@ -1067,6 +1095,7 @@ form {
 }
 
 @media only screen and (max-width: 1060px) {
+
 	#logo-name > img {
 		max-width: 100%;
 	}
@@ -1078,6 +1107,10 @@ form {
   .shop-display {
   	padding: 0 2rem 2rem 2rem;
   }
+
+  .shop-display > .no-items {
+  	margin: 0;
+	}
   
   .payment-display > .payment-product {
 		display: flex;
@@ -1157,6 +1190,21 @@ form {
 }
 
 @media only screen and (max-width: 700px) {
+
+	.logo-div {
+		width: 100%;
+	}
+
+	.landing > div {
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.landing-man {
+		width: 80%;
+	}
+
 	.nav-toggle-close > i {
 		font-size: 2rem;
 	}
@@ -1237,20 +1285,6 @@ form {
 
 	.hatman-div {
 		width: 100%;
-	}
-
-	.landing-scroll {
-		position: unset;
-	}
-
-	.landing > div {
-		width: 100%;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.landing-man {
-		width: 80%;
 	}
 
 	.logo-div {

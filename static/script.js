@@ -1,7 +1,10 @@
 function navScroll() {
     // Select the .hatman-div element and nav
     const hatmanDiv = document.querySelector('.hatman-div');
-    const nav = document.getElementsByTagName('nav')[0]; 
+    // const nav = document.getElementsByTagName('nav')[0];
+    const logo = document.querySelector('.logo-div'); 
+    const logoName = document.getElementById('logo-name');
+    const logoMan = document.getElementById('logo-man');
     const landing = document.querySelector('.landing');
     const hatmanImage = document.querySelector('.hatman-image');
     const commission = document.getElementById('commission');
@@ -18,9 +21,10 @@ function navScroll() {
             if (currentScrollY > lastScrollY) {
                 // Scrolling down: add classes
                 hatmanDiv.classList.add('hatman-scroll');
-                nav.classList.add('nav-scroll');
+                logoName.classList.add('nav-scroll');
                 landing.classList.add('landing-scroll');
                 hatmanImage.style.animationName = 'none';
+                logoMan.classList.add('man-appear');
             } else {
                 // Scrolling up: remove classes
                 // hatmanDiv.classList.remove('hatman-scroll');
