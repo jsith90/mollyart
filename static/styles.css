@@ -9,6 +9,17 @@
 	--transition: all 0.3s linear;
 }
 
+/*main {
+	opacity: 0;
+	transform: translateY(500px);
+	transition: transform 0.7s ease-in, opacity 0.3s ease-in;
+}*/
+
+/*.opacity {
+	opacity: 1;
+	transform: translateY(0px)
+}*/
+
 h1, h2, h3, h4, h5 {
 	font-family: "Karla", sans-serif;
 	font-weight: 800;
@@ -23,14 +34,75 @@ p, a, button {
 	color: black;
 }
 
+nav {
+/*	transform: translateY(-200px);*/
+	margin: 2rem 0 2rem 0;
+	max-height: 200px;
+	transition: opacity 2s ease-out;
+/*	transition: transform 0.9s ease-out;*/
+}
+
+/*.nav-down {
+	transform: translateY(0px);
+}*/
+
 .nav-div {
 	display: flex;
 	justify-content: space-between;
+	position: relative;
 }
 
-nav {
-	margin: 2rem 0 2rem 0;
-	max-height: 200px;
+@keyframes bounce {
+	0% {transform: translateY(0);}
+	50% {transform: translateY(20px);}
+	100% {transform: translateY(0);}
+}
+
+@keyframes small-bounce {
+	0% {transform: translateY(0px);}
+	50%{transform: translateY(5px);}
+	100%{transform: translateY(0px);}
+}
+
+.hatman-div {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  transition: transform 2s ease-out, width 2s, opacity 2s ease-out;
+  position: relative;
+  z-index: -10;
+}
+
+.hatman-image {
+	width: 40%;
+	animation-name: bounce;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.hatman-image > img {
+	width: 100%;
+}
+
+.hatman-scroll {
+	/*	transform: translateY(-110%);*/
+	opacity: 0;
+	/*	transition: opacity 0.9s ease-out;*/
+	/*	z-index: -100;*/
+	/*	height: 0;*/
+	transform: translateY(-350px);
+/*	position: fixed;*/
+	width: 30%;
+	
+}
+
+.home {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 100px 0 0 0;
+	min-height: 100vh;
 }
 
 .toggle-div {
@@ -106,6 +178,7 @@ nav {
 .logo-div {
 	width: 30%;
 	display: flex;
+/*	opacity: 0;*/
 }
 
 #logo-name:hover {
@@ -114,9 +187,15 @@ nav {
 
 #logo-name {
 	text-align: center;
-	transition: opacity 0.5s ease;
-	width: 100%;
 	transition: transform 0.5s ease;
+	width: 100%;
+}
+
+.nav-scroll {
+/*	transform: translateY(-110%);*/
+	opacity: 0;
+	position: relative;
+	z-index: -9;
 }
 
 /*#logo-man {
@@ -172,6 +251,51 @@ nav {
 .trolley-form > a > span {
 	font-size: 2rem;
 	margin-right: 1rem;
+}
+
+.landing {
+/*	margin: 0 0 150px 0;*/
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  width: 100%;
+  transition: opacity 2s ease, transform 2s ease;
+}
+
+.landing-scroll {
+	opacity: 1;
+	transform: translateY(-350px);
+	position: fixed;
+  top: 60%;
+}
+
+.landing > div {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.landing-man {
+	width: 30%;
+  display: block;
+  animation-name: bounce;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.landing > div > a > img {
+	 width: 100%;
+}
+
+.no-bounce {
+	animation-name: small-bounce;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+}
+
+.man-clicked {
+	width: 50px;
+	transition: width 6s;
 }
 
 .shop-header {
@@ -869,7 +993,19 @@ form {
   align-items: center;
 }
 
+@media only screen and (max-width: 1600px) {
+		.hatman-image > img {
+		transform: translateY(-100px);
+	}
+
+	.hatman-scroll {
+		transform: translateY(-250px);
+	}
+
+}
+
 @media only screen and (max-width: 1386px) {
+
   .view-product-sale > p, .view-product-sold > p, .view-product-available > p, .sold-out-badge {
   	font-size: 0.8rem;
   }
@@ -909,6 +1045,10 @@ form {
 }
 
 @media only screen and (max-width: 1188px) {
+		.hatman-div {
+		width: 100%;
+	}
+
   .view-product-sale > a, .view-product-sold > a, .view-product-available > a, .sold-out-badge {
   	font-size: 0.7rem;
   }
@@ -953,7 +1093,6 @@ form {
 }
 
 @media only screen and (max-width: 1020px) {
-  
   .category-display {
   	margin: 0 0 1rem 0;
   }
@@ -1091,6 +1230,28 @@ form {
 }
 
 @media only screen and (max-width: 530px) {
+	.man-clicked {
+		width: 5px;
+		transition: width 3s;
+	}
+
+	.hatman-div {
+		width: 100%;
+	}
+
+	.landing-scroll {
+		position: unset;
+	}
+
+	.landing > div {
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.landing-man {
+		width: 80%;
+	}
 
 	.logo-div {
 		width: 60%;

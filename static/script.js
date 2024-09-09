@@ -1,3 +1,74 @@
+function navScroll() {
+    // Select the .hatman-div element and nav
+    const hatmanDiv = document.querySelector('.hatman-div');
+    const nav = document.getElementsByTagName('nav')[0]; 
+    const landing = document.querySelector('.landing');
+    const hatmanImage = document.querySelector('.hatman-image');
+    const commission = document.getElementById('commission');
+    const shop = document.getElementById('shop');
+    const portfolio = document.getElementById('portfolio');
+
+
+    let lastScrollY = window.scrollY; // To keep track of the last scroll position
+
+    if (hatmanDiv) {
+        function handleScroll() {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY) {
+                // Scrolling down: add classes
+                hatmanDiv.classList.add('hatman-scroll');
+                nav.classList.add('nav-scroll');
+                landing.classList.add('landing-scroll');
+                hatmanImage.style.animationName = 'none';
+            } else {
+                // Scrolling up: remove classes
+                // hatmanDiv.classList.remove('hatman-scroll');
+                // nav.classList.remove('nav-scroll');
+                // landing.classList.remove('landing-scroll');
+                console.log("hatman is in the nav.");
+            }
+
+            // Update the last scroll position
+            lastScrollY = currentScrollY;
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll);
+    
+    } else {
+        console.log("The .hatman-div does not exist on this page.");
+    }
+
+    commission.addEventListener("mouseover", function () {
+        commission.classList.add("no-bounce");
+    });
+
+    commission.addEventListener("mouseout", function () {
+        commission.classList.remove("no-bounce");
+    });
+
+    shop.addEventListener("mouseover", function () {
+        shop.classList.add("no-bounce");
+    });
+
+    shop.addEventListener("mouseout", function () {
+        shop.classList.remove("no-bounce");
+    });
+
+    portfolio.addEventListener("mouseover", function () {
+        portfolio.classList.add("no-bounce");
+    });
+
+    shop.addEventListener("mouseout", function () {
+        portfolio.classList.remove("no-bounce");
+    });
+
+    shop.addEventListener("click", function () {
+        shop.classList.add("man-clicked");
+    });
+}
+
 function navBar() {
     const toggleDiv = document.querySelector(".toggle-div");
     const navToggleOpen = document.querySelector(".nav-toggle-open");
@@ -38,18 +109,7 @@ function navBar() {
         navToggleOpen.style.zIndex = "1";
         navToggleClose.style.zIndex = "0";
     });
-
-    // navName.addEventListener("mouseover", function () {
-    //     navMan.style.opacity = "1";
-    //     navMan.style.zIndex = "100";
-    // });
-
-    // navName.addEventListener("mouseout", function () {
-    //     navMan.style.opacity = "0";
-    //     navMan.style.zIndex = "0";
-    // });
 }
-
 
 function initShopItemEvents() {
     const shopItem = document.querySelectorAll('.shop-item');
@@ -210,3 +270,4 @@ initCheckoutButton();
 initModal();
 togglePaymentPageInfo();
 navBar();
+navScroll(); 

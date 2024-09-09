@@ -2,5 +2,18 @@
 {% load static %}
 
 {% block content %}
-<h1>Molly's Website</h1>
+<div class="home">
+	<div class="hatman-div">
+	    <div class="hatman-image">
+	        <img src="{% static 'images/hatman-image.gif' %}">
+	    </div>
+	</div>
+	<section class="landing">
+		<div>
+		<a class="landing-man" id="commission" href="#"><img src="{% static 'images/Commission.png' %}"></a>
+		<a class="landing-man" id="shop" href="{% url 'shop' %}"><img src="{% static 'images/Shop.png' %}"></a>
+		<a class="landing-man" id="portfolio" href="#"><img src="{% static 'images/Portfolio.png' %}"></a>
+		</div>
+	</section>
+</div>
 {% endblock %}
