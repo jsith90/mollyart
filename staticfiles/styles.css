@@ -19,6 +19,14 @@
 	opacity: 1;
 	transform: translateY(0px)
 }*/
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	flex: 1;
+}
 
 h1, h2, h3, h4, h5 {
 	font-family: "Karla", sans-serif;
@@ -36,7 +44,7 @@ p, a, button {
 
 nav {
 /*	transform: translateY(-200px);*/
-	margin: 2rem 0 4rem 0;
+	margin: 2rem 0 1rem 0;
 	transition: opacity 2s ease-out;
 /*	transition: transform 0.9s ease-out;*/
 }
@@ -67,7 +75,7 @@ nav {
   width: 50%;
   display: flex;
   justify-content: center;
-  transition: transform 2s ease-out, width 2s, opacity 2s ease-out;
+  transition: transform 2s ease-out, width 2s, opacity 2s ease-out, height 2s ease-out;
   position: relative;
   z-index: -10;
 }
@@ -88,7 +96,7 @@ nav {
 	opacity: 0;
 	/*	transition: opacity 0.9s ease-out;*/
 	/*	z-index: -100;*/
-	/*	height: 0;*/
+	height: 0;
 	transform: translateY(-350px);
 /*	position: fixed;*/
 	width: 30%;
@@ -100,8 +108,8 @@ nav {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	margin: 100px 0 0 0;
-	min-height: 100vh;
+/*	margin: 100px 0 0 0;*/
+/*	min-height: 100vh;*/
 }
 
 .toggle-div {
@@ -160,6 +168,7 @@ nav {
 
 .show-options {
 	max-height: 25rem;
+	margin-bottom: 3rem;
 }
 
 .nav-options > li {
@@ -283,7 +292,7 @@ nav {
   opacity: 0;
   width: 5%;
   transition: opacity 2s ease, transform 2s ease;
-  position: absolute;
+  position: relative;
 }
 
 .landing-scroll {
@@ -1021,6 +1030,49 @@ form {
   align-items: center;
 }
 
+.form-section {
+	font-family: "Space Grotesk", sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	text-decoration: none;
+	color: black;
+}
+
+form > .product-buttons > .product-button {
+	width: 100%;
+}
+
+footer {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
+footer > div {
+	width: 60%;
+	display: flex;
+}
+
+.footer-man-one {
+	width: 80%;
+	display: flex;
+	align-items: flex-end;	
+}
+
+.footer-man-one > img {
+	width: 60%;
+}
+
+.footer-man-two {
+	width: 60%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.footer-man-two > img {
+	width: 86%;
+}
+
 @media only screen and (max-width: 1600px) {
 		.hatman-image > img {
 		transform: translateY(-100px);
@@ -1100,7 +1152,7 @@ form {
 		max-width: 100%;
 	}
 
-	.nav-options {
+	.show-options {
 		margin: 2rem 0 0 0;
 	}
 
@@ -1291,7 +1343,7 @@ form {
 		width: 60%;
 	}
 
-	.nav-options {
+	.show-options {
 		margin-bottom: 1rem;
 	}
 

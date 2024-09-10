@@ -10,11 +10,14 @@ function navScroll() {
     const commission = document.getElementById('commission');
     const shop = document.getElementById('shop');
     const portfolio = document.getElementById('portfolio');
-
+    const home = document.querySelector('.home');
+    const footer = document.getElementsByTagName('footer')[0];
 
     let lastScrollY = window.scrollY; // To keep track of the last scroll position
 
     if (hatmanDiv) {
+        footer.style.display = "none";
+        home.style.minHeight = "100vh";
         function handleScroll() {
             const currentScrollY = window.scrollY;
 
@@ -24,7 +27,9 @@ function navScroll() {
                 logoName.classList.add('nav-scroll');
                 landing.classList.add('landing-scroll');
                 hatmanImage.style.animationName = 'none';
+                home.style.minHeight = "auto";
                 logoMan.classList.add('man-appear');
+                // home.style.display = "block";
             } else {
                 // Scrolling up: remove classes
                 // hatmanDiv.classList.remove('hatman-scroll');

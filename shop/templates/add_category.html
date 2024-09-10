@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <main class="add-category">
-        <div class="form-header">
-        <h1 class="form-title">Create a New Category</h1>
+<section class="form-section">
+    <header class="shop-header">
+        <div>
+            <h1 class="shop-heading">Create a New Category</h1>
         </div>
-        <form class="category-form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-            <div class="form-name form-group mb-2 col-3 p-3">
-                <label for="{{ category_form.name.id_for_label }}">{{ category_form.name.label }}</label>
-                {{ category_form.name }}
-            </div>
-            <button type="submit" class="publish-button">Create Category</button>
-        </form>
-    </main>
+    </header>
+    <form class="category-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form">
+            <label for="{{ category_form.name.id_for_label }}">{{ category_form.name.label }}</label>
+            {{ category_form.name }}
+        </div>
+        <div class="product-buttons">
+            <button type="submit" class="product-button">Create Category</button>
+        </div>
+    </form>
+</section>
 {% endblock %}

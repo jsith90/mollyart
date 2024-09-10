@@ -6,6 +6,7 @@
 </div>
  <div>
     <pre>Date Ordered: {{ order.date_ordered }}</pre><br>
+    <img src="{{ item.image }}">
     <pre>{{ order.full_name }}</pre>
     <pre>{{ order.shipping_address }}</pre><br>
     {% for item in items %}

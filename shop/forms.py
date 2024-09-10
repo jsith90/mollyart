@@ -5,16 +5,16 @@ from .models import Product, Category
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'price', 'category', 'description', 'image', 'quantity', 'is_sale', 'sale_price', 'is_sold_out']
+        fields = ['name', 'price', 'category', 'description', 'image', 'image2', 'image3', 'image4', 'quantity', 'is_sale', 'sale_price', 'is_sold_out']
         labels = {
             'name': 'Product Name:',
             'price': 'Price:',
             'category':'Category:',
             'description': 'Description:',
             'image': 'Uploade main image:',
-            'image2': 'Uploade an additional image:',
-            'image3': 'Uploade an additional image:',
-            'image4': 'Uploade an additional image:',
+            'image2': 'Upload a second image:',
+            'image3': 'Upload a third image:',
+            'image4': 'Upload a fourth image:',
             'quantity': 'Quantity:',
             'is_sale': 'Tick box for Sale:',
             'sale_price': 'Sale Price:',

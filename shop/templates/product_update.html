@@ -1,49 +1,67 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <main class="add-product">
-        <div class="form-header">
-        <h1 class="form-title">Update {{ product.name }}</h1>
+<section class="form-section">
+    <header class="shop-header">
+        <div>
+            <h1 class="shop-heading">Update {{ product.name }}</h1>
         </div>
-        <form class="product-update-form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-            <div class="form-name form-group mb-2 col-3 p-3">
-                <label for="{{ product_form.name.id_for_label }}">{{ product_form.name.label }}</label>
-                {{ product_form.name }}
+    </header>
+    <form class="product-update-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form">
+            <label for="{{ product_form.name.id_for_label }}">{{ product_form.name.label }}</label>
+            {{ product_form.name }}
+        </div>
+        <div class="form">
+            <label for="{{ product_form.price.id_for_label }}">{{ product_form.price.label }}</label>
+            £{{ product_form.price }}
+        </div>
+        <div class="form">
+            <label for="{{ product_form.category.id_for_label }}">{{ product_form.category.label }}</label>
+            {{ product_form.category }}
+            <div class="product-buttons">
+                <a class="product-button" target="_blank" href="{% url 'add_category' %}" class="btn btn-secondary">Add New Category</a>
             </div>
-            <div class="form-name form-group p-3 col-sm-9">
-                <label for="{{ product_form.price.id_for_label }}">{{ product_form.price.label }}</label>
-                £{{ product_form.price }}
-            </div>
-            <div class="form-group mb-2 col-3 p-3 form-category">
-                <label for="{{ product_form.category.id_for_label }}">{{ product_form.category.label }}</label>
-                {{ product_form.category }}
-                <a class="nav-link active" target="_blank" href="{% url 'add_category' %}" class="btn btn-secondary">Add New Category</a>
-            </div>
-            <div class="form-group mb-2 col-3 p-3 form-description">
-                <label for="{{ product_form.description.id_for_label }}">{{ product_form.description.label }}</label>
-                {{ product_form.description }}
-            </div>
-            <div class="form-group mb-2 col-3 p-3 form-image">
-                <label for="{{ product_form.image.id_for_label }}">{{ product_form.image.label }}</label>
-                {{ product_form.image }}
-            </div>
-            <div class="form-group mb-2 col-3 p-3 form-quantity">
-                <label for="{{ product_form.quantity.id_for_label }}">{{ product_form.quantity.label }}</label>
-                {{ product_form.quantity }}
-            </div>
-            <div class="form-group mb-2 col-3 p-3 form-sale">
-                <label for="{{ product_form.is_sale.id_for_label }}">{{ product_form.is_sale.label }}</label>
-                {{ product_form.is_sale }}
-                <br>
-                <label for="{{ product_form.sale_price.id_for_label }}">{{ product_form.sale_price.label }}</label>
-                £{{ product_form.sale_price }}
-            </div>
-            <div class="form-group mb-2 col-3 p-3 form-sale">
-                <label for="{{ product_form.is_sold_out.id_for_label }}">{{ product_form.is_sold_out.label }}</label>
-                {{ product_form.is_sold_out }}
-            </div>
-            <button type="submit" class="publish-button">Update Product</button>
-        </form>
-    </main>
+        </div>
+        <div class="form">
+            <label for="{{ product_form.description.id_for_label }}">{{ product_form.description.label }}</label>
+            {{ product_form.description }}
+        </div>
+        <div class="form image-input-display">
+            <label for="{{ product_form.image.id_for_label }}">{{ product_form.image.label }}</label>
+            {{ product_form.image }}
+        </div>
+        <div class="form image-input-display">
+            <label for="{{ product_form.image2.id_for_label }}">{{ product_form.image2.label }}</label>
+            {{ product_form.image2 }}
+        </div>
+        <div class="form image-input-display">
+            <label for="{{ product_form.image3.id_for_label }}">{{ product_form.image3.label }}</label>
+            {{ product_form.image3 }}
+        </div>
+        <div class="form image-input-display">
+            <label for="{{ product_form.image4.id_for_label }}">{{ product_form.image4.label }}</label>
+            {{ product_form.image4 }}
+        </div>
+        <div class="form">
+            <label for="{{ product_form.quantity.id_for_label }}">{{ product_form.quantity.label }}</label>
+            {{ product_form.quantity }}
+        </div>
+        <div class="form">
+            <label for="{{ product_form.is_sale.id_for_label }}">{{ product_form.is_sale.label }}</label>
+            {{ product_form.is_sale }}
+            <br>
+            <label for="{{ product_form.sale_price.id_for_label }}">{{ product_form.sale_price.label }}</label>
+            £{{ product_form.sale_price }}
+        </div>
+        <div class="form">
+            <label for="{{ product_form.is_sold_out.id_for_label }}">{{ product_form.is_sold_out.label }}</label>
+            {{ product_form.is_sold_out }}
+        </div>
+        <div class="product-buttons">
+            <button type="submit" class="product-button">Update Product</button>
+        </div>
+    </form>
+</section>
 {% endblock %}
