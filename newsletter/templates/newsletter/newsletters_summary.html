@@ -1,0 +1,14 @@
+{% if articles %}
+    {% for article in articles %}
+        {% if article.is_published %}
+            <li><a class="dropdown-item" href="#">{{ article.title }}</a></li>
+            {% if not forloop.last %}
+            <hr class="dropdown-divider" />
+            {% endif %}
+        {% else %}
+            <li><a class="dropdown-item" href="{% url 'draft_newsletter' article.id %}">{{ article.title }} (draft)</a></li>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <p>No Newsletters yet.</p>
+{% endif %}

@@ -6,6 +6,9 @@ from django.db.models import Q
 import json
 from django.contrib.auth import authenticate, login, logout
 from trolley.trolley import Trolley
+from newsletter.forms import SubscriptionForm
+from newsletter.views import subscribe
+from newsletter.models import Article
 
 
 # login page
@@ -171,5 +174,3 @@ def delete_category(request, pk):
         return redirect('shop')
     else:
     	return redirect('index')
-        
-

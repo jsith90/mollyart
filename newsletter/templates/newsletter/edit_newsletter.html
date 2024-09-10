@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="form-section">
+    <header class="shop-header">
+        <div>
+            <h1 class="shop-heading">Update {{ article.title }}</h1>
+        </div>
+    </header>
+    <form class="edit-newsletter-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form">
+            <label for="{{ article_form.title.id_for_label }}">{{ article_form.title.label }}</label>
+            {{ article_form.title }}
+        </div>
+        <div class="form">
+            <label for="{{ article_form.body.id_for_label }}">{{ article_form.body.label }}</label>
+            {{ article_form.body }}
+        </div>
+        <div class="form">
+            <label for="{{ article_form.image1.id_for_label }}">{{ article_form.image1.label }}</label>
+            {{ article_form.image1 }}
+            <label for="{{ article_form.caption1.id_for_label }}">{{ article_form.caption1.label }}</label>
+            {{ article_form.caption1 }}
+        </div>
+        <div class="form">
+            <label for="{{ article_form.image2.id_for_label }}">{{ article_form.image2.label }}</label>
+            {{ article_form.image2 }}
+            <label for="{{ article_form.caption2.id_for_label }}">{{ article_form.caption2.label }}</label>
+            {{ article_form.caption2 }}
+        </div>
+        <div class="form">
+            <label for="{{ article_form.image3.id_for_label }}">{{ article_form.image3.label }}</label>
+            {{ article_form.image3 }}
+            <label for="{{ article_form.caption3.id_for_label }}">{{ article_form.caption3.label }}</label>
+            {{ article_form.caption3 }}
+        </div>
+        <div class="form">
+            <label for="{{ article_form.image4.id_for_label }}">{{ article_form.image4.label }}</label>
+            {{ article_form.image4 }}
+            <label for="{{ article_form.caption4.id_for_label }}">{{ article_form.caption4.label }}</label>
+            {{ article_form.caption4 }}
+        </div>
+        <div class="product-buttons">
+            <label for="{{ form.title.id_for_label }}">{{ artice_form.slug.label }}</label>
+            {{ article_form.slug }}
+            <button type="submit" class="product-button">Update Newsletter Draft</button>
+            <a class="product-button" href="{% url 'index' %}">Home</a>
+        </div>    
+    </form>
+</section>
+{% endblock %}

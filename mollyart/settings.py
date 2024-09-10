@@ -37,8 +37,8 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 print(f"DEBUG (after conversion): {DEBUG}")
 
 
-ALLOWED_HOSTS = ['mollyart-production.up.railway.app', 'https://mollyart-production.up.railway.app', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://mollyart-production.up.railway.app']
+ALLOWED_HOSTS = ['mollyart-production.up.railway.app', 'https://mollyart-production.up.railway.app', 'localhost', '127.0.0.1', '194c-84-78-252-143.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://mollyart-production.up.railway.app', 'https://194c-84-78-252-143.ngrok-free.app']
 
 
 # Application definition
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "shop",
     "trolley",
     "payment",
+    "newsletter",
     'whitenoise.runserver_nostatic',
     'paypal.standard.ipn',
 ]
@@ -83,6 +84,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "trolley.context_processors.trolley",
+                'newsletter.context_processors.subscription_form',
+                'newsletter.context_processors.articles_processor',
             ],
         },
     },

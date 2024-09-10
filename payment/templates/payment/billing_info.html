@@ -1,152 +1,152 @@
 {% extends 'base.html' %}
 {% block content %}
-        <!-- Header-->
-                <header class="checkout-header">
-             <div>
-                <h1 class="shop-heading">H<span class="orange">e</span>r<span class="orange">e'</span>s <span class="orange">t</span>h<span class="orange">e</span> t<span class="orange">i</span>l<span class="orange">l</span></h1>
+<!-- Header-->
+<header class="checkout-header">
+    <div>
+        <h1 class="shop-heading">H<span class="orange">e</span>r<span class="orange">e'</span>s <span class="orange">t</span>h<span class="orange">e</span> t<span class="orange">i</span>l<span class="orange">l</span></h1>
+    </div>
+</header>
+<section class="payment-main">
+    <section class="payment-display">
+        <div class="payment-product">
+            <div class="payment-summary summary-toggle">
+                <h2>Order Summary</h2>
             </div>
-        </header>
-        <main class="payment-main">
-        <section class="payment-display">
-            <div class="payment-product">
-                <div class="payment-summary summary-toggle">
-                    <h2>Order Summary</h2>
-                </div>
-                <div class="payment-detail">
-                    {% for product in trolley_products %}
-                        <p>Product:</p>
-                        <h3>{{ product.name }}</h3>
-                        {% if product.is_sale %}
-                            <p>Price:</p> 
-                            <h3 class="price">£{{ product.sale_price }}</h3>
-                        {% else %}
-                            <p>Price:</p> 
-                            <h3 class="price">£{{ product.price }}</h3>
-                        {% endif %}
-                        <p>Quantity:</p>
-                            {% for key, value in quantities.items %}
-                                {% if key == product.id|slugify %}
-                                    <h3>{{ value }}</h3>
-                                {% endif %}
-                                {% if forloop.last  %}
-                                    </br>
-                                {% endif %}
-                            {% endfor %}
-                    {% endfor %}
-                    <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
-                </div>
-                <div class="payment-total">
-                    <p>Total:</p> 
-                    <h3>£{{ totals }}</h3>
-                </div>
-            </div>
-            <br>
-            <div class="payment-product">
-                <div class="payment-summary summary-toggle">
-                    <h2>Review Delivery Details</h2>
-                </div>
-                <div class="payment-detail">
-                    <p>Name:</p>
-                    <h4>{{ shipping_info.shipping_full_name }}</h4>
-                    <p>Email:</p> 
-                    <h4>{{ shipping_info.shipping_email }}</h4>
-                    <p>Address 1:</p> 
-                    <h4>{{ shipping_info.shipping_address1 }}</h4>
-                    {% if shipping_info.shipping_address2 %}
-                        <p>Address 2:</p>
-                        <h4>{{ shipping_info.shipping_address2 }}</h4>
+            <div class="payment-detail">
+                {% for product in trolley_products %}
+                    <p>Product:</p>
+                    <h3>{{ product.name }}</h3>
+                    {% if product.is_sale %}
+                        <p>Price:</p> 
+                        <h3 class="price">£{{ product.sale_price }}</h3>
+                    {% else %}
+                        <p>Price:</p> 
+                        <h3 class="price">£{{ product.price }}</h3>
                     {% endif %}
-                    <p>City:</p>
-                    <h4>{{ shipping_info.shipping_city }}</h4>
-                    <p>Region:</p> 
-                    <h4>{{ shipping_info.shipping_region }}</h4>
-                    <p>Postcode:</p> 
-                    <h4>{{ shipping_info.shipping_postcode }}</h4>
-                    <p>Country:</p>
-                    <h4>{{ shipping_info.shipping_country }}</h4>
-                    </br>
-                    <a href="{% url 'checkout' %}" class="return-button trolley-button">Update Shipping</a>
-                </div>
+                    <p>Quantity:</p>
+                        {% for key, value in quantities.items %}
+                            {% if key == product.id|slugify %}
+                                <h3>{{ value }}</h3>
+                            {% endif %}
+                            {% if forloop.last  %}
+                                </br>
+                            {% endif %}
+                        {% endfor %}
+                {% endfor %}
+                <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>
-        </section>
-        <section class=payment-display>
-            <div class="payment-product">
-                <div class="payment-summary">
-                    <h2>Pay by Card</h2>
-                </div>
-                <div class="stripe-box">
-                    <form id="payment-form" data-secret="{{ client_secret }}">
-                        {% csrf_token %}
-                        <div id="payment-element">
-                        <!-- placeholder for Elements -->
-                        </div>
-                        <button id="submit">Pay £{{ totals }}</button>
-                        <div id="error-message">
-                        <!-- Display error message to your customers here -->
-                        </div>
-                    </form>
-                </div>
+            <div class="payment-total">
+                <p>Total:</p> 
+                <h3>£{{ totals }}</h3>
             </div>
-            <div class="payment-product">
-                <div class="payment-summary">
-                    <h2>Pay with Paypal</h2>
-                </div>
-                <div class="stripe-box">
-                {% csrf_token %}
-                {{ paypal_form.render }}
-                </div>
+        </div>
+        <br>
+        <div class="payment-product">
+            <div class="payment-summary summary-toggle">
+                <h2>Review Delivery Details</h2>
             </div>
-        </section>
-    </main>
+            <div class="payment-detail">
+                <p>Name:</p>
+                <h4>{{ shipping_info.shipping_full_name }}</h4>
+                <p>Email:</p> 
+                <h4>{{ shipping_info.shipping_email }}</h4>
+                <p>Address 1:</p> 
+                <h4>{{ shipping_info.shipping_address1 }}</h4>
+                {% if shipping_info.shipping_address2 %}
+                    <p>Address 2:</p>
+                    <h4>{{ shipping_info.shipping_address2 }}</h4>
+                {% endif %}
+                <p>City:</p>
+                <h4>{{ shipping_info.shipping_city }}</h4>
+                <p>Region:</p> 
+                <h4>{{ shipping_info.shipping_region }}</h4>
+                <p>Postcode:</p> 
+                <h4>{{ shipping_info.shipping_postcode }}</h4>
+                <p>Country:</p>
+                <h4>{{ shipping_info.shipping_country }}</h4>
+                </br>
+                <a href="{% url 'checkout' %}" class="return-button trolley-button">Update Shipping</a>
+            </div>
+        </div>
+    </section>
+    <section class=payment-display>
+        <div class="payment-product">
+            <div class="payment-summary">
+                <h2>Pay by Card</h2>
+            </div>
+            <div class="stripe-box">
+                <form id="payment-form" data-secret="{{ client_secret }}">
+                    {% csrf_token %}
+                    <div id="payment-element">
+                    <!-- placeholder for Elements -->
+                    </div>
+                    <button id="submit">Pay £{{ totals }}</button>
+                    <div id="error-message">
+                    <!-- Display error message to your customers here -->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="payment-product">
+            <div class="payment-summary">
+                <h2>Pay with Paypal</h2>
+            </div>
+            <div class="stripe-box">
+            {% csrf_token %}
+            {{ paypal_form.render }}
+            </div>
+        </div>
+    </section>
+</section>
     <!-- Stripe.js -->
-    <script>
-        const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
-        const options = {
-            clientSecret: '{{ client_secret }}',
-            // Fully customizable with appearance API.
-            appearance: {
-                theme: 'flat'
-            },
-        };
-        console.log('Client Secret:', options.clientSecret); 
+<script>
+    const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+    const options = {
+        clientSecret: '{{ client_secret }}',
+        // Fully customizable with appearance API.
+        appearance: {
+            theme: 'flat'
+        },
+    };
+    console.log('Client Secret:', options.clientSecret); 
 
 
-        // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in a previous step
-        const elements = stripe.elements(options);
+    // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in a previous step
+    const elements = stripe.elements(options);
 
-        // Create and mount the Payment Element
-        const paymentElement = elements.create('payment');
-        paymentElement.mount('#payment-element');
+    // Create and mount the Payment Element
+    const paymentElement = elements.create('payment');
+    paymentElement.mount('#payment-element');
 
-        const form = document.getElementById('payment-form');
+    const form = document.getElementById('payment-form');
 
-        form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+    form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-        const {error} = await stripe.confirmPayment({
-            //`Elements` instance that was used to create the Payment Element
-            elements,
-            confirmParams: {
-              return_url: 'https://mollyart-production.up.railway.app/payment/payment_success',
-            },
-            headers: {
-            'X-CSRFToken': csrftoken, // Include the CSRF token in the headers
-            }
-        });
-
-        if (error) {
-            // This point will only be reached if there is an immediate error when
-            // confirming the payment. Show error to your customer (for example, payment
-            // details incomplete)
-            const messageContainer = document.querySelector('#error-message');
-            messageContainer.textContent = error.message;
-        } else {
-            // Your customer will be redirected to your `return_url`. For some payment
-            // methods like iDEAL, your customer will be redirected to an intermediate
-            // site first to authorize the payment, then redirected to the `return_url`.
+    const {error} = await stripe.confirmPayment({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        confirmParams: {
+          return_url: 'https://mollyart-production.up.railway.app/payment/payment_success',
+        },
+        headers: {
+        'X-CSRFToken': csrftoken, // Include the CSRF token in the headers
         }
-        });
-    </script>
+    });
+
+    if (error) {
+        // This point will only be reached if there is an immediate error when
+        // confirming the payment. Show error to your customer (for example, payment
+        // details incomplete)
+        const messageContainer = document.querySelector('#error-message');
+        messageContainer.textContent = error.message;
+    } else {
+        // Your customer will be redirected to your `return_url`. For some payment
+        // methods like iDEAL, your customer will be redirected to an intermediate
+        // site first to authorize the payment, then redirected to the `return_url`.
+    }
+    });
+</script>
 {% endblock %}

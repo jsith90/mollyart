@@ -167,7 +167,7 @@ nav {
 }
 
 .show-options {
-	max-height: 25rem;
+	max-height: 45rem;
 	margin-bottom: 3rem;
 }
 
@@ -1125,8 +1125,13 @@ footer > div {
 }
 
 @media only screen and (max-width: 1188px) {
-		.hatman-div {
+	.hatman-div {
 		width: 100%;
+		margin: 100px 0 0 0;
+	}
+
+	.hatman-scroll {
+		margin: 0 0 0 0;
 	}
 
   .view-product-sale > a, .view-product-sold > a, .view-product-available > a, .sold-out-badge {
@@ -1178,6 +1183,7 @@ footer > div {
 }
 
 @media only screen and (max-width: 1020px) {
+
   .category-display {
   	margin: 0 0 1rem 0;
   }
@@ -1333,10 +1339,6 @@ footer > div {
 	.man-clicked {
 		width: 5px;
 		transition: width 3s;
-	}
-
-	.hatman-div {
-		width: 100%;
 	}
 
 	.logo-div {

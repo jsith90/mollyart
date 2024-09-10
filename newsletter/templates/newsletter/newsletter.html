@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <title>Molly S-T Newsletter</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+      <!-- Core theme CSS (includes Bootstrap)-->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      <!-- google fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+      <script src="https://kit.fontawesome.com/ff8e893dec.js" crossorigin="anonymous"></script>
+      <style type="text/css">
+        body {
+          width: 100%;
+        }
+
+        main {
+          min-height: 100vh;
+        }
+
+        /* Fonts */
+        h1, h2, h3, h4, h5 {
+          font-family: "Karla", cursive;
+          font-optical-sizing: auto;
+          font-weight: 900;
+          font-style: normal;
+          text-transform: uppercase;
+        }
+
+        p, label, button, a {
+          font-family: "Space Grotesk", sans-serif;
+        } 
+
+
+        .article-page {
+          margin: 90px 50px 50px 50px;
+        }
+
+        .article-title h1 {
+          font-size: 40px;
+        }
+
+        .article-h1{
+          margin: 90px 50px 0 50px;
+        }
+
+        .hr-position {
+          width: 100%;
+        }
+
+        .article-hr {
+          width: 50%;
+          margin: 0;
+        }
+
+        .article-image {
+          width: 100%;
+          margin: 20px 0 0 0;
+        }
+
+        .article-image > img {
+          width: 50%;
+        }
+
+        .article-caption {
+          margin: 0 0 20px 0;
+          color: black;
+          font-size: 15px;
+          font-weight: 800;
+          width: auto;
+          align-self: center;
+          padding: 5px;
+        }
+
+        .body-position {
+          width: 100%;
+        }
+
+        .article-page .body-ps {
+          width: 50%;
+          margin: 10px 0 0 0;
+        }
+
+        .row {
+          margin-bottom: 50px;
+          margin-top: 10px;
+        }
+
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+          float: left;
+          width: 16.66%;
+        }
+
+        /* gallery modals */
+
+        .modal-img {
+          border-radius: 5px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+/*        .publish-checkbox-label {
+        }
+*/
+        .publish-checkbox-label label {
+          color: white;
+          background-color: black;
+          padding: 10px;
+          margin-right: 5px;
+        }
+
+        .publish-checkbox-label input[type="checkbox"] {
+          outline: 3px solid black;
+
+        }
+
+        .publish-checkbox-label input[type="checkbox"]:checked {
+          outline: 3px solid red;
+
+        }
+
+        .buttons-div {
+          margin: 20px;
+          display: grid;
+        }
+
+        .publish-button {
+          text-decoration: none;
+          background-color: #d3d3d3;
+          font-weight: 600;
+          padding: 10px;
+          border: 2px solid black;
+          width: 20%;
+          text-align: center;
+          margin: 20px;
+        }
+
+        .publish-button:hover {
+          color: black;
+          font-style: oblique;
+          background-color: green;
+          box-shadow: black 6px 6px 1px 1px;
+        }
+
+        .delete-button {
+          text-decoration: none;
+          background-color: #d3d3d3;
+          color: black;
+          font-weight: 600;
+          padding: 10px;
+          border: 2px solid black;
+          width: 20%;
+          text-align: center;
+          margin: 20px;
+        }
+
+        .delete-button:hover {
+          color: black;
+          font-style: oblique;
+          background-color: red;
+        }
+
+        @media only screen and (max-width: 700px) {
+          .article-page {
+            margin: 90px 0 0 0;
+          }
+
+          .article-hr {
+            width: 90%;
+          }
+
+          .article-image {
+            width: 100%;
+          }
+
+          .article-image img {
+            width: 90%;
+          }
+
+          .article-page .body-ps {
+            width: 90%;
+          }
+
+          .column {
+            width: 90%;
+          }
+
+          .publish-checkbox-label {
+            margin: 20px;
+            text-align: center;
+          }
+
+  /*        .buttons-div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+          }*/
+          .publish-button {
+            width: 40%;
+            margin: 20px;
+            text-align: center;
+          }
+        }
+
+      </style>
+  </head>
+  <body>
+    <main>
+      <div class="article-page">
+        <div class="article-title">
+          <h1 id="article-h1">{{ article.title }}</h1>
+          <pre>{{ article.date }}</pre>
+        </div>
+        <div class=hr-position>
+          <hr class="article-hr">
+        </div>
+        {% if article.image1 %}
+          <div class="article-image">
+            <img src="{{ article.image1.url }}" class="img-fluid modal-img" alt="{{ article.caption1 }}">
+            {% if article.caption1 %}
+              <p class="article-caption">{{ article.caption1 }}</p>
+            {% endif %}
+          </div>
+          <div class="hr-position">
+            <hr class="article-hr">
+          </div>
+          {% else %}
+            <div></div>
+          {% endif %}  
+          {% if article.body %}
+            <div class="body-position">
+              <div class="body-ps">
+                <p>{{ article.body|linebreaks }}</p>
+              </div>
+            </div>
+            <div class="hr-position">
+              <hr class="article-hr">
+            </div>
+          {% else %}
+            <div></div>
+          {% endif %}
+          <div class="buttons-div">
+              <a class="publish-button" href="https://mollyart-production.up.railway.app/" target="_blank">Molly's Website</a>
+          </div>
+          <div class="thumbnails row">
+            {% if article.image2 %}
+              <div class="column">
+                <img class="cursor modal-img" src="{{ article.image2.url }}" style="width:100%" alt="{{ article.caption2 }}">
+                {% if article.caption2 %}
+                  <p class="article-caption">{{ article.caption2 }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+            {% if article.image3 %}
+              <div class="column">
+                <img class="cursor modal-img" src="{{ article.image3.url }}" style="width:100%" alt="{{ article.caption3 }}">
+                {% if article.caption3 %}
+                  <p class="article-caption">{{ article.caption3 }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+            {% if article.image4 %}
+              <div class="column">
+                <img class="cursor modal-img" src="{{ article.image4.url }}" style="width:100%" alt="{{ article.caption4 }}">
+                {% if article.caption4 %}
+                  <p class="article-caption">{{ article.caption4 }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+            </div>
+        </main>
+      </div>
+    </main>
+  </body>
+</html>
+

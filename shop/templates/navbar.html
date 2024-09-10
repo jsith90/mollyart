@@ -24,6 +24,7 @@
     <ul class="nav-options">    
         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Shop</a></li>
             {% if user.is_superuser %}
+                <li class="nav-item"><a class="nav-link active" aria-label="Logout of User account" href="{% url 'logout' %}">Logout</a></li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_product' %}">Add Product</a></li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'add_category' %}">Add Category</a></li>
                 <li class="nav-item dropdown">
@@ -33,11 +34,37 @@
                         <li><hr class="dropdown-divider" /></li><a class="dropdown-item" href="{% url 'not_shipped_dash' %}">Unshipped Orders</a></li>
                     </ul>
                 </li>
-                <li><a class="dropdown-item drop-list" aria-label="Logout of User account" href="{% url 'logout' %}" class="active">Logout</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Newsletter</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'create_newsletter' %}">Create a Newsletter</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="{% url 'subscribers_dash' %}">Subscribers</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        {% if articles %}
+                            {% for article in articles %}
+                                {% if article.is_published %}
+                                    <li><a class="dropdown-item" href="{% url 'newsletter' article.id %}">{{ article.title }}</a></li>
+                                    {% if not forloop.last %}
+                                        <li><hr class="dropdown-divider" /></li>
+                                    {% endif %}
+                                {% else %}
+                                    <li><a class="dropdown-item" href="{% url 'draft_newsletter' article.id %}">{{ article.title }} (draft)</a></li>
+                                    {% if not forloop.last %}
+                                        <li><hr class="dropdown-divider" /></li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <li><p>No Newsletters yet.</p></li>
+                        {% endif %}
+                    </ul>
+                </li>
             {% endif %}
             {% if not user.is_authenticated %}
-                <li><a class="copythat" href="{% url 'login_user' %}">Login</a></li>
+                <li class="nav-item"><a  class="nav-link active" href="{% url 'login_user' %}">Login</a></li>
             {% endif %}
+        </li>
     </ul>
 </nav>
 

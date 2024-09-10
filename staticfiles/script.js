@@ -49,33 +49,37 @@ function navScroll() {
         console.log("The .hatman-div does not exist on this page.");
     }
 
-    commission.addEventListener("mouseover", function () {
-        commission.classList.add("no-bounce");
-    });
+    if (landing) {
+        commission.addEventListener("mouseover", function () {
+            commission.classList.add("no-bounce");
+        });
 
-    commission.addEventListener("mouseout", function () {
-        commission.classList.remove("no-bounce");
-    });
+        commission.addEventListener("mouseout", function () {
+            commission.classList.remove("no-bounce");
+        });
 
-    shop.addEventListener("mouseover", function () {
-        shop.classList.add("no-bounce");
-    });
+        shop.addEventListener("mouseover", function () {
+            shop.classList.add("no-bounce");
+        });
 
-    shop.addEventListener("mouseout", function () {
-        shop.classList.remove("no-bounce");
-    });
+        shop.addEventListener("mouseout", function () {
+            shop.classList.remove("no-bounce");
+        });
 
-    portfolio.addEventListener("mouseover", function () {
-        portfolio.classList.add("no-bounce");
-    });
+        portfolio.addEventListener("mouseover", function () {
+            portfolio.classList.add("no-bounce");
+        });
 
-    shop.addEventListener("mouseout", function () {
-        portfolio.classList.remove("no-bounce");
-    });
+        shop.addEventListener("mouseout", function () {
+            portfolio.classList.remove("no-bounce");
+        });
 
-    shop.addEventListener("click", function () {
-        shop.classList.add("man-clicked");
-    });
+        shop.addEventListener("click", function () {
+            shop.classList.add("man-clicked");
+        });
+    } else {
+        console.log("This is not the landing page.");
+    }
 }
 
 function navBar() {
@@ -192,6 +196,13 @@ function initCheckoutButton() {
 function togglePaymentPageInfo() {
     // Select all elements with the class 'summary-toggle'
     const summaryToggles = document.querySelectorAll(".summary-toggle");
+    const paymentDisplay = document.querySelector('.payment-display');
+    const footer = document.getElementsByTagName('footer')[0];
+    if (paymentDisplay) {
+        footer.style.display = "none";
+    } else {
+        console.log('no checkout')
+    }
     
     summaryToggles.forEach((toggle) => {
         toggle.addEventListener("mouseover", function() {
@@ -273,10 +284,32 @@ function initModal() {
     }
 }
 
+function trolleyPage() {
+    const checkoutProduct = document.querySelector('.checkout-product');
+    const footer = document.getElementsByTagName('footer')[0];
+    if (checkoutProduct) {
+        footer.style.display = "none";
+    } else {
+        console.log('no checkout')
+    }
+}
+
+function checkoutPages() {
+    const orderDisplay = document.querySelector('.order-display');
+    const footer = document.getElementsByTagName('footer')[0];
+    if (orderDisplay) {
+        footer.style.display = "none";
+    } else {
+        console.log('no checkout')
+    }
+}
+
 // Call these functions to initialize events based on the template
 initShopItemEvents();
 initCheckoutButton();
 initModal();
 togglePaymentPageInfo();
 navBar();
-navScroll(); 
+navScroll();
+trolleyPage(); 
+checkoutPages();

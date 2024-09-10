@@ -6,12 +6,11 @@
 </div>
  <div>
     <pre>Date Ordered: {{ order.date_ordered }}</pre><br>
-    <img src="{{ item.image }}">
     <pre>{{ order.full_name }}</pre>
     <pre>{{ order.shipping_address }}</pre><br>
     {% for item in items %}
     <pre>Item: {{ item.product }}</pre>
-    <pre>Quantity: {{ item.quantity }}
-    Price: £{{ item.price }}</pre>
+    <pre>Quantity: {{ item.quantity }}</pre>
+    <pre>Price: £{{ item.price }}</pre>
     {% endfor %}
 </div>

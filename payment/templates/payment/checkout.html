@@ -1,90 +1,90 @@
 {% extends 'base.html' %}
 {% block content %}
         <!-- Header-->
-        <header class="checkout-header">
-             <div>
-                <h1 class="shop-heading">W<span class="orange">h</span>e<span class="orange">r</span>e <span class="orange">y</span>o<span class="orange">u</span> l<span class="orange">i</span>v<span class="orange">i</span>n<span class="orange">g</span>?</h1>
+<header class="checkout-header">
+     <div>
+        <h1 class="shop-heading">W<span class="orange">h</span>e<span class="orange">r</span>e <span class="orange">y</span>o<span class="orange">u</span> l<span class="orange">i</span>v<span class="orange">i</span>n<span class="orange">g</span>?</h1>
+    </div>
+</header>
+<section class="checkout-main">
+    <section class="order-display">
+        <div class="order-product">
+            <div class="order-summary">
+                <h2>Order Summary</h2>
             </div>
-        </header>
-        <main class="checkout-main">
-        <section class="order-display">
-            <div class="order-product">
-                <div class="order-summary">
-                    <h2>Order Summary</h2>
-                </div>
-                <div class="order-detail">
-                    {% for product in trolley_products %}
-                        <p>Product:</p>
-                        <h3>{{ product.name }}</h3>
-                        {% if product.is_sale %}
-                            <p>Price:</p> 
-                            <h3 class="price">£{{ product.sale_price }}</h3>
-                        {% else %}
-                            <p>Price:</p> 
-                            <h3 class="price">£{{ product.price }}</h3>
-                        {% endif %}
-                        <p>Quantity:</p>
-                            {% for key, value in quantities.items %}
-                                {% if key == product.id|slugify %}
-                                    <h3>{{ value }}</h3>
-                                {% endif %}
-                                {% if forloop.last  %}
-                                    </br>
-                                {% endif %}
-                            {% endfor %}
-                    {% endfor %}
-                    <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
-                </div>
-                <div class="order-total">
-                    <p>Total:</p> 
-                    <h3>£{{ totals }}</h3>
-                </div>
+            <div class="order-detail">
+                {% for product in trolley_products %}
+                    <p>Product:</p>
+                    <h3>{{ product.name }}</h3>
+                    {% if product.is_sale %}
+                        <p>Price:</p> 
+                        <h3 class="price">£{{ product.sale_price }}</h3>
+                    {% else %}
+                        <p>Price:</p> 
+                        <h3 class="price">£{{ product.price }}</h3>
+                    {% endif %}
+                    <p>Quantity:</p>
+                        {% for key, value in quantities.items %}
+                            {% if key == product.id|slugify %}
+                                <h3>{{ value }}</h3>
+                            {% endif %}
+                            {% if forloop.last  %}
+                                </br>
+                            {% endif %}
+                        {% endfor %}
+                {% endfor %}
+                <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>
-        </section>
-        <section class="order-display">
-            <div class="order-product">
-                <div class="shipping-summary">
-                    <h2>Delivery Info</h2>
-                </div>
-                <div class="shipping-detail">
-                    <form method="POST" action="{% url 'billing_info' %}">
-                        {% csrf_token %}
-                            <div class="form">
-                                <label for="{{ shipping_form.shipping_full_name.id_for_label }}">{{ shipping_form.shipping_full_name.label }}</label>
-                                {{ shipping_form.shipping_full_name }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ shipping_form.shipping_email.id_for_label }}">{{ shipping_form.shipping_email.label }}</label>
-                                {{ shipping_form.shipping_email }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ shipping_form.shipping_address1.id_for_label }}">{{ shipping_form.shipping_address1.label }}</label>
-                                {{ shipping_form.shipping_address1 }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ shipping_form.shipping_address2.id_for_label }}">{{ shipping_form.shipping_address2.label }}</label>
-                                {{ shipping_form.shipping_address2 }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ shipping_form.shipping_city.id_for_label }}">{{ shipping_form.shipping_city.label }}</label>
-                                {{ shipping_form.shipping_city }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ shipping_form.shipping_region.id_for_label }}">{{ shipping_form.shipping_region.label }}</label>
-                                {{ shipping_form.shipping_region }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ shipping_form.shipping_postcode.id_for_label }}">{{ shipping_form.shipping_postcode.label }}</label>
-                                {{ shipping_form.shipping_postcode }}
-                            </div>
-                            <div class="form">
-                                <label for="{{ shipping_form.shipping_country.id_for_label }}">{{ shipping_form.shipping_country.label }}</label>
-                                {{ shipping_form.shipping_country }}
-                            </div>
-                            <button type="submit" class="return-button trolley-button">Continue to Payment</button>
-                    </form>
-                </div>
+            <div class="order-total">
+                <p>Total:</p> 
+                <h3>£{{ totals }}</h3>
             </div>
-        </section>
-        </main>
+        </div>
+    </section>
+    <section class="order-display">
+        <div class="order-product">
+            <div class="shipping-summary">
+                <h2>Delivery Info</h2>
+            </div>
+            <div class="shipping-detail">
+                <form method="POST" action="{% url 'billing_info' %}">
+                    {% csrf_token %}
+                        <div class="form">
+                            <label for="{{ shipping_form.shipping_full_name.id_for_label }}">{{ shipping_form.shipping_full_name.label }}</label>
+                            {{ shipping_form.shipping_full_name }}
+                        </div>
+                        <div class="form">
+                            <label for="{{ shipping_form.shipping_email.id_for_label }}">{{ shipping_form.shipping_email.label }}</label>
+                            {{ shipping_form.shipping_email }}
+                        </div>
+                        <div class="form">
+                            <label for="{{ shipping_form.shipping_address1.id_for_label }}">{{ shipping_form.shipping_address1.label }}</label>
+                            {{ shipping_form.shipping_address1 }}
+                        </div>
+                        <div class="form">
+                            <label for="{{ shipping_form.shipping_address2.id_for_label }}">{{ shipping_form.shipping_address2.label }}</label>
+                            {{ shipping_form.shipping_address2 }}
+                        </div>
+                        <div class="form">
+                            <label for="{{ shipping_form.shipping_city.id_for_label }}">{{ shipping_form.shipping_city.label }}</label>
+                            {{ shipping_form.shipping_city }}
+                        </div>
+                        <div class="form">
+                            <label for="{{ shipping_form.shipping_region.id_for_label }}">{{ shipping_form.shipping_region.label }}</label>
+                            {{ shipping_form.shipping_region }}
+                        </div>
+                        <div class="form">
+                            <label for="{{ shipping_form.shipping_postcode.id_for_label }}">{{ shipping_form.shipping_postcode.label }}</label>
+                            {{ shipping_form.shipping_postcode }}
+                        </div>
+                        <div class="form">
+                            <label for="{{ shipping_form.shipping_country.id_for_label }}">{{ shipping_form.shipping_country.label }}</label>
+                            {{ shipping_form.shipping_country }}
+                        </div>
+                        <button type="submit" class="return-button trolley-button">Continue to Payment</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</section>
 {% endblock %}
