@@ -1,16 +1,20 @@
 {% load static %}
 <footer>
-	<div>
-		<form method="post" action="{% url 'subscribe' %}">
-    {% csrf_token %}
-    {{ subscription_form.as_p }}
-    <button type="submit">Subscribe</button>
-</form>
-		<div class="footer-man-one">
-			<img src="{% static 'images/workman.png' %}">
+	<div class="footer-div">
+		<div class="subscribe-div">
+			<form method="post" action="{% url 'subscribe' %}">
+	    		{% csrf_token %}
+	    		{{ subscription_form.as_p }}
+	    		<button class="subscribe-button" type="submit">ok</button>
+			</form>
 		</div>
-		<div class="footer-man-two">
-			<img src="{% static 'images/workman-dos.png' %}">
+		<div class="workmen">
+			<div class="footer-man-one">
+				<img src="{% static 'images/workman.png' %}">
+			</div>
+			<div class="footer-man-two">
+				<img src="{% static 'images/workman-dos.png' %}">
+			</div>
 		</div>
 	</div>
 </footer>

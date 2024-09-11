@@ -71,6 +71,12 @@ nav {
 	100%{transform: translateY(0px);}
 }
 
+@keyframes waddle {
+	0%{transform: matrix(1, 0, 0.2, 1, 0, 0);}
+	50%{transform: matrix(1, 0, 0.1, 1, 0, 0);}
+	100%{transform: matrix(1, 0, 0.2, 1, 0, 0);}
+}
+
 .hatman-div {
   width: 50%;
   display: flex;
@@ -1046,32 +1052,99 @@ footer {
 	display: flex;
 	width: 100%;
 	justify-content: center;
+	margin: 1rem 0 0 0;
+	background: #f9e469;
+	padding: 1rem;
 }
 
-footer > div {
-	width: 60%;
+.footer-div {
+	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+/*	position: relative;*/
+}
+
+.subscribe-div {
+	background: white;
+	width: 40%;
+	text-align: center;
+	border: solid;
+	position: absolute;
+	z-index: 10;
+	animation-name: bounce;
+	animation-duration: 10s;
+	animation-iteration-count: infinite;
+}
+
+.subscribe-div > form {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.subscribe-div > form > p {
+	margin: 0;
+}
+
+.subscribe-button {
+	width: 15%;
+	margin: 0;
+	font-size: 0.7rem;
+	color: black;
+	text-transform: uppercase;
+	padding: 0.2rem;
+	display: block;
+	text-align: center;
+	border: black solid;
+	background: white;
+}
+
+.subscribe-button:hover {
+	background: #4eb2ff;
+}
+
+.workmen {
+	display: flex;
+	justify-content: center;
 }
 
 .footer-man-one {
-	width: 80%;
+	width: 30%;
 	display: flex;
-	align-items: flex-end;	
+	align-items: flex-start;
+	justify-content: center;
+	position: relative;
+	right: -5%;
+	top: -5%;
+	z-index: 1;
+	animation-name: waddle;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
 }
 
 .footer-man-one > img {
-	width: 60%;
+	width: 100%;
 }
 
 .footer-man-two {
-	width: 60%;
+	width: 30%;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
+	align-items: flex-start;
+	position: relative;
+	bottom: 6%;
+	left: -4%;
+	z-index: 1;
+	animation-name: waddle;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
 }
 
 .footer-man-two > img {
 	width: 86%;
 }
+
 
 @media only screen and (max-width: 1600px) {
 		.hatman-image > img {
@@ -1082,6 +1155,79 @@ footer > div {
 		transform: translateY(-250px);
 	}
 
+/*	footer {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		margin: 5rem 0 0 0;
+	}
+
+	.footer-div {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		position: relative;
+	}
+
+	.subscribe-div {
+		width: 40%;
+		text-align: center;
+		border: solid;
+		position: absolute;
+	}
+
+	.subscribe-div > form {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+	}
+
+	.subscribe-div > form > p {
+		margin: 0;
+	}
+
+	.subscribe-button {
+		width: 15%;
+		margin: 0;
+		font-size: 0.7rem;
+		color: black;
+		text-transform: uppercase;
+		padding: 0.2rem;
+		display: block;
+		text-align: center;
+		border: black solid;
+		background: white;
+	}
+
+	.footer-man-one {
+		width: 30%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		right: -5%;
+		top: -8%;	
+	}
+
+	.footer-man-one > img {
+		width: 100%;
+	}
+
+	.footer-man-two {
+		width: 30%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		position: relative;
+		bottom: 9%;
+		left: -4%;
+	}
+
+	.footer-man-two > img {
+		width: 86%;
+	}
+*/
 }
 
 @media only screen and (max-width: 1386px) {
@@ -1118,10 +1264,84 @@ footer > div {
   	width: 100%;
 	}
 
-.form {
-  	max-width: 80%;
-  	width: 500px;
+	.form {
+	  	max-width: 80%;
+	  	width: 500px;
 	}
+
+	footer {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		margin: 5rem 0 0 0;
+	}
+
+	.footer-div {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+/*		position: relative;*/
+	}
+
+	.subscribe-div {
+		width: 40%;
+		text-align: center;
+		border: solid;
+		position: absolute;
+	}
+
+	.subscribe-div > form {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+	}
+
+	.subscribe-div > form > p {
+		margin: 0;
+	}
+
+	.subscribe-button {
+		width: 15%;
+		margin: 0;
+		font-size: 0.7rem;
+		color: black;
+		text-transform: uppercase;
+		padding: 0.2rem;
+		display: block;
+		text-align: center;
+		border: black solid;
+		background: white;
+	}
+
+	.footer-man-one {
+		width: 30%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		right: -5%;
+		top: 2%;	
+	}
+
+	.footer-man-one > img {
+		width: 100%;
+	}
+
+	.footer-man-two {
+		width: 30%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		position: relative;
+		bottom: -1%;
+		left: -4%;
+	}
+
+	.footer-man-two > img {
+		width: 86%;
+	}
+
 }
 
 @media only screen and (max-width: 1188px) {
@@ -1149,6 +1369,80 @@ footer > div {
   .view-product-sold, .view-product-sale, .view-product-available, .product-button, .trolley-button  {
   	width: 60%;
 	}
+
+	footer {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		margin: 5rem 0 0 0;
+	}
+
+	.footer-div {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+/*		position: relative;*/
+	}
+
+	.subscribe-div {
+		width: 40%;
+		text-align: center;
+		border: solid;
+		position: absolute;
+	}
+
+	.subscribe-div > form {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+	}
+
+	.subscribe-div > form > p {
+		margin: 0;
+	}
+
+	.subscribe-button {
+		width: 15%;
+		margin: 0;
+		font-size: 0.7rem;
+		color: black;
+		text-transform: uppercase;
+		padding: 0.2rem;
+		display: block;
+		text-align: center;
+		border: black solid;
+		background: white;
+	}
+
+	.footer-man-one {
+		width: 30%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		right: -5%;
+		top: 5%;	
+	}
+
+	.footer-man-one > img {
+		width: 100%;
+	}
+
+	.footer-man-two {
+		width: 30%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		position: relative;
+		bottom: -4%;
+		left: -4%;
+	}
+
+	.footer-man-two > img {
+		width: 86%;
+	}
+
 }
 
 @media only screen and (max-width: 1060px) {
@@ -1180,6 +1474,78 @@ footer > div {
 	.payment-summary, .payment-detail, .payment-total, .stripe-box {
 		width: 90%;
 	}
+
+		footer {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		margin: 5rem 0 0 0;
+	}
+
+	.footer-div {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+/*		position: relative;*/
+	}
+
+	.subscribe-div {
+		width: 40%;
+		text-align: center;
+		border: solid;
+		position: absolute;
+	}
+
+	.subscribe-div > form {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+	}
+
+	.subscribe-div > form > p {
+		margin: 0;
+	}
+
+	.subscribe-button {
+		width: 15%;
+		margin: 0;
+		font-size: 0.7rem;
+		color: black;
+		text-transform: uppercase;
+		padding: 0.2rem;
+		display: block;
+		text-align: center;
+		border: black solid;
+		background: white;
+	}
+
+	.footer-man-one {
+		width: 30%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		right: -5%;
+		top: 5%;	
+	}
+
+	.footer-man-one > img {
+		width: 100%;
+	}
+
+	.footer-man-two {
+		width: 30%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		position: relative;
+		bottom: -4%;
+		left: -4%;
+	}
+
+	.footer-man-two > img {
+		width: 86%;
 }
 
 @media only screen and (max-width: 1020px) {
@@ -1244,6 +1610,90 @@ footer > div {
     font-size: 2rem;
 	}
 
+	footer {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		margin: 5rem 0 0 0;
+	}
+
+	.footer-div {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+/*		position: relative;*/
+	}
+
+	.subscribe-div {
+		width: 40%;
+		text-align: center;
+		border: solid;
+		position: absolute;
+	}
+
+	.subscribe-div > form {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+	}
+
+	.subscribe-div > form > p {
+		margin: 0;
+	}
+
+	.subscribe-button {
+		width: 15%;
+		margin: 0;
+		font-size: 0.7rem;
+		color: black;
+		text-transform: uppercase;
+		padding: 0.2rem;
+		display: block;
+		text-align: center;
+		border: black solid;
+		background: white;
+	}
+
+	.footer-man-one {
+		width: 30%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		right: -5%;
+		top: 9%;	
+	}
+
+	.footer-man-one > img {
+		width: 100%;
+	}
+
+	.footer-man-two {
+		width: 30%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		position: relative;
+		bottom: -8%;
+		left: -4%;
+	}
+
+	.footer-man-two > img {
+		width: 86%;
+	}
+}
+
+@media only screen and (max-width: 850px) {
+	.footer-man-one {
+		right: -5%;
+		top: 13%;	
+	}
+
+	.footer-man-two {
+		bottom: -14%;
+		left: -4%;
+	}
 
 }
 
@@ -1332,6 +1782,73 @@ footer > div {
 
 	.paid-display {
 		width: 80%;
+	}
+
+		footer {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+	}
+
+	.footer-div {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+/*		position: relative;*/
+	}
+
+	.subscribe-div {
+		width: 90%;
+		text-align: center;
+		border: solid;
+		position: unset;
+	}
+
+	.subscribe-div > form {
+		flex-direction: column;
+	}
+
+	.subscribe-button {
+		width: 15%;
+		margin: 2rem 0 0 0;
+		font-size: 0.7rem;
+		color: black;
+		text-transform: uppercase;
+		padding: 0.2rem;
+		display: block;
+		text-align: center;
+		border: black solid;
+		background: white;
+	}
+
+	.footer-man-one {
+		width: 50%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		right: 1%;
+		top: -15%;
+		width: 50%;	
+	}
+
+	.footer-man-one > img {
+		width: 100%;
+	}
+
+	.footer-man-two {
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		position: relative;
+		bottom: 16%;
+		left: -20%;
+	}
+
+	.footer-man-two > img {
+		width: 86%;
 	}
 }
 
@@ -1423,6 +1940,68 @@ footer > div {
 
 	.shop-display > .product-buttons > div > a {
 		width: 80%;
+	}
+
+	footer {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+	}
+
+	.footer-div {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+/*		position: relative;*/
+	}
+
+	.subscribe-div {
+		width: 90%;
+		text-align: center;
+		border: solid;
+	}
+
+	.subscribe-button {
+		width: 15%;
+		margin: 0.5rem 0 0 0;
+		font-size: 0.7rem;
+		color: black;
+		text-transform: uppercase;
+		padding: 0.2rem;
+		display: block;
+		text-align: center;
+		border: black solid;
+		background: white;
+	}
+
+	.footer-man-one {
+		width: 50%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		position: relative;
+		right: 1%;
+		top: -10%;
+		width: 50%;	
+	}
+
+	.footer-man-one > img {
+		width: 100%;
+	}
+
+	.footer-man-two {
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		position: relative;
+		bottom: 13%;
+		left: -20%;
+	}
+
+	.footer-man-two > img {
+		width: 86%;
 	}
 
 }

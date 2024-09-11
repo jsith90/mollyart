@@ -18,7 +18,7 @@ import time
 
 def subscribers_dash(request):
     if request.user.is_superuser:
-        subscribers = Subscriber.objects.all()
+        subscribers = Subscriber.objects.filter(is_active=True)
         if request.method == 'POST':
             for subscriber in subscribers:
                 checkbox_name = f'subscribers_{subscriber.id}_is_active'
@@ -35,6 +35,25 @@ def subscribers_dash(request):
         messages.success(request, 'Access Denied.')
         return redirect('index')
 
+def inactive_subscriber_dash(request):
+    if request.user.is_superuser:
+        subscribers = Subscriber.objects.filter(is_active=False)
+        if request.method == 'POST':
+            for subscriber in subscribers:
+                checkbox_name = f'subscribers_{subscriber.id}_is_active'
+                if checkbox_name in request.POST:
+                    subscriber.is_active = True
+                else:
+                    subscriber.is_active = False
+                subscriber.save()
+            messages.success(request, 'Subscriber status updated.')    
+            return redirect('inactive_subscriber_dash')
+            
+        return render(request, 'newsletter/inactive_subscriber_dash.html', {'subscribers':subscribers})
+    else:
+        messages.success(request, 'Access Denied.')
+        return redirect('index')
+
 
 def newsletter(request, pk):
     article = get_object_or_404(Article, id=pk)
@@ -47,11 +66,56 @@ def subscribe(request):
         form = SubscriptionForm(request.POST)
         if form.is_valid():
             form.save()
+            subscription_email_confirmation(request, form.cleaned_data['email'])
+            messages.success(request, 'Thanks for signing up! Check your emails for confirmation of your subscription!')
             return redirect('index')  # Redirect to a thank-you page
     else:
-        form = SubscriptionForm()
+        messages.error(request, 'Sorry that didnt work.')
+        return redirect('index')
 
     return render(request, 'newsletter/subscribe.html', {'form':form})
+
+
+def subscription_email_confirmation(request, email):
+    is_valid_email = True
+    try:
+        validate_email(email)
+    except ValidationError:
+        is_valid_email = False
+    if is_valid_email:
+        subject = "Welcome to the newsletter club!"
+        from_email = "j.sinclairthomson@gmail.com"
+        to_email = [email] 
+        html_template = get_template('newsletter/newsletter_signup.html')
+        html_content = html_template.render({'email':email})
+
+        email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
+        email_message.attach_alternative(html_content, "text/html")
+        email_message.send()
+
+
+def newsletter_email_send(request, article):
+    subscribers = Subscriber.objects.filter(is_active=True)
+    for subscriber in subscribers:
+        is_valid_email = True
+        try:
+            validate_email(subscriber.email)
+        except ValidationError:
+            is_valid_email = False
+
+        if is_valid_email and subscriber.is_active:
+            subject = "A Molly S-T Update!"
+            from_email = "j.sinclairthomson@gmail.com"
+            to_email = [subscriber.email] 
+            html_template = get_template('newsletter/newsletter.html')
+            html_content = html_template.render({'article':article})
+
+            email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
+            email_message.attach_alternative(html_content, "text/html")
+            email_message.send()
+        else:
+            messages.error(request, 'email address was invalid and and a shipping confirmation could not be sent.')
+            return redirect('not_shipped_dash')
 
 
 # Create your views here.

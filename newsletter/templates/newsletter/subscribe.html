@@ -1,5 +1,29 @@
-<form method="post" action="{% url 'subscribe' %}">
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<footer>
+    <div class="footer-div">
+        <div class="subscribe-div">
+            <form method="post" action="{% url 'subscribe' %}">
+                {% csrf_token %}
+                {{ subscription_form.as_p }}
+                <button class="subscribe-button" type="submit">ok</button>
+            </form>
+        </div>
+        <div class="workmen">
+            <div class="footer-man-one">
+                <img src="{% static 'images/workman.png' %}">
+            </div>
+            <div class="footer-man-two">
+                <img src="{% static 'images/workman-dos.png' %}">
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+<!-- <form method="post" action="{% url 'subscribe' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Subscribe</button>
-</form>
+</form> -->

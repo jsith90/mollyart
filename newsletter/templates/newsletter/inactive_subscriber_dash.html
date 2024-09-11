@@ -5,7 +5,7 @@
 		<center>
 			<div class="col-8">
 				<br>
-				<h3>Subscribers Dashboard</h3>
+				<h3>Inactive Subscribers Dashboard</h3>
         <form method="post">  <!-- Ensure the method is set to POST -->
           {% csrf_token %}
           <table class="table table-striped table-bordered">
@@ -27,9 +27,9 @@
               {% endfor %}
             </tbody>
           </table>
-          <p>Untick the checkbox to deactivate subscriber and then click the button to update status:</p>
+          <p>Tick checkbox to activate subscriber and then click the button to update status:</p>
           <button type="submit">Update Status</button>
-          <a href="{% url 'inactive_subscriber_dash' %}">Inactive Subscriber Dashboard</a>
+          <a href="{% url 'subscribers_dash' %}">Subscriber Dashboard</a>
         </form>
       </div>
     </center>
