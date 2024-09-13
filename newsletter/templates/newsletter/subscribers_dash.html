@@ -27,9 +27,10 @@
               {% endfor %}
             </tbody>
           </table>
+          <div class="product-buttons">
           <p>Untick the checkbox to deactivate subscriber and then click the button to update status:</p>
-          <button type="submit">Update Status</button>
-          <a href="{% url 'inactive_subscriber_dash' %}">Inactive Subscriber Dashboard</a>
+          <button class="product-button" type="submit">Update Status</button>
+          <a class="product-button" href="{% url 'inactive_subscriber_dash' %}">Inactive Subscriber Dashboard</a>
         </form>
       </div>
     </center>

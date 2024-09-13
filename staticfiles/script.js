@@ -1,3 +1,38 @@
+function commissionSlides() {
+    // set index and transition delay
+    let index = 0;
+    let transitionDelay = 10000;
+
+    // get div containing the slides
+    let slideContainer = document.querySelector(".slideshow");
+    // get the slides
+    let slides = slideContainer.querySelectorAll(".slide");
+
+    // set transition delay for slides
+    for (let slide of slides) {
+      slide.style.transition = `opacity 2s ease-in-out`;
+    }
+
+    // show the first slide
+    showSlide(index);
+
+    // show a specific slide
+    function showSlide(slideNumber) {
+        slides.forEach((slide, i) => {
+        slide.style.opacity = i == slideNumber ? "1" : "0";
+        });
+        // next index
+        index++;
+        // go back to 0 if at the end of slides
+        if (index >= slides.length) {
+            index = 0;
+        }
+    }
+
+    // transition to next slide every x seconds
+    setInterval (() => showSlide(index), transitionDelay);
+}
+
 function navScroll() {
     // Select the .hatman-div element and nav
     const hatmanDiv = document.querySelector('.hatman-div');
@@ -313,3 +348,4 @@ navBar();
 navScroll();
 trolleyPage(); 
 checkoutPages();
+commissionSlides();

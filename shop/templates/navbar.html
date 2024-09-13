@@ -61,6 +61,18 @@
                     </ul>
                 </li>
             {% endif %}
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Commissions</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'create_commission' %}">Send me a Commission</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        {% if user.is_superuser %}
+                            <li><a class="dropdown-item" href="{% url 'old_commission_image_upload' %}">Upload Old Commission Image</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="{% url 'image_reel_dash' %}">Old Commission Images Table</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
             {% if not user.is_authenticated %}
                 <li class="nav-item"><a  class="nav-link active" href="{% url 'login_user' %}">Login</a></li>
             {% endif %}

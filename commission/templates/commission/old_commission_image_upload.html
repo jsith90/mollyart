@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="form-section"> 
+        <header class="shop-header">
+            <div>
+                <h1 class="shop-heading">Upload Old Commission Image</h1>
+            </div>
+        </header>
+        <form class="past-commission-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form">
+                <label for="{{ past_commission_form.image_name.id_for_label }}">{{ past_commission_form.image_name.label }}</label>
+                {{ past_commission_form.image_name }}
+            </div>
+            <div class="form">
+                <label for="{{ past_commission_form.image.id_for_label }}">{{ past_commission_form.image.label }}</label>
+                {{ past_commission_form.image }}
+            </div>
+<!--             <div class="form">
+                <label for="{{ past_commission_form.is_active.id_for_label }}">{{ past_commission_form.is_active.label }}</label>
+                {{ past_commission_form.is_active }}
+            </div> -->
+            <button type="submit" class="publish-button">Upload Image to Reel</button>
+        </form>
+    </section>
+{% endblock %}

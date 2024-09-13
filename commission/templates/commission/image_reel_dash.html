@@ -5,33 +5,32 @@
 		<center>
 			<div class="col-8">
 				<br>
-				<h3>Inactive Subscribers Dashboard</h3>
+				<h3>Image Reel Dashboard</h3>
         <form method="post">  <!-- Ensure the method is set to POST -->
           {% csrf_token %}
           <table class="table table-striped table-bordered">
             <thead>
               <tr>
-                <th scope="col">Email</th>
-                <th scope="col">Status</th>
+                <th scope="col">Image Name:</th>
+                <th scope="col">Status:</th>
               </tr>
             </thead>
             <tbody>
-              {% for subscriber in subscribers %}
+              {% for image in images %}
                 <tr>
-                  <td>{{ subscriber.email }}</td>
+                  <td>{{ image.image_name }}</td>
                   <td>
-                    <label for="subscribers_{{ subscriber.id }}_is_active">Is subscriber active:</label>
-                    <input type="checkbox" name="subscribers_{{ subscriber.id }}_is_active" value="True "{% if subscriber.is_active %}checked{% endif %}>
+                    <label for="subscribers_{{ subscriber.id }}_is_active">Is image active:</label>
+                    <input type="checkbox" name="images_{{ image.id }}_is_active" value="True "{% if image.is_active %}checked{% endif %}>
                   </td>
                 </tr>
               {% endfor %}
             </tbody>
           </table>
           <div class="product-buttons">
-          <p>Tick checkbox to activate subscriber and then click the button to update status:</p>
+          <p>Untick the checkbox to deactivate image and then click the button to update status:</p>
           <button class="product-button" type="submit">Update Status</button>
-          <a class="product-button" href="{% url 'subscribers_dash' %}">Subscriber Dashboard</a>
-          </div>
+          <a class="product-button" href="{% url 'inactive_image_reel_dash' %}">Inactive Image Reel Dashboard</a>
         </form>
       </div>
     </center>

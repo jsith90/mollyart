@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="past-commission-slides">
+        <div class="reel-images">
+            <div class="reel-image">
+                {% for image in past_images %}
+                    <img src="{{ image.image.url }}" alt="{{ image.image_name }}">
+                {% endfor %}
+            </div>
+            <div class="reel-image">
+                {% for image in past_images %}
+                    <img src="{{ image.image.url }}" alt="{{ image.image_name }}">
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="form-section"> 
+        <header class="shop-header">
+            <div>
+                <h1 class="shop-heading">Commission Form</h1>
+                <p>It helps speed things up if you can also send me some images for me to reference - please attach below</p>
+            </div>
+        </header>
+        <form class="commission-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form">
+                <label for="{{ commission_form.email.id_for_label }}">{{ commission_form.email.label }}</label>
+                {{ commission_form.email }}
+            </div>
+            <div class="form">
+                <label for="{{ commission_form.address.id_for_label }}">{{ commission_form.address.label }}</label>
+                {{ commission_form.address }}
+            </div>
+            <div class="form">
+                <label for="{{ commission_form.commission_title.id_for_label }}">{{ commission_form.commission_title.label }}</label>
+                {{ commission_form.commission_title }}
+            </div>
+            <div class="form">
+                <label for="{{ commission_form.commission_idea.id_for_label }}">{{ commission_form.commission_idea.label }}</label>
+                {{ commission_form.commission_idea }}
+            </div>
+            <div class="form">
+                <label for="{{ commission_form.canvas_size.id_for_label }}">{{ commission_form.canvas_size.label }}</label>
+                {{ commission_form.canvas_size }}
+            </div>
+            <div class="form">
+                <label for="{{ commission_form.deadline_date.id_for_label }}">{{ commission_form.deadline_date.label }}</label>
+                {{ commission_form.deadline_date }}
+            </div>
+            <div class="form">
+                <label for="{{ commission_form.contact_number.id_for_label }}">{{ commission_form.contact_number.label }}</label>
+                {{ commission_form.contact_number }}
+            </div>
+            <div class="form">
+                <label for="{{ commission_form.framing_options.id_for_label }}">{{ commission_form.framing_options.label }}</label>
+                {{ commission_form.framing_options }}
+            </div>
+            {{ image_formset.management_form }}
+            {% for form in image_formset %}
+                <div class="form image-input-display" id="edit_{{ form.image.id_for_label }}">
+                    <label for="{{ form.image.id_for_label }}">{{ form.image.label }}</label>
+                    {{ form.image }}
+                </div>
+            {% endfor %}
+            <div class="add-buttons">
+                <label for="add-img">Press for image input
+                <button type="button" class="open-image-input" id="add-img">+</button>
+                <button type="button" class="close-image-input" id="minus-img">-</button>
+                </label>
+            </div>
+            <button type="submit" class="publish-button">Send Commission</button>
+        </form>
+    </section>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all image input divs
+            const imageInputs = document.querySelectorAll(".image-input-display");
+
+            // Hide all image inputs initially
+            imageInputs.forEach(input => input.style.display = "none");
+
+            // Get the button to show more image inputs
+            const openButton = document.querySelector(".open-image-input");
+
+            // Get the button to hide image inputs
+            const closeButton = document.querySelector(".close-image-input");
+
+            // Initialize a counter to keep track of the current image input to display
+            let currentImageIndex = 0;
+
+            // Show image input on button click
+            openButton.addEventListener('click', function() {
+                if (currentImageIndex < imageInputs.length) {
+                    imageInputs[currentImageIndex].style.display = "block";
+                    currentImageIndex++;
+                }
+            });
+
+            // Hide image input on button click
+            closeButton.addEventListener('click', function() {
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                    imageInputs[currentImageIndex].style.display = "none";
+                }
+            });
+        });
+    </script>
+{% endblock %}

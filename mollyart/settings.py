@@ -55,8 +55,10 @@ INSTALLED_APPS = [
     "trolley",
     "payment",
     "newsletter",
+    "commission",
     'whitenoise.runserver_nostatic',
     'paypal.standard.ipn',
+
 ]
 
 MIDDLEWARE = [

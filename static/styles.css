@@ -17,8 +17,18 @@
 
 /*.opacity {
 	opacity: 1;
-	transform: translateY(0px)
+	transform: translateY(0px)	
 }*/
+
+.alert {
+	font-family: 'Space Grotesk';
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  background: #f9e469;
+}
+
 body {
 	display: flex;
 	flex-direction: column;
@@ -75,6 +85,13 @@ nav {
 	0%{transform: matrix(1, 0, 0.2, 1, 0, 0);}
 	50%{transform: matrix(1, 0, 0.1, 1, 0, 0);}
 	100%{transform: matrix(1, 0, 0.2, 1, 0, 0);}
+}
+
+@keyframes slide {
+	from {
+		transform: translateX(0);
+	}
+	to { transform:translateX(-100%); }
 }
 
 .hatman-div {
@@ -1047,6 +1064,69 @@ form {
 form > .product-buttons > .product-button {
 	width: 100%;
 }
+
+.past-commission-slides {
+	margin: 0 0 70px 0;
+}
+
+.reel-images {
+	overflow: hidden;
+	padding: 0 0 60px 0;
+	white-space: nowrap;
+}
+
+.reel-image {
+	display: inline-block;
+	animation: 50s slide infinite linear;
+	
+}
+
+.reel-images:hover .reel-image {
+	animation-play-state: paused;
+} 
+
+.reel-image img {
+	width: 500px;
+	margin: 0 40px;
+}
+
+.slideshow {
+  display: flex;
+  justify-content: center;
+}
+.slide {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.slide > img {
+	width: 50%;
+}
+
+.image-input-display {
+		display: none;
+}
+
+.add-buttons {
+	text-align: center;
+}
+
+.add-buttons label {
+	padding: 5px;
+	border: 3px solid black;
+	margin-left: 15px;
+	margin-bottom: 20px;
+}
+
+#add-img, #minus-img {
+	background-color: #d3d3d3;
+}
+
 
 footer {
 	display: flex;
