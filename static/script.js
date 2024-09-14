@@ -112,6 +112,10 @@ function navScroll() {
         shop.addEventListener("click", function () {
             shop.classList.add("man-clicked");
         });
+
+        commission.addEventListener("click", function () {
+            commission.classList.add("man-clicked");
+        });
     } else {
         console.log("This is not the landing page.");
     }

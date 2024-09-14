@@ -35,6 +35,13 @@ def logout_user(request):
 def index(request):
 	return render(request, 'index.html', {})
 
+def admin_dash(request):
+	user = request.user
+	if user.is_superuser:
+		return render(request, 'admin.html', {})
+	else:
+		return redirect('index')
+
 def shop(request):
 	products = Product.objects.all()
 	categories = Category.objects.all()

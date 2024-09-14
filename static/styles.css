@@ -357,6 +357,21 @@ nav {
 	transition: width 6s;
 }
 
+.admin {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.dash {
+	width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid;
+}
+
 .shop-header {
 	display: flex;
 	justify-content: center;

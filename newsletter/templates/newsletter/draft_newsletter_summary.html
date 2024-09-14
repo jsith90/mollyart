@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if articles %}
+        {% for article in articles %}
+            {% if not article.is_published %}
+                <div class="container">
+                    <div class="row">
+                        <center>
+                            <div class="col-8">
+                                <br>
+                                <h3>Draft Newsletters</h3>
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Newsletter Title</th>
+                                        <th scope="col">Status</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                          <td><a href="{% url 'draft_newsletter' article.id %}">{{ article.title }}</a></td>
+                                          <td>
+                                            Draft
+                                          </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <a class="btn" href="{% url 'newsletters_summary' %}">Past Newsletters</a>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h1>No New Newsletters To Post.</h1>
+    {% endif %}
+{% endblock %}

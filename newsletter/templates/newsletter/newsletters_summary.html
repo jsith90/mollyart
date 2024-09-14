@@ -1,14 +1,40 @@
-{% if articles %}
-    {% for article in articles %}
-        {% if article.is_published %}
-            <li><a class="dropdown-item" href="#">{{ article.title }}</a></li>
-            {% if not forloop.last %}
-            <hr class="dropdown-divider" />
-            {% endif %}
-        {% else %}
-            <li><a class="dropdown-item" href="{% url 'draft_newsletter' article.id %}">{{ article.title }} (draft)</a></li>
-        {% endif %}
-    {% endfor %}
-{% else %}
-    <p>No Newsletters yet.</p>
-{% endif %}
+{% extends 'base.html' %}
+{% block content %}
+    {% if articles %}
+        <div class="container">
+            <div class="row">
+                <center>
+                    <div class="col-8">
+                        <br>
+                        <h3>Published Newsletters</h3>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th scope="col">Newsletter Title</th>
+                                <th scope="col">Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for article in articles %}
+                                    {% if article.is_published %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'newsletter' article.id %}">{{ article.title }}</a>
+                                            </td>
+                                            <td>
+                                                Published
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <a class="btn" href="{% url  'draft_newsletter_summary' %}">Draft Newletters</a>
+                    </div>
+                </center>
+            </div>
+        </div>
+    {% else %}
+        <h1>No Newsletters Yet.</h1>
+    {% endif %}
+{% endblock %}

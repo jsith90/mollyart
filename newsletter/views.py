@@ -190,8 +190,16 @@ def newsletter_email_send(request, article):
 def newsletters_summary(request):
     user = request.user
     if user.is_superuser:
-        articles = Article.objects.all()
+        articles = Article.objects.filter(is_published=True)
         return render(request, 'newsletter/newsletters_summary.html', {'articles':articles})
+    else:
+        return redirect('index')
+
+def draft_newsletter_summary(request):
+    user = request.user
+    if user.is_superuser:
+        articles = Article.objects.filter(is_published=False)
+        return render(request, 'newsletter/draft_newsletter_summary.html', {'articles':articles})
     else:
         return redirect('index')
 
