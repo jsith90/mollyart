@@ -170,11 +170,11 @@ function initShopItemEvents() {
                 const shopText = item.querySelectorAll('.item-detail > h3, .item-detail > p, .item-detail > h4');
                 const shopImage = item.querySelectorAll('.modal-img');
                 shopText.forEach(text => {
-                    text.style.color = "#4eb2ff";
+                    text.style.color = "#0065d9";
                 });
                 shopBadge.forEach(badge => {
-                    badge.style.background = "#4eb2ff";
-                    badge.style.border = "#4eb2ff";
+                    badge.style.background = "#0065d9";
+                    badge.style.border = "#0065d9";
                 });
                 shopImage.forEach(image => {
                     image.style.opacity = "0.7";
@@ -217,8 +217,8 @@ function initCheckoutButton() {
     if (checkout) {
         checkout.addEventListener('mouseover', function() {
             checkout.style.cursor = "pointer"; 
-            checkout.style.background = "#4eb2ff";
-            checkout.style.border = "#4eb2ff";
+            checkout.style.background = "#0065d9";
+            checkout.style.border = "#0065d9";
         });
 
         checkout.addEventListener('mouseout', function() {
@@ -244,7 +244,7 @@ function togglePaymentPageInfo() {
             
             // const shopText = item.querySelectorAll('.item-detail > h3, .item-detail > p, .item-detail > h4');
             toggle.style.cursor = "pointer";
-            toggle.style.background = "#4eb2ff";
+            toggle.style.background = "#0065d9";
         });
 
         toggle.addEventListener("mouseout", function() {

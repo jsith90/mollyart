@@ -158,6 +158,11 @@ nav {
 
 .nav-toggle-open > i {
 	font-size: 3rem;
+	transition: transform 0.5s ease;
+}
+
+.nav-toggle-open > i:hover {
+	transform: translateY(-10px);
 }
 
 .nav-toggle-close {
@@ -398,7 +403,7 @@ nav {
 
 .category-display > div > h2 > a:hover {
 	cursor: pointer;
-	color: #4eb2ff;
+	color: #0065d9;
 }
 
 .shop-display {
@@ -575,7 +580,7 @@ nav {
 }
 
 .product-button:hover {
-	background: #4eb2ff;
+	background: #0065d9;
 	cursor: pointer;
 }
 
@@ -661,7 +666,7 @@ nav {
 
 .close:hover,
 .close:focus {
-  color: #4eb2ff;
+  color: #0065d9;
   text-decoration: none;
   cursor: pointer;
 }
@@ -692,7 +697,7 @@ nav {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
-  color: #4eb2ff;
+  color: #0065d9;
 }
 
 .cursor {
@@ -742,7 +747,7 @@ nav {
 }
 
 .trolley-button:hover {
-	background: #4eb2ff;
+	background: #0065d9;
 	cursor: pointer;
 }
 
@@ -1167,7 +1172,7 @@ form > .product-buttons > .product-button {
 }
 
 .commission-button:hover {
-	background: #4eb2ff;
+	background: #0065d9;
 	cursor: pointer;
 }
 
@@ -1224,7 +1229,7 @@ footer {
 }
 
 .subscribe-button:hover {
-	background: #4eb2ff;
+	background: #0065d9;
 }
 
 .workmen {
@@ -1239,7 +1244,7 @@ footer {
 	justify-content: center;
 	position: relative;
 	right: -5%;
-	top: -5%;
+	top: 0%;
 	z-index: 1;
 	animation-name: waddle;
 	animation-duration: 5s;
@@ -1256,7 +1261,7 @@ footer {
 	justify-content: center;
 	align-items: flex-start;
 	position: relative;
-	bottom: 6%;
+	bottom: 1%;
 	left: -4%;
 	z-index: 1;
 	animation-name: waddle;

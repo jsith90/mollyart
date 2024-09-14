@@ -33,17 +33,14 @@ class CreateArticle(forms.ModelForm):
             'is_published': forms.CheckboxInput(),
         }
 
+
 class SubscriptionForm(forms.ModelForm):
     class Meta:
         model = Subscriber
         fields = ['email']
         labels = {
-            'email': 'Subscribe to my newsletter (enter your email):'
-    }
-    widgets = {
-        'email': forms.EmailInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'enter your email',
-            'required': 'required',
-        })
-    }
+            'email': 'Subscribe to my newsletter:'
+        }
+        widgets = {
+        'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'enter your email...', 'required': 'required'}),
+        }
