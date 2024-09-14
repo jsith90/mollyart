@@ -5,8 +5,9 @@ from .models import Commission, Image, Past_Commission_Image
 class CommissionForm(forms.ModelForm):
     class Meta:
         model = Commission
-        fields = ['email', 'address', 'commission_title', 'commission_idea', 'canvas_size', 'deadline_date', 'contact_number', 'framing_options']
+        fields = ['name', 'email', 'address', 'commission_title', 'commission_idea', 'canvas_size', 'deadline_date', 'contact_number', 'framing_options']
         labels = {
+            'name': 'Your Name:',
             'email': 'Email:',
             'address': 'Address (for delivery quote estimation):',
             'commission_title': 'Commission Name:',
@@ -17,6 +18,7 @@ class CommissionForm(forms.ModelForm):
             'framing_options': 'Framing Options:',
         }
         widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your name...'}),
         	'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your email address...'}),
             'address': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your delivery address...'}),
             'commission_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your commission title...'}),

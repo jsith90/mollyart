@@ -12,6 +12,7 @@ class Commission(models.Model):
 		('tray frame', 'Tray Frame'),
 	]
 
+	name = models.CharField(max_length=500, blank=True, null=True)
 	email = models.EmailField(max_length=250)
 	address = models.TextField(max_length=15000)
 	commission_title = models.CharField(max_length=250)
