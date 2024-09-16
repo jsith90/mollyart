@@ -69,13 +69,14 @@ def category_summary(request):
 
 
 def category(request, foo):
+	categories = Category.objects.all()
 	# replace hyphens with spaces
 	foo = foo.replace('-', ' ')
 	# grab category from url
 	try:
 		category = Category.objects.get(name=foo)
 		products = Product.objects.filter(category=category)
-		return render(request, 'category.html', {'products':products, 'category':category})
+		return render(request, 'category.html', {'products':products, 'category':category, 'categories':categories})
 	except:
 		messages.error(request, ('Nothing available here at the moment.'))
 		return redirect('index')

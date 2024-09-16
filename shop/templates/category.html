@@ -2,11 +2,26 @@
 
 {% block content %}
     <!-- Header-->
-    <header class="category-header">
+    <header class="shop-header">
+        <div>
+            <h1 class="shop-heading"><a href="{% url 'shop' %}">Siop | Shop</a></h1>
+        </div>
+        <section class="category-display">
+            <div>
+                {% for category in categories %}
+                    <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
+                    {% if not forloop.last  %}
+                    <h2>·</h2>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </header>
+    <div class="category-header">
         <div>
             <h1 class="category-heading">{{ category }}</h1>
         </div>
-    </header>
+    </div>
     <section class="shop-display">
         <div>    
             {% for product in products %}
@@ -81,13 +96,10 @@
             {% endfor %}
         </div>
         <div class="product-buttons edit delete">
-            <div>
-            <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
             {% if user.is_superuser %}
                 <a href="{% url 'category_update' category.id %}" class="product-button edit">Edit Category</a>
                 <a href="{% url 'delete_category' category.id %}" class="product-button delete">Delete Category</a>
             {% endif %}
-            </div>
         </div>
     </section>
 {% endblock %}
