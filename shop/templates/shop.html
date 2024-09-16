@@ -4,20 +4,19 @@
         <!-- Header-->
         <header class="shop-header">
             <div>
-                <h1 class="shop-heading">m<span class="orange">y</span>n<span class="orange">d</span> i <span class="orange">s</span>i<span class="orange">o</span>p<span class="orange">a</span></h1>
+                <h1 class="shop-heading"><a href="{% url 'shop' %}">Siop | Shop</a></h1>
             </div>
+            <section class="category-display">
+                <div>
+                    {% for category in categories %}
+                        <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
+                        {% if not forloop.last  %}
+                        <h2>·</h2>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
         </header>
-        <!-- Section-->
-        <section class="category-display">
-            <div>
-                {% for category in categories %}
-                    <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
-                    {% if not forloop.last  %}
-                    <h2>·</h2>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </section>
         <section class="shop-display">
             <div>    
                 {% for product in products %}

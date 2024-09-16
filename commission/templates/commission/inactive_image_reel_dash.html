@@ -18,7 +18,7 @@
             <tbody>
               {% for image in images %}
                 <tr>
-                  <td>{{ image.image_name }}</td>
+                  <td><a href="{{ image.image.url }}">{{ image.image_name }}</a></td>
                   <td>
                     <label for="images_{{ image.id }}_is_active">Is image active:</label>
                     <input type="checkbox" name="images_{{ image.id }}_is_active" value="True "{% if image.is_active %}checked{% endif %}>

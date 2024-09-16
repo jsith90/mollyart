@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 {% load shop_filters %}
 {% block content %}
+  <!-- Header-->
+  <header class="shop-header">
+      <div>
+          <h1 class="shop-heading"><a href="{% url 'shop' %}">Siop | Shop</a></h1>
+      </div>
+      <section class="category-display">
+          <div>
+              {% for category in categories %}
+                  <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
+                  {% if not forloop.last  %}
+                  <h2>·</h2>
+                  {% endif %}
+              {% endfor %}
+          </div>
+      </section>
+  </header>
   <section class="shop-display">
     <div class="product">    
       <div class="product-item">

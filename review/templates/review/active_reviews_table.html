@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<center>
+			<div class="col-8">
+				<br>
+				<h3>Active Reviews Dashboard</h3>
+        <form method="post">  <!-- Ensure the method is set to POST -->
+          {% csrf_token %}
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Name of reviewer:</th>
+                <th scope="col">Review:</th>
+                <th scope="col">Status:</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for review in reviews %}
+                <tr>
+                  <td><a href="#">{{ review.name }}</a></td>
+                  <td>{{review.review}}</td>
+                  <td>
+                    <label for="reviews_{{ review.id }}_is_active">Is review active:</label>
+                    <input type="checkbox" name="reviews_{{ review.id }}_is_active" value="True "{% if review.is_active %}checked{% endif %}>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="product-buttons">
+          <p>Tick checkbox to activate review and then click the button to update status:</p>
+          <button class="product-button" type="submit">Update Status</button>
+          <a class="product-button" href="{% url 'inactive_reviews_table' %}">Inactive Reviews Dashboard</a>
+          </div>
+        </form>
+      </div>
+    </center>
+  </div>
+</div>
+{% endblock %}

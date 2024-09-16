@@ -2,24 +2,38 @@
 
 {% block content %}
 	{% if user.is_superuser %}
+		<header class="shop-header">
+            <div>
+                <h1 class="shop-heading">Admin Dashboard</h1>
+            </div>
+        </header>
 		<section class="admin">
 			<div class="dash product-buttons">
 				<h2>Shop</h2>
                 <a class="product-button" aria-current="page" href="{% url 'add_product' %}">Add Product</a>
                 <a class="product-button" aria-current="page" href="{% url 'add_category' %}">Add Category</a>
-                <a class="product-button" href="{% url 'shipped_dash' %}">Shipped Orders</a></li>
                 <a class="product-button" href="{% url 'not_shipped_dash' %}">Unshipped Orders</a></li>
+                <a class="product-button" href="{% url 'shipped_dash' %}">Shipped Orders</a></li>
+			</div>
+			<div class="dash product-buttons">
+				<h2>Portfolio</h2>
+                <a class="product-button" href="{% url 'add_portfolio' %}">Add Portfolio Page</a>
+                <a class="product-button" href="{% url 'draft_portfolio_summary' %}">Draft Portfolios</a>
 			</div>
 			<div class="dash product-buttons">
 				<h2>Newsletter</h2>
             	<a class="product-button" href="{% url 'create_newsletter' %}">Create a Newsletter</a></li>
-                <a class="product-button" href="{% url 'subscribers_dash' %}">Subscribers</a>
+                <a class="product-button" href="{% url 'subscribers_dash' %}">Subscribers List</a>
                 <a class="product-button" href="{% url 'draft_newsletter_summary' %}">Newsletter Drafts</a>
 			</div>
 			<div class="dash product-buttons">
 				<h2>Commissions</h2>
 				<a class="product-button" href="{% url 'old_commission_image_upload' %}">Upload Old Commission Image</a>
-                <a class="product-button" href="{% url 'image_reel_dash' %}">Old Commission Images Table</a>
+                <a class="product-button" href="{% url 'image_reel_dash' %}">Commission Images Dashboard</a>
+			</div>
+			<div class="dash product-buttons">
+				<h2>Reviews</h2>
+                <a class="product-button" href="{% url 'inactive_reviews_table' %}">Reviews Dashboard</a>
 			</div>
 		</section>
 	{% endif %}

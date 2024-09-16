@@ -12,7 +12,7 @@
         </div>
         <div class="logo-div">
         <a id="logo-name" href="{% url 'index' %}"><img src="{% static 'images/logo-type.png' %}"></a>
-        <a id="logo-man" class="logo-man" href="{% url 'index' %}"><img src="{% static 'images/hatman-image.gif' %}"></a>
+        <a id="logo-man" class="logo-man" href="{% url 'index' %}"><img src="{% static 'images/hatlady.png' %}"></a>
         </div>
         <form class="trolley-form">
             <a href="{% url 'trolley_summary' %}">
@@ -22,8 +22,9 @@
         </form>
     </div>
     <ul class="nav-options">    
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Shop</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{% url 'create_commission' %}">Commission Form</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Siop | Shop</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'create_commission' %}">Comisiynau | Commissions</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'write_review' %}">Reviews</a></li>
         {% if user.is_superuser %}
             <li class="nav-item"><a class="nav-link active" href="{% url 'admin_dash' %}">Admin</a></li>
             <li class="nav-item"><a class="nav-link active" aria-label="Logout of User account" href="{% url 'logout' %}">Logout</a></li>

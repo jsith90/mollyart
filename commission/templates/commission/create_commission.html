@@ -5,12 +5,12 @@
         <div class="reel-images">
             <div class="reel-image">
                 {% for image in past_images %}
-                    <img src="{{ image.image.url }}" alt="{{ image.image_name }}">
+                    <img class="modal-img" src="{{ image.image.url }}" alt="{{ image.image_name }}">
                 {% endfor %}
             </div>
             <div class="reel-image">
                 {% for image in past_images %}
-                    <img src="{{ image.image.url }}" alt="{{ image.image_name }}">
+                    <img class="modal-img" src="{{ image.image.url }}" alt="{{ image.image_name }}">
                 {% endfor %}
             </div>
         </div>
@@ -18,7 +18,7 @@
     <section class="form-section"> 
         <header class="shop-header">
             <div>
-                <h1 class="shop-heading">Commission Form</h1>
+                <h1 class="shop-heading">comisiynau | commissions</h1>
             </div>
         </header>
         <form class="commission-form" method="post" enctype="multipart/form-data">
@@ -79,6 +79,23 @@
             <button type="submit" class="commission-button">Send Commission</button>
         </form>
     </section>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01">
+      
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+      <div class="thumbnails row">
+        {% for image in past_images %}
+          <div class="column">
+            <img class="demo cursor" src="{{ image.image.url }}" style="width:100%" onclick="currentSlide({{ forloop.counter }})" alt="{{ image.image_name }}">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
             // Get all image input divs

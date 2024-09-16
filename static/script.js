@@ -1,36 +1,62 @@
 function commissionSlides() {
-    // set index and transition delay
-    let index = 0;
-    let transitionDelay = 10000;
+    // Get the modal
+    const modal = document.getElementById("myModal");
 
-    // get div containing the slides
-    let slideContainer = document.querySelector(".slideshow");
-    // get the slides
-    let slides = slideContainer.querySelectorAll(".slide");
+    // Get the modal image and caption elements
+    const modalImg = document.getElementById("img01");
 
-    // set transition delay for slides
-    for (let slide of slides) {
-      slide.style.transition = `opacity 2s ease-in-out`;
+    // Get all images that will open the modal
+    const images = document.querySelectorAll('.modal-img');
+
+    // Add click event listeners to each image
+    images.forEach((img, index) => {
+      img.onclick = function() {
+        modal.style.display = "block";
+        modal.style.zIndex = "1000";
+        slideIndex = index + 1;  // Update the slide index
+        showSlides(slideIndex);
+      }
+    });
+
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    };
+
+    let slideIndex = 1;
+
+    // Next/previous controls
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
     }
 
-    // show the first slide
-    showSlide(index);
-
-    // show a specific slide
-    function showSlide(slideNumber) {
-        slides.forEach((slide, i) => {
-        slide.style.opacity = i == slideNumber ? "1" : "0";
-        });
-        // next index
-        index++;
-        // go back to 0 if at the end of slides
-        if (index >= slides.length) {
-            index = 0;
-        }
+    // Thumbnail image controls
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
     }
 
-    // transition to next slide every x seconds
-    setInterval (() => showSlide(index), transitionDelay);
+    function showSlides(n) {
+      const images = document.querySelectorAll('.modal-img');  // Get all the images again
+      const dots = document.getElementsByClassName("demo");
+
+      if (n > images.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = images.length }
+
+      // Update the modal image and caption
+      modalImg.src = images[slideIndex - 1].src;
+      captionText.innerHTML = images[slideIndex - 1].alt;
+
+      // Remove 'active' class from all dots
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      // Add 'active' class to the corresponding dot
+      dots[slideIndex - 1].className += " active";
+    }
 }
 
 function navScroll() {
@@ -128,6 +154,7 @@ function navBar() {
     const links = document.querySelector(".nav-options");
     const navName = document.getElementById("logo-name");
     const navMan = document.getElementById("logo-man");
+    const nav = document.getElementsByTagName("nav")[0]; 
 
 
     navToggleOpen.addEventListener("click", function () {
@@ -144,6 +171,7 @@ function navBar() {
         navToggleClose.style.opacity = "1";
         navToggleOpen.style.zIndex = "0";
         navToggleClose.style.zIndex = "1";
+        nav.style.marginBottom = "0";
     });
 
     navToggleClose.addEventListener("click", function () {

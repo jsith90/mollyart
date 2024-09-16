@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="edit-portfolio-section"> 
+        <header class="shop-header">
+            <div>
+                <h1 class="shop-heading">Update portfolio</h1>
+            </div>
+        </header>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form">
+                {{ portfolio_form.as_p }}
+            </div>
+            <div class="edit-commission-images">
+                <p>Hey Mol! Attach your images using the image uploaders below. If you tick 'clear' next to an existing image, you'll delete the image but not the caption; if you tick 'delete', you'll delete the image and the caption from the portfolio page. Have a nice day, love your bro x</p>
+                {{ image_formset.management_form }}
+                {% for form in image_formset %}
+                    <div class="form image-input-display">
+                        {{ form.as_p }}
+                    </div>
+                {% endfor %}
+                <div class="add-buttons">
+                    <label for="add-img">Press for image input:</label>
+                    <div class="just-buttons">
+                        <button type="button" class="open-image-input" id="add-img">+</button>
+                        <button type="button" class="close-image-input" id="minus-img">-</button>
+                    </div>
+                </div>
+                <button type="submit" class="commission-button">Update Portfolio</button>
+            </div>
+        </form>
+    </section>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all image input divs
+            const imageInputs = document.querySelectorAll(".image-input-display");
+
+            // Hide all image inputs initially
+            imageInputs.forEach(input => input.style.display = "none");
+
+            // Get the button to show more image inputs
+            const openButton = document.querySelector(".open-image-input");
+
+            // Get the button to hide image inputs
+            const closeButton = document.querySelector(".close-image-input");
+
+            // Initialize a counter to keep track of the current image input to display
+            let currentImageIndex = 0;
+
+            // Show image input on button click
+            openButton.addEventListener('click', function() {
+                if (currentImageIndex < imageInputs.length) {
+                    imageInputs[currentImageIndex].style.display = "block";
+                    currentImageIndex++;
+                }
+            });
+
+            // Hide image input on button click
+            closeButton.addEventListener('click', function() {
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                    imageInputs[currentImageIndex].style.display = "none";
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

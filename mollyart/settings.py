@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     "payment",
     "newsletter",
     "commission",
+    "review",
+    "portfolio",
     'whitenoise.runserver_nostatic',
     'paypal.standard.ipn',
 

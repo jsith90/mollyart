@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="form-section"> 
+        <header class="shop-header">
+            <div>
+                <h1 class="shop-heading">Create a portfolio</h1>
+            </div>
+        </header>
+        <form class="portfolio-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form">
+                <label for="{{ portfolio_form.title.id_for_label }}">{{ portfolio_form.title.label }}</label>
+                {{ portfolio_form.title }}
+            </div>
+            <div class="form">
+                <label for="{{ portfolio_form.description.id_for_label }}">{{ portfolio_form.description.label }}</label>
+                {{ portfolio_form.description }}
+            </div>
+            <div class="add-commission-images">
+                <p>Hey Mol! Attach your images using the image uploaders below. Have a nice day, love your bro x</p>
+                {{ image_formset.management_form }}
+                {% for form in image_formset %}
+                    <div class="form image-input-display" id="edit_{{ form.image.id_for_label }}">
+                        <label for="{{ form.image.id_for_label }}">{{ form.image.label }}</label>
+                        {{ form.image }}
+                        <label for="{{ form.caption.id_for_label }}">{{ form.caption.label }}</label>
+                        {{ form.caption }}
+                    </div>
+                {% endfor %}
+                <div class="add-buttons">
+                    <label for="add-img">Press for image input:</label>
+                    <div class="just-buttons">
+                        <button type="button" class="open-image-input" id="add-img">+</button>
+                        <button type="button" class="close-image-input" id="minus-img">-</button>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="commission-button">Create Portfolio</button>
+        </form>
+    </section>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all image input divs
+            const imageInputs = document.querySelectorAll(".image-input-display");
+
+            // Hide all image inputs initially
+            imageInputs.forEach(input => input.style.display = "none");
+
+            // Get the button to show more image inputs
+            const openButton = document.querySelector(".open-image-input");
+
+            // Get the button to hide image inputs
+            const closeButton = document.querySelector(".close-image-input");
+
+            // Initialize a counter to keep track of the current image input to display
+            let currentImageIndex = 0;
+
+            // Show image input on button click
+            openButton.addEventListener('click', function() {
+                if (currentImageIndex < imageInputs.length) {
+                    imageInputs[currentImageIndex].style.display = "block";
+                    currentImageIndex++;
+                }
+            });
+
+            // Hide image input on button click
+            closeButton.addEventListener('click', function() {
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                    imageInputs[currentImageIndex].style.display = "none";
+                }
+            });
+        });
+    </script>
+{% endblock %}

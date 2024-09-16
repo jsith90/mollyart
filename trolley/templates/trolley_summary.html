@@ -4,7 +4,7 @@
         <!-- Header-->
         <header class="shop-header">
             <div>
-                <h1 class="shop-heading">T<span class="orange">r</span>o<span class="orange">l</span>i</h1>
+                <h1 class="shop-heading">Troli | Trolley</h1>
             </div>
         </header>
         <section class="shop-display">
@@ -60,6 +60,9 @@
             {% else %}
             <div class="no-items">
                 <p>There's nothing in your trolley...</p>
+                <div class="trolley-buttons">
+                    <a class="trolley-button" href="{% url 'shop' %}">Molly's Shop</a>
+                </div>
             </div>
             {% endif %}
         </section>

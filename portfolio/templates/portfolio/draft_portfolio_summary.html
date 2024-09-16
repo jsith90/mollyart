@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <center>
+                <div class="col-8">
+                    <br>
+                    <h3>Draft Newsletters</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">Draft Portfolio Summary</th>
+                            <th scope="col">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% if portfolios %}
+                                {% for portfolio in portfolios %}
+                                    {% if not portfolio.is_published %}
+                                        <tr>
+                                            <td><a href="{% url 'edit_portfolio' portfolio.id %}">{{ portfolio.title }}</a></td>
+                                            <td>Draft</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    <a class="btn" href="#">Published Portfolios</a>
+                </div>
+            </center>
+        </div>
+    </div>                                           
+{% endblock %}

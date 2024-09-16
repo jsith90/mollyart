@@ -17,7 +17,7 @@
 
 /*.opacity {
 	opacity: 1;
-	transform: translateY(0px)	
+	transform: translateY(0px)
 }*/
 
 .alert {
@@ -34,9 +34,9 @@ body {
 	flex-direction: column;
 }
 
-main {
-	flex: 1;
-}
+/*main {
+	background: #e7e5d5;
+}*/
 
 h1, h2, h3, h4, h5 {
 	font-family: "Karla", sans-serif;
@@ -54,7 +54,7 @@ p, a, button {
 
 nav {
 /*	transform: translateY(-200px);*/
-	margin: 2rem 0 1rem 0;
+	margin: 2rem 0 2rem 0;
 	transition: opacity 2s ease-out;
 /*	transition: transform 0.9s ease-out;*/
 }
@@ -95,16 +95,16 @@ nav {
 }
 
 .hatman-div {
-  width: 50%;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   transition: transform 2s ease-out, width 2s, opacity 2s ease-out, height 2s ease-out;
   position: relative;
-  z-index: -10;
+  z-index: 10;
 }
 
 .hatman-image {
-	width: 40%;
+	width: 50%;
 	animation-name: bounce;
   animation-duration: 3s;
   animation-iteration-count: infinite;
@@ -192,11 +192,12 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #e7e5d5;
 }
 
 .show-options {
 	max-height: 45rem;
-	margin-bottom: 3rem;
+	margin: 2rem 0 0 0;
 }
 
 .nav-options > li {
@@ -374,20 +375,42 @@ nav {
 
 .shop-header {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	margin: 0 0 2rem 0;
+	background: #e7e5d5;
+	padding: 40px 0 0 0;
 }
 
 .shop-header > div {
 	text-align: center;
 }
 
-.shop-header > div > h1 {
+.shop-header > div > h1 > a {
 	text-transform: uppercase;
 	font-size: 4rem;
+	font-family: "Karla", sans-serif;
+	font-weight: 900;
 /*	color: #26FF9A;*/
 /*	color: #268BFF;*/
 /*color: #ff9a26*/
+}
+
+.shop-header > div > h1 {
+	text-transform: uppercase;
+	font-size: 4rem;
+	font-family: "Karla", sans-serif;
+	font-weight: 900;
+	padding: 0 0 40px 0;
+/*	color: #26FF9A;*/
+/*	color: #268BFF;*/
+/*color: #ff9a26*/
+}
+
+.shop-header > div > h1 > a:hover {
+	cursor: pointer;
+	color: #0065d9;
 }
 
 /*.orange {
@@ -397,7 +420,7 @@ nav {
 .category-display {
 	display: flex;
 	justify-content: center;
-	margin: 0 0 6rem 0;
+	margin: 3rem 0 3rem 0;
 }
 
 .category-display > div {
@@ -435,6 +458,8 @@ nav {
   justify-content: center;
   margin: 40px 40px 0 0;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .shop-item {
@@ -748,8 +773,6 @@ nav {
   opacity: 1;
 }
 
-
-
 .trolley-button {
 	background: white;
 	border: black solid;
@@ -819,6 +842,8 @@ nav {
   margin: 0 0 6rem 0;
 /*  color: #26ff9a;*/
   text-align: center;
+  background: #e7e5d5;
+  padding: 20px;
 }
 
 .checkout-header > div > h1 {
@@ -1086,7 +1111,8 @@ form > .product-buttons > .product-button {
 }
 
 .past-commission-slides {
-	margin: 0 0 70px 0;
+	padding: 70px 0 0 0;
+	background: #e7e5d5;
 }
 
 .reel-images {
@@ -1137,6 +1163,40 @@ form > .product-buttons > .product-button {
 .add-commission-images p {
 	text-align: center;
 	width: 70%;
+}
+
+.edit-portfolio-section {
+	font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-portfolio-section form {
+	padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.edit-commission-images {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50%;
+}
+
+.edit-commission-images p {
+	text-align: center;
+	width: 100%;
 }
 
 .image-input-display {
@@ -1195,9 +1255,8 @@ footer {
 	display: flex;
 	width: 100%;
 	justify-content: center;
-	margin: 5rem 0 0 0;
-	background: #f9e469;
-	padding: 1rem;
+	padding: 2rem 0 5rem 0;
+	background: #e7e5d5;
 }
 
 .footer-div {
@@ -1214,6 +1273,7 @@ footer {
 	text-align: center;
 	border: solid;
 	position: absolute;
+	font-size: 2rem;
 	z-index: 10;
 	animation-name: bounce;
 	animation-duration: 10s;
@@ -1233,7 +1293,7 @@ footer {
 .subscribe-button {
 	width: 15%;
 	margin: 0;
-	font-size: 0.7rem;
+	font-size: 2rem;
 	color: black;
 	text-transform: uppercase;
 	padding: 0.2rem;
@@ -1416,7 +1476,7 @@ footer {
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		margin: 5rem 0 0 0;
+		padding: 2rem 0 5rem 0;
 	}
 
 	.footer-div {
@@ -1428,7 +1488,7 @@ footer {
 	}
 
 	.subscribe-div {
-		width: 40%;
+		width: 60%;
 		text-align: center;
 		border: solid;
 		position: absolute;
@@ -1517,7 +1577,7 @@ footer {
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		margin: 5rem 0 0 0;
+		padding: 2rem 0 5rem 0;
 	}
 
 	.footer-div {
@@ -1529,10 +1589,11 @@ footer {
 	}
 
 	.subscribe-div {
-		width: 40%;
+		width: 60%;
 		text-align: center;
 		border: solid;
 		position: absolute;
+		font-size: 1rem;
 	}
 
 	.subscribe-div > form {
@@ -1618,11 +1679,15 @@ footer {
 		width: 90%;
 	}
 
-		footer {
+	.edit-commission-images {
+		width: 75%;
+	}
+
+	footer {
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		margin: 5rem 0 0 0;
+		padding: 2rem 0 5rem 0;
 	}
 
 	.footer-div {
@@ -1634,7 +1699,7 @@ footer {
 	}
 
 	.subscribe-div {
-		width: 40%;
+		width: 70%;
 		text-align: center;
 		border: solid;
 		position: absolute;
@@ -1691,7 +1756,12 @@ footer {
 		width: 86%;
 }
 
+
 @media only screen and (max-width: 1020px) {
+
+	.hatman-image {
+		width: 80%;
+	}
 
   .category-display {
   	margin: 0 0 1rem 0;
@@ -1753,11 +1823,15 @@ footer {
     font-size: 2rem;
 	}
 
+	.edit-portfolio-section form {
+  	width: 80%;
+	}
+
 	footer {
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		margin: 5rem 0 0 0;
+		padding: 2rem 0 5rem 0;
 	}
 
 	.footer-div {
@@ -1773,6 +1847,9 @@ footer {
 		text-align: center;
 		border: solid;
 		position: absolute;
+		flex-direction: column;
+		display: flex;
+		font-size: 1rem;
 	}
 
 	.subscribe-div > form {
@@ -1787,7 +1864,7 @@ footer {
 
 	.subscribe-button {
 		width: 15%;
-		margin: 0;
+		margin: 0.5rem 0 0 0;
 		font-size: 0.7rem;
 		color: black;
 		text-transform: uppercase;
@@ -1843,7 +1920,7 @@ footer {
 @media only screen and (max-width: 700px) {
 
 	.logo-div {
-		width: 100%;
+		width: 40%;
 	}
 
 	.landing > div {
@@ -1949,6 +2026,10 @@ footer {
 		border: solid;
 	}
 
+	.edit-commission-images {
+		width: 100%;
+	}
+
 
 	footer {
 		display: flex;
@@ -2048,6 +2129,10 @@ footer {
   	font-size: 2rem;
   }
 
+  .shop-header > div > h1 > a {
+  	font-size: 2rem;
+  }
+
    .category-display > div > h2 {
   	padding: 0.5rem;
   }
@@ -2117,6 +2202,14 @@ footer {
 		margin: 0 10px;
 	}
 
+	.add-commission-images .image-input-display {
+  	width: 80%;
+  }
+
+  .edit-portfolio-section form {
+  	width: 100%;
+	}
+
 	footer {
 		display: flex;
 		width: 100%;
@@ -2135,6 +2228,7 @@ footer {
 		width: 90%;
 		text-align: center;
 		border: solid;
+		font-size: 1rem;
 	}
 
 	.subscribe-button {
