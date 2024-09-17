@@ -1,61 +1,65 @@
 function commissionSlides() {
     // Get the modal
     const modal = document.getElementById("myModal");
+    if (modal) {
 
-    // Get the modal image and caption elements
-    const modalImg = document.getElementById("img01");
+        // Get the modal image and caption elements
+        const modalImg = document.getElementById("img01");
 
-    // Get all images that will open the modal
-    const images = document.querySelectorAll('.modal-img');
+        // Get all images that will open the modal
+        const images = document.querySelectorAll('.modal-img');
 
-    // Add click event listeners to each image
-    images.forEach((img, index) => {
-      img.onclick = function() {
-        modal.style.display = "block";
-        modal.style.zIndex = "1000";
-        slideIndex = index + 1;  // Update the slide index
-        showSlides(slideIndex);
-      }
-    });
+        // Add click event listeners to each image
+        images.forEach((img, index) => {
+          img.onclick = function() {
+            modal.style.display = "block";
+            modal.style.zIndex = "1000";
+            slideIndex = index + 1;  // Update the slide index
+            showSlides(slideIndex);
+          }
+        });
 
-    // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        const span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-    };
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        };
 
-    let slideIndex = 1;
+        let slideIndex = 1;
 
-    // Next/previous controls
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
+        // Next/previous controls
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
 
-    // Thumbnail image controls
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
+        // Thumbnail image controls
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
 
-    function showSlides(n) {
-      const images = document.querySelectorAll('.modal-img');  // Get all the images again
-      const dots = document.getElementsByClassName("demo");
+        function showSlides(n) {
+          const images = document.querySelectorAll('.modal-img');  // Get all the images again
+          const dots = document.getElementsByClassName("demo");
 
-      if (n > images.length) { slideIndex = 1 }
-      if (n < 1) { slideIndex = images.length }
+          if (n > images.length) { slideIndex = 1 }
+          if (n < 1) { slideIndex = images.length }
 
-      // Update the modal image and caption
-      modalImg.src = images[slideIndex - 1].src;
-      captionText.innerHTML = images[slideIndex - 1].alt;
+          // Update the modal image and caption
+          modalImg.src = images[slideIndex - 1].src;
+          captionText.innerHTML = images[slideIndex - 1].alt;
 
-      // Remove 'active' class from all dots
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
+          // Remove 'active' class from all dots
+          for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
 
-      // Add 'active' class to the corresponding dot
-      dots[slideIndex - 1].className += " active";
+          // Add 'active' class to the corresponding dot
+          dots[slideIndex - 1].className += " active";
+        }
+    } else {
+        console.log('no modal.');
     }
 }
 
@@ -207,6 +211,7 @@ function initShopItemEvents() {
                 shopBadge.forEach(badge => {
                     badge.style.background = "#0065d9";
                     badge.style.border = "#0065d9";
+                    badge.style.boxShadow = "black 6px 6px 1px 1px";
                 });
                 shopImage.forEach(image => {
                     image.style.opacity = "0.7";
@@ -226,14 +231,17 @@ function initShopItemEvents() {
                 saleBadge.forEach(badge => {
                     badge.style.background = "red";
                     badge.style.border = "red";
+                    badge.style.boxShadow = "none";
                 });
                 soldBadge.forEach(badge => {
                     badge.style.background = "black";
                     badge.style.border = "black";
+                    badge.style.boxShadow = "none";
                 });
                 availableBadge.forEach(badge => {
                     badge.style.background = "#3f9c44";
                     badge.style.border = "#3f9c44";
+                    badge.style.boxShadow = "none";
                 });
                 shopImage.forEach(image => {
                     image.style.opacity = "1";
@@ -251,11 +259,13 @@ function initCheckoutButton() {
             checkout.style.cursor = "pointer"; 
             checkout.style.background = "#0065d9";
             checkout.style.border = "#0065d9";
+            checkout.style.boxShadow = "black 6px 6px 1px 1px";
         });
 
         checkout.addEventListener('mouseout', function() {
             checkout.style.background = "#3f9c44";
             checkout.style.border = "#3f9c44";
+            checkout.style.boxShadow = "none";
         });
     }
 }
