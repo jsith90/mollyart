@@ -101,6 +101,7 @@ nav {
   transition: transform 2s ease-out, width 2s, opacity 2s ease-out, height 2s ease-out;
   position: relative;
   z-index: -10;
+  margin: 50px 0 0 0;
 }
 
 .hatman-image {
@@ -1656,6 +1657,10 @@ footer {
 
 @media only screen and (max-width: 1060px) {
 
+	.hatman-image {
+		width: 100%;
+	}
+
 	#logo-name > img {
 		max-width: 100%;
 	}
@@ -1767,10 +1772,6 @@ footer {
 
 
 @media only screen and (max-width: 1020px) {
-
-	.hatman-image {
-		width: 80%;
-	}
 
   .category-display {
   	margin: 0 0 1rem 0;

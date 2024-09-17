@@ -7,24 +7,24 @@ class CommissionForm(forms.ModelForm):
         model = Commission
         fields = ['name', 'email', 'address', 'commission_title', 'commission_idea', 'canvas_size', 'deadline_date', 'contact_number', 'framing_options']
         labels = {
-            'name': 'Your Name:',
-            'email': 'Email:',
-            'address': 'Address (for delivery quote estimation):',
-            'commission_title': 'Commission Name:',
-            'commission_idea':'Commission Idea:',
+            'name': 'Your Name (required):',
+            'email': 'Email (required):',
+            'address': 'Address (for delivery quote estimation | required):',
+            'commission_title': 'Commission Name (required):',
+            'commission_idea':'Commission Idea (required):',
             'canvas_size': 'Canvas Size:',
-            'deadline_date': 'Deadline Date:',
+            'deadline_date': 'Deadline Date (required):',
             'contact_number': 'Contact Number:',
             'framing_options': 'Framing Options:',
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your name...'}),
-        	'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your email address...'}),
-            'address': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your delivery address...'}),
-            'commission_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your commission title...'}),
-            'commission_idea': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your idea...'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your name...', 'required': 'required'}),
+        	'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your email address...', 'required': 'required'}),
+            'address': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your delivery address...', 'required': 'required'}),
+            'commission_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your commission title...', 'required': 'required'}),
+            'commission_idea': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your idea...', 'required': 'required'}),
             'canvas_size': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your sizes...'}),
-            'deadline_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'deadline_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control', 'required': 'required'}),
             'contact_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your phone number...'}),
             'framing_options': forms.Select(attrs={'class': 'form-control'}),
         }
