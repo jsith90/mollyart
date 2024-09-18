@@ -1,10 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
     <!-- Header-->
     <header class="shop-header">
-        <div>
-            <h1 class="shop-heading"><a href="{% url 'shop' %}">Siop | Shop</a></h1>
+        <div class="header-div">
+<!--                 <div class="header-icons">
+                <div class="header-icon">
+                    <img src="{% static 'images/molly-boot.png' %}">
+                </div>
+                <a class="shop-heading" href="{% url 'shop' %}"><img src="{% static 'images/shop-logo.png' %}"></a>
+                <div class="header-icon">
+                    <img src="{% static 'images/molly-glove.png' %}">
+                </div>
+            </div> -->
+            <div class="header-icons">
+                <div class="header-icon">
+                    <img src="{% static 'images/molly-boot.png' %}">
+                </div>
+                <a class="shop-heading" href="{% url 'shop' %}"><img src="{% static 'images/shop-logo.png' %}"></a>
+                <div class="header-icon">
+                    <img src="{% static 'images/molly-glove.png' %}">
+                </div>
+            </div>
         </div>
         <section class="category-display">
             <div>

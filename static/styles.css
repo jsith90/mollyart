@@ -130,7 +130,7 @@ nav {
 .home {
 	width: 100%;
 	display: flex;
-	justify-content: center;
+/*	justify-content: center;*/
 	flex-wrap: wrap;
 /*	margin: 100px 0 0 0;*/
 /*	min-height: 100vh;*/
@@ -316,13 +316,16 @@ nav {
 }
 
 .landing {
-/*	margin: 0 0 150px 0;*/
+	margin: 0 0 50px 0;
   display: flex;
-  justify-content: center;
   opacity: 0;
   width: 5%;
   transition: opacity 2s ease, transform 2s ease;
   position: relative;
+}
+
+.landing-icons {
+	opacity: 0;
 }
 
 .landing-scroll {
@@ -330,10 +333,10 @@ nav {
 	width: 100%;
 }
 
-.landing > div {
+.centering {
   display: flex;
+  width: 100%;
   justify-content: center;
-  width: 80%;
 }
 
 .landing-man {
@@ -346,6 +349,17 @@ nav {
 
 .landing > div > a > img {
 	 width: 100%;
+}
+
+.croeso {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	transition: width 2s ease;
+}
+
+.croeso img {
+	width: 100%;
 }
 
 .no-bounce {
@@ -375,13 +389,88 @@ nav {
 }
 
 .shop-header {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	background: #e7e5d5;
-	padding: 2rem 0 2rem 0;
-	margin: 0 0 4rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem 0 2rem 0;
+  margin: 0;
+}
+
+@keyframes dl-wave {
+  0% {transform: translateX(0)}
+  25% {transform: translateX(-25%) scaleY(30%);}
+  50% {transform: translateX(-50%) scaleY(100%)}
+  75% {transform: translateX(-75%) scaleY(30%);}
+  100% {transform: translateX(-100%)}
+}
+
+.shop-top {
+	position: fixed;
+	top: 0;
+	z-index: 100;
+}
+
+.header-div {
+	display: flex;
+}
+
+.header-icons {
+	justify-content: space-evenly;
+  align-items: center;
+  margin: 0 0 50px 0;
+  display: flex;
+}
+
+.header-icon {
+	width: 10%;
+	animation-name: bounce;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;}
+
+.header-icon img {
+	width: 100%;
+}
+
+.shop-heading {
+	width: 20%;
+	margin: 0 20px;
+	transition: transform 0.5s ease;
+}
+
+.shop-heading:hover {
+	transform: translateY(-10px);
+}
+
+.shop-heading img {
+	width: 100%;
+}
+
+.commission-heading {
+	width: 30%;
+	margin: 0 20px;
+	transition: transform 0.5s ease;
+}
+
+.commission-heading:hover {
+	transform: translateY(-10px);
+}
+
+
+.commission-heading img {
+	width: 100%;
+}
+
+.svg-wave-under {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.svg-wave-over {
+	white-space: nowrap;
+	overflow: hidden;
+	transform: scale(1, -1);
 }
 
 .shop-header > div {
@@ -442,6 +531,7 @@ nav {
 
 .category-display > div > h2 > a:hover {
 	cursor: pointer;
+	font-weight: 1000;
 	color: #0065d9;
 }
 
@@ -939,6 +1029,7 @@ form {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 }
 
 .form {
@@ -1109,6 +1200,10 @@ form {
 	font-style: normal;
 	text-decoration: none;
 	color: black;
+	margin: 2rem 0 0 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 form > .product-buttons > .product-button {
@@ -1129,11 +1224,16 @@ form > .product-buttons > .product-button {
 .reel-image {
 	display: inline-block;
 	animation: 50s slide infinite linear;
-	
 }
 
 .reel-images:hover .reel-image {
 	animation-play-state: paused;
+} 
+
+.landing-icon:hover {
+	animation-name: bounce;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
 } 
 
 .reel-image img {
@@ -1267,7 +1367,7 @@ footer {
 	width: 100%;
 	justify-content: center;
 	padding: 2rem 0 5rem 0;
-	margin: 20px 0 0 0;
+	margin: 0;
 	background: #e7e5d5;
 }
 
@@ -2060,6 +2160,13 @@ footer {
 		width: 100%;
 	}
 
+	.commission-heading {
+		width: 50%;
+	}
+
+	.shop-heading {
+		width: 50%;
+	}
 
 	footer {
 		display: flex;
@@ -2130,6 +2237,10 @@ footer {
 }
 
 @media only screen and (max-width: 530px) {
+	svg {
+		height: 50px;
+	}
+
 	.man-clicked {
 		width: 5px;
 		transition: width 3s;

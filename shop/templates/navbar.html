@@ -22,9 +22,9 @@
         </form>
     </div>
     <ul class="nav-options">    
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Siop | Shop</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{% url 'create_commission' %}">Comisiynau | Commissions</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{% url 'write_review' %}">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Shop</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'create_commission' %}">Commissions</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'write_review' %}">Review</a></li>
         {% if user.is_superuser %}
             <li class="nav-item"><a class="nav-link active" href="{% url 'admin_dash' %}">Admin</a></li>
             <li class="nav-item"><a class="nav-link active" aria-label="Logout of User account" href="{% url 'logout' %}">Logout</a></li>

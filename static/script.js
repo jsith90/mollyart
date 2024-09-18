@@ -66,19 +66,22 @@ function commissionSlides() {
 function navScroll() {
     // Select the .hatman-div element and nav
     const hatmanDiv = document.querySelector('.hatman-div');
-    // const nav = document.getElementsByTagName('nav')[0];
+    const nav = document.getElementsByTagName('nav')[0];
     const logo = document.querySelector('.logo-div'); 
     const logoName = document.getElementById('logo-name');
     const logoMan = document.getElementById('logo-man');
     const landing = document.querySelector('.landing');
     const hatmanImage = document.querySelector('.hatman-image');
+    const croeso = document.querySelector('.croeso');
     const commission = document.getElementById('commission');
     const shop = document.getElementById('shop');
     const portfolio = document.getElementById('portfolio');
     const home = document.querySelector('.home');
     const footer = document.getElementsByTagName('footer')[0];
+    const landingIcons = document.querySelector('.landing-icons');
 
     let lastScrollY = window.scrollY; // To keep track of the last scroll position
+    let navHeight = nav.offsetHeight;
 
     if (hatmanDiv) {
         footer.style.display = "none";
@@ -86,15 +89,17 @@ function navScroll() {
         function handleScroll() {
             const currentScrollY = window.scrollY;
 
-            if (currentScrollY > lastScrollY) {
+            if (currentScrollY > navHeight) {
                 // Scrolling down: add classes
                 hatmanDiv.classList.add('hatman-scroll');
                 logoName.classList.add('nav-scroll');
                 landing.classList.add('landing-scroll');
+                landingIcons.classList.add('landing-scroll');
                 hatmanImage.style.animationName = 'none';
                 home.style.minHeight = "auto";
                 logoMan.classList.add('man-appear');
-                // home.style.display = "block";
+                croeso.style.width = "30%";
+                home.style.background = "#e7e5d5";
             } else {
                 // Scrolling up: remove classes
                 // hatmanDiv.classList.remove('hatman-scroll');
@@ -192,6 +197,7 @@ function navBar() {
         navToggleClose.style.opacity = "0";
         navToggleOpen.style.zIndex = "1";
         navToggleClose.style.zIndex = "0";
+        nav.style.marginBottom = "2rem";
     });
 }
 

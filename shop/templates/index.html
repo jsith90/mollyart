@@ -9,11 +9,31 @@
 	    </div>
 	</div>
 	<section class="landing">
-		<div>
-		<a class="landing-man" id="commission" href="{% url 'create_commission' %}"><img src="{% static 'images/Commission.png' %}"></a>
-		<a class="landing-man" id="shop" href="{% url 'shop' %}"><img src="{% static 'images/Shop.png' %}"></a>
-		<a class="landing-man" id="portfolio" href="#"><img src="{% static 'images/Portfolio.png' %}"></a>
-		</div>
+		<div class="centering">
+	    	<div class="croeso">
+	    		<img src="{% static 'images/croeso.png' %}">
+	    	</div>
+<!-- 			<a class="landing-man" id="commission" href="{% url 'create_commission' %}"><img src="{% static 'images/Commission.png' %}"></a>
+			<a class="landing-man" id="shop" href="{% url 'shop' %}"><img src="{% static 'images/Shop.png' %}"></a>
+			<a class="landing-man" id="portfolio" href="#"><img src="{% static 'images/Portfolio.png' %}"></a> -->
 	</section>
+	<div class="reel-images landing-icons">
+	    <div class="reel-image">
+	    	<img class="landing-icon" src="{% static 'images/molly-house.png' %}" alt="landing-icon">
+	    	<img class="landing-icon" src="{% static 'images/blue-tree.png' %}" alt="landing-icon">
+	    	<img class="landing-icon" src="{% static 'images/molly-boot.png' %}" alt="landing-icon">
+	    	<img class="landing-icon" src="{% static 'images/molly-eye-tog.png' %}" alt="landing-icon">
+	    	<img class="landing-icon" src="{% static 'images/molly-chair.png' %}" alt="landing-icon">
+	    	<img class="landing-icon" src="{% static 'images/molly-glove.png' %}" alt="landing-icon">
+	    </div>
+	    <div class="reel-image">
+	        <img class="landing-icon" src="{% static 'images/molly-house.png' %}" alt="landing-icon">
+	        <img class="landing-icon" src="{% static 'images/blue-tree.png' %}" alt="landing-icon">
+	        <img class="landing-icon" src="{% static 'images/molly-boot.png' %}" alt="landing-icon">
+	        <img class="landing-icon" src="{% static 'images/molly-eye-tog.png' %}" alt="landing-icon">
+	        <img class="landing-icon" src="{% static 'images/molly-chair.png' %}" alt="landing-icon">
+	        <img class="landing-icon" src="{% static 'images/molly-glove.png' %}" alt="landing-icon">
+	    </div>
+	</div>
 </div>
 {% endblock %}
