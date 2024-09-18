@@ -77,6 +77,7 @@ function navScroll() {
     const shop = document.getElementById('shop');
     const portfolio = document.getElementById('portfolio');
     const home = document.querySelector('.home');
+    const wave = document.querySelector('.svg-wave-over');
     const footer = document.getElementsByTagName('footer')[0];
     const landingIcons = document.querySelector('.landing-icons');
 
@@ -84,6 +85,7 @@ function navScroll() {
     let navHeight = nav.offsetHeight;
 
     if (hatmanDiv) {
+        wave.style.display = "none";
         footer.style.display = "none";
         home.style.minHeight = "100vh";
         function handleScroll() {
@@ -95,10 +97,11 @@ function navScroll() {
                 logoName.classList.add('nav-scroll');
                 landing.classList.add('landing-scroll');
                 landingIcons.classList.add('landing-scroll');
+                landingIcons.style.height = "100vh"
                 hatmanImage.style.animationName = 'none';
                 home.style.minHeight = "auto";
                 logoMan.classList.add('man-appear');
-                croeso.style.width = "30%";
+                croeso.classList.add('width-control');
                 home.style.background = "#e7e5d5";
             } else {
                 // Scrolling up: remove classes

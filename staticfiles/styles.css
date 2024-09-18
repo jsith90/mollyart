@@ -326,6 +326,12 @@ nav {
 
 .landing-icons {
 	opacity: 0;
+	height: 0;
+	transition: opacity 2s ease, height 2s ease;
+}
+
+.width-control {
+	width: 30%;
 }
 
 .landing-scroll {
@@ -1767,6 +1773,10 @@ footer {
 }
 
 @media only screen and (max-width: 1060px) {
+
+	.width-control {
+	width: 70%;
+	}
 
 	.hatman-image {
 		width: 100%;
