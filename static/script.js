@@ -130,12 +130,12 @@ function navScroll() {
     }
 
     navToggleOpen.addEventListener("click", function () {
-        wave[0].style.display = "none";
+        wave2.style.display = "none";
         hatmanDiv.style.display = "none";
     });
 
     navToggleClose.addEventListener("click", function () {
-        wave[0].style.display = "block";
+        wave2.style.display = "block";
         hatmanDiv.style.display = "flex";
     });
 
