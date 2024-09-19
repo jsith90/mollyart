@@ -1,5 +1,6 @@
 {% load static %}
 
+
 * {
 	margin: 0;
 	padding: 0;
@@ -32,6 +33,7 @@
 body {
 	display: flex;
 	flex-direction: column;
+	cursor: url('/static/images/mouse.png'), auto;
 }
 
 /*main {
@@ -50,6 +52,10 @@ p, a, button {
 	font-style: normal;
 	text-decoration: none;
 	color: black;
+}
+
+button, a {
+	cursor: url('.../images/mouse.png') auto;
 }
 
 nav {
@@ -98,7 +104,7 @@ nav {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  transition: transform 2s ease-out, width 2s, opacity 2s ease-out, height 2s ease-out;
+  transition: transform 1s ease-out, width 1s, opacity 1s ease-out, height 1s ease-out;
   position: relative;
   z-index: -10;
   margin: 50px 0 0 0;
@@ -265,7 +271,7 @@ nav {
 	right: -25%;
 	z-index: -9;	
 	opacity: 0;
-	transition: opacity 2s ease-in, transform 0.5s ease;
+	transition: opacity 1s ease-in, transform 0.5s ease;
 }
 
 .man-appear {
@@ -320,16 +326,16 @@ nav {
   display: flex;
   opacity: 0;
   width: 5%;
-  transition: opacity 2s ease, transform 2s ease;
-  transition-delay: 2s;
+  transition: opacity 1s ease, transform 1s ease;
+  transition-delay: 1s;
   position: relative;
 }
 
 .landing-icons {
 	opacity: 0;
 	height: 0;
-	transition: opacity 2s ease, height 2s ease;
-	transition-delay: 2s;
+	transition: opacity 1s ease, height 1s ease;
+	transition-delay: 1s;
 }
 
 .width-control {
@@ -364,8 +370,8 @@ nav {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	transition: width 2s ease;
-	transition-delay: 2s;
+	transition: width 1s ease;
+	transition-delay: 1s;
 }
 
 .croeso img {
@@ -481,22 +487,23 @@ nav {
 	white-space: nowrap;
 	overflow: hidden;
 	transform: scale(1, -1);
-	transition: opacity 2s ease, height 2s ease, width 2s ease;
-	transition-delay: 2s;
+	transition: opacity 1s ease, height 1s ease, width 1s ease;
+	transition-delay: 1s;
 }
 
 .svg-wave-over-home {
 	white-space: nowrap;
 	overflow: hidden;
 	transform: scale(1, -1);
-	transition: opacity 2s ease, height 2s ease, width 2s ease;
-	transition-delay: 2s;
+	transition: opacity 1s ease, height 1s ease, width 1s ease;
+	transition-delay: 1s;
 	opacity: 0;
+	height: 0;
 }
 
 .wave-appear {
 	opacity: 1;
-	height: auto;
+	height: 100px;
 	width: 100%;
 }
 
@@ -509,8 +516,8 @@ nav {
 	background: #e7e5d5;
 	height: 0;
 	opacity: 0;
-	transition: opacity 2s ease, height 2s ease;
-	transition-delay: 2s;
+	transition: opacity 1s ease, height 1s ease;
+	transition-delay: 1s;
 }
 
 .see-reviews {
@@ -1288,12 +1295,22 @@ form > .product-buttons > .product-button {
 	white-space: nowrap;
 }
 
+.icon-reel-images {
+	overflow: hidden;
+	padding: 0 0 60px 0;
+	white-space: nowrap;
+}
+
 .reel-image {
 	display: inline-block;
 	animation: 50s slide infinite linear;
 }
 
 .reel-images:hover .reel-image {
+	animation-play-state: paused;
+} 
+
+.icon-reel-images:hover .reel-image {
 	animation-play-state: paused;
 } 
 
@@ -2154,7 +2171,7 @@ footer {
 		width: 100px;
 	}
 
-	.reel-images {
+	.icon-reel-images {
 		padding: 100px 0 0 0;
 	}
 
