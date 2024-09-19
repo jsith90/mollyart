@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
+
         <!-- Header-->
 <header class="checkout-header">
      <div>
-        <h1 class="shop-heading">cyfeiriad danfon | delivery address</h1>
+        <h1>delivery details</h1>
     </div>
 </header>
 <section class="checkout-main">
@@ -44,7 +47,7 @@
     <section class="order-display">
         <div class="order-product">
             <div class="shipping-summary">
-                <h2>Delivery Info</h2>
+                <h2>name & address</h2>
             </div>
             <div class="shipping-detail">
                 <form method="POST" action="{% url 'billing_info' %}">

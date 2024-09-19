@@ -15,17 +15,17 @@ class CommissionForm(forms.ModelForm):
             'canvas_size': 'Canvas Size:',
             'deadline_date': 'Deadline Date (required):',
             'contact_number': 'Contact Number:',
-            'framing_options': 'Framing Options:',
+            'framing_options': 'Framing Options (drop-down):',
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your name...', 'required': 'required'}),
-        	'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your email address...', 'required': 'required'}),
-            'address': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your delivery address...', 'required': 'required'}),
-            'commission_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your commission title...', 'required': 'required'}),
-            'commission_idea': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Your idea...', 'required': 'required'}),
-            'canvas_size': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your sizes...'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write your name here...', 'required': 'required'}),
+        	'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Write your email here...', 'required': 'required'}),
+            'address': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your address here...', 'required': 'required'}),
+            'commission_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write your commission title here...', 'required': 'required'}),
+            'commission_idea': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your commission ideas here...', 'required': 'required'}),
+            'canvas_size': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write the sizes you want here...'}),
             'deadline_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control', 'required': 'required'}),
-            'contact_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your phone number...'}),
+            'contact_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write your number here...'}),
             'framing_options': forms.Select(attrs={'class': 'form-control'}),
         }
 

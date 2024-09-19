@@ -316,11 +316,12 @@ nav {
 }
 
 .landing {
-	margin: 0 0 50px 0;
+	padding: 0;
   display: flex;
   opacity: 0;
   width: 5%;
   transition: opacity 2s ease, transform 2s ease;
+  transition-delay: 2s;
   position: relative;
 }
 
@@ -328,6 +329,7 @@ nav {
 	opacity: 0;
 	height: 0;
 	transition: opacity 2s ease, height 2s ease;
+	transition-delay: 2s;
 }
 
 .width-control {
@@ -337,6 +339,7 @@ nav {
 .landing-scroll {
 	opacity: 1;
 	width: 100%;
+	background: #e7e5d5;
 }
 
 .centering {
@@ -362,6 +365,7 @@ nav {
 	display: flex;
 	justify-content: center;
 	transition: width 2s ease;
+	transition-delay: 2s;
 }
 
 .croeso img {
@@ -477,6 +481,54 @@ nav {
 	white-space: nowrap;
 	overflow: hidden;
 	transform: scale(1, -1);
+	transition: opacity 2s ease, height 2s ease, width 2s ease;
+	transition-delay: 2s;
+}
+
+.wave-appear {
+	opacity: 1;
+	height: auto;
+	width: 100%;
+}
+
+.slideshow {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	background: #e7e5d5;
+	height: 0;
+	opacity: 0;
+	transition: opacity 2s ease, height 2s ease;
+	transition-delay: 2s;
+}
+
+.see-reviews {
+	height: auto;
+	opacity: 1;
+}
+
+.slide {
+	position: absolute;
+	text-align: center;
+	padding: 100px;
+}
+
+.slide-paragraph {
+	color: white;
+	font-size: 1.9rem;
+	font-weight: 900;
+}
+
+.backdrop {
+	width: 20%;
+	position: relative;
+	opacity: 0;
+}
+
+.backdrop img {
+	width: 100%;
 }
 
 .shop-header > div {
@@ -1670,7 +1722,17 @@ footer {
 
 }
 
+
 @media only screen and (max-width: 1188px) {
+
+	.wave-appear {
+		height: 50px;
+	}
+
+	.slide-paragraph {
+		font-size: 1.3rem;
+	}
+
 	.hatman-div {
 		width: 100%;
 		margin: 100px 0 0 0;
@@ -2037,6 +2099,18 @@ footer {
 
 @media only screen and (max-width: 850px) {
 
+	.reel-image img {
+		width: 200px;
+	}
+
+	.landing {
+		padding: 0 0 30px 0;
+	}
+
+	.slideshow {
+		padding: 30px 0 0 0;
+	}
+
 	.nav-options > li {
 		width: 100%;
 	}
@@ -2058,6 +2132,22 @@ footer {
 }
 
 @media only screen and (max-width: 700px) {
+
+	.slideshow {
+		padding: 50px 0 0 0;
+	}
+
+	.slide-paragraph {
+		font-size: 1rem;
+	}
+
+	.reel-image img {
+		width: 100px;
+	}
+
+	.reel-images {
+		padding: 100px 0 0 0;
+	}
 
 	.logo-div {
 		width: 40%;
@@ -2247,6 +2337,15 @@ footer {
 }
 
 @media only screen and (max-width: 530px) {
+
+	.slideshow {
+		padding: 100px 0 0 0;
+	}
+
+	.slide {
+		padding: 0;
+	}
+
 	svg {
 		height: 50px;
 	}

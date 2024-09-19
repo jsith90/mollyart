@@ -1,23 +1,24 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <section class="form-section"> 
+{% block content %} 
         <header class="shop-header">
             <div>
-                <h1 class="shop-heading">adolygu fi | write a review</h1>
+                <h1>review</h1>
             </div>
         </header>
-        <form class="review-form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-            <div class="form">
-                <label for="{{ review_form.name.id_for_label }}">{{ review_form.name.label }}</label>
-                {{ review_form.name }}
-            </div>
-            <div class="form">
-                <label for="{{ review_form.review.id_for_label }}">{{ review_form.review.label }}</label>
-                {{ review_form.review }}
-            </div>
-            <button type="submit" class="commission-button">Send</button>
-        </form>
-    </section>
+        <section class="form-section">
+            <h2>Review Form</h2>
+            <form class="review-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div class="form">
+                    <label for="{{ review_form.name.id_for_label }}">{{ review_form.name.label }}</label>
+                    {{ review_form.name }}
+                </div>
+                <div class="form">
+                    <label for="{{ review_form.review.id_for_label }}">{{ review_form.review.label }}</label>
+                    {{ review_form.review }}
+                </div>
+                <button type="submit" class="commission-button">Send</button>
+            </form>
+        </section>
 {% endblock %}

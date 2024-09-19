@@ -73,19 +73,20 @@ function navScroll() {
     const landing = document.querySelector('.landing');
     const hatmanImage = document.querySelector('.hatman-image');
     const croeso = document.querySelector('.croeso');
-    const commission = document.getElementById('commission');
-    const shop = document.getElementById('shop');
-    const portfolio = document.getElementById('portfolio');
+    const reviews = document.querySelector('.slideshow');
     const home = document.querySelector('.home');
-    const wave = document.querySelector('.svg-wave-over');
+    const wave = document.querySelectorAll('.svg-wave-over');
     const footer = document.getElementsByTagName('footer')[0];
     const landingIcons = document.querySelector('.landing-icons');
+    const navToggleOpen = document.querySelector(".nav-toggle-open");
+    const navToggleClose = document.querySelector(".nav-toggle-close");
 
     let lastScrollY = window.scrollY; // To keep track of the last scroll position
     let navHeight = nav.offsetHeight;
 
     if (hatmanDiv) {
-        wave.style.display = "none";
+        wave[0].style.opacity = "0";
+        wave[1].style.opacity = "0";
         footer.style.display = "none";
         home.style.minHeight = "100vh";
         function handleScroll() {
@@ -96,13 +97,20 @@ function navScroll() {
                 hatmanDiv.classList.add('hatman-scroll');
                 logoName.classList.add('nav-scroll');
                 landing.classList.add('landing-scroll');
+                reviews.classList.add('see-reviews');
                 landingIcons.classList.add('landing-scroll');
-                landingIcons.style.height = "100vh"
+                landingIcons.style.height = "100vh";
                 hatmanImage.style.animationName = 'none';
                 home.style.minHeight = "auto";
                 logoMan.classList.add('man-appear');
-                croeso.classList.add('width-control');
-                home.style.background = "#e7e5d5";
+                wave[0].style.opacity = "1";
+                wave[0].classList.add('wave-appear');
+                if (window.innerWidth > 1060) {
+                    croeso.style.width = "30%";
+                } else {
+                    croeso.style.width = "70%";
+                }
+                // home.style.background = "#e7e5d5";
             } else {
                 // Scrolling up: remove classes
                 // hatmanDiv.classList.remove('hatman-scroll');
@@ -122,41 +130,48 @@ function navScroll() {
         console.log("The .hatman-div does not exist on this page.");
     }
 
-    if (landing) {
-        commission.addEventListener("mouseover", function () {
-            commission.classList.add("no-bounce");
-        });
+    navToggleOpen.addEventListener("click", function () {
+        wave[0].style.display = "none";
+        hatmanDiv.style.display = "none";
+    });
 
-        commission.addEventListener("mouseout", function () {
-            commission.classList.remove("no-bounce");
-        });
+    navToggleClose.addEventListener("click", function () {
+        wave[0].style.display = "block";
+        hatmanDiv.style.display = "flex";
+    });
 
-        shop.addEventListener("mouseover", function () {
-            shop.classList.add("no-bounce");
-        });
+    // set index and transition delay
+    let index = 0;
+    let transitionDelay = 10000;
 
-        shop.addEventListener("mouseout", function () {
-            shop.classList.remove("no-bounce");
-        });
+    // get div containing the slides
+    let slideContainer = document.querySelector(".slideshow");
+    // get the slides
+    let slides = slideContainer.querySelectorAll(".slide");
 
-        portfolio.addEventListener("mouseover", function () {
-            portfolio.classList.add("no-bounce");
-        });
-
-        shop.addEventListener("mouseout", function () {
-            portfolio.classList.remove("no-bounce");
-        });
-
-        shop.addEventListener("click", function () {
-            shop.classList.add("man-clicked");
-        });
-
-        commission.addEventListener("click", function () {
-            commission.classList.add("man-clicked");
-        });
-    } else {
-        console.log("This is not the landing page.");
+    // set transition delay for slides
+    for (let slide of slides) {
+      slide.style.transition = `opacity 2s ease-in-out`;
     }
+
+    // show the first slide
+    showSlide(index);
+
+    // show a specific slide
+    function showSlide(slideNumber) {
+        slides.forEach((slide, i) => {
+        slide.style.opacity = i == slideNumber ? "1" : "0";
+        });
+        // next index
+        index++;
+        // go back to 0 if at the end of slides
+        if (index >= slides.length) {
+            index = 0;
+        }
+    }
+
+    // transition to next slide every x seconds
+    setInterval (() => showSlide(index), transitionDelay);
 }
 
 function navBar() {

@@ -9,6 +9,7 @@ from trolley.trolley import Trolley
 from newsletter.forms import SubscriptionForm
 from newsletter.views import subscribe
 from newsletter.models import Article
+from review.models import Review
 
 
 # login page
@@ -33,7 +34,8 @@ def logout_user(request):
 
 # Create your views here.
 def index(request):
-	return render(request, 'index.html', {})
+	reviews = Review.objects.filter(is_active=True)
+	return render(request, 'index.html', { 'reviews':reviews })
 
 def admin_dash(request):
 	user = request.user
