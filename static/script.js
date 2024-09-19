@@ -75,7 +75,8 @@ function navScroll() {
     const croeso = document.querySelector('.croeso');
     const reviews = document.querySelector('.slideshow');
     const home = document.querySelector('.home');
-    const wave = document.querySelectorAll('.svg-wave-over');
+    const wave = document.querySelector('.svg-wave-over');
+    const wave2 = document.querySelector('.svg-wave-over-home')
     const footer = document.getElementsByTagName('footer')[0];
     const landingIcons = document.querySelector('.landing-icons');
     const navToggleOpen = document.querySelector(".nav-toggle-open");
@@ -85,8 +86,7 @@ function navScroll() {
     let navHeight = nav.offsetHeight;
 
     if (hatmanDiv) {
-        wave[0].style.opacity = "0";
-        wave[1].style.opacity = "0";
+        wave.style.display = "none";
         footer.style.display = "none";
         home.style.minHeight = "100vh";
         function handleScroll() {
@@ -103,8 +103,7 @@ function navScroll() {
                 hatmanImage.style.animationName = 'none';
                 home.style.minHeight = "auto";
                 logoMan.classList.add('man-appear');
-                wave[0].style.opacity = "1";
-                wave[0].classList.add('wave-appear');
+                wave2.classList.add('wave-appear');
                 if (window.innerWidth > 1060) {
                     croeso.style.width = "30%";
                 } else {
