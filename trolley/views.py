@@ -4,15 +4,17 @@ from shop.models import Product
 from django.http import JsonResponse
 from django.contrib import messages
 import shop.urls
+from review.models import Review
 
 # Create your views here.
 def trolley_summary(request):
 	# get trolley
+	reviews = Review.objects.filter(is_active=True)
 	trolley = Trolley(request)
 	trolley_products = trolley.get_prods
 	quantities = trolley.get_quants
 	totals = trolley.trolley_total()
-	return render(request, 'trolley_summary.html', {'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals})
+	return render(request, 'trolley_summary.html', {'reviews': reviews, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals})
 
 
 def trolley_add(request):

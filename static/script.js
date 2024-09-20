@@ -65,13 +65,13 @@ function commissionSlides() {
 
 function navScroll() {
     // Select the .hatman-div element and nav
-    const hatmanDiv = document.querySelector('.hatman-div');
+    // const hatmanDiv = document.querySelector('.hatman-div');
     const nav = document.getElementsByTagName('nav')[0];
     const logo = document.querySelector('.logo-div'); 
     const logoName = document.getElementById('logo-name');
     const logoMan = document.getElementById('logo-man');
     const landing = document.querySelector('.landing');
-    const hatmanImage = document.querySelector('.hatman-image');
+    // const hatmanImage = document.querySelector('.hatman-image');
     const croeso = document.querySelector('.croeso');
     const reviews = document.querySelector('.slideshow');
     const home = document.querySelector('.home');
@@ -85,36 +85,32 @@ function navScroll() {
     let lastScrollY = window.scrollY; // To keep track of the last scroll position
     let navHeight = nav.offsetHeight;
 
-    if (hatmanDiv) {
+    if (wave2) {
         wave.style.display = "none";
         footer.style.display = "none";
         home.style.minHeight = "100vh";
+        logoName.classList.add('nav-scroll');
+        logoName.style.position = "absolute";
+        logoMan.classList.add('man-appear');
+        logoMan.style.position = "relative";
+
         function handleScroll() {
             const currentScrollY = window.scrollY;
 
             if (currentScrollY > navHeight) {
                 // Scrolling down: add classes
-                hatmanDiv.classList.add('hatman-scroll');
-                logoName.classList.add('nav-scroll');
-                landing.classList.add('landing-scroll');
-                reviews.classList.add('see-reviews');
-                landingIcons.classList.add('landing-scroll');
-                landingIcons.style.height = "100vh";
-                hatmanImage.style.animationName = 'none';
+                // landingIcons.classList.add('landing-scroll');
+                // landingIcons.style.height = "100vh";
+                croeso.style.opacity = "1";
+                // hatmanImage.style.animationName = 'none';
                 home.style.minHeight = "auto";
-                logoMan.classList.add('man-appear');
                 wave2.classList.add('wave-appear');
                 if (window.innerWidth > 1060) {
                     croeso.style.width = "30%";
                 } else {
                     croeso.style.width = "70%";
                 }
-                // home.style.background = "#e7e5d5";
             } else {
-                // Scrolling up: remove classes
-                // hatmanDiv.classList.remove('hatman-scroll');
-                // nav.classList.remove('nav-scroll');
-                // landing.classList.remove('landing-scroll');
                 console.log("hatman is in the nav.");
             }
 

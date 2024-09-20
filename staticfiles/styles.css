@@ -100,7 +100,7 @@ nav {
 	to { transform:translateX(-100%); }
 }
 
-.hatman-div {
+/*.hatman-div {
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -123,15 +123,15 @@ nav {
 
 .hatman-scroll {
 	/*	transform: translateY(-110%);*/
-	opacity: 0;
+/*	opacity: 0;*/
 	/*	transition: opacity 0.9s ease-out;*/
 	/*	z-index: -100;*/
-	height: 0;
-	transform: translateY(-350px);
+/*	height: 0;
+	transform: translateY(-350px);*/
 /*	position: fixed;*/
-	width: 30%;
+/*	width: 30%;*/
 	
-}
+}*/
 
 .home {
 	width: 100%;
@@ -234,13 +234,12 @@ nav {
 	text-align: center;
 	transition: transform 0.5s ease;
 	width: 100%;
-	position: absolute;
+	position: relative;
 }
 
 .nav-scroll {
 /*	transform: translateY(-110%);*/
 	opacity: 0;
-	position: relative;
 	z-index: -9;
 }
 
@@ -266,17 +265,16 @@ nav {
 }
 
 .logo-man {
-	width: 50%;
-	position: relative;
-	right: -25%;
+	width: 100%;
+	position: absolute;
 	z-index: -9;	
-	opacity: 0;
+	display: none;
 	transition: opacity 1s ease-in, transform 0.5s ease;
 }
 
 .man-appear {
 	z-index: 1;
-	opacity: 1;
+	display: block;
 }
 
 .logo-man:hover {
@@ -324,18 +322,20 @@ nav {
 .landing {
 	padding: 0;
   display: flex;
-  opacity: 0;
-  width: 5%;
+  opacity: 1;
+  width: 100%;
+  background: #e7e5d5;
   transition: opacity 1s ease, transform 1s ease;
   transition-delay: 1s;
   position: relative;
 }
 
 .landing-icons {
-	opacity: 0;
-	height: 0;
+	opacity: 1;
+	height: 100vh;
 	transition: opacity 1s ease, height 1s ease;
 	transition-delay: 1s;
+	background: #e7e5d5;
 }
 
 .width-control {
@@ -367,10 +367,11 @@ nav {
 }
 
 .croeso {
-	width: 100%;
+	width: 30%;
+	opacity: 1;
 	display: flex;
 	justify-content: center;
-	transition: width 1s ease;
+	transition: opacity 1s ease;
 	transition-delay: 1s;
 }
 
@@ -495,18 +496,18 @@ nav {
 	white-space: nowrap;
 	overflow: hidden;
 	transform: scale(1, -1);
-	transition: opacity 1s ease, height 1s ease, width 1s ease;
-	transition-delay: 1s;
-	opacity: 0;
-	height: 0;
+/*	transition: opacity 1s ease, height 1s ease, width 1s ease;
+	transition-delay: 1s;*/
+	opacity: 1;
+	height: 100px;
 }
 
-.wave-appear {
+/*.wave-appear {
 	opacity: 1;
 	height: 100px;
 	width: 100%;
 }
-
+*/
 .slideshow {
 	position: relative;
 	display: flex;
@@ -514,15 +515,10 @@ nav {
 	align-items: center;
 	width: 100%;
 	background: #e7e5d5;
-	height: 0;
-	opacity: 0;
-	transition: opacity 1s ease, height 1s ease;
-	transition-delay: 1s;
-}
-
-.see-reviews {
 	height: auto;
 	opacity: 1;
+	transition: opacity 1s ease, height 1s ease;
+	transition-delay: 1s;
 }
 
 .slide {
@@ -535,6 +531,7 @@ nav {
 	color: white;
 	font-size: 1.9rem;
 	font-weight: 900;
+	text-shadow: 2px 2px #e7d5e0;
 }
 
 .backdrop {
@@ -980,6 +977,23 @@ nav {
 
 .shop-display > .checkout-product > .product-item {
 	width: 50%;
+}
+
+.trolley-reviews {
+	overflow: hidden;
+	padding: 0 0 60px 0;
+	white-space: nowrap;
+}
+
+.trolley-review {
+	background: #f3e9d7;
+	display: inline-block;
+	animation: 50s slide infinite linear;
+}
+
+.trolley-p {
+	display: inline-block;
+	margin: 0 20px;
 }
 
 .checking-out {
@@ -1861,6 +1875,15 @@ footer {
 }
 
 @media only screen and (max-width: 1060px) {
+
+	.croeso {
+		width: 70%;
+		opacity: 1;
+		display: flex;
+		justify-content: center;
+		transition: opacity 1s ease;
+		transition-delay: 1s;
+	}	
 
 	.width-control {
 	width: 70%;
