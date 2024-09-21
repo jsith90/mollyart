@@ -32,8 +32,10 @@ def create_commission(request):
 				image.commission = commission
 				image.save()
 			commission_email(commission, images)
+			messages.success(request, "Thanks for sending your commission proposal! I'll be in touch soon about your idea.")
 			return redirect('index')
 		else:
+			messages.error(request, "Something's up with your form.")
 			return render(request, 'commission/create_commission.html', { 'commission_form':commission_form, 'image_formset': image_formset, 'past_images':past_images })
 	else:
 		commission_form = CommissionForm()
@@ -70,8 +72,9 @@ def order_shipped_email(request, order):
 		email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
 		email_message.attach_alternative(html_content, "text/html")
 		email_message.send()
+		messages.success(request, 'An order email has been sent!')
 	else:
-		messages.error(request, 'email address was invalid and and a shipping confirmation could not be sent.')
+		messages.error(request, 'The email address was invalid and and a shipping confirmation could not be sent.')
 		return redirect('not_shipped_dash')
 
 
@@ -85,7 +88,8 @@ def old_commission_image_upload(request):
 				commission_image = past_commission_form.save(commit=False)
 				commission_image.is_active = True
 				commission_image.save()
-				return redirect('index')
+				messages.success(request, "You've added a new image to the database, now be sure to activate it as well!")
+				return redirect('admin_dash')
 			else:
 				return render(request, 'commission/old_commission_image_upload.html', { 'past_commission_form': past_commission_form })
 		else:
@@ -93,6 +97,7 @@ def old_commission_image_upload(request):
 			return render(request, 'commission/old_commission_image_upload.html', { 'past_commission_form': past_commission_form })
 
 	else:
+		messages.error (request, "Not authorised to do that bud.")
 		return redirect('index')
 
 def image_reel_dash(request):
@@ -111,7 +116,7 @@ def image_reel_dash(request):
             
         return render(request, 'commission/image_reel_dash.html', { 'images':images })
     else:
-        messages.success(request, 'Access Denied.')
+        messages.error(request, "Not authorised to do that bud.")
         return redirect('index')
 
 def inactive_image_reel_dash(request):
@@ -125,11 +130,11 @@ def inactive_image_reel_dash(request):
                 else:
                     image.is_active = False
                 image.save()
-            messages.success(request, 'Subscriber status updated.')    
+            messages.success(request, 'Image status updated.')    
             return redirect('inactive_image_reel_dash')
             
         return render(request, 'commission/inactive_image_reel_dash.html', { 'images':images })
     else:
-        messages.success(request, 'Access Denied.')
+        messages.error(request, "Not authorised to do that bud.")
         return redirect('index')
 

@@ -3,38 +3,35 @@
 
 {% block content %}
     <!-- Header-->
-    <header class="shop-header">
-        <div class="header-div">
-<!--                 <div class="header-icons">
-                <div class="header-icon">
-                    <img src="{% static 'images/molly-boot.png' %}">
-                </div>
-                <a class="shop-heading" href="{% url 'shop' %}"><img src="{% static 'images/shop-logo.png' %}"></a>
-                <div class="header-icon">
-                    <img src="{% static 'images/molly-glove.png' %}">
-                </div>
-            </div> -->
-            <div class="header-icons">
-                <div class="header-icon">
-                    <img src="{% static 'images/molly-boot.png' %}">
-                </div>
-                <a class="shop-heading" href="{% url 'shop' %}"><img src="{% static 'images/shop-logo.png' %}"></a>
-                <div class="header-icon">
-                    <img src="{% static 'images/molly-glove.png' %}">
+        <!-- Header-->
+        <header class="shop-header">
+            <div class="header-div">
+                <div class="header-icons">
+                    <div class="header-icon">
+                        <img src="{% static 'images/molly-boot.png' %}">
+                    </div>
+                    <a class="shop-heading" href="{% url 'shop' %}"><img src="{% static 'images/shop-logo.png' %}"></a>
+                    <div class="header-icon">
+                        <img src="{% static 'images/molly-glove.png' %}">
+                    </div>
                 </div>
             </div>
+            <section class="category-display">
+                <div>
+                    {% for category in categories %}
+                        <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
+                        {% if not forloop.last  %}
+                        <h2>·</h2>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </header>
+        <div class="svg-wave-under">
+            <svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {display: inline-block; animation: dl-wave 15s linear infinite;
+            transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg><svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {animation: dl-wave 15s linear infinite;
+            transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg>
         </div>
-        <section class="category-display">
-            <div>
-                {% for category in categories %}
-                    <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
-                    {% if not forloop.last  %}
-                    <h2>·</h2>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </section>
-    </header>
     <div class="category-header">
         <div>
             <h1 class="category-heading">{{ category }}</h1>

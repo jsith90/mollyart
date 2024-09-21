@@ -27,10 +27,28 @@
         {% include 'navbar.html' %}
         {% if messages %}
             {% for message in messages %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="close">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="document.getElementById('close').style.display='none';"></button>
-            </div>
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" id="close">
+                    <div class="header-icon">
+                        {% if message.tags == 'success' %}
+                            <img src="{% static 'images/successes.png' %}">
+                        {% elif message.tags == 'error' %}
+                            <img src="{% static 'images/errors.png' %}">
+                        {% else %}
+                            <img src="{% static 'images/molly-eye-tog.png' %}">
+                        {% endif %}
+                    </div>
+                    {{ message }}
+                    <div class="header-icon">
+                        {% if message.tags == 'success' %}
+                            <img src="{% static 'images/successes.png' %}">
+                        {% elif message.tags == 'error' %}
+                            <img src="{% static 'images/errors.png' %}">
+                        {% else %}
+                            <img src="{% static 'images/molly-eye-tog.png' %}">
+                        {% endif %}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="document.getElementById('close').style.display='none';"></button>
+                </div>
             {% endfor %}
         {% endif %}
         <main>

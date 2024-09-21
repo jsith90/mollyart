@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 <!-- Header-->
 <header class="checkout-header">
@@ -80,7 +82,7 @@
                     <div id="payment-element">
                     <!-- placeholder for Elements -->
                     </div>
-                    <button id="submit">Pay £{{ totals }}</button>
+                    <button class="payment-button" id="submit">Pay £{{ totals }}</button>
                     <div id="error-message">
                     <!-- Display error message to your customers here -->
                     </div>
@@ -98,6 +100,9 @@
         </div>
     </section>
 </section>
+<div id="myLoadingModal" class="loading-modal">
+  <div id="logo-load" class="logo-load"><img src="{% static 'images/hatlady.gif' %}"></div>
+</div>
     <!-- Stripe.js -->
 <script>
     const stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');

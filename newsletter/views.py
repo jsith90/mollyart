@@ -32,8 +32,9 @@ def subscribers_dash(request):
             
         return render(request, 'newsletter/subscribers_dash.html', {'subscribers':subscribers})
     else:
-        messages.success(request, 'Access Denied.')
+        messages.error(request, "Not authorised to do that bud.")
         return redirect('index')
+
 
 def inactive_subscriber_dash(request):
     if request.user.is_superuser:
@@ -51,7 +52,7 @@ def inactive_subscriber_dash(request):
             
         return render(request, 'newsletter/inactive_subscriber_dash.html', {'subscribers':subscribers})
     else:
-        messages.success(request, 'Access Denied.')
+        messages.error(request, "Not authorised to do that bud.")
         return redirect('index')
 
 
@@ -67,10 +68,13 @@ def subscribe(request):
         if form.is_valid():
             form.save()
             subscription_email_confirmation(request, form.cleaned_data['email'])
-            messages.success(request, 'Thanks for signing up! Check your emails for confirmation of your subscription!')
-            return redirect('index')  # Redirect to a thank-you page
+            messages.success(request, 'Thanks for signing up to my newsletter! Check your emails for confirmation of your subscription!')
+            return redirect('index')
+        else:
+            messages.error(request, "Sorry, that didnt work. Perhaps you're already signed up?")
+            return redirect('index')
     else:
-        messages.error(request, 'Sorry that didnt work.')
+        messages.error(request, "Sorry, that didnt work.")
         return redirect('index')
 
     return render(request, 'newsletter/subscribe.html', {'form':form})
@@ -96,12 +100,14 @@ def subscription_email_confirmation(request, email):
 
 def newsletter_email_send(request, article):
     subscribers = Subscriber.objects.filter(is_active=True)
+    invaild_emails = []
     for subscriber in subscribers:
         is_valid_email = True
         try:
             validate_email(subscriber.email)
         except ValidationError:
             is_valid_email = False
+            invalid_emails.append(subscriber.email)
 
         if is_valid_email and subscriber.is_active:
             subject = "A Molly S-T Update!"
@@ -113,9 +119,10 @@ def newsletter_email_send(request, article):
             email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
             email_message.attach_alternative(html_content, "text/html")
             email_message.send()
-        else:
-            messages.error(request, 'email address was invalid and and a shipping confirmation could not be sent.')
-            return redirect('not_shipped_dash')
+        
+    if invalid_emails:
+        messages.error(request, f"You have the following invalid emails in your subscriber list: {', '.join(invalid_emails)}; you should deactivate these emails.")
+        return redirect('subscribers_dash')
 
 
 # Create your views here.
@@ -151,6 +158,7 @@ def draft_newsletter(request, pk):
                 article.save(update_fields=['is_published'])
                 if article.is_published:
                     newsletter_email_send(request, article)
+                    messages.success(request, "Congratulations! The world thanks you for your newsletter.")
                     return redirect('index')
         else:
             article_form = CreateArticle(instance=article)
@@ -160,31 +168,8 @@ def draft_newsletter(request, pk):
             'article_form': article_form
         })
     else:
+        messages.error(request, "You ain't authorised to do that bud.")
         return redirect('index')
-
-
-def newsletter_email_send(request, article):
-    subscribers = Subscriber.objects.filter(is_active=True)
-    for subscriber in subscribers:
-        is_valid_email = True
-        try:
-            validate_email(subscriber.email)
-        except ValidationError:
-            is_valid_email = False
-
-        if is_valid_email and subscriber.is_active:
-            subject = "A Molly S-T Update!"
-            from_email = "j.sinclairthomson@gmail.com"
-            to_email = [subscriber.email] 
-            html_template = get_template('newsletter/newsletter.html')
-            html_content = html_template.render({'article':article})
-
-            email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
-            email_message.attach_alternative(html_content, "text/html")
-            email_message.send()
-        else:
-            messages.error(request, 'email address was invalid and and a shipping confirmation could not be sent.')
-            return redirect('not_shipped_dash')
 
 
 def newsletters_summary(request):
@@ -193,6 +178,7 @@ def newsletters_summary(request):
         articles = Article.objects.filter(is_published=True)
         return render(request, 'newsletter/newsletters_summary.html', {'articles':articles})
     else:
+        messages.error(request, "You ain't authorised to do that bud.")
         return redirect('index')
 
 def draft_newsletter_summary(request):
@@ -201,6 +187,7 @@ def draft_newsletter_summary(request):
         articles = Article.objects.filter(is_published=False)
         return render(request, 'newsletter/draft_newsletter_summary.html', {'articles':articles})
     else:
+        messages.error(request, "You ain't authorised to do that bud.")
         return redirect('index')
 
 
@@ -222,5 +209,6 @@ def edit_newsletter(request, pk):
             'article_form': article_form,
         })
     else:
+        messages.error(request, "You ain't authorised to do that bud.")
         return redirect('index')
 

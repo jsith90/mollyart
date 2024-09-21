@@ -1,3 +1,22 @@
+function paymentLoading() {
+    pay = document.querySelector('.payment-button');
+    modal = document.getElementById('myLoadingModal');
+    let isUnloading = false;
+    if (pay) {
+        pay.onclick = function() {
+            window.addEventListener('beforeunload', function (event) {
+                isUnloading = true;
+                modal.style.display = "flex";
+            });
+            setTimeout(function() {
+                if(!isUnloading) {
+                    modal.style.display = "none";
+                }
+            }, 10000);
+        }
+    }
+}
+
 function commissionSlides() {
     // Get the modal
     const modal = document.getElementById("myModal");
@@ -415,3 +434,4 @@ navScroll();
 trolleyPage(); 
 checkoutPages();
 commissionSlides();
+paymentLoading();

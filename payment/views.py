@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from trolley.trolley import Trolley
-from payment.forms import ShippingForm, PaymentForm
+from payment.forms import ShippingForm
 from payment.models import ShippingAddress, Order, OrderItem
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -35,29 +35,30 @@ def orders(request, pk):
 		# get the order
 		order = Order.objects.get(id=pk)
 		# get the order item
-		items = OrderItem.objects.filter(order=pk)
+		items = OrderItem.objects.filter(order=order)
 
 		if request.POST:
 			status = request.POST['shipping_status']
 			# check if true or false
 			if status == "true":
-				# get the order
-				order = Order.objects.filter(id=pk)
 				# Update the status
 				now = datetime.datetime.now()
-				order.update(shipped=True, date_shipped=now)
+				order.shipped = True
+				order.date_shipped = now
+				order.save()
+				order_shipped_email(request, order)
 			else:
 				# get the order
-				order = Order.objects.filter(id=pk)
+				order.shipped = False
 				# Update the status
-				order.update(shipped=False)
+				order.save()
 
-			messages.success(request, "Shipping Status Updated")
-			return redirect('index')
+			messages.success(request, "Shipping Status Updated.")
+			return redirect('not_shipped_dash')
 
 		return render(request, 'payment/orders.html', {'order':order, 'items':items})
 	else:
-		messages.success(request, 'Access Denied.')
+		messages.error(request, "Not authorised to do that bud.")
 		return redirect('index')
 
 
@@ -75,12 +76,12 @@ def not_shipped_dash(request):
 			order.date_shipped=now
 			order.save()
 			order_shipped_email(request, order)
-			messages.success(request, "Shipping Status Updated")
+			messages.success(request, "Shipping Status Updated.")
 			return redirect('not_shipped_dash')
 			
 		return render(request, 'payment/not_shipped_dash.html', {'orders':orders})
 	else:
-		messages.success(request, 'Access Denied.')
+		messages.error(request, "Not authorised to do that bud.")
 		return redirect('index')
 
 def order_shipped_email(request, order):
@@ -101,10 +102,9 @@ def order_shipped_email(request, order):
 		email_message.attach_alternative(html_content, "text/html")
 		email_message.send()
 	else:
-		messages.error(request, 'email address was invalid and and a shipping confirmation could not be sent.')
+		messages.error(request, 'The email was invalid and and a shipping confirmation could not be sent.')
 		return redirect('not_shipped_dash')
 
-	
 
 def shipped_dash(request):
 	if request.user.is_superuser:
@@ -120,70 +120,12 @@ def shipped_dash(request):
 			order.date_shipped = None
 			order.save()
 
-			messages.success(request, "Shipping Status Updated")
-			return redirect('index')
+			messages.success(request, "Shipping Status Updated.")
+			return redirect('shipped_dash')
 
 		return render(request, 'payment/shipped_dash.html', {'orders':orders})
 	else:
-		messages.success(request, 'Access Denied.')
-		return redirect('index')
-
-def process_order(request):
-	# get trolley
-	trolley = Trolley(request)
-	trolley_products = trolley.get_prods
-	quantities = trolley.get_quants
-	totals = trolley.trolley_total()
-	if request.POST:
-		# getting billing info from the last page
-		payment_form = PaymentForm(request.POST or None)
-		# get shipping session data
-		my_shipping = request.session.get('my_shipping')
-		# gather order info
-		full_name = my_shipping['shipping_full_name']
-		email = my_shipping['shipping_email']
-		amount_paid = totals
-		# Create shipping address from shipping info
-		shipping_address = f"{my_shipping['shipping_address1']}\n{my_shipping['shipping_address2']}\n{my_shipping['shipping_city']}\n{my_shipping['shipping_region']}\n{my_shipping['shipping_postcode']}\n{my_shipping['shipping_country']}"
-		# Create an orde
-		# not logged in
-		# create order
-		create_order = Order(full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid)
-		create_order.save()
-		# add order items
-		order_id = create_order.pk
-		# get product stuff
-		for product in trolley_products():
-			# get product id
-			product_id = product.id
-			# get product price
-			if product.is_sale:
-				price = product.sale_price
-			else:
-				price = product.price
-			# get quantity
-			for key,value in quantities().items():
-				if int(key) == product.id:
-					# create order itemv
-					create_order_item = OrderItem(order_id=order_id, product_id=product_id, quantity=value, price=price,)
-					create_order_item.save()
-					# Update the quantity of the product in the Product app
-					product_obj = Product.objects.get(id=product_id)
-					product_obj.quantity -= value  # Subtract the purchased quantity
-					if product_obj.quantity == 0:
-						product_obj.is_sold_out = True
-						product_obj.is_sale = False 
-					product_obj.save()  # Save the updated product
-
-			# delete our trolley
-			for key in list(request.session.keys()):
-				if key == 'session_key':
-					del request.session[key]
-					
-			messages.success(request, 'Order Placed.')
-			return redirect('index')
-	else:
-		messages.error(request, 'Access Denied.')
+		messages.error(request, "Not authorised to do that bud.")
 		return redirect('index')
 
 
@@ -249,11 +191,10 @@ def billing_info(request):
 			'cancel_return': 'https://{}{}'.format(host, reverse('payment_failed')),
 		}
 
-		# creae paypal button
+		# create paypal button
 		paypal_form = PayPalPaymentsForm(initial=paypal_dict)
-			
-		# Not logged in
-		billing_form = PaymentForm()
+		
+		# create an order 
 		create_order = Order(full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid, payment_intent_id=intent.id, invoice=my_Invoice)
 		create_order.save() 
 		order_id = create_order.pk
@@ -273,7 +214,7 @@ def billing_info(request):
 					create_order_item = OrderItem(order_id=order_id, product_id=product_id, quantity=value, price=price,)
 					create_order_item.save()
 
-		return render(request, 'payment/billing_info.html', { 'client_secret':intent.client_secret, 'STRIPE_PUBLIC_KEY':settings.STRIPE_PUBLIC_KEY, 'paypal_form':paypal_form, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_info':request.POST, 'billing_form': billing_form})
+		return render(request, 'payment/billing_info.html', { 'client_secret':intent.client_secret, 'STRIPE_PUBLIC_KEY':settings.STRIPE_PUBLIC_KEY, 'paypal_form':paypal_form, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_info':request.POST })
 
 
 		# shipping_info = request.POST
@@ -296,10 +237,9 @@ def checkout(request):
 		for product_id in sold_out_ids:
 			product = Product.objects.get(id=product_id)  # Get the product instance
 			messages.error(request, f'Sorry, {product.name} is sold out and has been removed from your trolley.')
-			# Optionally, remove sold-out products from the trolley
-			# call delete function
+			# Remove sold-out products from the trolley
 			trolley.delete(product=product_id)
-		# Redirect back to trolley summary or any other page after removing sold-out items
+		# Redirect back to trolley summary
 		return redirect('trolley_summary')
 	else:
 		# Check out as guest
