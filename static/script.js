@@ -216,7 +216,7 @@ function navBar() {
         navToggleOpen.style.opacity = "0";
         navToggleClose.style.opacity = "1";
         navToggleOpen.style.zIndex = "0";
-        navToggleClose.style.zIndex = "1";
+        navToggleClose.style.zIndex = "10";
         nav.style.marginBottom = "0";
     });
 
