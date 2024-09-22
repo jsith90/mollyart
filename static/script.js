@@ -232,7 +232,7 @@ function navBar() {
         links.classList.remove("show-options");
         navToggleOpen.style.opacity = "1";
         navToggleClose.style.opacity = "0";
-        navToggleOpen.style.zIndex = "1";
+        navToggleOpen.style.zIndex = "10";
         navToggleClose.style.zIndex = "0";
         nav.style.marginBottom = "2rem";
     });
