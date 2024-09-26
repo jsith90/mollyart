@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load trolley_filters %}
 
 {% block content %}
 <!-- Header-->
@@ -25,15 +26,31 @@
                         <p>Price:</p> 
                         <h3 class="price">£{{ product.price }}</h3>
                     {% endif %}
-                    <p>Quantity:</p>
-                        {% for key, value in quantities.items %}
-                            {% if key == product.id|slugify %}
-                                <h3>{{ value }}</h3>
-                            {% endif %}
-                            {% if forloop.last  %}
-                                </br>
-                            {% endif %}
-                        {% endfor %}
+                    {% if not product.is_size %}
+                        <p>Quantity:</p>
+                            {% for key, value in quantities.items %}
+                                {% if key == product.id|slugify %}
+                                    <h3>{{ value }}</h3>
+                                {% endif %}
+                                {% if forloop.last  %}
+                                    </br>
+                                {% endif %}
+                            {% endfor %}
+                    {% else %}
+                        {% for size in sizes %}
+                                    <p class="value-quantity">{{ size }}:</p>
+                            {% for key, value in current_trolley.items %}
+                                {% if key|startswith:product.id|stringformat:"s" %}
+                                    {% if value.size == size.size %}
+                                        <h3>{{ value.quantity }}</h3>
+                                    {% endif %}
+                                {% endif %}
+                                {% if forloop.last  %}
+                                    </br>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %} 
+                    {% endif %}
                 {% endfor %}
                 <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>
@@ -137,7 +154,7 @@
         //`Elements` instance that was used to create the Payment Element
         elements,
         confirmParams: {
-          return_url: 'https://mollyart-production.up.railway.app/payment/payment_success',
+          return_url: 'https://83a4-90-167-200-214.ngrok-free.app/payment/payment_success',
         },
         headers: {
         'X-CSRFToken': csrftoken, // Include the CSRF token in the headers
@@ -156,5 +173,23 @@
         // site first to authorize the payment, then redirected to the `return_url`.
     }
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    // Select all elements with the class 'value-quantity'
+    let valueQuantity = document.querySelectorAll(".value-quantity");
+
+        valueQuantity.forEach(function(value) {
+            // Check if the next sibling is not an <h3> element
+            if (!value.nextElementSibling || value.nextElementSibling.tagName !== 'H3') {
+                // Create an <h3> element
+                const h3Element = document.createElement('h3');
+                h3Element.textContent = '0'; // Set the text content to '0'
+
+                // Insert the <h3> element after the current element
+                value.insertAdjacentElement('afterend', h3Element);
+            }
+        });
+    });
+
 </script>
 {% endblock %}

@@ -747,6 +747,10 @@ nav {
 	color: red;
 }
 
+.size-quantity {
+	display: none;
+}
+
 /* gallery modals for products and commission images on commission form */
 
 .modal-img {
@@ -1440,6 +1444,38 @@ form > .product-buttons > .product-button {
 	background: #0065d9;
 	cursor: pointer;
 	box-shadow: black 6px 6px 1px 1px;
+}
+
+/* add product and sizes  */
+
+.size {
+	display: none;
+}
+
+.size-input-display {
+	display: none;
+}
+
+.add-size-buttons {
+	text-align: center;
+  width: 50%;
+  border: solid 3px;
+  margin: 0 0 20px 0;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  display: flex;
+}
+
+#add-size, #minus-size {
+  background-color: #0065d9;
+  width: 30%;
+  font-size: 1.5rem;
+  border: solid;
+}
+
+.sale-price {
+	display: none;
 }
 
 /* footer stylings */

@@ -1,38 +1,38 @@
 {% extends 'base.html' %}
+
 {% load static %}
 {% load shop_filters %}
 
 {% block content %}
   <!-- Header-->
-        <!-- Header-->
-        <header class="shop-header">
-            <div class="header-div">
-                <div class="header-icons">
-                    <div class="header-icon">
-                        <img src="{% static 'images/molly-boot.png' %}">
-                    </div>
-                    <a class="shop-heading" href="{% url 'shop' %}"><img src="{% static 'images/shop-logo.png' %}"></a>
-                    <div class="header-icon">
-                        <img src="{% static 'images/molly-glove.png' %}">
-                    </div>
-                </div>
-            </div>
-            <section class="category-display">
-                <div>
-                    {% for category in categories %}
-                        <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
-                        {% if not forloop.last  %}
-                        <h2>·</h2>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </section>
-        </header>
-        <div class="svg-wave-under">
-            <svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {display: inline-block; animation: dl-wave 15s linear infinite;
-            transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg><svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {animation: dl-wave 15s linear infinite;
-            transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg>
-        </div>
+  <header class="shop-header">
+      <div class="header-div">
+          <div class="header-icons">
+              <div class="header-icon">
+                  <img src="{% static 'images/molly-boot.png' %}">
+              </div>
+              <a class="shop-heading" href="{% url 'shop' %}"><img src="{% static 'images/shop-logo.png' %}"></a>
+              <div class="header-icon">
+                  <img src="{% static 'images/molly-glove.png' %}">
+              </div>
+          </div>
+      </div>
+      <section class="category-display">
+          <div>
+              {% for category in categories %}
+                  <h2><a href="{% url 'category' category %}">{{ category }}</a></h2>
+                  {% if not forloop.last  %}
+                  <h2>·</h2>
+                  {% endif %}
+              {% endfor %}
+          </div>
+      </section>
+  </header>
+  <div class="svg-wave-under">
+      <svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {display: inline-block; animation: dl-wave 15s linear infinite;
+      transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg><svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {animation: dl-wave 15s linear infinite;
+      transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg>
+  </div>
   <section class="shop-display">
     <div class="product">    
       <div class="product-item">
@@ -54,14 +54,14 @@
           </div>
           <!-- Product details-->
           <div class="item-detail">
-          <div class="mobile-view">
-            <!-- Product name-->
-            <h3>{{ product.name }}</h3>
-            <!-- Product price-->
-            <p>{{ product.description }}</p>
-            <p class="line-through">£{{ product.price }}</p>
-            <h4 class="price">£{{ product.sale_price }}</h4>
-          </div>
+            <div class="mobile-view">
+              <!-- Product name-->
+              <h3>{{ product.name }}</h3>
+              <!-- Product price-->
+              <p>{{ product.description }}</p>
+              <p class="line-through">£{{ product.price }}</p>
+              <h4 class="price">£{{ product.sale_price }}</h4>
+            </div>
         {% elif product.is_sold_out %}
           <div class="item-image-box">
             <!-- sold out badge -->
@@ -81,11 +81,11 @@
           <!-- Product details-->
           <div class="item-detail">
             <div class="mobile-view">
-            <h3 class="line-through">{{ product.name }}</h3>
-            <!-- Product price-->
-            <p>{{ product.description }}</p>
-            <h4 class="price">£{{ product.price }}</h4>
-          </div>
+              <h3 class="line-through">{{ product.name }}</h3>
+              <!-- Product price-->
+              <p>{{ product.description }}</p>
+              <h4 class="price">£{{ product.price }}</h4>
+            </div>
         {% else %}
           <div class="item-image-box">  
             <!-- Product image-->
@@ -102,101 +102,181 @@
           </div>
           <!-- Product details-->
           <div class="item-detail">
-          <div class="mobile-view">
-            <!-- Product name-->
-            <h3>{{ product.name }}</h3>
-            <!-- Product price-->
-            <p>{{ product.description }}</p>
-            <h4 class="price">£{{ product.price }}</h4>
-          </div>
+            <div class="mobile-view">
+              <!-- Product name-->
+              <h3>{{ product.name }}</h3>
+              <!-- Product price-->
+              <p>{{ product.description }}</p>
+              <h4 class="price">£{{ product.price }}</h4>
+            </div>
         {% endif %}
-        {% if not product.is_sold_out and product.id|stringformat:"s" not in trolley.trolley %}
-          <div class=mobile-view>
-          <div class="quantity-box">
-            <h5 class="price">Quantity:</h5>
-              <select id="qty-trolley" class="quantity-form">
-                {% for i in product.quantity|range %}
-                  <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
-                {% endfor %}
-              </select>
-          </div>
+        {% if not product.is_sold_out %}
+          {% if product.id|stringformat:"s" not in product_ids %}
+            {% if not product.is_size %}
+                <div class="mobile-view">
+                    <div class="quantity-box">
+                        <h5 class="price">Quantity:</h5>
+                        <select id="qty-trolley" class="quantity-form">
+                            {% for i in product.quantity|range %}
+                                <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            {% else %}
+              <div class="mobile-view">
+                  <div class="quantity-box">
+                      <h5 class="price">Size:</h5>
+                      {% for size in sizes %}
+                          <div>
+                              <label>
+                                  <input type="radio" name="size" value="{{ size.size }}" class="size-radio" />
+                                  <span class="size-name">{{ size.size }}</span>
+                              </label>
+                          </div>
+                          <select id="qty-trolley-{{ size.size }}" class="quantity-form size-quantity" style="display: none;">
+                              {% for i in size.quantity|range %}
+                                  <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+                              {% endfor %}
+                          </select>
+                      {% endfor %}
+                  </div>
+              </div>
+            {% endif %}
+          {% endif %}
         {% endif %}
         <div class="product-buttons edit delete">
-          {% if not product.is_sold_out and product.id|stringformat:"s" not in trolley.trolley %}
-            <button type="button" value="{{ product.id }}" class="trolley-button" id="add-trolley">Add to Trolley</button>
+          {% if not product.is_sold_out %}  
+            {% if product.id|stringformat:"s" not in product_ids %}
+                <button type="button" value="{{ product.id }}" class="trolley-button" id="add-trolley">Add to Trolley</button>
+            {% endif %}
+            {% if product.id|stringformat:"s" in product_ids %}
+                <a class="product-button" href="{% url 'trolley_summary' %}">Go to Trolley</a>
+            {% endif %}
           {% endif %}
-          {% if product.id|stringformat:"s" in trolley.trolley %}
-            <a class="product-button" href="{% url 'trolley_summary' %}">Go to Trolley</a>
-          {% endif %}
-            <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
+          <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
           {% if user.is_superuser %}
             <a class="edit product-button" href="{% url 'product_update' product.id %}">Edit</a>
             <a class="delete product-button" href="{% url 'delete_product' product.id %}">Delete</a>
           {% endif %}
         </div>
         </div>
-          </div>
       </div>
     </div>     
   </section>
           <!-- The Modal -->
-<div id="myModal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="img01">
-  {% if product.image2 %}
-  <!-- Next and previous buttons -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  {% endif %}
-  <div class="thumbnails row">
-      {% if product.image %}
-      <div class="column">
-        <img class="demo cursor" src="{{ product.image.url }}" style="width:100%" onclick="currentSlide({{ 1 }})" alt="{{ product.name }}">
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    {% if product.image2 %}
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    {% endif %}
+    <div class="thumbnails row">
+        {% if product.image %}
+        <div class="column">
+          <img class="demo cursor" src="{{ product.image.url }}" style="width:100%" onclick="currentSlide({{ 1 }})" alt="{{ product.name }}">
+        </div>
+        {% endif %}
+        {% if product.image2 %}
+        <div class="column">
+          <img class="demo cursor" src="{{ product.image2.url }}" style="width:100%" onclick="currentSlide({{ 2 }})" alt="{{ product.name }}">
+        </div>
+        {% endif %}
+        {% if product.image3 %}
+        <div class="column">
+          <img class="demo cursor" src="{{ product.image3.url }}" style="width:100%" onclick="currentSlide({{ 3 }})" alt="{{ product.name }}">
+        </div>
+        {% endif %}
+        {% if product.image4 %}
+        <div class="column">
+          <img class="demo cursor" src="{{ product.image4.url }}" style="width:100%" onclick="currentSlide({{ 4 }})" alt="{{ product.name }}">
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
-      {% if product.image2 %}
-      <div class="column">
-        <img class="demo cursor" src="{{ product.image2.url }}" style="width:100%" onclick="currentSlide({{ 2 }})" alt="{{ product.name }}">
-      </div>
-      {% endif %}
-      {% if product.image3 %}
-      <div class="column">
-        <img class="demo cursor" src="{{ product.image3.url }}" style="width:100%" onclick="currentSlide({{ 3 }})" alt="{{ product.name }}">
-      </div>
-      {% endif %}
-      {% if product.image4 %}
-      <div class="column">
-        <img class="demo cursor" src="{{ product.image4.url }}" style="width:100%" onclick="currentSlide({{ 4 }})" alt="{{ product.name }}">
-      </div>
-      {% endif %}
-    </div>
-</div>
+  </div>
+  <script>
+    $(document).on('click', '#add-trolley', function(e){
+      e.preventDefault();
 
-<script>
-  // Check if button pressed
-  $(document).on('click', '#add-trolley', function(e){
-    e.preventDefault();
-    $.ajax({
-        type: 'POST',
-        url: '{% url 'trolley_add' %}',
-        data: {
+      {% if product.is_size %}
+        // Product has sizes
+        const selectedSize = $('input[name="size"]:checked').val();
+        console.log('Selected Size:', selectedSize);
+        if (!selectedSize) {
+          alert("Please select a size.");
+          return;
+        }
+
+        const selectedQty = $('#qty-trolley-' + selectedSize + ' option:selected').val();
+        console.log('Selected quantity:', selectedQty);
+        if (!selectedQty) {
+          alert("Please select a quantity.");
+          return;
+        }
+
+        $.ajax({
+          type: 'POST',
+          url: '{% url 'trolley_add' %}',
+          data: {
             product_id: $('#add-trolley').val(),
-            product_qty: $('#qty-trolley option:selected').text(),
+            product_size: selectedSize,
+            product_qty: selectedQty,
             csrfmiddlewaretoken: '{{ csrf_token }}',
             action: 'post'
-        },
+          },
+          success: function(json){
+            document.getElementById('trolley_quantity').textContent = json.qty;
+            location.reload();
+          },
+          error: function(xhr, errmsg, err){
+            console.log('Error:', errmsg);
+          }
+        });
 
-        success: function(json){
-          //console.log(json)
-          document.getElementById('trolley_quantity').textContent = json.qty
-          location.reload();
-        },
-        error: function(xhr, errmsg, err){
-
+      {% else %}
+        // Product has no sizes
+        const selectedQty = $('#qty-trolley option:selected').val();
+        if (!selectedQty) {
+          alert("Please select a quantity.");
+          return;
         }
-  });
 
-});
+        $.ajax({
+          type: 'POST',
+          url: '{% url 'trolley_add' %}',
+          data: {
+            product_id: $('#add-trolley').val(),
+            product_qty: selectedQty,
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            action: 'post'
+          },
+          success: function(json){
+            document.getElementById('trolley_quantity').textContent = json.qty;
+            location.reload();
+          },
+          error: function(xhr, errmsg, err){
+            console.log('Error:', errmsg);
+          }
+        });
+      {% endif %}
+    });
 
-</script>        
+    // Size selection logic
+    const sizeRadios = document.querySelectorAll('.size-radio');
+    const sizeQuantities = document.querySelectorAll('.size-quantity');
+
+    sizeRadios.forEach((radio, index) => {
+      radio.addEventListener('change', function() {
+        sizeQuantities.forEach((select, selectIndex) => {
+          if (selectIndex === index) {
+            select.style.display = 'block'; // Show the corresponding quantity dropdown
+          } else {
+            select.style.display = 'none'; // Hide other quantity dropdowns
+          }
+        });
+      });
+    });
+  </script>       
 {% endblock %}

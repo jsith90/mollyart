@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Category
-from .forms import ProductForm, CategoryForm
+from .models import Product, Category, Size
+from .forms import ProductForm, CategoryForm, SizeFormSet, SizeForm
 from django.contrib import messages
 from django.db.models import Q
 import json
@@ -10,6 +10,7 @@ from newsletter.forms import SubscriptionForm
 from newsletter.views import subscribe
 from newsletter.models import Article
 from review.models import Review
+from django.forms import inlineformset_factory
 
 
 # login page
@@ -86,25 +87,33 @@ def category(request, foo):
 
 def product(request, pk):
 	product = Product.objects.get(id=pk)
+	sizes = product.size.all() 
 	categories = Category.objects.all()
 	trolley = Trolley(request)
-	return render(request, 'product.html', {'product':product, 'trolley':trolley, 'categories':categories})
+	product_ids = trolley.get_product_ids()
+	return render(request, 'product.html', {'product_ids':product_ids, 'product':product, 'sizes':sizes, 'trolley':trolley, 'categories':categories})
 
 
 def add_product(request):
     user = request.user
     if user.is_superuser:
         if request.method == 'POST':
-            product_form = ProductForm(request.POST, request.FILES)           
-            if product_form.is_valid():
+            product_form = ProductForm(request.POST, request.FILES)
+            size_formset = SizeFormSet(request.POST, request.FILES)         
+            if product_form.is_valid() and size_formset.is_valid():
                 # save product to db
                 product = product_form.save()
+                sizes = size_formset.save(commit=False)
+                for size in sizes:
+                	size.product = product
+                	size.save()
                 return redirect('index')
             else:
-                return render(request, 'add_product.html', { 'product_form': product_form })
+                return render(request, 'add_product.html', { 'product_form': product_form, 'size_formset': size_formset })
         else:
             product_form = ProductForm()
-            return render(request, 'add_product.html', { 'product_form': product_form })
+            size_formset = SizeFormSet()
+            return render(request, 'add_product.html', { 'product_form': product_form, 'size_formset': size_formset })
     else:
         return redirect('index')
 
@@ -114,17 +123,31 @@ def product_update(request, product_id):
 	user = request.user
 	if user.is_superuser:
 		product = get_object_or_404(Product, id=product_id)
+		sizes = product.size.all()
 		if request.method == 'POST':
 			product_form = ProductForm(request.POST, request.FILES, instance=product)
-			if product_form.is_valid():
+			size_formset = SizeFormSet(request.POST, request.FILES, instance=product)     
+			if product_form.is_valid() and size_formset.is_valid():
 				product_form.save()
+				sizes = size_formset.save(commit=False)
+				for size in sizes:
+					size.product = product
+					size.save()
+
+				for form in size_formset.deleted_forms:
+					if form.instance.product_id:
+						form.instance.delete()
 				return redirect('index')
 			# Redirect to a suitable page after updating
 			else:
-				return render(request, 'product_update.html', { 'product':product, 'product_form': product_form, 'product': product})
+				print("Product form errors:", product_form.errors)
+				print("Size formset errors:", size_formset.errors)
+				messages.error(request, 'There was an error with the forms')
+				return render(request, 'product_update.html', { 'product':product, 'product_form': product_form, 'size_formset': size_formset })
 		else:
 			product_form = ProductForm(instance=product)
-			return render(request, 'product_update.html', { 'product': product, 'product_form': product_form })
+			size_formset = SizeFormSet(instance=product) 
+			return render(request, 'product_update.html', { 'product': product, 'product_form': product_form, 'size_formset': size_formset })
 	else:
 		return redirect('index')
 

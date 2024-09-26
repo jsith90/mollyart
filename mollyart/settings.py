@@ -37,8 +37,8 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 print(f"DEBUG (after conversion): {DEBUG}")
 
 
-ALLOWED_HOSTS = ['mollyart-production.up.railway.app', 'https://mollyart-production.up.railway.app', 'localhost', '127.0.0.1', '5145-84-78-253-210.ngrok-free.app']
-CSRF_TRUSTED_ORIGINS = ['https://mollyart-production.up.railway.app', 'https://5145-84-78-253-210.ngrok-free.app']
+ALLOWED_HOSTS = ['mollyart-production.up.railway.app', 'https://mollyart-production.up.railway.app', 'localhost', '127.0.0.1', '83a4-90-167-200-214.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://mollyart-production.up.railway.app', 'https://83a4-90-167-200-214.ngrok-free.app']
 
 
 # Application definition

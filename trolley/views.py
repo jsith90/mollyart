@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .trolley import Trolley
-from shop.models import Product
+from shop.models import Product, Size
 from django.http import JsonResponse
 from django.contrib import messages
 import shop.urls
@@ -13,8 +13,10 @@ def trolley_summary(request):
 	trolley = Trolley(request)
 	trolley_products = trolley.get_prods
 	quantities = trolley.get_quants
+	product_sizes = trolley.get_prods_sizes
+	sizes = trolley.get_sizes
 	totals = trolley.trolley_total()
-	return render(request, 'trolley_summary.html', {'reviews': reviews, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals})
+	return render(request, 'trolley_summary.html', {'reviews': reviews, 'product_sizes':product_sizes, 'trolley_products':trolley_products, 'quantities':quantities, 'sizes':sizes, 'totals':totals, 'current_trolley': trolley.trolley})
 
 
 def trolley_add(request):
@@ -25,18 +27,20 @@ def trolley_add(request):
 		# get stuff
 		product_id = int(request.POST.get('product_id'))
 		product_qty = int(request.POST.get('product_qty')) 
+		product_size = str(request.POST.get('product_size'))
 		# look up product in DB
 		product = get_object_or_404(Product, id=product_id)
 		if not product.is_sold_out:
 			# save to session
-			trolley.add(product=product, quantity=product_qty)
+			trolley.add(product=product, quantity=product_qty, size=product_size)
 
 			# get trolley quantity
 			trolley_quantity = trolley.__len__()
+			trolley_sizes = trolley.get_prods_sizes()
 
 			# return response
 			# response = JsonResponse({'Product Name: ': product.name})
-			response = JsonResponse({'qty': trolley_quantity})
+			response = JsonResponse({'qty': trolley_quantity, 'sizes': trolley_sizes})
 			messages.success(request, ('This was added to your trolley.'))
 			return response
 		else:
@@ -69,10 +73,11 @@ def trolley_update(request):
 		#get stuff
 		product_id = int(request.POST.get('product_id'))
 		product_qty = int(request.POST.get('product_qty'))
+		product_size = str(request.POST.get('product_size'))
 
-		trolley.update(product=product_id, quantity=product_qty)
+		trolley.update(product=product_id, quantity=product_qty, size=product_size)
 
-		response = JsonResponse({'qty':product_qty})
+		response = JsonResponse({'qty': product_qty, 'sizes': product_size})
 		messages.success(request, ('Your trolley has been updated.'))
 		return response
 		# return redirect('trolley_summary')

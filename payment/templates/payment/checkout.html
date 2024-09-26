@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load trolley_filters %}
 
 {% block content %}
 
@@ -25,6 +26,7 @@
         <div class="order-product">
             <div class="order-summary">
                 <h2>Order Summary</h2>
+                {{ current_trolley }}
             </div>
             <div class="order-detail">
                 {% for product in trolley_products %}
@@ -37,15 +39,31 @@
                         <p>Price:</p> 
                         <h3 class="price">£{{ product.price }}</h3>
                     {% endif %}
-                    <p>Quantity:</p>
-                        {% for key, value in quantities.items %}
-                            {% if key == product.id|slugify %}
-                                <h3>{{ value }}</h3>
-                            {% endif %}
-                            {% if forloop.last  %}
-                                </br>
-                            {% endif %}
-                        {% endfor %}
+                    {% if not product.is_size %}
+                        <p>Quantity:</p>
+                            {% for key, value in quantities.items %}
+                                {% if key == product.id|slugify %}
+                                    <h3>{{ value }}</h3>
+                                {% endif %}
+                                {% if forloop.last  %}
+                                    </br>
+                                {% endif %}
+                            {% endfor %}
+                    {% else %}
+                        {% for size in sizes %}
+                            <p>{{ size }}:</p>
+                            {% for key, value in current_trolley.items %}
+                                {% if key|startswith:product.id|stringformat:"s" %}
+                                    {% if value.size == size.size %}
+                                        <h3>{{ value.quantity }}</h3>
+                                    {% endif %}
+                                {% endif %}
+                                {% if forloop.last  %}
+                                    </br>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %} 
+                    {% endif %}
                 {% endfor %}
                 <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>

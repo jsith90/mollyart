@@ -38,12 +38,13 @@ class Product(models.Model):
 	image2 = CloudinaryField('image', blank=True, null=True)
 	image3 = CloudinaryField('image', blank=True, null=True)
 	image4 = CloudinaryField('image', blank=True, null=True)
-	quantity = models.IntegerField(default=1)
+	quantity = models.IntegerField(default=0)
 	# Add sale stuff
 	is_sale = models.BooleanField(default=False)
 	sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
 	# sold out
 	is_sold_out = models.BooleanField(default=False)
+	is_size = models.BooleanField(default=False, blank=True, null=True)
 
 
 	def __str__(self):
@@ -62,3 +63,13 @@ class Order(models.Model):
 
 	def __str__(self):
 		return self.product
+
+
+class Size(models.Model):
+	product = models.ForeignKey(Product, related_name='size', on_delete=models.CASCADE)
+	size = models.CharField(max_length=150, blank=True, null=True)
+	quantity = quantity = models.IntegerField(default=0)
+	is_sold_out = models.BooleanField(default=False, blank=True, null=True)
+	
+	def __str__(self):
+			return self.size

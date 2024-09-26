@@ -4,7 +4,7 @@ from payment.forms import ShippingForm
 from payment.models import ShippingAddress, Order, OrderItem
 from django.contrib import messages
 from django.contrib.auth.models import User
-from shop.models import Product
+from shop.models import Product, Size
 import datetime
 # paypal stuff
 from django.urls import reverse
@@ -150,7 +150,10 @@ def billing_info(request):
 	# get trolley
 	trolley = Trolley(request)
 	trolley_products = trolley.get_prods
+	product_sizes = trolley.get_product_sizes()
+	sizes = trolley.get_sizes()
 	quantities = trolley.get_quants
+	current_trolley = trolley.trolley
 	totals = trolley.trolley_total()
 	if request.POST:
 		# create a session with shipping info
@@ -208,13 +211,28 @@ def billing_info(request):
 			else:
 				price = product.price
 			# get quantity
-			for key,value in quantities().items():
-				if int(key) == product.id:
-					# create order itemv
-					create_order_item = OrderItem(order_id=order_id, product_id=product_id, quantity=value, price=price,)
-					create_order_item.save()
-
-		return render(request, 'payment/billing_info.html', { 'client_secret':intent.client_secret, 'STRIPE_PUBLIC_KEY':settings.STRIPE_PUBLIC_KEY, 'paypal_form':paypal_form, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_info':request.POST })
+			if not product.is_size:
+				for key,value in quantities().items():
+					if int(key) == product.id:
+						# create order itemv
+						create_order_item = OrderItem(order_id=order_id, product_id=product_id, quantity=value, price=price,)
+						create_order_item.save()
+						print(create_order_item)
+			else:
+				sizes_list = []
+				for size in sizes:
+					for key,value in current_trolley.items():
+						if str(key).startswith(str(product.id)):
+							print(type(key), key, type(value), value)
+							if value['size'] == size.size:
+								size_quantity = f"{size.size}: {str(value['quantity'])}"
+								sizes_list.append(size_quantity)
+								print('This is:', size_quantity)
+				sizes_string = ', '.join(sizes_list)
+				create_order_item = OrderItem(is_size=True, order_id=order_id, product_id=product_id, size=sizes_string, price=price,)
+				create_order_item.save()
+				print(create_order_item)
+		return render(request, 'payment/billing_info.html', { 'current_trolley':current_trolley, 'sizes':sizes, 'client_secret':intent.client_secret, 'STRIPE_PUBLIC_KEY':settings.STRIPE_PUBLIC_KEY, 'paypal_form':paypal_form, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_info':request.POST })
 
 
 		# shipping_info = request.POST
@@ -229,6 +247,7 @@ def checkout(request):
 	# get trolley
 	trolley = Trolley(request)
 	trolley_products = trolley.get_prods()
+	sizes = trolley.get_sizes()
 	quantities = trolley.get_quants
 	totals = trolley.trolley_total()
 	sold_out_ids = [product.id for product in trolley_products if product.is_sold_out]
@@ -244,7 +263,7 @@ def checkout(request):
 	else:
 		# Check out as guest
 		shipping_form = ShippingForm(request.POST or None)
-		return render(request, 'payment/checkout.html', {'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_form':shipping_form})
+		return render(request, 'payment/checkout.html', {'current_trolley': trolley.trolley,'sizes': sizes, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_form':shipping_form})
 
 
 @csrf_exempt
@@ -292,6 +311,9 @@ def stripe_webhook(request):
 		my_order.payment_method = 'stripe'
 		my_order.paid = True
 		my_order.save()
+
+		my_order_items = OrderItem.objects.filter(order=order)
+		print('this is my order:', my_order, 'these are my order items:', my_order_items)
 		handle_payment_intent_succeeded(my_order)
 		send_email(my_order)
 		return HttpResponse({'status': 'success'}, status=200)
@@ -299,21 +321,47 @@ def stripe_webhook(request):
 		logger.warning(f'Unhandled event type: {event["type"]}')
 		# Process the payment intent as needed
 
-def handle_payment_intent_succeeded(order):
-	time.sleep(5)
-	# Get order items associated with the order
-	items = OrderItem.objects.filter(order=order)
-	if order.paid:
-	    for item in items:
-	        product = Product.objects.get(id=item.product_id)  # Get the product by ID
-	        product.quantity -= item.quantity  # Subtract the purchased quantity
-	        
-	        # If quantity is zero, mark as sold out
-	        if product.quantity <= 0:
-	            product.is_sold_out = True
-	            product.is_sale = False 
+import time
 
-	        product.save()  # Save the updated product
+def handle_payment_intent_succeeded(order):
+    time.sleep(5)
+    # Get order items associated with the order
+    items = OrderItem.objects.filter(order=order)
+    if order.paid:
+        for item in items:
+            print(f"Processing item ID: {item.id}, is_size: {item.is_size}, size: {item.size}")
+            product = Product.objects.get(id=item.product_id)  # Get the product by ID
+            # If the item has sizes, parse the size field
+            if item.is_size == True:
+                # Split the sizes string (e.g., 'size: Small: 1, size: Medium: 2')
+                size_entries = item.size.split(', ')  # Split by comma and space
+
+                for size_entry in size_entries:
+                    # Example size_entry: 'size: Small: 1'
+                    size_info = size_entry.split(': ')
+                    size_name = size_info[0].strip()
+                    size_quantity = int(size_info[1].strip())  # 1
+
+                    # Update the corresponding ProductSize entry
+                    product_size = Size.objects.get(product=product, size=size_name)
+                    product_size.quantity -= size_quantity  # Subtract the quantity for the size
+                    
+                    # If the quantity is zero, mark as sold out for this size
+                    if product_size.quantity <= 0:
+                        product_size.is_sold_out = True  # Ensure it doesn't go negative
+
+                    product_size.save()  # Save the updated size quantity
+
+            else:
+                # No size handling, just update the product quantity
+                product.quantity -= item.quantity  # Subtract the purchased quantity
+
+                # If the product quantity is zero, mark as sold out
+                if product.quantity <= 0:
+                    product.is_sold_out = True
+                    product.is_sale = False
+
+                product.save()  # Save the updated product
 
 
 def send_email(order):

@@ -2,64 +2,23 @@
 {% load static %}
 
 {% block content %}
+<header class="shop-header">
+    <div>
+        <h1>Update {{ product.name }}</h1>
+    </div> 
+</header>
 <section class="form-section">
-    <header class="shop-header">
-        <div>
-            <h1 class="shop-heading">Update {{ product.name }}</h1>
-        </div>
-    </header>
     <form class="product-update-form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
         <div class="form">
-            <label for="{{ product_form.name.id_for_label }}">{{ product_form.name.label }}</label>
-            {{ product_form.name }}
+            {{ product_form.as_p }}
         </div>
-        <div class="form">
-            <label for="{{ product_form.price.id_for_label }}">{{ product_form.price.label }}</label>
-            £{{ product_form.price }}
-        </div>
-        <div class="form">
-            <label for="{{ product_form.category.id_for_label }}">{{ product_form.category.label }}</label>
-            {{ product_form.category }}
-            <div class="product-buttons">
-                <a class="product-button" target="_blank" href="{% url 'add_category' %}" class="btn btn-secondary">Add New Category</a>
-            </div>
-        </div>
-        <div class="form">
-            <label for="{{ product_form.description.id_for_label }}">{{ product_form.description.label }}</label>
-            {{ product_form.description }}
-        </div>
-        <div class="form image-input-display">
-            <label for="{{ product_form.image.id_for_label }}">{{ product_form.image.label }}</label>
-            {{ product_form.image }}
-        </div>
-        <div class="form image-input-display">
-            <label for="{{ product_form.image2.id_for_label }}">{{ product_form.image2.label }}</label>
-            {{ product_form.image2 }}
-        </div>
-        <div class="form image-input-display">
-            <label for="{{ product_form.image3.id_for_label }}">{{ product_form.image3.label }}</label>
-            {{ product_form.image3 }}
-        </div>
-        <div class="form image-input-display">
-            <label for="{{ product_form.image4.id_for_label }}">{{ product_form.image4.label }}</label>
-            {{ product_form.image4 }}
-        </div>
-        <div class="form">
-            <label for="{{ product_form.quantity.id_for_label }}">{{ product_form.quantity.label }}</label>
-            {{ product_form.quantity }}
-        </div>
-        <div class="form">
-            <label for="{{ product_form.is_sale.id_for_label }}">{{ product_form.is_sale.label }}</label>
-            {{ product_form.is_sale }}
-            <br>
-            <label for="{{ product_form.sale_price.id_for_label }}">{{ product_form.sale_price.label }}</label>
-            £{{ product_form.sale_price }}
-        </div>
-        <div class="form">
-            <label for="{{ product_form.is_sold_out.id_for_label }}">{{ product_form.is_sold_out.label }}</label>
-            {{ product_form.is_sold_out }}
-        </div>
+        {{ size_formset.management_form }}
+            {% for form in size_formset %}
+                <div class="form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
         <div class="product-buttons">
             <button type="submit" class="product-button">Update Product</button>
         </div>

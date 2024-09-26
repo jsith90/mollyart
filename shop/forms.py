@@ -1,11 +1,12 @@
 from django import forms
-from .models import Product, Category
+from .models import Product, Category, Size
+from django.forms import inlineformset_factory
 
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'price', 'category', 'description', 'image', 'image2', 'image3', 'image4', 'quantity', 'is_sale', 'sale_price', 'is_sold_out']
+        fields = ['name', 'price', 'category', 'description', 'image', 'image2', 'image3', 'image4', 'quantity', 'is_sale', 'sale_price', 'is_sold_out', 'is_size']
         labels = {
             'name': 'Product Name:',
             'price': 'Price:',
@@ -19,6 +20,7 @@ class ProductForm(forms.ModelForm):
             'is_sale': 'Tick box for Sale:',
             'sale_price': 'Sale Price:',
             'is_sold_out': 'Tick box for Sold Out',
+            'is_size': 'Tick the box to add sizes:',
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter product name...'}),
@@ -30,9 +32,10 @@ class ProductForm(forms.ModelForm):
             'image3': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'image4': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
-            'is_sale': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'is_sale': forms.CheckboxInput(attrs={'class': 'is-sale form-check-input'}),
             'sale_price': forms.NumberInput(attrs={'class': 'form-control'}),
-            'is_sold_out': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'is_sold_out': forms.CheckboxInput(attrs={'class': 'is-sold-out form-check-input'}),
+            'is_size': forms.CheckboxInput(attrs={'class': 'is-size form-check-input'}),
         }
 
 
@@ -46,3 +49,24 @@ class CategoryForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter category name...'})
             }
+
+
+class SizeForm(forms.ModelForm):
+    class Meta:
+        model = Size
+        fields = ['size', 'quantity']
+        labels = {
+            'size': 'Add a size:',
+            'quantity': 'Quantity:'
+        }
+        widgets = {
+            'size': forms.TextInput(attrs={
+                'class': 'form-control', 'placeholder': 'Write the size (Small, Medium etc.)...' 
+            }),
+            'quantity': forms.NumberInput(attrs={
+                'class': 'form-control'
+            }),
+        }
+
+SizeFormSet = inlineformset_factory(Product, Size, form=SizeForm, max_num=10, extra=10, can_delete=True)
+

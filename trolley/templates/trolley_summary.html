@@ -3,26 +3,14 @@
 {% load trolley_filters %}
 
 {% block content %}
-        <!-- Header-->
-        <header class="shop-header">
-            <div>
-                <h1>trolley</h1>
-            </div>
-        </header>
-<!--         <div class="trolley-reviews">
-                <div class="trolley-review">
-                    {% for review in reviews %}
-                        <p class="trolley-p">"{{ review.review }}"</p>
-                    {% endfor %}
-                </div>
-                <div class="trolley-review">
-                    {% for review in reviews %}
-                        <p class="trolley-p">"{{ review.review }}"</p>
-                    {% endfor %}
-                </div>
-        </div> -->
-        <section class="shop-display">
-            {% if trolley_products %}
+    <!-- Header-->
+    <header class="shop-header">
+        <div>
+            <h1>trolley</h1>
+        </div>
+    </header>
+    <section class="shop-display">
+        {% if trolley_products %}
             {% for product in trolley_products %}
                 <div class="checkout-product">
                     <div class="product-item">
@@ -43,23 +31,57 @@
                                 <!-- Product price-->
                                 <h4 class="price">£{{ product.price }}</h4>
                             {% endif %}
-                            <div class="quantity-box">
-                                <h5 class="price">Quantity:</h5>
-                                <select id="select{{ product.id }}" class="quantity-form">
-                                    <option selected>
-                                        {% for key, value in quantities.items %}
-                                            {% if key == product.id|slugify %}
-                                                {{ value }}
-                                            {% endif %}
-                                        {% endfor %}
-                                    </option>
-                                    {% for i in product.quantity|range %}
-                                        <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                            {% if not product.is_size %}
+                                <div class=mobile-view>
+                                    <div class="quantity-box">
+                                        <h5 class="price">Quantity:</h5>
+                                        <select class="qty-trolley" class="quantity-form">
+                                            <option selected>
+                                                {% for key, value in quantities.items %}
+                                                    {% if key == product.id|slugify %}
+                                                        {{ value }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </option>
+                                            {% for i in product.quantity|range %}
+                                              <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="mobile-view">
+                                    <div class="quantity-box">
+                                        <h5 class="price">Size:</h5>
+                                        <div>
+                                            {% for size in sizes %}
+                                                <div>
+                                                  <label>
+                                                    <input type="radio" name="size" value="{{ size.size }}" class="size-radio" />
+                                                    <span class="size-name">{{ size.size }}</span>
+                                                  </label>
+                                                </div>
+                                                <select id="{{ size.size }}" class="quantity-form size-quantity" style="display: none;">
+                                                    <option selected>
+                                                        {% for key, value in current_trolley.items %}
+                                                            {% if key|startswith:product.id|stringformat:"s" %}
+                                                                {% if value.size == size.size %}
+                                                                    {{ value.quantity }}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </option>
+                                                    {% for i in size.quantity|range %}
+                                                        <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>    
+                            {% endif %}
                             <div class="product-buttons">
-                                <button type="button" data-index="{{ product.id }}" class="product-button update-trolley">Update Quantity</button>
+                                <button type="button" data-index="{{ product.id }}" data-size="{{ product.is_size }}" class="product-button update-trolley">Update Quantity</button>
                                 <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
                                 <button type="button" data-index="{{ product.id }}" class="product-button delete-product">Remove</button>
                             </div>
@@ -71,44 +93,94 @@
                 <h3>Total: £{{ totals }}</h3>
                 <a href="{% url 'checkout' %}" id="checkout" class="view-product-available">Checkout</a>
             </div>
-            {% else %}
+        {% else %}
             <div class="no-items">
                 <p>There's nothing in your trolley...</p>
                 <div class="trolley-buttons">
                     <a class="trolley-button" href="{% url 'shop' %}">Molly's Shop</a>
                 </div>
             </div>
-            {% endif %}
-        </section>
+        {% endif %}    
+    </section>
 <script>
-    // Update trolley
-    $(document).on('click', '.update-trolley', function(e){
+    $(document).on('click', '.update-trolley', function(e) {
     e.preventDefault();
-    var productid = $(this).data('index');
+    
+        var productid = $(this).data('index');
+        console.log(productid)
+        var hasSize = $(this).data('size');  // Read the data-size attribute to determine if the product has sizes
+        
+        if (hasSize == 'True') {  // If the product has sizes
+            const selectedSize = $('input[name="size"]:checked').val();
+            console.log(hasSize);
+            console.log('Selected Size:', selectedSize);
+            
+            if (!selectedSize) {
+                alert("Please select a size.");
+                return;
+            }
 
-    $.ajax({
-    type: 'POST',
-    url: '{% url 'trolley_update' %}',
-    data: {
-        product_id: $(this).data('index'),
-        product_qty: $('#select' + productid + ' option:selected').text(),
-        csrfmiddlewaretoken: '{{ csrf_token }}',
-        action: 'post'
-    },
+            const selectedQty = $('#' + selectedSize + ' option:selected').val();
+            console.log('Selected quantity:', selectedQty);
+            
+            if (!selectedQty) {
+                alert("Please select a quantity.");
+                return;
+            }
 
-        success: function(json){
-          console.log(json)
-          // document.getElementById('trolley_quantity').textContent = json.qty
-          location.reload();
-        },
-        error: function(xhr, errmsg, err){
+            // AJAX request to update trolley with size and quantity
+            $.ajax({
+                type: 'POST',
+                url: '{% url "trolley_update" %}',
+                data: {
+                    product_id: $(this).data('index'),
+                    product_qty: selectedQty,
+                    product_size: selectedSize,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+                success: function(json) {
+                    console.log(json);
+                    location.reload();  // Reload page on success
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log(errmsg);
+                }
+            });
 
+        } else {  // If the product does not have sizes
+            const productRow = $(this).closest('.checkout-product');
+            const selectedQty = productRow.find('.qty-trolley option:selected').val();
+            console.log('Selected quantity without size:', selectedQty);
+            
+            if (!selectedQty) {
+                alert("Please select a quantity without size.");
+                return;
+            }
+
+            // AJAX request to update trolley without size
+            $.ajax({
+                type: 'POST',
+                url: '{% url "trolley_update" %}',
+                data: {
+                    product_id: $(this).data('index'),
+                    product_qty: selectedQty,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+                success: function(json) {
+                    console.log(json);
+                    location.reload();  // Reload page on success
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log(errmsg);
+                }
+            });
         }
-  });
+    });
 
-});
 
-  // delete item from trolley
+  // delete item from trolley********
 
    $(document).on('click', '.delete-product', function(e){
     e.preventDefault();
@@ -133,6 +205,34 @@
         }
   });
 
+});
+
+  // Size selection logic
+  const sizeRadios = document.querySelectorAll('.size-radio');
+  const sizeQuantities = document.querySelectorAll('.size-quantity');
+
+  sizeRadios.forEach((radio, index) => {
+    radio.addEventListener('change', function() {
+      sizeQuantities.forEach((select, selectIndex) => {
+        if (selectIndex === index) {
+          select.style.display = 'block'; // Show the corresponding quantity dropdown
+        } else {
+          select.style.display = 'none'; // Hide other quantity dropdowns
+        }
+      });
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Select all <option> elements with the 'selected' attribute
+    let selectedOptions = document.querySelectorAll("option[selected]");
+
+    selectedOptions.forEach(function(option) {
+        // Check if the option has no value or the value is empty
+        if (!option.textContent.trim()) {
+            option.textContent = "0";  // Set the value to '0'
+        }
+    });
 });
 
 </script>

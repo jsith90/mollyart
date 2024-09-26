@@ -70,6 +70,8 @@ class OrderItem(models.Model):
 	# keys
 	quantity = models.PositiveBigIntegerField(default=1)
 	price = models.DecimalField(max_digits=7, decimal_places=2)
+	size = models.CharField(default=None, blank="True", null="True", max_length=300)
+	is_size = models.BooleanField(default=False, blank=True, null=True)
 
 	def __str__(self):
-		return f'Order Item - {str(self.id)}'
+		return f"OrderItem: order_id={self.order.id}, product_id={self.product.id}, quantity={self.quantity}, size={self.size}, price={self.price}, is_size={self.is_size}"
