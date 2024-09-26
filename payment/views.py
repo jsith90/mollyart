@@ -311,9 +311,6 @@ def stripe_webhook(request):
 		my_order.payment_method = 'stripe'
 		my_order.paid = True
 		my_order.save()
-
-		my_order_items = OrderItem.objects.filter(order=order)
-		print('this is my order:', my_order, 'these are my order items:', my_order_items)
 		handle_payment_intent_succeeded(my_order)
 		send_email(my_order)
 		return HttpResponse({'status': 'success'}, status=200)
