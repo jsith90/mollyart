@@ -26,7 +26,6 @@
         <div class="order-product">
             <div class="order-summary">
                 <h2>Order Summary</h2>
-                {{ current_trolley }}
             </div>
             <div class="order-detail">
                 {% for product in trolley_products %}
@@ -51,7 +50,7 @@
                             {% endfor %}
                     {% else %}
                         {% for size in sizes %}
-                            <p>{{ size }}:</p>
+                            <p class="value-quantity">{{ size }}:</p>
                             {% for key, value in current_trolley.items %}
                                 {% if key|startswith:product.id|stringformat:"s" %}
                                     {% if value.size == size.size %}
@@ -119,4 +118,22 @@
         </div>
     </section>
 </section>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select all elements with the class 'value-quantity'
+        let valueQuantity = document.querySelectorAll(".value-quantity");
+
+        valueQuantity.forEach(function(value) {
+            // Check if the next sibling is not an <h3> element
+            if (!value.nextElementSibling || value.nextElementSibling.tagName !== 'H3') {
+                // Create an <h3> element
+                const h3Element = document.createElement('h3');
+                h3Element.textContent = '0'; // Set the text content to '0'
+
+                // Insert the <h3> element after the current element
+                value.insertAdjacentElement('afterend', h3Element);
+            }
+        });
+    });
+</script>
 {% endblock %}

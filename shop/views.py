@@ -91,6 +91,9 @@ def product(request, pk):
 	categories = Category.objects.all()
 	trolley = Trolley(request)
 	product_ids = trolley.get_product_ids()
+	if all(size.is_sold_out for size in sizes):
+		product.is_sold_out = True
+		product.save()
 	return render(request, 'product.html', {'product_ids':product_ids, 'product':product, 'sizes':sizes, 'trolley':trolley, 'categories':categories})
 
 

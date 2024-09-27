@@ -49,19 +49,22 @@
                                         </select>
                                     </div>
                                 </div>
-                            {% else %}
-                                <div class="mobile-view">
-                                    <div class="quantity-box">
-                                        <h5 class="price">Size:</h5>
-                                        <div>
-                                            {% for size in sizes %}
-                                                <div>
-                                                  <label>
+                                </div>
+                                {% else %}
+                                    <div class="mobile-view">
+                                    <div class="quantity-box size-quantities">
+                                      <h5 class="price">Size:</h5>
+                                      {% for size in sizes %}
+                                        <div class="sizes-div">
+                                          {% if not size.is_sold_out %}
+                                            <div>
+                                                <label class="quantity-radio">
                                                     <input type="radio" name="size" value="{{ size.size }}" class="size-radio" />
                                                     <span class="size-name">{{ size.size }}</span>
-                                                  </label>
-                                                </div>
-                                                <select id="{{ size.size }}" class="quantity-form size-quantity" style="display: none;">
+                                                </label>
+                                            </div>
+                                            <div class="quantity-select-div">
+                                                <select id="{{ size.size }}" class="quantity-form size-quantity">
                                                     <option selected>
                                                         {% for key, value in current_trolley.items %}
                                                             {% if key|startswith:product.id|stringformat:"s" %}
@@ -72,35 +75,41 @@
                                                         {% endfor %}
                                                     </option>
                                                     {% for i in size.quantity|range %}
-                                                        <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+                                                      <option class="quantity-form" value="{{ i|add:1 }}">{{ i|add:1 }}</option>
                                                     {% endfor %}
                                                 </select>
-                                            {% endfor %}
+                                            </div>
+                                            {% else %}
+                                            <div class="sold-out-div">
+                                              <p class="sold-out size-name line-through">{{ size.size }}</p>
+                                            </div>
+                                          {% endif %}
                                         </div>
+                                      {% endfor %}
                                     </div>
-                                </div>    
-                            {% endif %}
-                            <div class="product-buttons">
-                                <button type="button" data-index="{{ product.id }}" data-size="{{ product.is_size }}" class="product-button update-trolley">Update Quantity</button>
-                                <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
-                                <button type="button" data-index="{{ product.id }}" class="product-button delete-product">Remove</button>
+                                  </div>
+                                {% endif %}
+                                <div class="product-buttons">
+                                    <button type="button" data-index="{{ product.id }}" data-size="{{ product.is_size }}" class="product-button update-trolley">Update Quantity</button>
+                                    <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
+                                    <button type="button" data-index="{{ product.id }}" class="product-button delete-product">Remove</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                {% endfor %}
+                <div class="checking-out">
+                    <h3>Total: £{{ totals }}</h3>
+                    <a href="{% url 'checkout' %}" id="checkout" class="view-product-available">Checkout</a>
                 </div>
-            {% endfor %}
-            <div class="checking-out">
-                <h3>Total: £{{ totals }}</h3>
-                <a href="{% url 'checkout' %}" id="checkout" class="view-product-available">Checkout</a>
-            </div>
-        {% else %}
-            <div class="no-items">
-                <p>There's nothing in your trolley...</p>
-                <div class="trolley-buttons">
-                    <a class="trolley-button" href="{% url 'shop' %}">Molly's Shop</a>
+            {% else %}
+                <div class="no-items">
+                    <p>There's nothing in your trolley...</p>
+                    <div class="trolley-buttons">
+                        <a class="trolley-button" href="{% url 'shop' %}">Molly's Shop</a>
+                    </div>
                 </div>
-            </div>
-        {% endif %}    
+            {% endif %}    
     </section>
 <script>
     $(document).on('click', '.update-trolley', function(e) {
@@ -215,9 +224,9 @@
     radio.addEventListener('change', function() {
       sizeQuantities.forEach((select, selectIndex) => {
         if (selectIndex === index) {
-          select.style.display = 'block'; // Show the corresponding quantity dropdown
+          select.style.opacity = '1'; // Show the corresponding quantity dropdown
         } else {
-          select.style.display = 'none'; // Hide other quantity dropdowns
+          select.style.opacity = '0'; // Hide other quantity dropdowns
         }
       });
     });

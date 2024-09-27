@@ -116,7 +116,7 @@
                 <div class="mobile-view">
                     <div class="quantity-box">
                         <h5 class="price">Quantity:</h5>
-                        <select id="qty-trolley" class="quantity-form">
+                        <select id="qty-trolley" class="quantity-form pure-quantity">
                             {% for i in product.quantity|range %}
                                 <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
                             {% endfor %}
@@ -125,22 +125,32 @@
                 </div>
             {% else %}
               <div class="mobile-view">
-                  <div class="quantity-box">
-                      <h5 class="price">Size:</h5>
-                      {% for size in sizes %}
-                          <div>
-                              <label>
-                                  <input type="radio" name="size" value="{{ size.size }}" class="size-radio" />
-                                  <span class="size-name">{{ size.size }}</span>
-                              </label>
-                          </div>
-                          <select id="qty-trolley-{{ size.size }}" class="quantity-form size-quantity" style="display: none;">
+                <div class="quantity-box size-quantities">
+                  <h5 class="price">Size:</h5>
+                  {% for size in sizes %}
+                    <div class="sizes-div">
+                      {% if not size.is_sold_out %}
+                        <div>
+                            <label class="quantity-radio">
+                                <input type="radio" name="size" value="{{ size.size }}" class="size-radio" />
+                                <span class="size-name">{{ size.size }}</span>
+                            </label>
+                        </div>
+                        <div class="quantity-select-div">
+                          <select id="qty-trolley-{{ size.size }}" class="quantity-form size-quantity">
                               {% for i in size.quantity|range %}
-                                  <option value="{{ i|add:1 }}">{{ i|add:1 }}</option>
+                                  <option class="quantity-form" value="{{ i|add:1 }}">{{ i|add:1 }}</option>
                               {% endfor %}
                           </select>
-                      {% endfor %}
-                  </div>
+                        </div>
+                        {% else %}
+                        <div class="sold-out-div">
+                          <p class="sold-out size-name line-through">{{ size.size }}</p>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                </div>
               </div>
             {% endif %}
           {% endif %}
@@ -270,10 +280,11 @@
     sizeRadios.forEach((radio, index) => {
       radio.addEventListener('change', function() {
         sizeQuantities.forEach((select, selectIndex) => {
-          if (selectIndex === index) {
-            select.style.display = 'block'; // Show the corresponding quantity dropdown
+          if (selectIndex === index) { 
+            // Show the corresponding quantity dropdown
+            select.style.opacity = '1'
           } else {
-            select.style.display = 'none'; // Hide other quantity dropdowns
+            select.style.opacity = '0' // Hide other quantity dropdowns
           }
         });
       });

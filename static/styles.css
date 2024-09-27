@@ -696,15 +696,67 @@ nav {
 	margin: 2rem 0 0 0;	
 }
 
+ .quantity-box .pure-quantity {
+ 		width: 30%;
+ }
+
+.quantity-radio {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.quantity-box .sold-out {
+	margin-left: 30px;
+}
+
+.sizes-div {
+	display: flex;
+}
+
+.size-name {
+	font-family: 'Space Grotesk';
+	font-weight: 800;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+input[type="radio"] {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  margin: 6px;
+  padding: 0;
+  border: 2px solid black;
+  border-radius: 50%;
+  appearance: none;
+  background-color: transparent;
+  outline: none;
+}
+
+input[type="radio"]:not(:disabled):checked {
+	background-color: #0065d9;
+	cursor: pointer;
+}
+
+.quantity-select-div {
+	width: 25%;
+	margin: 0 0 0 20px;
+}
+
 .quantity-form {
-	width: 30%;
-	background: black;
-	color: white;
+	width: 100%;
+	background: white;
+	color: black;
 	font-size: large;
+	text-align: center;
+	font-weight: 900;
+	border: 3px solid black;
 }
 
 .product-buttons {
 	margin: 2rem 0 0 0;
+	width: 50%;
 }
 
 .product-button {
@@ -748,7 +800,8 @@ nav {
 }
 
 .size-quantity {
-	display: none;
+	opacity: 0;
+	transition: opacity 0.4s ease-in-out;
 }
 
 /* gallery modals for products and commission images on commission form */
@@ -944,6 +997,10 @@ nav {
 
 .shop-display > .checkout-product > .product-item {
 	width: 50%;
+}
+
+.shop-display > .checkout-product > .product-item > .item-detail > .product-buttons {
+	width: 80%;
 }
 
 .trolley-reviews {
@@ -1202,6 +1259,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 60px 0 0 0;
 }
 
 .paid-product {
@@ -2203,6 +2261,23 @@ footer {
   	width: 100%;
   }
 
+  .size-quantities {
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+  }
+
+	.sizes-div {
+	  display: flex;
+	  justify-content: flex-end;
+	  align-items: ;
+	  width: 50%;
+ }
+
+ .sold-out-div {
+ 		margin: 0 80px 0 0;
+ }
+
   .checkout-product > .product-item > .item-detail {
   	width: 100%;
   	text-align: center;
@@ -2224,9 +2299,9 @@ footer {
   	width: 50%;
   }
 
-  .product >  .product-item > .item-detail > .product-buttons > .product-button {
-  	width: 100%;
-  }
+  .shop-display > .checkout-product > .product-item > .item-detail > .product-buttons {
+		width: 100%;
+	}
 
   .checking-out {
   	width: 100%;
@@ -2418,6 +2493,14 @@ footer {
 
   .view-product-sold, .view-product-sale, .view-product-available, .trolley-button {
   	width: 40%;
+  }
+  
+  .product-buttons {
+  	width: 70%
+  }
+
+  .sizes-div {
+  	width: 70%;
   }
 /*
   .checkout-header {

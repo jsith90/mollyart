@@ -54,10 +54,11 @@ class CategoryForm(forms.ModelForm):
 class SizeForm(forms.ModelForm):
     class Meta:
         model = Size
-        fields = ['size', 'quantity']
+        fields = ['size', 'quantity', 'is_sold_out']
         labels = {
             'size': 'Add a size:',
-            'quantity': 'Quantity:'
+            'quantity': 'Quantity:',
+            'is_sold_out': 'Mark as sold out'
         }
         widgets = {
             'size': forms.TextInput(attrs={
@@ -65,6 +66,9 @@ class SizeForm(forms.ModelForm):
             }),
             'quantity': forms.NumberInput(attrs={
                 'class': 'form-control'
+            }),
+            'is_sold_out': forms.CheckboxInput(attrs={
+                'class': 'form-check-input'
             }),
         }
 
