@@ -51,6 +51,9 @@
                             {% endfor %}
                         {% endfor %} 
                     {% endif %}
+                    {% if not forloop.last %}
+                        <hr/ class="product-hr">
+                    {% endif %}
                 {% endfor %}
                 <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>

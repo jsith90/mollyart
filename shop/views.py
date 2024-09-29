@@ -12,7 +12,6 @@ from newsletter.models import Article
 from review.models import Review
 from django.forms import inlineformset_factory
 
-
 # login page
 def login_user(request):
     if request.method == "POST":
@@ -32,11 +31,11 @@ def logout_user(request):
     logout(request)
     return redirect('index')
 
-
 # Create your views here.
 def index(request):
 	reviews = Review.objects.filter(is_active=True)
 	return render(request, 'index.html', { 'reviews':reviews })
+
 
 def admin_dash(request):
 	user = request.user
@@ -44,6 +43,7 @@ def admin_dash(request):
 		return render(request, 'admin.html', {})
 	else:
 		return redirect('index')
+
 
 def shop(request):
 	products = Product.objects.all()
@@ -65,6 +65,7 @@ def search(request):
 			return render(request, 'search.html', {'searched':searched})
 	else:
 		return render(request, 'search.html', {})
+
 
 def category_summary(request):
 	categories = Category.objects.all()
@@ -91,9 +92,10 @@ def product(request, pk):
 	categories = Category.objects.all()
 	trolley = Trolley(request)
 	product_ids = trolley.get_product_ids()
-	if all(size.is_sold_out for size in sizes):
-		product.is_sold_out = True
-		product.save()
+	if product.is_size:
+		if all(size.is_sold_out for size in sizes):
+			product.is_sold_out = True
+			product.save()
 	return render(request, 'product.html', {'product_ids':product_ids, 'product':product, 'sizes':sizes, 'trolley':trolley, 'categories':categories})
 
 
@@ -119,7 +121,6 @@ def add_product(request):
             return render(request, 'add_product.html', { 'product_form': product_form, 'size_formset': size_formset })
     else:
         return redirect('index')
-
 
 # Create your views here.
 def product_update(request, product_id):
@@ -171,7 +172,6 @@ def add_category(request):
             return render(request, 'add_category.html', { 'category_form': category_form })
     else:
         return redirect('index')
-
 
 # Create your views here.
 def category_update(request, category_id):

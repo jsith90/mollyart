@@ -35,7 +35,7 @@
                                 <div class=mobile-view>
                                     <div class="quantity-box">
                                         <h5 class="price">Quantity:</h5>
-                                        <select class="qty-trolley" class="quantity-form">
+                                        <select class="qty-trolley quantity-form pure-quantity" class="quantity-form">
                                             <option selected>
                                                 {% for key, value in quantities.items %}
                                                     {% if key == product.id|slugify %}
@@ -48,7 +48,6 @@
                                             {% endfor %}
                                         </select>
                                     </div>
-                                </div>
                                 </div>
                                 {% else %}
                                     <div class="mobile-view">

@@ -16,7 +16,6 @@ import logging
 import time
 from django.contrib.auth import authenticate, login, logout
 
-# Create your views here.
 
 # Create your views here.
 def write_review(request):
@@ -27,12 +26,26 @@ def write_review(request):
 			review = review_form.save(commit=False)
 			review.is_active = False
 			review.save()
+			review_notification_email(review)
+			messages.success(request, 'Thanks for leaving a review!')
 			return redirect('index')
 		else:
+			messages.error(request, "Sorry that didn't work!")
 			return render(request, 'review/write_review.html', { 'review_form':review_form })
 	else:
 		review_form = ReviewForm()
 		return render(request, 'review/write_review.html', { 'review_form': review_form })
+
+
+def review_notification_email(review):
+	subject = "You have a new review to activate!"
+	from_email = "j.sinclairthomson@gmail.com"
+	to_email = ["j.sinclairthomson@gmail.com"] 
+	html_template = get_template('review/notification.html')
+	html_content = html_template.render({'review': review})
+	email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
+	email_message.attach_alternative(html_content, "text/html")
+	email_message.send()
 
 
 def inactive_reviews_table(request):

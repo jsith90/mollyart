@@ -313,6 +313,7 @@ def stripe_webhook(request):
 		my_order.save()
 		handle_payment_intent_succeeded(my_order)
 		send_email(my_order)
+		purchase_notification_email(my_order)
 		return HttpResponse({'status': 'success'}, status=200)
 	else:
 		logger.warning(f'Unhandled event type: {event["type"]}')
@@ -359,7 +360,7 @@ def handle_payment_intent_succeeded(order):
                     product.is_sale = False
 
                 product.save()  # Save the updated product
-
+ 
 
 def send_email(order):
 	items = OrderItem.objects.filter(order=order)
@@ -373,6 +374,17 @@ def send_email(order):
 	email_message.attach_alternative(html_content, "text/html")
 	email_message.send()
 
+
+def purchase_notification_email(order):
+	items = OrderItem.objects.filter(order=order)
+	subject = "You have a new customer!"
+	from_email = "j.sinclairthomson@gmail.com"
+	to_email = ["j.sinclairthomson@gmail.com"] 
+	html_template = get_template('payment/notification.html')
+	html_content = html_template.render({'order': order, 'items': items})
+	email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
+	email_message.attach_alternative(html_content, "text/html")
+	email_message.send()
 
 	
 def payment_success(request):

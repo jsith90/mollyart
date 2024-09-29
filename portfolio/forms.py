@@ -5,16 +5,18 @@ from .models import Portfolio, Image
 class PortfolioForm(forms.ModelForm):
     class Meta:
         model = Portfolio
-        fields = ['title', 'description', 'is_published']
+        fields = ['title', 'description', 'is_published', 'front_image']
         labels = {
             'title': 'Gallery Title',
             'description': 'Description',
-            'is_published':'Check the box to publish gallery:'
+            'is_published':'Check the box to publish gallery:',
+            'front_image': 'Add a title image:'
         }
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter gallery title'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter description'}),
             'is_published': forms.CheckboxInput(),
+            'front_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
 
         }
 
