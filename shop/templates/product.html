@@ -282,9 +282,13 @@
         sizeQuantities.forEach((select, selectIndex) => {
           if (selectIndex === index) { 
             // Show the corresponding quantity dropdown
-            select.style.opacity = '1'
+            select.style.opacity = '1';
+            select.style.height = "auto";
+            select.style.width = "100%";
           } else {
-            select.style.opacity = '0' // Hide other quantity dropdowns
+            select.style.opacity = '0';
+            select.style.height = "0";
+            select.style.width = "0"; // Hide other quantity dropdowns
           }
         });
       });

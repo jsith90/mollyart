@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 from .models import Commission, Image, Past_Commission_Image
 from .forms import CommissionForm, ImageForm, ImageFormSet, Past_Commission_ImageForm
+from review.models import Review
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -21,6 +22,7 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 def create_commission(request):
 	past_images = Past_Commission_Image.objects.filter(is_active=True)
+	reviews = Review.objects.filter(is_active=True)
 	if request.method == 'POST':
 		commission_form = CommissionForm(request.POST)
 		image_formset = ImageFormSet(request.POST, request.FILES)
@@ -36,11 +38,11 @@ def create_commission(request):
 			return redirect('index')
 		else:
 			messages.error(request, "Something's up with your form.")
-			return render(request, 'commission/create_commission.html', { 'commission_form':commission_form, 'image_formset': image_formset, 'past_images':past_images })
+			return render(request, 'commission/create_commission.html', { 'reviews': reviews, 'commission_form':commission_form, 'image_formset': image_formset, 'past_images':past_images })
 	else:
 		commission_form = CommissionForm()
 		image_formset = ImageFormSet()
-		return render(request, 'commission/create_commission.html', { 'commission_form': commission_form, 'image_formset': image_formset, 'past_images': past_images })
+		return render(request, 'commission/create_commission.html', { 'reviews': reviews, 'commission_form': commission_form, 'image_formset': image_formset, 'past_images': past_images })
 
 
 def commission_email(commission, images):

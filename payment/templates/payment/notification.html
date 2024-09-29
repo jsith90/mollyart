@@ -11,7 +11,7 @@
       {% for item in items %}
          <pre>Item: {{ item.product }}</pre>
          {% if item.is_size %}
-            <pre>{{ item.sizes_list }}</pre>
+            <pre>{{ item.size }}</pre>
          {% else %}
             <pre>Quantity: {{ item.quantity }}</pre>
             <pre>Price: £{{ item.price }}</pre>

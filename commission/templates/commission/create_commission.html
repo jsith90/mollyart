@@ -2,20 +2,6 @@
 {% load static %}
 
 {% block content %}
-    <section class="past-commission-slides">
-        <div class="reel-images">
-            <div class="reel-image">
-                {% for image in past_images %}
-                    <img class="modal-img" src="{{ image.image.url }}" alt="{{ image.image_name }}">
-                {% endfor %}
-            </div>
-            <div class="reel-image">
-                {% for image in past_images %}
-                    <img class="modal-img" src="{{ image.image.url }}" alt="{{ image.image_name }}">
-                {% endfor %}
-            </div>
-        </div>
-    </section>
     <header class="shop-header">
         <div class="header-div">
             <div class="header-icons">
@@ -33,8 +19,13 @@
         transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg><svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {animation: dl-wave 15s linear infinite;
         transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg>
     </div>
-    <section class="form-section"> 
-        <h2>Commission Form</h2>
+    <section class="form-section form-display"> 
+        <div class="commission-example">
+            <div class="repeat-image">
+                <img src="{% static 'images/commission-example.JPG' %}">
+            </div>
+            <h2 class="form-toggle">Commission Form</h2>
+        </div>
         <form class="commission-form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
             <div class="form">
@@ -44,7 +35,7 @@
             <div class="form">
                 <label for="{{ commission_form.email.id_for_label }}">{{ commission_form.email.label }}</label>
                 {{ commission_form.email }}
-            </div>
+            </div>  
             <div class="form">
                 <label for="{{ commission_form.address.id_for_label }}">{{ commission_form.address.label }}</label>
                 {{ commission_form.address }}
@@ -92,6 +83,43 @@
             </div>
             <button type="submit" class="commission-button">Send Commission</button>
         </form>
+    </section>
+    <section class="past-commission-slides">
+        <div class="reel-images">
+            <div class="reel-image">
+                {% for image in past_images %}
+                    <img class="modal-img" src="{{ image.image.url }}" alt="{{ image.image_name }}">
+                {% endfor %}
+            </div>
+            <div class="reel-image">
+                {% for image in past_images %}
+                    <img class="modal-img" src="{{ image.image.url }}" alt="{{ image.image_name }}">
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="commission-section">
+        <div class="reel-images">
+            <div class="reel-image">
+                <p>
+                    {% for review in reviews %}
+                        <span class="review-span">"{{ review.review }}"</span>  <span class="review-name">{{ review.name }}</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="reel-image">
+                <p>
+                    {% for review in reviews %}
+                        <span class="review-span">"{{ review.review }}"  </span><span class="review-name">{{ review.name }}</span>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+        <div class="commission-backdrop">
+        </div>
+        <div class="commission-image">
+            <img src="{% static 'images/commission-image.JPG' %}">
+        </div>
     </section>
     <!-- The Modal -->
     <div id="myModal" class="modal">

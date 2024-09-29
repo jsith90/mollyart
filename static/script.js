@@ -424,6 +424,43 @@ function checkoutPages() {
     }
 }
 
+
+function toggleCommissionForm() {
+    // Select all elements with the class 'summary-toggle'
+    const formToggles = document.querySelectorAll(".form-toggle");
+    const formDisplay = document.querySelector('.form-display');
+    
+    
+    formToggles.forEach((toggle) => {
+        toggle.addEventListener("mouseover", function() {
+            
+            // const shopText = item.querySelectorAll('.item-detail > h3, .item-detail > p, .item-detail > h4');
+            toggle.style.cursor = "pointer";
+            toggle.style.background = "#0065d9";
+            toggle.style.boxShadow = "black 6px 6px 1px 1px";
+        });
+
+        toggle.addEventListener("mouseout", function() {
+            toggle.style.background = ""; // Reset background on mouse out
+            toggle.style.boxShadow = "";
+        });
+        // Add click event listener to each summary-toggle
+        toggle.addEventListener("click", function () {
+            // Find the next sibling element with the class 'payment-detail'
+            const commissionForm = document.querySelector('.commission-form');
+            const example = document.querySelector('.commission-example');
+
+            // Toggle the 'payment-detail-display' class to show/hide the details
+            if (commissionForm) {
+                commissionForm.classList.toggle("form-detail-display");
+                example.style.margin = "0 0 50px 0";
+
+            }
+        });
+    });
+}
+
+
 // Call these functions to initialize events based on the template
 initShopItemEvents();
 initCheckoutButton();
@@ -435,3 +472,4 @@ trolleyPage();
 checkoutPages();
 commissionSlides();
 paymentLoading();
+toggleCommissionForm();
