@@ -857,7 +857,7 @@ input[type="radio"]:not(:disabled):checked {
 }
 
 .commission-example {
-	background-image: url(/static/images/commission-example.JPG);
+	background-image: url(/static/images/commission-example-min.JPG);
   background-repeat: no-repeat;
   overflow: hidden;
   width: 100%;
@@ -871,7 +871,7 @@ input[type="radio"]:not(:disabled):checked {
 }
 
 .commission-change {
-	background-image: url(/static/images/backdrop.JPG);
+	background-image: url(/static/images/backdrop-min.JPG);
   background-repeat: no-repeat;
   overflow: hidden;
   width: 100%;
@@ -1503,6 +1503,7 @@ form {
 .form-detail-display {
 	max-height: 2000px; /* Set a maximum height large enough to fit content */
   opacity: 1;
+  margin: 0 0 50px 0;
 }
 
 .form-section {
@@ -1522,8 +1523,8 @@ form > .product-buttons > .product-button {
 }
 
 .past-commission-slides {
-	padding: 70px 0 0 0;
-	background: #e7e5d5;
+	padding: 0;
+	background: white;
 }
 
 .reel-images {
@@ -1542,7 +1543,7 @@ form > .product-buttons > .product-button {
 } 
 
 .reel-image img {
-	width: 300px;
+	width: 400px;
 	margin: 0 40px;
 }
 
@@ -2328,7 +2329,7 @@ footer {
 	}
 
 	.reel-image img {
-		width: 200px;
+		width: 400px;
 	}
 
 	.landing {
@@ -2379,7 +2380,7 @@ footer {
 	}
 
 	.reel-image img {
-		width: 100px;
+		width: 300px;
 	}
 
 	.icon-reel-images {
