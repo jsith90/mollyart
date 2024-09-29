@@ -15,7 +15,7 @@ function paymentLoading() {
             }, 10000);
         }
     }
-}
+}  
 
 function commissionSlides() {
     // Get the modal
@@ -449,13 +449,16 @@ function toggleCommissionForm() {
             // Find the next sibling element with the class 'payment-detail'
             const commissionForm = document.querySelector('.commission-form');
             const example = document.querySelector('.commission-example');
+            const relative = document.querySelector('.relative');
 
             // Toggle the 'payment-detail-display' class to show/hide the details
             if (commissionForm) {
                 commissionForm.classList.toggle("form-detail-display");
                 example.style.margin = "0 0 50px 0";
-
+                example.classList.toggle('commission-change');
+                relative.classList.toggle('absolute');
             }
+
         });
     });
 }

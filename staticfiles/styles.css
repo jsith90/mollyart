@@ -870,6 +870,30 @@ input[type="radio"]:not(:disabled):checked {
   align-items: center;
 }
 
+.commission-change {
+	background-image: url(/static/images/backdrop.JPG);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.relative {
+	opacity: 1;
+	height: auto;
+}
+
+.absolute {
+	opacity: 0;
+	height: 0;
+}
+
 .repeat-image {
 	width: 50%;
 }

@@ -216,20 +216,25 @@
 });
 
   // Size selection logic
-  const sizeRadios = document.querySelectorAll('.size-radio');
-  const sizeQuantities = document.querySelectorAll('.size-quantity');
+    const sizeRadios = document.querySelectorAll('.size-radio');
+    const sizeQuantities = document.querySelectorAll('.size-quantity');
 
-  sizeRadios.forEach((radio, index) => {
-    radio.addEventListener('change', function() {
-      sizeQuantities.forEach((select, selectIndex) => {
-        if (selectIndex === index) {
-          select.style.opacity = '1'; // Show the corresponding quantity dropdown
-        } else {
-          select.style.opacity = '0'; // Hide other quantity dropdowns
-        }
+    sizeRadios.forEach((radio, index) => {
+      radio.addEventListener('change', function() {
+        sizeQuantities.forEach((select, selectIndex) => {
+          if (selectIndex === index) { 
+            // Show the corresponding quantity dropdown
+            select.style.opacity = '1';
+            select.style.height = "auto";
+            select.style.width = "100%";
+          } else {
+            select.style.opacity = '0';
+            select.style.height = "0";
+            select.style.width = "0"; // Hide other quantity dropdowns
+          }
+        });
       });
     });
-  });
 
   document.addEventListener("DOMContentLoaded", function() {
     // Select all <option> elements with the 'selected' attribute

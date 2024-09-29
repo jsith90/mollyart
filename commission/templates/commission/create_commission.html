@@ -20,9 +20,25 @@
         transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg>
     </div>
     <section class="form-section form-display"> 
+<!--         <div class="reel-images">
+            <div class="reel-image">
+                <p>
+                    {% for review in reviews %}
+                        <span class="review-span">"{{ review.review }}"</span>  <span class="review-name">{{ review.name }}</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="reel-image">
+                <p>
+                    {% for review in reviews %}
+                        <span class="review-span">"{{ review.review }}"  </span><span class="review-name">{{ review.name }}</span>
+                    {% endfor %}
+                </p>
+            </div> -->
+        </div>
         <div class="commission-example">
             <div class="repeat-image">
-                <img src="{% static 'images/commission-example.JPG' %}">
+                <img class="relative" src="{% static 'images/commission-example.JPG' %}">
             </div>
             <h2 class="form-toggle">Commission Form</h2>
         </div>
@@ -98,7 +114,7 @@
             </div>
         </div>
     </section>
-    <section class="commission-section">
+    <!-- <section class="commission-section">
         <div class="reel-images">
             <div class="reel-image">
                 <p>
@@ -120,7 +136,7 @@
         <div class="commission-image">
             <img src="{% static 'images/commission-image.JPG' %}">
         </div>
-    </section>
+    </section> -->
     <!-- The Modal -->
     <div id="myModal" class="modal">
       <span class="close">&times;</span>
