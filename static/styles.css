@@ -491,7 +491,9 @@ nav {
 .shop-heading {
 	width: 20%;
 	margin: 0 20px;
+	text-transform: uppercase;
 	transition: transform 0.5s ease;
+	font-size: 4rem;
 }
 
 .shop-heading:hover {
@@ -500,6 +502,7 @@ nav {
 
 .shop-heading img {
 	width: 100%;
+
 }
 
 .shop-header > div {
@@ -1811,6 +1814,35 @@ form > .product-buttons > .product-button {
   background-position: center;
   background-size: 119%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  transition: opacity 1s ease-in-out, background-size 1s ease-in-out
+}
+
+.portfolio:hover {
+	filter: invert(1);
+	opacity: 0.5;
+	background-size: 159%;
+
+}
+
+.portfolio:hover .portfolio-title {
+	background: black;
+	color: white;
+	opacity: 1;
+}
+
+.portfolio-title {
+	position: absolute;
+	text-align: center;
+	opacity: 0;
+  text-transform: lowercase;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  z-index: 100;
+  border-radius: 5%;
 }
 
 /* footer stylings */
@@ -2773,6 +2805,12 @@ footer {
 		width: 30%;
 
 	}
+
+	.portfolio {
+	  padding: 30% 40%;
+	  margin: 4% 2%;
+	}
+
 
 	.commission-intro-image {
     max-height: 400px;

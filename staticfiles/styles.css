@@ -1,5 +1,5 @@
 {% load static %}
-
+  
 /* general stylings */
 
 * {
@@ -1811,6 +1811,17 @@ form > .product-buttons > .product-button {
   background-position: center;
   background-size: 119%;
   overflow: hidden;
+}
+
+.portfolio-title {
+	position: absolute;
+	right: 10px;
+	top: 8px;
+	text-align: center;
+	color: white;
+  background: black;
+  width: 30%;
+  text-transform: uppercase;
 }
 
 /* footer stylings */

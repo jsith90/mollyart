@@ -6,6 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 # Create your views here.
+def portfolio(request, pk):
+    portfolio = Portfolio.objects.get(id=pk)
+    return render(request, 'portfolio/portfolio.html', {'portfolio':portfolio})
+
+
 def portfolio_title_page(request):
     portfolios = Portfolio.objects.filter(is_published=True)
     return render(request, 'portfolio/portfolio_title_page.html', { 'portfolios':portfolios })
