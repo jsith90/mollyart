@@ -322,7 +322,7 @@ nav {
 }
 
 .slide-padding .slideshow {
-	padding: 200px;
+	padding: 2%;
 }
 
 .slide-padding .slideshow .slide .slide-paragraph {
@@ -2523,6 +2523,11 @@ footer {
 		padding: 30px 0 0 0;
 	}
 
+	.slide-padding .slideshow {
+		padding: 10%;
+	}
+
+
 	.nav-options > li {
 		width: 100%;
 	}
@@ -2569,6 +2574,11 @@ footer {
 	.slideshow {
 		padding: 50px 0 0 0;
 	}
+
+	.slide-padding .slideshow {
+		padding: 20%;
+	}
+
 
 	.slide-paragraph {
 		font-size: 1rem;
@@ -2825,7 +2835,7 @@ footer {
   }
 
   .commission-intro-paragraph {
-		width: 40%;
+		width: 30%;
 	}
 
 	.slideshow {
@@ -2836,9 +2846,13 @@ footer {
 		padding: 0;
 	}
 
-/*	.slide-padding .slideshow	.slide {
-		padding: 100px;
-	}*/
+	.slide-padding .slideshow {
+		padding: 30%;
+	}
+
+	.slide-padding .slideshow	.slide {
+		margin: 0 2px;
+	}
 
 	svg {
 		height: 50px;
@@ -3058,5 +3072,10 @@ footer {
 	.commission-image {
 		top: 65%;
 	}
+
+	.slide-padding .slideshow {
+		padding: 50%;
+	}
+
 }
 
