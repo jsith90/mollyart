@@ -8,29 +8,18 @@
         </div>
     </header>
     <section class="form-section"> 
-        <form class="portfolio-form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+        <h2>portfolio update form</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="form">
-                <label for="{{ portfolio_form.title.id_for_label }}">{{ portfolio_form.title.label }}</label>
-                {{ portfolio_form.title }}
+                {{ portfolio_form.as_p }}
             </div>
-            <div class="form">
-                <label for="{{ portfolio_form.description.id_for_label }}">{{ portfolio_form.description.label }}</label>
-                {{ portfolio_form.description }}
-            </div>
-            <div class="form">
-                <label for="{{ portfolio_form.front_image.id_for_label }}">{{ portfolio_form.front_image.label }}</label>
-                {{ portfolio_form.front_image }}
-            </div>
-            <div class="add-commission-images">
-                <p>Attach your gallery images using the image uploaders below.</p>
+            <div class="edit-commission-images">
+                <p>Attach your images using the image uploaders below.</p>
                 {{ image_formset.management_form }}
                 {% for form in image_formset %}
-                    <div class="form image-input-display" id="edit_{{ form.image.id_for_label }}">
-                        <label for="{{ form.image.id_for_label }}">{{ form.image.label }}</label>
-                        {{ form.image }}
-                        <label for="{{ form.caption.id_for_label }}">{{ form.caption.label }}</label>
-                        {{ form.caption }}
+                    <div class="form image-input-display">
+                        {{ form.as_p }}
                     </div>
                 {% endfor %}
                 <div class="add-buttons">
@@ -40,8 +29,9 @@
                         <button type="button" class="close-image-input" id="minus-img">-</button>
                     </div>
                 </div>
+                <button type="submit" class="commission-button">Create Portfolio</button>
             </div>
-            <button type="submit" class="commission-button">Create Portfolio</button>
+        </form>
         </form>
     </section>
     <script type="text/javascript">

@@ -454,7 +454,6 @@ function toggleCommissionForm() {
             // Toggle the 'payment-detail-display' class to show/hide the details
             if (commissionForm) {
                 commissionForm.classList.toggle("form-detail-display");
-                example.style.margin = "0 0 50px 0";
                 example.classList.toggle('commission-change');
                 relative.classList.toggle('absolute');
             }

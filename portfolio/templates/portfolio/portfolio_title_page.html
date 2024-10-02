@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<div class="portfolios">
+		{% for portfolio in portfolios %}
+			{% if portfolio.front_image %}
+				<div class="portfolio" style="background-image: url('{{ portfolio.front_image.url }}');"></div>
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endblock %}

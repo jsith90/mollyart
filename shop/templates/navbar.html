@@ -23,6 +23,7 @@
     </div>
     <ul class="nav-options">    
         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Shop</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'portfolio_title_page' %}">Portfolio</a></li>
         <li class="nav-item"><a class="nav-link active" href="{% url 'create_commission' %}">Commissions</a></li>
         <li class="nav-item"><a class="nav-link active" href="{% url 'write_review' %}">Review</a></li>
         {% if user.is_superuser %}

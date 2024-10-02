@@ -7,7 +7,7 @@ class Portfolio(models.Model):
 	title = models.CharField(max_length=250, default='', blank=True, null=True)
 	description = models.TextField(max_length=500, default='', blank=True, null=True)
 	is_published = models.BooleanField(default=False)
-	front_image = CloudinaryField('image', blank=True, null=True)
+	front_image = CloudinaryField(blank=True, null=True)
 
 	def __str__(self):
 		return self.title if self.title else 'Untitled'

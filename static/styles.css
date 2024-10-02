@@ -315,6 +315,20 @@ nav {
 	transition-delay: 1s;
 }
 
+.slide-padding {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+}
+
+.slide-padding .slideshow {
+	padding: 200px;
+}
+
+.slide-padding .slideshow .slide .slide-paragraph {
+		text-shadow: none;
+}
+
 .slide {
 	position: absolute;
 	text-align: center;
@@ -465,9 +479,10 @@ nav {
 
 .header-icon {
 	width: 10%;
-	animation-name: bounce;
+/*	animation-name: bounce;
 	animation-duration: 3s;
-	animation-iteration-count: infinite;}
+	animation-iteration-count: infinite;*/
+}
 
 .header-icon img {
 	width: 100%;
@@ -611,6 +626,50 @@ nav {
 
 /* commission form page */
 
+.commission-header {
+	background: #e7e5d5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem 0 2rem 0;
+  margin: 0;
+}
+
+.commission-header > div {
+	text-align: center;
+}
+
+.commission-header > div > h1 > a {
+	text-transform: uppercase;
+	font-size: 4rem;
+	font-family: "Karla", sans-serif;
+	font-weight: 900;
+/*	color: #26FF9A;*/
+/*	color: #268BFF;*/
+/*color: #ff9a26*/
+}
+
+.commission-header > div > h1 {
+	text-transform: uppercase;
+	font-size: 4rem;
+	font-family: "Karla", sans-serif;
+	font-weight: 900;
+	padding: 0;
+/*	color: #26FF9A;*/
+/*	color: #268BFF;*/
+/*color: #ff9a26*/
+}
+
+.commission-header > div > h1 > a:hover {
+	cursor: pointer;
+	color: #0065d9;
+}
+
+.commission-header .header-div .header-icons {
+	margin: 0;
+}
+
 .commission-heading {
 	width: 30%;
 	margin: 0 20px;
@@ -623,6 +682,51 @@ nav {
 
 .commission-heading img {
 	width: 100%;
+}
+
+.commission-intro {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 0 0 50px 0;
+	position: relative;
+}
+
+.commission-intro-image {
+	width: 95%;
+	position: relative;
+}
+
+.commission-intro-image img {
+	width: 100%;
+	border-radius: 150px;
+}
+
+.commission-intro-paragraph {
+	width: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	position: absolute;
+	top:12%;
+	right: 3%;
+	margin-right: 20px;
+}
+
+.commission-intro-paragraph h1 {
+	color: white;
+	text-align: end;
+}
+
+.commission-intro-paragraph p {
+	color: white;
+	text-align: end;
+}
+
+.commission-intro-paragraph img {
+	width: 30%;
 }
 
 /* shop and product page stylings  */
@@ -1497,13 +1601,15 @@ form {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.5s ease
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  background-color: #e7e5d5;
 }
 
 .form-detail-display {
 	max-height: 2000px; /* Set a maximum height large enough to fit content */
   opacity: 1;
   margin: 0 0 50px 0;
+	padding: 50px 0 50px 0;  
 }
 
 .form-section {
@@ -1512,7 +1618,7 @@ form {
 	font-style: normal;
 	text-decoration: none;
 	color: black;
-	margin: 2rem 0 0 0;
+/*	margin: 2rem 0 0 0;*/
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -1523,7 +1629,7 @@ form > .product-buttons > .product-button {
 }
 
 .past-commission-slides {
-	padding: 0;
+	padding: 50px 0;
 	background: white;
 }
 
@@ -1686,6 +1792,25 @@ form > .product-buttons > .product-button {
 
 .sale-price {
 	display: none;
+}
+
+/* portfolio pages */
+/* portfolio title page */
+.portfolios {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.portfolio {
+  padding: 15% 20%;
+  margin: 2%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 119%;
+  overflow: hidden;
 }
 
 /* footer stylings */
@@ -2069,6 +2194,10 @@ footer {
 		font-size: 3rem;
 	}
 
+	.commission-header > div > h1 {
+		font-size: 3rem;
+	}
+
   .shop-display {
   	padding: 0 2rem 2rem 2rem;
   }
@@ -2172,6 +2301,24 @@ footer {
 
 
 @media only screen and (max-width: 1020px) {
+
+	.commission-intro-image img {
+		border-radius: 25px;
+	}
+
+	.commission-intro-paragraph {
+		top:3%;
+		right: 4%;
+		margin: 0;
+	}
+
+	.commission-intro-paragraph h1 {
+		font-size: 1.6rem;
+	}
+
+	.commission-intro-paragraph p {
+		font-size: 0.7rem;
+	}
 
 	.alert {
 		font-size: 1rem;
@@ -2328,6 +2475,10 @@ footer {
 	  height: 500px;
 	}
 
+	.commission-intro-paragraph h1 {
+		font-size: 1.5rem;
+	}
+
 	.reel-image img {
 		width: 400px;
 	}
@@ -2352,6 +2503,10 @@ footer {
 		font-size: 2rem;
 	}
 
+	.commission-header > div > h1 {
+		font-size: 2rem;
+	}
+
 	.footer-man-one {
 		right: -5%;
 		top: 8%;	
@@ -2369,6 +2524,14 @@ footer {
 	.alert{
 		width:70%;
 		left: 15%;
+	}
+
+	.commission-intro-paragraph h1 {
+		font-size: 1.1rem;
+	}
+
+	.commission-intro-paragraph p {
+		font-size: 0.6rem;
 	}
 
 	.slideshow {
@@ -2611,6 +2774,22 @@ footer {
 
 	}
 
+	.commission-intro-image {
+    max-height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+	}
+
+  .commission-intro-image img {
+      width: 200%;
+      position: relative;
+      left: -70%;
+  }
+
+  .commission-intro-paragraph {
+		width: 40%;
+	}
+
 	.slideshow {
 		padding: 100px 0 0 0;
 	}
@@ -2618,6 +2797,10 @@ footer {
 	.slide {
 		padding: 0;
 	}
+
+/*	.slide-padding .slideshow	.slide {
+		padding: 100px;
+	}*/
 
 	svg {
 		height: 50px;
@@ -2654,6 +2837,18 @@ footer {
   }
 
   .shop-header > div > h1 > a {
+  	font-size: 2rem;
+  }
+
+  .commission-header {
+  	margin-bottom: 0;
+  }
+
+  .commission-header > div > h1 {
+  	font-size: 1.5rem;
+  }
+
+  .commission-header > div > h1 > a {
   	font-size: 2rem;
   }
 

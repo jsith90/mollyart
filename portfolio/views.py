@@ -6,11 +6,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 # Create your views here.
+def portfolio_title_page(request):
+    portfolios = Portfolio.objects.filter(is_published=True)
+    return render(request, 'portfolio/portfolio_title_page.html', { 'portfolios':portfolios })
+
+
 def add_portfolio(request):
     user = request.user
     if user.is_authenticated and user.is_superuser:
         if request.method == "POST":
-            portfolio_form = PortfolioForm(request.POST)
+            portfolio_form = PortfolioForm(request.POST, request.FILES)
             image_formset = ImageFormSet(request.POST, request.FILES)
 
             if portfolio_form.is_valid() and image_formset.is_valid():
@@ -39,8 +44,7 @@ def add_portfolio(request):
 def edit_portfolio(request, pk):
     user = request.user
     if user.is_superuser:
-        portfolio = get_object_or_404(Portfolio, id=pk)
-        images = portfolio.image.all() 
+        portfolio = get_object_or_404(Portfolio, id=pk) 
         if request.method == 'POST':
             portfolio_form = PortfolioForm(request.POST, request.FILES, instance=portfolio)
             image_formset = ImageFormSet(request.POST, request.FILES, instance=portfolio)
@@ -62,7 +66,7 @@ def edit_portfolio(request, pk):
 					'portfolio': portfolio,
 					'portfolio_form': portfolio_form,
 					'image_formset': image_formset,
-					'images': images  # Pass the existing images to the template
+					# 'images': images  # Pass the existing images to the template
 				})
         else:
             portfolio_form = PortfolioForm(instance=portfolio)
@@ -73,7 +77,7 @@ def edit_portfolio(request, pk):
             'portfolio': portfolio,
             'portfolio_form': portfolio_form,
             'image_formset': image_formset,
-            'images': images
+            # 'images': images
 
         })
     else:

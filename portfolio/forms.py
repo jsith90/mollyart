@@ -10,7 +10,7 @@ class PortfolioForm(forms.ModelForm):
             'title': 'Gallery Title',
             'description': 'Description',
             'is_published':'Check the box to publish gallery:',
-            'front_image': 'Add a title image:'
+            'front_image': 'Add a title image:',
         }
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter gallery title'}),
