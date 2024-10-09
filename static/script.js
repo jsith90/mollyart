@@ -463,6 +463,8 @@ function toggleCommissionForm() {
 }
 
 
+
+
 // Call these functions to initialize events based on the template
 initShopItemEvents();
 initCheckoutButton();

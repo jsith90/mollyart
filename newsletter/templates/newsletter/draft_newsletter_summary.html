@@ -30,7 +30,10 @@
                         {% endif %}
                     </tbody>
                 </table>
-                <a class="btn" href="{% url 'newsletters_summary' %}">Past Newsletters</a>
+                <div class="product-buttons">
+                    <a class="product-button" href="{% url 'newsletters_summary' %}">Past Newsletters</a>
+                    <a class="product-button" href="{% url 'admin_dash' %}">Admin Dashboard</a>
+                </div>
             </div>
         </center>
     </div>

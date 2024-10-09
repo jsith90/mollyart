@@ -100,7 +100,7 @@ def subscription_email_confirmation(request, email):
 
 def newsletter_email_send(request, article):
     subscribers = Subscriber.objects.filter(is_active=True)
-    invaild_emails = []
+    invalid_emails = []
     for subscriber in subscribers:
         is_valid_email = True
         try:
@@ -134,7 +134,8 @@ def create_newsletter(request):
             if article_form.is_valid():
                 # save article to db
                 article = article_form.save()
-                return redirect('index')
+                messages.success(request, 'Draft successfully created.')
+                return redirect('draft_newsletter_summary')
             else:
                 return render(request, 'newsletter/create_newsletter.html', { 'article_form': article_form })
         else:

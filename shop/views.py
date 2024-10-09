@@ -10,6 +10,7 @@ from newsletter.forms import SubscriptionForm
 from newsletter.views import subscribe
 from newsletter.models import Article
 from review.models import Review
+from portfolio.models import Portfolio
 from django.forms import inlineformset_factory
 
 # login page
@@ -34,7 +35,8 @@ def logout_user(request):
 # Create your views here.
 def index(request):
 	reviews = Review.objects.filter(is_active=True)
-	return render(request, 'index.html', { 'reviews':reviews })
+	portfolios = Portfolio.objects.filter(is_published=True)
+	return render(request, 'index.html', { 'reviews':reviews, 'portfolios':portfolios })
 
 
 def admin_dash(request):

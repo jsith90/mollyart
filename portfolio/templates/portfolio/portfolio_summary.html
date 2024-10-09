@@ -7,23 +7,24 @@
             <center>
                 <div class="col-8">
                     <br>
-                    <h3>Draft Portfolios</h3>
+                    <h3>Portfolios</h3>
                     <form method="post">  <!-- Ensure the method is set to POST -->
                     {% csrf_token %}
                         <table class="table table-striped table-bordered">
                             <thead>
                               <tr>
-                                <th scope="col">Draft Portfolio Summary</th>
+                                <th scope="col">Published Portfolios</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Is portfolio published:</th>
                               </tr>
                             </thead>
                             <tbody>
                                 {% if portfolios %}
                                     {% for portfolio in portfolios %}
-                                        {% if not portfolio.is_published %}
+                                        {% if portfolio.is_published %}
                                             <tr>
                                                 <td><a href="{% url 'edit_portfolio' portfolio.id %}">{{ portfolio.title }}</a></td>
-                                                <td>Draft</td>
+                                                <td>Published</td>
                                                 <td>
                                                     <label for="portfolios_{{ portfolio.id }}_is_published">Is Portfolio Published:</label>
                                                     <input type="checkbox" name="portfolios_{{ portfolio.id }}_is_published" value="True "{% if portfolio.is_published %}checked{% endif %}>
@@ -36,7 +37,7 @@
                         </table>
                         <div class="product-buttons">
                             <button class="product-button" type="submit">Update Published Status</button>
-                            <a class="product-button" href="{% url 'portfolio_summary' %}">Published Portfolios</a>
+                            <a class="product-button" href="{% url 'draft_portfolio_summary' %}">Draft Portfolios</a>
                             <a class="product-button" href="{% url 'admin_dash' %}">Admin Dashboard</a>
                         </div>
                     </form>

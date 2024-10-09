@@ -4,10 +4,10 @@
     <div class="nav-div">
         <div class="toggle-div">
         <button class="nav-toggle-open">
-            <i class="fa-solid fa-sliders"></i>
+            <img src="{% static 'images/dice.png' %}">
         </button>
         <button class="nav-toggle-close">
-            <i class="fa-solid fa-square-xmark"></i>
+            <img src="{% static 'images/close-icon.png' %}">
         </button>
         </div>
         <div class="logo-div">
@@ -16,7 +16,7 @@
         </div>
         <form class="trolley-form">
             <a href="{% url 'trolley_summary' %}">
-                <i class="fa-solid fa-cart-shopping"></i>
+                <img src="{% static 'images/trolley-nav.png' %}">
                 <span class="trolley-number" id="trolley_quantity">{{ trolley | length }}</span>
             </a>
         </form>

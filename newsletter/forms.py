@@ -7,16 +7,16 @@ class CreateArticle(forms.ModelForm):
         model = Article
         fields = ['title', 'body', 'image1', 'caption1', 'image2', 'caption2', 'image3', 'caption3', 'image4', 'caption4', 'is_published']
         labels = {
-            'title': 'Newsletter Title',
-            'body': 'Newsletter Content',
+            'title': 'Newsletter Title:',
+            'body': 'Newsletter Content:',
             'image1':'Upload image:',
-            'caption1': 'Add Caption',
+            'caption1': 'Add Caption:',
             'image2': 'Upload a second image:',
-            'caption2': 'Add Caption',
+            'caption2': 'Add Caption:',
             'image3': 'Upload a third image:',
-            'caption3': 'Add Caption',
+            'caption3': 'Add Caption:',
             'image4': 'Upload a fourth image:',
-            'caption4': 'Add Caption',
+            'caption4': 'Add Caption:',
             'is_published':'Check the box before posting the newsletter:'
         }
         widgets = {

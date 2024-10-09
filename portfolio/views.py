@@ -5,10 +5,49 @@ from .forms import PortfolioForm, ImageFormSet
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
-# Create your views here.
+
+def portfolio_summary(request):
+    user = request.user
+    if user.is_superuser:
+        portfolios = Portfolio.objects.filter(is_published=True)
+        if request.method == 'POST':
+            for portfolio in portfolios:
+                checkbox_name = f'portfolios_{portfolio.id}_is_published'
+                if checkbox_name in request.POST:
+                    portfolio.is_published = True
+                else:
+                    portfolio.is_published = False
+                portfolio.save()
+            messages.success(request, 'Published status updated.')    
+            return redirect('portfolio_summary')
+        return render(request, 'portfolio/portfolio_summary.html', {'portfolios':portfolios})
+    else:
+        return redirect('index')
+
+
+def draft_portfolio_summary(request):
+    user = request.user
+    if user.is_superuser:
+        portfolios = Portfolio.objects.filter(is_published=False)
+        if request.method == 'POST':
+            for portfolio in portfolios:
+                checkbox_name = f'portfolios_{portfolio.id}_is_published'
+                if checkbox_name in request.POST:
+                    portfolio.is_published = True
+                else:
+                    portfolio.is_published = False
+                portfolio.save()
+            messages.success(request, 'Published status updated.')    
+            return redirect('draft_portfolio_summary')
+        return render(request, 'portfolio/draft_portfolio_summary.html', {'portfolios':portfolios})
+    else:
+        return redirect('index')
+
+
 def portfolio(request, pk):
     portfolio = Portfolio.objects.get(id=pk)
-    return render(request, 'portfolio/portfolio.html', {'portfolio':portfolio})
+    images = portfolio.image.all()
+    return render(request, 'portfolio/portfolio.html', {'portfolio':portfolio, 'images':images})
 
 
 def portfolio_title_page(request):
@@ -29,7 +68,7 @@ def add_portfolio(request):
                 for image in images:
                     image.portfolio = portfolio
                     image.save()
-                return redirect('index')  # Redirect to a success page or similar
+                return redirect('draft_portfolio_summary')  # Redirect to a success page or similar
             else:
                 return render(request, 'portfolio/add_portfolio.html', {
                     'portfolio_form': portfolio_form,
@@ -85,14 +124,5 @@ def edit_portfolio(request, pk):
             # 'images': images
 
         })
-    else:
-        return redirect('index')
-
-
-def draft_portfolio_summary(request):
-    user = request.user
-    if user.is_superuser:
-        portfolios = Portfolio.objects.filter(is_published=False)
-        return render(request, 'portfolio/draft_portfolio_summary.html', {'portfolios':portfolios})
     else:
         return redirect('index')

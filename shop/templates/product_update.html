@@ -2,26 +2,133 @@
 {% load static %}
 
 {% block content %}
-<header class="shop-header">
-    <div>
-        <h1>Update {{ product.name }}</h1>
-    </div> 
-</header>
-<section class="form-section">
-    <form class="product-update-form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-        <div class="form">
-            {{ product_form.as_p }}
-        </div>
-        {{ size_formset.management_form }}
-            {% for form in size_formset %}
-                <div class="form">
-                    {{ form.as_p }}
+    <header class="shop-header">
+        <div>
+            <h1>Update {{ product.name }}</h1>
+        </div> 
+    </header>
+    <section class="form-section">
+        <form class="product-update-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="product-form">
+                {{ product_form.as_p }}
+                {{ size_formset.management_form }}
+                <div class="size">
+                    {% for form in size_formset %}
+                        <div class="size-input-display">
+                            {{ form.as_p }}
+                        </div>
+                    {% endfor %}
+                    <div class="add-size-buttons">
+                        <label for="add-img">Press for size input:</label>
+                        <div class="just-buttons">
+                            <button type="button" class="open-size-input" id="add-size">+</button>
+                            <button type="button" class="close-size-input" id="minus-size">-</button>
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-        <div class="product-buttons">
-            <button type="submit" class="product-button">Update Product</button>
-        </div>
-    </form>
-</section>
+                <div class="product-buttons">
+                    <button type="submit" class="product-button">Update Product</button>
+                    <a class="product-button" href="{% url 'admin_dash' %}">Admin Dashboard</a>
+                    <a class="product-button" href="{% url 'shop' %}">Shop</a>
+                </div>
+            </div>
+        </form>
+    </section>
+    <script type="text/javascript">
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     // Get all image input divs
+        //     const imageInputs = document.querySelectorAll(".image-control");
+
+        //     // Hide all image inputs initially
+        //     imageInputs.forEach(input => input.parentElement.style.display = "none");
+
+        //     // Get the button to show more image inputs
+        //     const openButton = document.querySelector(".open-image-input");
+
+        //     // Get the button to hide image inputs
+        //     const closeButton = document.querySelector(".close-image-input");
+
+        //     // Initialize a counter to keep track of the current image input to display
+        //     let currentImageIndex = 0;
+
+        //     // Show image input on button click
+        //     openButton.addEventListener('click', function() {
+        //         if (currentImageIndex < imageInputs.length) {
+        //             imageInputs[currentImageIndex].parentElement.style.display = "block";
+        //             currentImageIndex++;
+        //         }
+        //     });
+
+        //     // Hide image input on button click
+        //     closeButton.addEventListener('click', function() {
+        //         if (currentImageIndex > 0) {
+        //             currentImageIndex--;
+        //             imageInputs[currentImageIndex].parentElement.style.display = "none";
+        //         }
+        //     });
+        // });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const sizeInputs = document.querySelectorAll(".size-input-display");
+
+            sizeInputs.forEach(input => input.style.display = "none");
+
+            const openSizeButton = document.querySelector(".open-size-input");
+            const closeSizeButton = document.querySelector(".close-size-input");
+
+            let currentSizeIndex = 0;
+
+
+            openSizeButton.addEventListener('click', function() {
+                if (currentSizeIndex < sizeInputs.length) {
+                    sizeInputs[currentSizeIndex].style.display = "block";
+                    currentSizeIndex++;
+                }
+            });
+
+            closeSizeButton.addEventListener('click', function() {
+                if (currentSizeIndex > 0) {
+                    currentSizeIndex--;
+                    sizeInputs[currentSizeIndex].style.display = "none";
+                }
+            });
+        });
+
+        const isSize = document.querySelector('.is-size');
+        const size = document.querySelector('.size')
+        const quantity = document.querySelector('.quantity-control');
+
+        isSize.addEventListener("change", function () {
+            if(isSize.checked) {
+                size.style.display = "flex";
+                quantity.parentElement.style.display = "none";
+            } else {
+                size.style.display = "none";
+                quantity.parentElement.style.display = "block";
+            }
+        })
+
+        const isSale = document.querySelector('.is-sale');
+        const isSoldOut = document.querySelector('.is-sold-out');
+        const salePrice = document.querySelector('.sale-price');
+
+        isSale.addEventListener("change", function () {
+            if(isSale.checked) {
+                salePrice.parentElement.style.display = "block";
+                isSoldOut.checked = false;
+            } else {
+                salePrice.parentElement.style.display = "none";
+            }
+        })
+
+
+        isSoldOut.addEventListener("change", function () {
+            if(isSoldOut.checked === true) {
+                isSale.checked = false;
+                salePrice.parentElement.style.display = "none";
+            }
+        })
+
+    </script>
 {% endblock %}

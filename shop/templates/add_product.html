@@ -7,187 +7,126 @@
         <h1>Create a New Product</h1>
     </div>
 </header>
-<section class="form-section">
-    <form class="product-form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-        <div class="form">
-            <label for="{{ product_form.name.id_for_label }}">{{ product_form.name.label }}</label>
-            {{ product_form.name }}
-        </div>
-        <div class="form">
-            <label for="{{ product_form.price.id_for_label }}">{{ product_form.price.label }}</label>
-            £{{ product_form.price }}
-        </div>
-        <div class="form">
-            <label for="{{ product_form.category.id_for_label }}">{{ product_form.category.label }}</label>
-            {{ product_form.category }}
-            <div class="product-buttons">
-                <a class="product-button" target="_blank" href="{% url 'add_category' %}" class="btn btn-secondary">Add New Category</a>
-            </div>
-        </div>
-        <div class="form">
-            <label for="{{ product_form.description.id_for_label }}">{{ product_form.description.label }}</label>
-            {{ product_form.description }}
-        </div>
-        <div class="form">
-            <label for="add-buttons">Add Images:</label>
-            <div class="form image-input-display">
-                <label for="{{ product_form.image.id_for_label }}">{{ product_form.image.label }}</label>
-                {{ product_form.image }}
-            </div>
-            <div class="form image-input-display">
-                <label for="{{ product_form.image2.id_for_label }}">{{ product_form.image2.label }}</label>
-                {{ product_form.image2 }}
-            </div>
-            <div class="form image-input-display">
-                <label for="{{ product_form.image3.id_for_label }}">{{ product_form.image3.label }}</label>
-                {{ product_form.image3 }}
-            </div>
-            <div class="form image-input-display">
-                <label for="{{ product_form.image4.id_for_label }}">{{ product_form.image4.label }}</label>
-                {{ product_form.image4 }}
-            </div>
-            <div class="add-buttons">
-                <label for="add-img">Press for image input:</label>
-                <div class="just-buttons">
-                    <button type="button" class="open-image-input" id="add-img">+</button>
-                    <button type="button" class="close-image-input" id="minus-img">-</button>
+ <section class="form-section">
+        <form class="add-product-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="product-form">
+                {{ product_form.as_p }}
+                {{ size_formset.management_form }}
+                <div class="size">
+                    {% for form in size_formset %}
+                        <div class="size-input-display">
+                            {{ form.as_p }}
+                        </div>
+                    {% endfor %}
+                    <div class="add-size-buttons">
+                        <label for="add-img">Press for size input:</label>
+                        <div class="just-buttons">
+                            <button type="button" class="open-size-input" id="add-size">+</button>
+                            <button type="button" class="close-size-input" id="minus-size">-</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-buttons">
+                    <button type="submit" class="product-button">Update Product</button>
                 </div>
             </div>
-        </div>
-        <div class="form">
-            <label for="{{ product_form.is_size.id_for_label }}">{{ product_form.is_size.label }}</label>
-            {{ product_form.is_size }}
-        </div>
-        <div class="form size">
-        <label for="add-size-buttons">Press for sizes:</label>
-        {{ size_formset.management_form }}
-            {% for form in size_formset %}
-                <div class="form size-input-display" id="edit_{{ form.size.id_for_label }}">
-                    <label for="{{ form.size.id_for_label }}">{{ form.size.label }}</label>
-                    {{ form.size }}
-                    <label for="{{ form.quantity.id_for_label }}">{{ form.quantity.label }}</label>
-                    {{ form.quantity }}
-                </div>
-            {% endfor %}
-            <div class="add-size-buttons">
-                <label for="add-img">Press for size input:</label>
-                <div class="just-buttons">
-                    <button type="button" class="open-size-input" id="add-size">+</button>
-                    <button type="button" class="close-size-input" id="minus-size">-</button>
-                </div>
-            </div>
-        </div>
-        <div class="form quantity">
-            <label for="{{ product_form.quantity.id_for_label }}">{{ product_form.quantity.label }}</label>
-            {{ product_form.quantity }}
-        </div>
-        <div class="form">
-            <label for="{{ product_form.is_sale.id_for_label }}">{{ product_form.is_sale.label }}</label>
-            {{ product_form.is_sale }}
-        </div>
-        <div class="form sale-price">
-            <label for="{{ product_form.sale_price.id_for_label }}">{{ product_form.sale_price.label }}</label>
-            £{{ product_form.sale_price }}
-        </div>
-        <div class="form">
-            <label for="{{ product_form.is_sold_out.id_for_label }}">{{ product_form.is_sold_out.label }}</label>
-            {{ product_form.is_sold_out }}
-        </div>
-        <div class="product-buttons">
-            <button type="submit" class="product-button">Create Product</button>
-        </div>
-    </form>
-</section>
-<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get all image input divs
-        const imageInputs = document.querySelectorAll(".image-input-display");
-        const sizeInputs = document.querySelectorAll(".size-input-display");
+        </form>
+    </section>
+    <script type="text/javascript">
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     // Get all image input divs
+        //     const imageInputs = document.querySelectorAll(".image-control");
 
-        // Hide all image inputs initially
-        imageInputs.forEach(input => input.style.display = "none");
-        sizeInputs.forEach(input => input.style.display = "none");
+        //     // Hide all image inputs initially
+        //     imageInputs.forEach(input => input.parentElement.style.display = "none");
 
-        // Get the button to show more image inputs
-        const openButton = document.querySelector(".open-image-input");
-        const openSizeButton = document.querySelector(".open-size-input");
+        //     // Get the button to show more image inputs
+        //     const openButton = document.querySelector(".open-image-input");
 
-        // Get the button to hide image inputs
-        const closeButton = document.querySelector(".close-image-input");
-        const closeSizeButton = document.querySelector(".close-size-input");
+        //     // Get the button to hide image inputs
+        //     const closeButton = document.querySelector(".close-image-input");
 
-        // Initialize a counter to keep track of the current image input to display
-        let currentImageIndex = 0;
-        let currentSizeIndex = 0;
+        //     // Initialize a counter to keep track of the current image input to display
+        //     let currentImageIndex = 0;
 
-        // Show image input on button click
-        openButton.addEventListener('click', function() {
-            if (currentImageIndex < imageInputs.length) {
-                imageInputs[currentImageIndex].style.display = "block";
-                currentImageIndex++;
-            }
+        //     // Show image input on button click
+        //     openButton.addEventListener('click', function() {
+        //         if (currentImageIndex < imageInputs.length) {
+        //             imageInputs[currentImageIndex].parentElement.style.display = "block";
+        //             currentImageIndex++;
+        //         }
+        //     });
+
+        //     // Hide image input on button click
+        //     closeButton.addEventListener('click', function() {
+        //         if (currentImageIndex > 0) {
+        //             currentImageIndex--;
+        //             imageInputs[currentImageIndex].parentElement.style.display = "none";
+        //         }
+        //     });
+        // });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const sizeInputs = document.querySelectorAll(".size-input-display");
+
+            sizeInputs.forEach(input => input.style.display = "none");
+
+            const openSizeButton = document.querySelector(".open-size-input");
+            const closeSizeButton = document.querySelector(".close-size-input");
+
+            let currentSizeIndex = 0;
+
+
+            openSizeButton.addEventListener('click', function() {
+                if (currentSizeIndex < sizeInputs.length) {
+                    sizeInputs[currentSizeIndex].style.display = "block";
+                    currentSizeIndex++;
+                }
+            });
+
+            closeSizeButton.addEventListener('click', function() {
+                if (currentSizeIndex > 0) {
+                    currentSizeIndex--;
+                    sizeInputs[currentSizeIndex].style.display = "none";
+                }
+            });
         });
 
-        openSizeButton.addEventListener('click', function() {
-            if (currentSizeIndex < sizeInputs.length) {
-                sizeInputs[currentSizeIndex].style.display = "block";
-                currentSizeIndex++;
+        const isSize = document.querySelector('.is-size');
+        const size = document.querySelector('.size')
+        const quantity = document.querySelector('.quantity-control');
+
+        isSize.addEventListener("change", function () {
+            if(isSize.checked) {
+                size.style.display = "flex";
+                quantity.parentElement.style.display = "none";
+            } else {
+                size.style.display = "none";
+                quantity.parentElement.style.display = "block";
             }
-        });
+        })
 
-        // Hide image input on button click
-        closeButton.addEventListener('click', function() {
-            if (currentImageIndex > 0) {
-                currentImageIndex--;
-                imageInputs[currentImageIndex].style.display = "none";
+        const isSale = document.querySelector('.is-sale');
+        const isSoldOut = document.querySelector('.is-sold-out');
+        const salePrice = document.querySelector('.sale-price');
+
+        isSale.addEventListener("change", function () {
+            if(isSale.checked) {
+                salePrice.parentElement.style.display = "block";
+                isSoldOut.checked = false;
+            } else {
+                salePrice.parentElement.style.display = "none";
             }
-        });
+        })
 
-        closeSizeButton.addEventListener('click', function() {
-            if (currentSizeIndex > 0) {
-                currentSizeIndex--;
-                sizeInputs[currentSizeIndex].style.display = "none";
+
+        isSoldOut.addEventListener("change", function () {
+            if(isSoldOut.checked === true) {
+                isSale.checked = false;
+                salePrice.parentElement.style.display = "none";
             }
-        });
-    });
+        })
 
-    const isSize = document.querySelector('.is-size');
-    const size = document.querySelector('.size')
-    const quantity = document.querySelector('.quantity');
-
-    isSize.addEventListener("change", function () {
-        if(isSize.checked) {
-            size.style.display = "block";
-            quantity.style.display = "none";
-        } else {
-            size.style.display = "none";
-            quantity.style.display = "block";
-        }
-    })
-
-    const isSale = document.querySelector('.is-sale');
-    const salePrice = document.querySelector('.sale-price');
-
-    isSale.addEventListener("change", function () {
-        if(isSale.checked) {
-            salePrice.style.display = "block";
-            isSoldOut.checked = false;
-        } else {
-            salePrice.style.display = "none";
-        }
-    })
-
-    const isSoldOut = document.querySelector('.is-sold-out');
-
-    isSoldOut.addEventListener("change", function () {
-        if(isSoldOut.checked === true) {
-            isSale.checked = false;
-            salePrice.style.display = "none";
-        }
-    })
-
-
-
-</script>
+    </script>
 {% endblock %}
