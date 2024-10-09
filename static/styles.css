@@ -252,7 +252,7 @@ nav {
 #logo-name-mobile {
 	text-align: center;
 	transition: transform 0.5s ease;
-	width: 100%;
+	width: 80%;
 	position: relative;
 }
 
@@ -263,7 +263,7 @@ nav {
 }
 
 #logo-name-mobile > img {
-	max-width: 80%;
+	max-width: 100%;
 	height: auto;
 	margin: 0 auto 0 auto;
 }
@@ -3147,8 +3147,9 @@ footer {
 
 	.logo-div-mobile {
 		display: flex;
+		justify-content: center;
 		position: relative;
-		width: 50%;
+		width: 85%;
 	}
 
 	.portfolio {
