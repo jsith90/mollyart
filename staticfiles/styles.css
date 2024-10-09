@@ -223,11 +223,33 @@ nav {
 /*	opacity: 0;*/
 }
 
+.logo-div-mobile {
+	display: none;
+}
+
 #logo-name:hover {
 	transform: translateY(-10px);
 }
 
 #logo-name {
+	text-align: center;
+	transition: transform 0.5s ease;
+	width: 100%;
+	position: relative;
+}
+
+
+#logo-name > img {
+	max-width: 80%;
+	height: auto;
+	margin: 0 autor 0 auto;
+}
+
+#logo-name-mobile:hover {
+	transform: translateY(-10px);
+}
+
+#logo-name-mobile {
 	text-align: center;
 	transition: transform 0.5s ease;
 	width: 100%;
@@ -240,7 +262,7 @@ nav {
 	z-index: -9;
 }
 
-#logo-name > img {
+#logo-name-mobile > img {
 	max-width: 80%;
 	height: auto;
 	margin: 0 auto 0 auto;
@@ -254,16 +276,28 @@ nav {
 	transition: opacity 1s ease-in, transform 0.5s ease;
 }
 
+#logo-man > img {
+	width: 100%;
+}
+
+.logo-man-mobile {
+	width: 100%;
+	position: absolute;
+	z-index: -9;	
+	display: none;
+	transition: opacity 1s ease-in, transform 0.5s ease;
+}
+
 .man-appear {
 	z-index: 1;
 	display: block;
 }
 
-.logo-man:hover {
+.logo-man-mobile:hover {
 	transform: translateY(-10px);
 }
 
-#logo-man > img {
+#logo-man-mobile > img {
 	width: 100%;
 }
 
@@ -3092,6 +3126,29 @@ footer {
 	.alert > div {
 		width: 30%;
 
+	}
+
+	.nav-div {
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.toggle-div {
+		width: 50%;
+	}
+
+	.trolley-form {
+		width: 50%;
+	}
+
+	.logo-div {
+		display: none;
+	}
+
+	.logo-div-mobile {
+		display: flex;
+		position: relative;
+		width: 50%;
 	}
 
 	.portfolio {

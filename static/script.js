@@ -87,8 +87,12 @@ function navScroll() {
     // const hatmanDiv = document.querySelector('.hatman-div');
     const nav = document.getElementsByTagName('nav')[0];
     const logo = document.querySelector('.logo-div'); 
+    const logoMobile = document.querySelector('.logo-div-mobile');
+    const logoMobileStyles = window.getComputedStyle(logoMobile);
     const logoName = document.getElementById('logo-name');
+    const logoNameMobile = document.getElementById('logo-name-mobile');
     const logoMan = document.getElementById('logo-man');
+    const logoManMobile = document.getElementById('logo-man-mobile');
     const landing = document.querySelector('.landing');
     // const hatmanImage = document.querySelector('.hatman-image');
     const croeso = document.querySelector('.croeso');
@@ -112,6 +116,12 @@ function navScroll() {
         logoName.style.position = "absolute";
         logoMan.classList.add('man-appear');
         logoMan.style.position = "relative";
+            if (logoMobileStyles.display === "flex") {
+                logoManMobile.classList.add('man-appear');
+                logoManMobile.style.position = "relative";
+                logoNameMobile.classList.add('nav-scroll');
+                logoNameMobile.style.position = "absolute";
+            }
 
         function handleScroll() {
             const currentScrollY = window.scrollY;

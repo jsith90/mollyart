@@ -20,6 +20,10 @@
                 <span class="trolley-number" id="trolley_quantity">{{ trolley | length }}</span>
             </a>
         </form>
+        <div class="logo-div-mobile">
+            <a id="logo-name-mobile" href="{% url 'index' %}"><img src="{% static 'images/logo-type.png' %}"></a>
+            <a id="logo-man-mobile" class="logo-man-mobile" href="{% url 'index' %}"><img src="{% static 'images/hatlady.gif' %}"></a>
+        </div>
     </div>
     <ul class="nav-options">    
         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'shop' %}">Shop</a></li>
