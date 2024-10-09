@@ -254,6 +254,7 @@ nav {
 	transition: transform 0.5s ease;
 	width: 80%;
 	position: relative;
+	margin: 0 0 1rem 0;
 }
 
 .nav-scroll {
@@ -640,6 +641,45 @@ nav {
 	justify-content: center;
 }
 
+.review {
+	background-image: url(/static/images/review.JPG);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 100%;
+  height: 500px;
+  background-size: auto;
+  background-position: center;
+  position: relative;
+}
+
+.review-heading {
+  color: #e7e5d5;
+  text-transform: lowercase;
+  position: absolute;
+  top: 10%;
+  right: 2%;
+  font-size: 3rem;
+  text-shadow: black 1rem 1rem;
+  text-align: center;
+}
+
+.review-link {
+  position: absolute;
+  color: #e7e5d5;
+  z-index: 100;
+  text-decoration: underline;
+  font-size: 1.5rem;
+}
+
+.review-link:hover {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.review-link:nth-of-type(1) {
+	top: 24%;
+	right: 3%;
+}
 
 /* admin dashboard  */
 
@@ -2632,6 +2672,14 @@ footer {
 
 @media only screen and (max-width: 1020px) {
 
+	.icon-reel-images .reel-image img {
+		width: 150px;
+	}
+
+	.slide-paragraph {
+		font-size: 1.3rem;
+	}
+
 	.commission-intro-image img {
 		border-radius: 25px;
 	}
@@ -3128,6 +3176,10 @@ footer {
 
 	}
 
+	nav {
+		margin: 2rem 0 0 0;
+	}
+
 	.nav-div {
 		justify-content: center;
 		flex-wrap: wrap;
@@ -3150,6 +3202,11 @@ footer {
 		justify-content: center;
 		position: relative;
 		width: 85%;
+		padding: 2rem 0 0 0
+	}
+
+	.svg-wave-over-home {
+		height: auto;
 	}
 
 	.portfolio {
@@ -3179,7 +3236,11 @@ footer {
 	}
 
 	.slide {
-		padding: 0;
+		padding: 20px;
+	}
+
+	.slide-paragraph {
+		font-size: 1.1rem;
 	}
 
 	.slide-padding .slideshow {

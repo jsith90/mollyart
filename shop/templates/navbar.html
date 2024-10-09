@@ -30,6 +30,7 @@
         <li class="nav-item"><a class="nav-link active" href="{% url 'portfolio_title_page' %}">Portfolio</a></li>
         <li class="nav-item"><a class="nav-link active" href="{% url 'create_commission' %}">Commissions</a></li>
         <li class="nav-item"><a class="nav-link active" href="{% url 'write_review' %}">Review</a></li>
+        <li class="nav-item"><a class="nav-link active" href="https://www.instagram.com/mollyst.art/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
         {% if user.is_superuser %}
             <li class="nav-item"><a class="nav-link active" href="{% url 'admin_dash' %}">Admin</a></li>
             <li class="nav-item"><a class="nav-link active" aria-label="Logout of User account" href="{% url 'logout' %}">Logout</a></li>
