@@ -1791,7 +1791,7 @@ form {
 .loading-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1000; /* Sit on top */
+  z-index: 0; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -1809,6 +1809,7 @@ form {
 	flex-direction: column;
 	align-items: center;
 	width: 50%;
+	z-index: 1000;
 }
 
 .logo-load:hover {
