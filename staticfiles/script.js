@@ -23,11 +23,6 @@ function paymentLoading() {
             }
         }, 10000);
     }
-
-    // Optionally, reset the unloading state when navigating away
-    window.addEventListener('beforeunload', function () {
-        isUnloading = true;
-    });
 }
 
 
@@ -485,8 +480,6 @@ function toggleCommissionForm() {
         });
     });
 }
-
-
 
 
 // Call these functions to initialize events based on the template

@@ -648,8 +648,15 @@ nav {
   width: 100%;
   height: 500px;
   background-size: auto;
-  background-position: center;
+  background-position: bottom;
   position: relative;
+}
+
+.review img {
+	width: 500px;
+	position: absolute;
+	top: 15%;
+	left: 5%;
 }
 
 .review-heading {
@@ -659,7 +666,6 @@ nav {
   top: 10%;
   right: 2%;
   font-size: 3rem;
-  text-shadow: black 1rem 1rem;
   text-align: center;
 }
 
@@ -680,6 +686,68 @@ nav {
 	top: 24%;
 	right: 3%;
 }
+
+.commission-ad {
+	width: 100%;
+	height: 600px;
+	background: #e7e5d5;
+	position: relative;
+}
+
+.commission-ad-img {
+  width: 500px;
+  position: absolute;
+  top: 10%;
+  right: 3%;
+  border-radius: 5%;
+}
+
+.commission-ad h1 {
+  color: white;
+  text-shadow: 1px 1px #e7d5e0;
+  position: absolute;
+  top: 24%;
+  left: 2%;
+  font-size: 3rem;
+}
+
+.commission-ad-link:hover {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.commission-ad-link {
+	text-decoration: underline;
+}
+
+.commission-ad-link:nth-of-type(1n) {
+	position: absolute;
+  top: 36%;
+  color: white;
+  text-shadow: 1px 1px #e7d5e0;
+  font-size: 1.5rem;
+  left: 2%;
+}
+
+.commission-ad-link:nth-of-type(2n) {
+  position: absolute;
+  top: 66%;
+  color: white;
+  text-shadow: 1px 1px #e7d5e0;
+  font-size: 1.5rem;
+  left: 2%;
+}
+
+.commission-ad h2 {
+  top: 32%;
+  color: white;
+  text-shadow: 1px 1px #e7d5e0;
+  position: absolute;
+  top: 54%;
+  left: 2%;
+  font-size: 3rem;
+}
+
 
 /* admin dashboard  */
 
@@ -1791,7 +1859,7 @@ form {
 .loading-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 11; /* Sit on top */
+  z-index: 0; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -2427,6 +2495,44 @@ footer {
 		margin: 0 0 0 0;
 	}
 
+	.commission-ad {
+		height: auto;
+	}
+
+	.commission-ad-img {
+	  width: 90%;
+	  position: relative;
+	  top: unset;
+	  right: -5%;
+	  border-radius: 5%;
+	  padding: 1rem;
+	}
+
+	.commission-ad h1 {
+	  top: 18%;
+	  left: 20%;
+	  color: #e5e7d7;
+	}
+
+	.commission-ad-link:nth-of-type(1n) {
+	  top: 25%;
+	  left: 20%;
+	  color: #e5e7d7;
+	}
+
+	.commission-ad-link:nth-of-type(2n) {
+	  top: 44%;
+	  left: 23%;
+	  color: #e5e7d7;
+	}
+
+	.commission-ad h2 {
+	  top: 38%;
+	  left: 20%;
+	  font-size: 3rem;
+	  color: #e5e7d7;
+	}
+
   .view-product-sale > a, .view-product-sold > a, .view-product-available > a, .sold-out-badge {
   	font-size: 0.7rem;
   }
@@ -2873,6 +2979,28 @@ footer {
 		padding: 10%;
 	}
 
+	.commission-ad h1 {
+	  top: 18%;
+	  left: 14%;
+	  font-size: 2rem;
+	}
+
+	.commission-ad-link:nth-of-type(1n) {
+	  top: 26%;
+	  left: 15%;
+	}
+
+	.commission-ad-link:nth-of-type(2n) {
+	  top: 45%;
+	  left: 14%;
+	}
+
+	.commission-ad h2 {
+	  top: 38%;
+	  left: 14%;
+	  font-size: 2rem;
+	}
+
 
 	.nav-options > li {
 		width: 100%;
@@ -2951,6 +3079,14 @@ footer {
 
 	.landing-man {
 		width: 80%;
+	}
+
+	.review img {
+		width: 70%;
+	}
+
+	.review-heading {
+	  font-size: 2rem;
 	}
 
 	.nav-toggle-close > img {
@@ -3209,11 +3345,44 @@ footer {
 		height: auto;
 	}
 
+	.review img {
+		width: 90%;
+		top: 32%;
+	}
+
+	.review-heading {
+	  font-size: 1.5rem;
+	}
+
+	.review-link {
+	  font-size: 1rem;
+	}
+
+	.commission-ad-img {
+		border-radius: 10%;
+	}
+
+	.commission-ad h1 {
+		font-size: 1.5rem;
+	}
+
+	.commission-ad h2 {
+		font-size: 1.5rem;
+	}
+
+	.commission-ad-link:nth-of-type(1n) {
+		font-size: 1rem;
+	}
+
+	.commission-ad-link:nth-of-type(2n) {
+		font-size: 1rem;
+	}
+
+
 	.portfolio {
 	  padding: 30% 40%;
 	  margin: 4% 2%;
 	}
-
 
 	.commission-intro-image {
     max-height: 400px;
@@ -3495,12 +3664,28 @@ footer {
 	}
 
 	.slide-padding .slideshow {
-		padding: 50%;
+		height: 700px;
 	}
 
 	.portfolio-page-title h2 {
     font-size: 1.5rem;
     text-transform: uppercase;
+	}
+
+	.commission-ad h1 {
+		font-size: 1.1rem;
+	}
+
+	.commission-ad h2 {
+		font-size: 1.1rem;
+	}
+
+	.commission-ad-link:nth-of-type(1n) {
+		font-size: 0.8rem;
+	}
+
+	.commission-ad-link:nth-of-type(2n) {
+		font-size: 0.8rem;
 	}
 
 }

@@ -8,28 +8,21 @@ function paymentLoading() {
         pay.addEventListener('click', function () {
             showModal();
         });
-
-        pay.addEventListener('touchstart', function () {
-            showModal();
-        });
     }
 
     function showModal() {
         // Show the modal immediately
         modal.style.display = "flex";
+        modal.style.zIndex = "1000";
 
         // Hide the modal after 10 seconds if no unload event occurs
         setTimeout(function () {
             if (!isUnloading) {
                 modal.style.display = "none";
+                modal.style.zIndex = "0";
             }
         }, 10000);
     }
-
-    // Optionally, reset the unloading state when navigating away
-    window.addEventListener('beforeunload', function () {
-        isUnloading = true;
-    });
 }
 
 
@@ -487,8 +480,6 @@ function toggleCommissionForm() {
         });
     });
 }
-
-
 
 
 // Call these functions to initialize events based on the template
