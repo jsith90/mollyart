@@ -1878,7 +1878,7 @@ form {
 }
 
 .form-detail-display {
-	max-height: 2000px; /* Set a maximum height large enough to fit content */
+	max-height: 10000px; /* Set a maximum height large enough to fit content */
   opacity: 1;
   margin: 0 0 50px 0;
 	padding: 50px 0 50px 0;  

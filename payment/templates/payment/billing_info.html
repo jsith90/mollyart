@@ -157,19 +157,21 @@
     const form = document.getElementById('payment-form');
 
     form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+        event.preventDefault();
+        // const modal = document.getElementById("myLoadingModal");
+        // modal.style.display = "flex";
 
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-    const {error} = await stripe.confirmPayment({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        confirmParams: {
-          return_url: 'https://mollyart-production.up.railway.app/payment/payment_success',
-        },
-        headers: {
-        'X-CSRFToken': csrftoken, // Include the CSRF token in the headers
-        }
+        const {error} = await stripe.confirmPayment({
+            //`Elements` instance that was used to create the Payment Element
+            elements,
+            confirmParams: {
+              return_url: 'https://mollyart-production.up.railway.app/payment/payment_success',
+            },
+            headers: {
+            'X-CSRFToken': csrftoken, // Include the CSRF token in the headers
+            }
     });
 
     if (error) {

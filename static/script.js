@@ -1,21 +1,37 @@
 function paymentLoading() {
-    pay = document.querySelector('.payment-button');
-    modal = document.getElementById('myLoadingModal');
+    let pay = document.querySelector('.payment-button');
+    let modal = document.getElementById('myLoadingModal');
     let isUnloading = false;
+
     if (pay) {
-        pay.onclick = function() {
-            window.addEventListener('beforeunload', function (event) {
-                isUnloading = true;
-                modal.style.display = "flex";
-            });
-            setTimeout(function() {
-                if(!isUnloading) {
-                    modal.style.display = "none";
-                }
-            }, 10000);
-        }
+        // Listen for both click and touchstart to handle both desktop and mobile
+        pay.addEventListener('click', function () {
+            showModal();
+        });
+
+        pay.addEventListener('touchstart', function () {
+            showModal();
+        });
     }
-}  
+
+    function showModal() {
+        // Show the modal immediately
+        modal.style.display = "flex";
+
+        // Hide the modal after 10 seconds if no unload event occurs
+        setTimeout(function () {
+            if (!isUnloading) {
+                modal.style.display = "none";
+            }
+        }, 10000);
+    }
+
+    // Optionally, reset the unloading state when navigating away
+    window.addEventListener('beforeunload', function () {
+        isUnloading = true;
+    });
+}
+
 
 function commissionSlides() {
     // Get the modal
