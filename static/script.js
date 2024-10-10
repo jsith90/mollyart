@@ -1,3 +1,66 @@
+function imageCarousel() {
+    const galleryContainer = document.querySelector('.gallery-container');
+    const galleryControlsContainer = document.querySelector('.gallery-controls');
+    const galleryControls = ['previous', 'next'];
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    class Carousel {
+        constructor(container, items, controls) {
+            this.carouselContainer = container;
+            this.carouselControls = controls;
+            this.carouselArray = [...items];
+        }
+
+        updateGallery() {
+            this.carouselArray.forEach(el => {
+                el.classList.remove('gallery-item-0');
+                el.classList.remove('gallery-item-1');
+                el.classList.remove('gallery-item-2');
+                el.classList.remove('gallery-item-3');
+                el.classList.remove('gallery-item-4');
+            });
+
+            this.carouselArray.slice(0, 5).forEach((el, i) => {
+                el.classList.add(`gallery-item-${i}`);
+            });
+        }
+
+        setCurrentState(direction) {
+            if(direction.className == 'gallery-controls-previous') {
+               this.carouselArray.unshift(this.carouselArray.pop()); 
+            } else {
+                this.carouselArray.push(this.carouselArray.shift());
+            }
+            this.updateGallery();
+        }
+
+        setControls() {
+            this.carouselControls.forEach(control => {
+               galleryControlsContainer.appendChild(document.createElement('button')).className =`gallery-controls-${control}`;
+               document.querySelector(`.gallery-controls-${control}`).innerText = ''; 
+            });
+        }
+
+        useControls(){
+            const triggers = [...galleryControlsContainer.childNodes];
+            triggers.forEach(control => {
+                control.addEventListener('click', e => {
+                    e.preventDefault();
+                    this.setCurrentState(control);
+                })
+            })
+        }
+    }
+
+    const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
+
+    exampleCarousel.setControls();
+    exampleCarousel.useControls();
+    example.useKeyboardControls();
+
+}
+
+
 function paymentLoading() {
     let pay = document.querySelector('.payment-button');
     let modal = document.getElementById('myLoadingModal');
@@ -118,8 +181,8 @@ function navScroll() {
     let navHeight = nav.offsetHeight;
 
     if (wave2) {
-        wave.style.display = "none";
-        footer.style.display = "none";
+        // wave.style.display = "none";
+        // footer.style.display = "none";
         home.style.minHeight = "100vh";
         logoName.classList.add('nav-scroll');
         logoName.style.position = "absolute";
@@ -494,3 +557,4 @@ checkoutPages();
 commissionSlides();
 paymentLoading();
 toggleCommissionForm();
+imageCarousel();
