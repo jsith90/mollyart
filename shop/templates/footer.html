@@ -17,5 +17,16 @@ transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 2
 				<img src="{% static 'images/workman-dos.png' %}">
 			</div>
 		</div>
+	    {% if user.is_authenticated %}
+			<div class="footer-bottom">
+				<a class="insta" href="https://www.instagram.com/mollyst.art/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+				<p class="footer-text">&copy; All Rights Reserved, Molly ST 2024</p>
+			</div>
+		{% else %}
+			<div class="footer-bottom">
+				<a class="insta" href="https://www.instagram.com/mollyst.art/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+				<p class="footer-text"><a class="copythat" href="{% url 'login_user' %}">&copy;</a> All Rights Reserved, Molly ST 2024</p>
+			</div>
+		{% endif %}
 	</div>
 </footer>

@@ -206,7 +206,7 @@ function navScroll() {
                 // hatmanImage.style.animationName = 'none';
                 home.style.minHeight = "auto";
                 wave2.classList.add('wave-appear');
-                if (window.innerWidth > 1060) {
+                if (window.innerWidth > 530) {
                     croeso.style.width = "30%";
                 } else {
                     croeso.style.width = "70%";

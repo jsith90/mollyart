@@ -252,7 +252,6 @@ nav {
 #logo-name-mobile {
 	text-align: center;
 	transition: transform 0.5s ease;
-	width: 80%;
 	position: relative;
 	margin: 0 0 1rem 0;
 }
@@ -279,6 +278,14 @@ nav {
 
 #logo-man > img {
 	width: 100%;
+}
+
+.logo-mobile {
+	width: 100%;
+	position: absolute;
+	z-index: -9;	
+	display: none;
+	transition: opacity 1s ease-in, transform 0.5s ease;
 }
 
 .logo-man-mobile {
@@ -2283,7 +2290,7 @@ footer {
 	display: flex;
 	width: 100%;
 	justify-content: center;
-	padding: 2rem 0 0 0;
+	padding: 2rem 0 1rem 0;
 	margin: 0;
 	background: #e7e5d5;
 }
@@ -2294,6 +2301,30 @@ footer {
 	flex-wrap: wrap;
 	justify-content: center;
 /*	position: relative;*/
+}
+
+.footer-bottom {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.footer-text {
+	color: white;
+	font-size: 2rem;
+	text-align: center;
+}
+
+.insta {
+	font-size: 5rem;
+	color: white;
+}
+
+.copythat {
+	text-decoration: none;
+	color: white;
 }
 
 .subscribe-div {
@@ -2431,6 +2462,10 @@ footer {
 	  	max-width: 80%;
 	  	width: 500px;
 	}
+
+	.shop-item {
+  	width: 45%;
+  }
 
 	footer {
 		display: flex;
@@ -2667,13 +2702,37 @@ footer {
 
 	}
 
+	.nav-div {
+		flex-wrap: wrap;
+	}
+
+	.logo-div {
+		display: none;
+	}
+
+	.logo-div-mobile {
+		display: flex;
+		justify-content: center;
+		position: relative;
+		width: 100%;
+		padding: 2rem 0 0 0
+	}
+
+	.logo-man-mobile {
+		width: 60%;
+	}
+
+	#logo-name-mobile {
+		width: 40%;
+	}
+	
 	.croeso {
-		width: 70%;
 		opacity: 1;
 		display: flex;
 		justify-content: center;
 		transition: opacity 1s ease;
 		transition-delay: 1s;
+		padding: 0 0 3rem;
 	}	
 
 	.width-control {
@@ -3073,6 +3132,10 @@ footer {
 		left: 15%;
 	}
 
+	#logo-name-mobile {
+		width: 60%;
+	}
+
 	.commission-intro-paragraph h1 {
 		font-size: 1.1rem;
 	}
@@ -3137,7 +3200,7 @@ footer {
 	}
 
 	.trolley-form > a > span {
-		font-size: 1rem;
+		font-size: 1.5rem;
 	}
 
 	.checking-out {
@@ -3351,11 +3414,6 @@ footer {
 		margin: 2rem 0 0 0;
 	}
 
-	.nav-div {
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
 	.toggle-div {
 		width: 50%;
 	}
@@ -3364,20 +3422,20 @@ footer {
 		width: 50%;
 	}
 
-	.logo-div {
-		display: none;
+	.logo-man-mobile {
+		width: 100%;
 	}
 
-	.logo-div-mobile {
-		display: flex;
-		justify-content: center;
-		position: relative;
-		width: 85%;
-		padding: 2rem 0 0 0
+	#logo-name-mobile {
+		width: 80%;
 	}
 
 	.svg-wave-over-home {
 		height: auto;
+	}
+
+	.croeso {
+		width: 70%;
 	}
 
 	.review img {
@@ -3418,7 +3476,7 @@ footer {
 	}
 
 	.gallery h2 {
-		font-size: 1.8rem;
+		font-size: 1.5rem;
 		text-align: center;
 	}
 
@@ -3729,19 +3787,11 @@ footer {
 	}
 
 	.commission-ad h1 {
-		font-size: 1.1rem;
+		font-size: 1.5rem;
 	}
 
 	.commission-ad h2 {
-		font-size: 1.1rem;
-	}
-
-	.commission-ad-link:nth-of-type(1n) {
-		font-size: 0.8rem;
-	}
-
-	.commission-ad-link:nth-of-type(2n) {
-		font-size: 0.8rem;
+		font-size: 1.5rem;
 	}
 
 	.review-link:nth-of-type(1) {
@@ -3749,12 +3799,14 @@ footer {
 	}
 
 	.review h2 {
+		font-size: 1.2rem;
 		top: 79%;
-		right: 8%;
+		right: 2%;
+		position: relative;
 	}
 
 	.review-link:nth-of-type(2) {
-		top: 91%;
+		top: 84%;
 		right: 48%;
 	}
 

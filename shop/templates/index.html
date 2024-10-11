@@ -34,45 +34,31 @@
 		<div class="icon-reel-images landing-icons">
 		    <div class="reel-image">
 		    	<img class="landing-icon" src="{% static 'images/molly-house.png' %}" alt="landing-icon">
-		    	<img class="landing-icon" src="{% static 'images/trolley.png' %}" alt="landing-icon">
 		    	<img class="landing-icon" src="{% static 'images/blue-tree.png' %}" alt="landing-icon">
-		    	<img class="landing-icon" src="{% static 'images/paintbrush.png' %}" alt="landing-icon">
-		    	<img class="landing-icon" src="{% static 'images/molly-boot.png' %}" alt="landing-icon">
-		    	<img class="landing-icon" src="{% static 'images/dice.png' %}" alt="landing-icon">
-		    	<img class="landing-icon" src="{% static 'images/molly-eye-tog.png' %}" alt="landing-icon">
-		    	<img class="landing-icon" src="{% static 'images/pay-success.png' %}" alt="landing-icon">
 		    	<img class="landing-icon" src="{% static 'images/molly-chair.png' %}" alt="landing-icon">
 		    	<img class="landing-icon" src="{% static 'images/molly-glove.png' %}" alt="landing-icon">
-		    	<img class="landing-icon" src="{% static 'images/payment-icon.png' %}" alt="landing-icon">
 		    </div>
 		    <div class="reel-image">
-		        <img class="landing-icon" src="{% static 'images/molly-house.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/trolley.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/blue-tree.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/paintbrush.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/molly-boot.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/dice.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/molly-eye-tog.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/pay-success.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/molly-chair.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/molly-glove.png' %}" alt="landing-icon">
-		        <img class="landing-icon" src="{% static 'images/payment-icon.png' %}" alt="landing-icon">
+				<img class="landing-icon" src="{% static 'images/molly-house.png' %}" alt="landing-icon">
+		    	<img class="landing-icon" src="{% static 'images/blue-tree.png' %}" alt="landing-icon">
+		    	<img class="landing-icon" src="{% static 'images/molly-chair.png' %}" alt="landing-icon">
+		    	<img class="landing-icon" src="{% static 'images/molly-glove.png' %}" alt="landing-icon">
 		    </div>
 		</div>
 		<div class="review">
 			<img class="review-img" src="{% static 'images/review.JPG' %}">
 			<h1 class="review-heading">creating on a cornershop scale...</h1>
 			<a class="review-link" href="{% url 'shop' %}">shop now</a>
-			<h2 class="review-heading">... follow me on instagram...</h2>
-			<a class="nav-link active review-link" href="https://www.instagram.com/mollyst.art/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+			<h2 class="review-heading">i take commissions...</h2>
+			<a href="{% url 'create_commission' %}" class="review-link">commission me</a>
 		</div>
-		<div class="commission-ad">
+		<!-- <div class="commission-ad">
 			<img class="commission-ad-img" src="{% static 'images/commission-ad.JPG' %}">
 			<h1>i take commissions...</h1>
 			<a href="{% url 'create_commission' %}" class="commission-ad-link">commission me</a>
 			<h2>... and feedback...</h2>
 			<a href="{% url 'write_review' %}" class="commission-ad-link">review me</a>
-		</div><div class="svg-wave-under"><svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {display: inline-block; animation: dl-wave 15s linear infinite;
+		</div> --><div class="svg-wave-under"><svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {display: inline-block; animation: dl-wave 15s linear infinite;
             transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg><svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {animation: dl-wave 15s linear infinite;
             transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 288.59999999999997 40 192.40000000000003 89 481 89 L 481 89 L 481 0 L 0 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 480 89 C 742.8 89 655.2 21 918 21 L 918 21 L 918 0 L 480 0 Z" stroke-width="0"></path> <path fill="rgba(231, 229, 213, 1)" d="M 917 21 C 1267.4 21 1150.6 97 1501 97 L 1501 97 L 1501 0 L 917 0 Z" stroke-width="0"></path><path fill="rgba(231, 229, 213, 1)" d="M 1500 97 C 1741.8 97 1661.2 40 1903 40 L 1903 40 L 1903 0 L 1500 0 Z" stroke-width="0"></path></svg></div><div class="gallery">
 			<h2>check out my portfolio...</h2>
