@@ -182,7 +182,7 @@ nav {
 }
 
 .nav-toggle-close > img {
-	width: 40%;
+	width: 38%;
 }
 
 .nav-options {
@@ -2310,14 +2310,14 @@ footer {
 }
 
 .footer-text {
-	color: white;
+	color: black;
 	font-size: 2rem;
 	text-align: center;
 }
 
 .insta {
 	font-size: 5rem;
-	color: white;
+	color: black;
 }
 
 .insta:hover {
@@ -3196,7 +3196,7 @@ footer {
 	}
 
 	.nav-toggle-close > img {
-		width: 40%;
+		width: 38%;
 	}
 
 	.nav-toggle-open > img {
