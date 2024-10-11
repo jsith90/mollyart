@@ -689,11 +689,13 @@ nav {
 .review h1 {
 	top: 10%;
   right: 2%;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .review h2 {
 	top: 47%;
   right: 2%;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .review-link {
@@ -717,10 +719,6 @@ nav {
 .review-link:nth-of-type(2) {
 	top: 61%;
 	right: 3%;
-}
-
-.review-link:nth-of-type(2):hover {
-	color: #0065d9;
 }
 
 .commission-ad {
@@ -2322,6 +2320,10 @@ footer {
 	color: white;
 }
 
+.insta:hover {
+	color: #0065d9;
+}
+
 .copythat {
 	text-decoration: none;
 	color: white;
@@ -2863,6 +2865,12 @@ footer {
 
 	.footer-man-two > img {
 		width: 86%;
+	}
+
+	.insta {
+		font-size: 4rem;
+	}
+
 }
 
 
@@ -3162,7 +3170,7 @@ footer {
 	}
 
 	.icon-reel-images {
-		padding: 100px 0 0 0;
+		padding: 100px 0 30px 0;
 	}
 
 	.landing > div {
@@ -3450,10 +3458,6 @@ footer {
 	.review-link {
 	  font-size: 1rem;
 	}
-
-.review-link:nth-of-type(2) {
-	font-size: 2rem;
-}
 
 	.commission-ad-img {
 		border-radius: 10%;
@@ -3765,6 +3769,14 @@ footer {
 		width: 86%;
 	}
 
+	.insta {
+		font-size: 3rem;
+	}
+
+	.footer-text {
+		font-size: 1.8rem;
+	}
+
 }
 
 @media only screen and (max-width: 390px) {
@@ -3798,16 +3810,16 @@ footer {
 		right: 41%;
 	}
 
-	.review h2 {
-		font-size: 1.2rem;
-		top: 79%;
-		right: 2%;
-		position: relative;
+	.review-link:nth-of-type(2) {
+		top: 88%;
+		right: 32%;
 	}
 
-	.review-link:nth-of-type(2) {
-		top: 84%;
-		right: 48%;
+	.review h2 {
+		font-size: 1.5rem;
+		top: 82%;
+		right: -1%;
+		position: relative;
 	}
 
 }
