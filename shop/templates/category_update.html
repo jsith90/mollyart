@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Molly ST – Update: {{ category.name }}{% endblock %}
+
 {% block content %}
 <header class="shop-header">
     <div>
-        <h1>Update {{ category.name }}</h1>
+        <h1>Update: {{ category.name }}</h1>
     </div>
 </header>
 <section class="form-section">

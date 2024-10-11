@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Molly ST – Admin Dashboard{% endblock %}
+
 {% block content %}
 	{% if user.is_superuser %}
 		<header class="shop-header">

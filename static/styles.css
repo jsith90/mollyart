@@ -530,6 +530,12 @@ nav {
 
 }
 
+.gallery-item-2:hover .portfolio-title {
+	opacity: 1;
+	background-color: white;
+	
+}
+
 .gallery-item-3 {
 	left: 70%;
 	transform: translateX(-50%);
@@ -669,10 +675,18 @@ nav {
   color: #e7e5d5;
   text-transform: lowercase;
   position: absolute;
-  top: 10%;
-  right: 2%;
   font-size: 3rem;
   text-align: center;
+}
+
+.review h1 {
+	top: 10%;
+  right: 2%;
+}
+
+.review h2 {
+	top: 47%;
+  right: 2%;
 }
 
 .review-link {
@@ -693,6 +707,15 @@ nav {
 	right: 3%;
 }
 
+.review-link:nth-of-type(2) {
+	top: 61%;
+	right: 3%;
+}
+
+.review-link:nth-of-type(2):hover {
+	color: #0065d9;
+}
+
 .commission-ad {
 	width: 100%;
 	height: 600px;
@@ -710,7 +733,7 @@ nav {
 
 .commission-ad h1 {
   color: white;
-  text-shadow: 1px 1px #e7d5e0;
+  text-shadow: 2px 2px #baaeb5;
   position: absolute;
   top: 24%;
   left: 2%;
@@ -724,13 +747,13 @@ nav {
 
 .commission-ad-link {
 	text-decoration: underline;
+	text-shadow: 2px 2px #baaeb5;
 }
 
 .commission-ad-link:nth-of-type(1n) {
 	position: absolute;
   top: 36%;
   color: white;
-  text-shadow: 1px 1px #e7d5e0;
   font-size: 1.5rem;
   left: 2%;
 }
@@ -739,7 +762,6 @@ nav {
   position: absolute;
   top: 66%;
   color: white;
-  text-shadow: 1px 1px #e7d5e0;
   font-size: 1.5rem;
   left: 2%;
 }
@@ -747,7 +769,7 @@ nav {
 .commission-ad h2 {
   top: 32%;
   color: white;
-  text-shadow: 1px 1px #e7d5e0;
+  text-shadow: 2px 2px #baaeb5;
   position: absolute;
   top: 54%;
   left: 2%;
@@ -2190,7 +2212,7 @@ p:has(.sale-price) {
 }
 
 .portfolio:hover .portfolio-title {
-	background: black;
+	background-color: black;
 	color: white;
 	opacity: 1;
 }
@@ -2204,6 +2226,9 @@ p:has(.sale-price) {
   font-size: 1.2rem;
   z-index: 100;
   border-radius: 5%;
+  -webkit-transition: background-color 500ms linear;
+  -ms-transition: background-color 500ms linear;
+  transition: opacity 0.5s ease-in-out, background-color 500ms linear;
 }
 
 .portfolio-image-div {
@@ -3368,6 +3393,10 @@ footer {
 	  font-size: 1rem;
 	}
 
+.review-link:nth-of-type(2) {
+	font-size: 2rem;
+}
+
 	.commission-ad-img {
 		border-radius: 10%;
 	}
@@ -3713,6 +3742,20 @@ footer {
 
 	.commission-ad-link:nth-of-type(2n) {
 		font-size: 0.8rem;
+	}
+
+	.review-link:nth-of-type(1) {
+		right: 41%;
+	}
+
+	.review h2 {
+		top: 79%;
+		right: 8%;
+	}
+
+	.review-link:nth-of-type(2) {
+		top: 91%;
+		right: 48%;
 	}
 
 }
