@@ -24,7 +24,7 @@
     <section class="order-display">
         <div class="order-product">
             <div class="order-summary">
-                <h2>Order Summary</h2>
+                <h2>Order Summary {% for size in sizes %} {{ size.id }} {% endfor %}</h2>
             </div>
             <div class="order-detail">
                 {% for product in trolley_products %}

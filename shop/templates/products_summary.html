@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Molly ST – Draft Portfolios{% endblock %}
+{% block title %}Molly ST – Products Dash{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -9,26 +9,27 @@
             <center>
                 <div class="col-8">
                     <br>
-                    <h3>Draft Portfolios</h3>
+                    <h3>Shop Floor Products</h3>
                     <form method="post">  <!-- Ensure the method is set to POST -->
                     {% csrf_token %}
                         <table class="table table-striped table-bordered">
                             <thead>
                               <tr>
-                                <th scope="col">Draft Portfolio Summary</th>
+                                <th scope="col">Shop Floor Products</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Is product on the shop floor:</th>
                               </tr>
                             </thead>
                             <tbody>
-                                {% if portfolios %}
-                                    {% for portfolio in portfolios %}
-                                        {% if not portfolio.is_published %}
+                                {% if products %}
+                                    {% for product in products %}
+                                        {% if product.is_on_shelf %}
                                             <tr>
-                                                <td><a href="{% url 'portfolio' portfolio.id %}">{{ portfolio.title }}</a></td>
-                                                <td>Draft</td>
+                                                <td><a href="{% url 'product' product.id %}">{{ product.name }}</a></td>
+                                                <td>On Shop Floor</td>
                                                 <td>
-                                                    <label for="portfolios_{{ portfolio.id }}_is_published">Is Portfolio Published:</label>
-                                                    <input type="checkbox" name="portfolios_{{ portfolio.id }}_is_published" value="True "{% if portfolio.is_published %}checked{% endif %}>
+                                                    <label for="portfolios_{{ portfolio.id }}_is_published">Is product on shop floor:</label>
+                                                    <input type="checkbox" name="products_{{ product.id }}_is_on_shelf" value="True "{% if product.is_on_shelf %}checked{% endif %}>
                                                 </td>
                                             </tr>
                                         {% endif %}
@@ -37,8 +38,8 @@
                             </tbody>
                         </table>
                         <div class="product-buttons">
-                            <button class="product-button" type="submit">Update Published Status</button>
-                            <a class="product-button" href="{% url 'portfolio_summary' %}">Published Portfolios</a>
+                            <button class="product-button" type="submit">Update Product Status</button>
+                            <a class="product-button" href="{% url 'warehoused_product_summary' %}">Warehoused Products</a>
                             <a class="product-button" href="{% url 'admin_dash' %}">Admin Dashboard</a>
                         </div>
                     </form>

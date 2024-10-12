@@ -48,7 +48,7 @@ def admin_dash(request):
 
 
 def shop(request):
-	products = Product.objects.all()
+	products = Product.objects.filter(is_on_shelf=True)
 	categories = Category.objects.all()
 	return render(request, 'shop.html', {'products':products, 'categories':categories})
 
@@ -114,15 +114,18 @@ def add_product(request):
                 for size in sizes:
                 	size.product = product
                 	size.save()
-                return redirect('index')
+                messages.success(request, 'Product added to database.')
+                return redirect('warehoused_product_summary')
             else:
-                return render(request, 'add_product.html', { 'product_form': product_form, 'size_formset': size_formset })
+            	messages.error(request, 'There was an error and product was not created')
+            	return render(request, 'add_product.html', { 'product_form': product_form, 'size_formset': size_formset })
         else:
             product_form = ProductForm()
             size_formset = SizeFormSet()
             return render(request, 'add_product.html', { 'product_form': product_form, 'size_formset': size_formset })
     else:
-        return redirect('index')
+    	messages.error(request, 'Beware of the guard dog.')
+    	return redirect('index')
 
 # Create your views here.
 def product_update(request, product_id):
@@ -143,7 +146,8 @@ def product_update(request, product_id):
 				for form in size_formset.deleted_forms:
 					if form.instance.product_id:
 						form.instance.delete()
-				return redirect('index')
+				messages.success(request, 'Product updated!')
+				return redirect('shop')
 			# Redirect to a suitable page after updating
 			else:
 				print("Product form errors:", product_form.errors)
@@ -213,3 +217,42 @@ def delete_category(request, pk):
         return redirect('shop')
     else:
     	return redirect('index')
+
+
+def products_summary(request):
+    user = request.user
+    if user.is_superuser:
+        products = Product.objects.filter(is_on_shelf=True)
+        if request.method == 'POST':
+            for product in products:
+                checkbox_name = f'products_{product.id}_is_on_shelf'
+                if checkbox_name in request.POST:
+                    product.is_on_shelf = True
+                else:
+                    product.is_on_shelf = False
+                product.save()
+            messages.success(request, 'Product status updated.')    
+            return redirect('products_summary')
+        return render(request, 'products_summary.html', {'products':products})
+    else:
+        return redirect('index')
+
+
+def warehoused_product_summary(request):
+    user = request.user
+    if user.is_superuser:
+        products = Product.objects.filter(is_on_shelf=False)
+        if request.method == 'POST':
+            for product in products:
+                checkbox_name = f'products_{product.id}_is_on_shelf'
+                if checkbox_name in request.POST:
+                    product.is_on_shelf = True
+                else:
+                    product.is_on_shelf = False
+                product.save()
+            messages.success(request, 'Product status updated.')    
+            return redirect('warehoused_product_summary')
+        return render(request, 'warehoused_product_summary.html', {'products':products})
+    else:
+        return redirect('index')
+

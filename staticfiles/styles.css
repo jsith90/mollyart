@@ -1265,6 +1265,35 @@ input[type="radio"]:not(:disabled):checked {
 	color: red;
 }
 
+.delete-modal {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 20%;
+	left: 14%;
+	z-index: -10;
+	width: 70%;
+	height: 70%;
+	opacity: 0.9;
+	background: #e7e5d5;
+}
+
+.delete-modal div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.delete-modal div .product-buttons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: white;
+	padding: 0.5rem;
+}
+
 .edit {
 	color: #3f9c44;
 }
@@ -1741,6 +1770,10 @@ form {
 	width: 100%;
 }
 
+.description {
+	display: none;
+}
+
 .add-product-form .product-buttons, .product-update-form .product-buttons {
 	display: flex;
 	justify-content: center;
@@ -2137,6 +2170,10 @@ form > .product-buttons > .product-button {
   display: block;
 }
 
+.edit-commission-images a {
+	margin: 1rem 0 0 0;
+}
+
 .commission-button:hover {
 	background: #0065d9;
 	cursor: pointer;
@@ -2282,6 +2319,19 @@ p:has(.sale-price) {
 	text-transform: uppercase;
 }
 
+.buttons {
+	display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.buttons .product-buttons {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
 /* footer stylings */
 
 footer {
@@ -2318,6 +2368,15 @@ footer {
 .insta {
 	font-size: 5rem;
 	color: black;
+}
+
+#me {
+	font-size: 2rem;
+	text-decoration: underline;
+}
+
+#me:hover {
+	text-decoration: none;
 }
 
 .insta:hover {
@@ -3098,6 +3157,11 @@ footer {
 	  left: 14%;
 	  font-size: 2rem;
 	}
+
+	.review-heading {
+  	font-size: 2.5rem;
+	}
+
 
 
 	.nav-options > li {

@@ -244,26 +244,41 @@ def billing_info(request):
 	
 
 def checkout(request):
-	# get trolley
-	trolley = Trolley(request)
-	trolley_products = trolley.get_prods()
-	sizes = trolley.get_sizes()
-	quantities = trolley.get_quants
-	totals = trolley.trolley_total()
-	sold_out_ids = [product.id for product in trolley_products if product.is_sold_out]
-	if sold_out_ids:
-		# Display a message for each sold-out product
-		for product_id in sold_out_ids:
-			product = Product.objects.get(id=product_id)  # Get the product instance
-			messages.error(request, f'Sorry, {product.name} is sold out and has been removed from your trolley.')
-			# Remove sold-out products from the trolley
-			trolley.delete(product=product_id)
-		# Redirect back to trolley summary
-		return redirect('trolley_summary')
-	else:
-		# Check out as guest
-		shipping_form = ShippingForm(request.POST or None)
-		return render(request, 'payment/checkout.html', {'current_trolley': trolley.trolley,'sizes': sizes, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_form':shipping_form})
+    # Get trolley
+    trolley = Trolley(request)
+    trolley_products = trolley.get_prods()  # List of products in the trolley
+    sizes = trolley.get_sizes()  # List of sizes in the trolley
+    quantities = trolley.get_quants()  # Quantities of products
+    totals = trolley.trolley_total()  # Trolley total price
+
+    # Handle sold-out products (those not size-specific)
+    sold_out_ids = [product.id for product in trolley_products if not product.is_size and product.is_sold_out]
+    sold_out_size_ids = [size.id for size in sizes if size.is_sold_out]
+    if sold_out_ids:
+        for product_id in sold_out_ids:
+            product = Product.objects.get(id=product_id)  # Get the product instance
+            messages.error(request, f'Sorry, {product.name} is sold out and has been removed from your trolley.')
+            # Remove sold-out products from the trolley
+            trolley.delete(product=product_id)
+            return redirect('trolley_summary')
+    # Handle sold-out sizes
+    if sold_out_size_ids:
+    	to_delete= []
+    	for size in sizes:
+            if size.id in sold_out_size_ids:
+                product = size.product  # Get the product associated with the size
+                current_trolley = trolley.trolley
+                for key, item in current_trolley.items():
+                    if str(product.id) in key and item['size'] == size.size:
+                        messages.error(request, f'Sorry, {product.name} in size {size.size} is sold out and has been removed from your trolley.')
+                        to_delete.append(product.id)
+    	for product_id in to_delete:
+    		trolley.delete(product=product_id)
+
+    		return redirect('trolley_summary')
+
+    shipping_form = ShippingForm(request.POST or None)
+    return render(request, 'payment/checkout.html', {'current_trolley': trolley.trolley, 'sizes': sizes, 'trolley_products': trolley_products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form })
 
 
 @csrf_exempt

@@ -8,4 +8,5 @@ urlpatterns = [
     path('edit_portfolio/<int:pk>', views.edit_portfolio, name='edit_portfolio'),
     path('portfolio_title_page/', views.portfolio_title_page, name='portfolio_title_page'),    
     path('portfolio/<int:pk>', views.portfolio, name='portfolio'),
+    path('delete_portfolio/<int:pk>/', views.delete_portfolio, name='delete_portfolio'),
 ]

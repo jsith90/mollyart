@@ -126,3 +126,13 @@ def edit_portfolio(request, pk):
         })
     else:
         return redirect('index')
+
+
+def delete_portfolio(request, pk):
+    user = request.user
+    porfolio = Portfolio.objects.get(id=pk)
+    if user.is_superuser:
+        Portfolio.objects.get(id=pk).delete()
+        return redirect('portfolio_summary')
+    else:
+        return redirect('index')

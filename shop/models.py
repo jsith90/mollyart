@@ -45,6 +45,8 @@ class Product(models.Model):
 	# sold out
 	is_sold_out = models.BooleanField(default=False)
 	is_size = models.BooleanField(default=False, blank=True, null=True)
+	# on shop floor
+	is_on_shelf = models.BooleanField(default=False, blank=True, null=True)
 
 
 	def __str__(self):

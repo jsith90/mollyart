@@ -14,7 +14,7 @@
                     </div>
                     <a class="shop-heading" href="{% url 'shop' %}"><img src="{% static 'images/shop-logo.png' %}"></a>
                     <div class="header-icon">
-                        <img src="{% static 'images/molly-boot.png' %}">
+                        <img src="{% static 'images/molly-boot-flip.png' %}">
                     </div>
                 </div>
             </div>
@@ -112,11 +112,26 @@
                 {% endif %}
             {% endfor %}
         </div>
-        <div class="product-buttons edit delete">
-            {% if user.is_superuser %}
-                <a href="{% url 'category_update' category.id %}" class="product-button edit">Edit Category</a>
-                <a href="{% url 'delete_category' category.id %}" class="product-button delete">Delete Category</a>
-            {% endif %}
-        </div>
     </section>
+    {% if user.is_superuser %}
+        <section class="buttons">
+            <div class="product-buttons edit delete">
+                <a href="{% url 'category_update' category.id %}" class="product-button edit">Edit Category</a>
+                <button class="delete product-button" id="open">Delete Category</button>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if user.is_superuser %}
+        <div id="deleteModal" class="delete-modal">
+            <div>
+                <div class="product-buttons edit delete">
+                    <h2>Are you sure you want to delete this category?</h2>
+                    <p>All products associated with it will also be deleted!</p>
+                    <a href="{% url 'delete_category' category.id %}" class="product-button delete">Delete Category</a>
+                    <a class="edit product-button" id="close">No</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

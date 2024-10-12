@@ -4,59 +4,64 @@ function imageCarousel() {
     const galleryControls = ['previous', 'next'];
     const galleryItems = document.querySelectorAll('.gallery-item');
 
-    class Carousel {
-        constructor(container, items, controls) {
-            this.carouselContainer = container;
-            this.carouselControls = controls;
-            this.carouselArray = [...items];
-        }
-
-        updateGallery() {
-            this.carouselArray.forEach(el => {
-                el.classList.remove('gallery-item-0');
-                el.classList.remove('gallery-item-1');
-                el.classList.remove('gallery-item-2');
-                el.classList.remove('gallery-item-3');
-                el.classList.remove('gallery-item-4');
-            });
-
-            this.carouselArray.slice(0, 5).forEach((el, i) => {
-                el.classList.add(`gallery-item-${i}`);
-            });
-        }
-
-        setCurrentState(direction) {
-            if(direction.className == 'gallery-controls-previous') {
-               this.carouselArray.unshift(this.carouselArray.pop()); 
-            } else {
-                this.carouselArray.push(this.carouselArray.shift());
+    if (galleryContainer) {
+        class Carousel {
+            constructor(container, items, controls) {
+                this.carouselContainer = container;
+                this.carouselControls = controls;
+                this.carouselArray = [...items];
             }
-            this.updateGallery();
-        }
 
-        setControls() {
-            this.carouselControls.forEach(control => {
-               galleryControlsContainer.appendChild(document.createElement('button')).className =`gallery-controls-${control}`;
-               document.querySelector(`.gallery-controls-${control}`).innerText = ''; 
-            });
-        }
+            updateGallery() {
+                this.carouselArray.forEach(el => {
+                    el.classList.remove('gallery-item-0');
+                    el.classList.remove('gallery-item-1');
+                    el.classList.remove('gallery-item-2');
+                    el.classList.remove('gallery-item-3');
+                    el.classList.remove('gallery-item-4');
+                });
 
-        useControls(){
-            const triggers = [...galleryControlsContainer.childNodes];
-            triggers.forEach(control => {
-                control.addEventListener('click', e => {
-                    e.preventDefault();
-                    this.setCurrentState(control);
+                this.carouselArray.slice(0, 5).forEach((el, i) => {
+                    el.classList.add(`gallery-item-${i}`);
+                });
+            }
+
+            setCurrentState(direction) {
+                if(direction.className == 'gallery-controls-previous') {
+                   this.carouselArray.unshift(this.carouselArray.pop()); 
+                } else {
+                    this.carouselArray.push(this.carouselArray.shift());
+                }
+                this.updateGallery();
+            }
+
+            setControls() {
+                this.carouselControls.forEach(control => {
+                   galleryControlsContainer.appendChild(document.createElement('button')).className =`gallery-controls-${control}`;
+                   document.querySelector(`.gallery-controls-${control}`).innerText = ''; 
+                });
+            }
+
+            useControls(){
+                const triggers = [...galleryControlsContainer.childNodes];
+                triggers.forEach(control => {
+                    control.addEventListener('click', e => {
+                        e.preventDefault();
+                        this.setCurrentState(control);
+                    })
                 })
-            })
+            }
         }
+    
+
+        const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
+
+        exampleCarousel.setControls();
+        exampleCarousel.useControls();
+        example.useKeyboardControls();
+    } else {
+        console.log("No Gallery Container.")
     }
-
-    const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
-
-    exampleCarousel.setControls();
-    exampleCarousel.useControls();
-    example.useKeyboardControls();
 
 }
 
@@ -84,7 +89,7 @@ function paymentLoading() {
                 modal.style.display = "none";
                 modal.style.zIndex = "0";
             }
-        }, 10000);
+        }, 20000);
     }
 }
 
@@ -545,6 +550,36 @@ function toggleCommissionForm() {
 }
 
 
+function deleteModal() {
+    const modal = document.getElementById("deleteModal");
+    const open = document.getElementById('open');
+    const close = document.getElementById("close");
+
+    if (open && modal) {
+        open.addEventListener("click", function () {
+            modal.style.display = "flex";
+            modal.style.zIndex = "1000";
+        });
+    }
+
+    if (close && modal) {
+        close.addEventListener("click", function() {
+            modal.style.display = "none";
+            modal.style.zIndex = "-10";
+        });
+    }
+
+    // Close modal if clicked outside the modal content
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            modal.style.zIndex = "-10";
+        }
+    });
+}
+
+
+
 // Call these functions to initialize events based on the template
 initShopItemEvents();
 initCheckoutButton();
@@ -558,3 +593,4 @@ commissionSlides();
 paymentLoading();
 toggleCommissionForm();
 imageCarousel();
+deleteModal();

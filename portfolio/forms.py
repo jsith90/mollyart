@@ -8,13 +8,13 @@ class PortfolioForm(forms.ModelForm):
         fields = ['title', 'description', 'is_published', 'front_image']
         labels = {
             'title': 'Gallery Title',
-            'description': 'Description',
+            'description': '',
             'is_published':'Check the box to publish gallery:',
             'front_image': 'Add a title image:',
         }
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter gallery title'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter description'}),
+            'description': forms.Textarea(attrs={'class': 'form-control description', 'placeholder': 'Enter description'}),
             'is_published': forms.CheckboxInput(attrs={'class': 'is-published'}),
             'front_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
 
