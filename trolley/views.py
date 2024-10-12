@@ -49,7 +49,7 @@ def trolley_add(request):
 			# return response
 			# response = JsonResponse({'Product Name: ': product.name})
 			response = JsonResponse({'qty': trolley_quantity})
-			messages.error(request, ("Sorry that one isn't available at the moment."))
+			messages.error(request, "Sorry that one isn't available at the moment.")
 			return response
 
 
@@ -62,7 +62,7 @@ def trolley_delete(request):
 		trolley.delete(product=product_id)
 
 		response = JsonResponse({'product':product_id})
-		messages.success(request, ('Item removed from shopping trolley.'))
+		messages.success(request, 'Item removed from shopping trolley.')
 		return response
 		# return redirect('trolley_summary')
 
@@ -78,6 +78,6 @@ def trolley_update(request):
 		trolley.update(product=product_id, quantity=product_qty, size=product_size)
 
 		response = JsonResponse({'qty': product_qty, 'sizes': product_size})
-		messages.success(request, ('Your trolley has been updated.'))
+		messages.success(request, 'Your trolley has been updated.')
 		return response
 		# return redirect('trolley_summary')

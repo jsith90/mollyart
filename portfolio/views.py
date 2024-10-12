@@ -22,6 +22,7 @@ def portfolio_summary(request):
             return redirect('portfolio_summary')
         return render(request, 'portfolio/portfolio_summary.html', {'portfolios':portfolios})
     else:
+        messages.error(request, 'You are not who you need to be.')
         return redirect('index')
 
 
@@ -41,6 +42,7 @@ def draft_portfolio_summary(request):
             return redirect('draft_portfolio_summary')
         return render(request, 'portfolio/draft_portfolio_summary.html', {'portfolios':portfolios})
     else:
+        messages.error(request, 'You are not who you need to be.')
         return redirect('index')
 
 
@@ -52,6 +54,7 @@ def portfolio(request, pk):
     else:
         messages.error(request, 'That portfolio is currently unavailable.')
         return redirect('index')
+
 
 def draft_portfolio(request, pk):
     user = request.user
@@ -82,6 +85,7 @@ def add_portfolio(request):
                 for image in images:
                     image.portfolio = portfolio
                     image.save()
+                messages.success(request, 'portfolio added to drafts!')
                 return redirect('draft_portfolio_summary')  # Redirect to a success page or similar
             else:
                 return render(request, 'portfolio/add_portfolio.html', {
@@ -96,6 +100,7 @@ def add_portfolio(request):
                 'image_formset': image_formset
             })
     else:
+        messages.error(request, 'Not today.')
         return redirect('index')
 
 
@@ -139,6 +144,7 @@ def edit_portfolio(request, pk):
 
         })
     else:
+        messages.error(request, 'ah ah ah what is the magic word?')
         return redirect('index')
 
 

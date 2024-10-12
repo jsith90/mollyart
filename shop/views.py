@@ -83,7 +83,7 @@ def category(request, foo):
 	# grab category from url
 	try:
 		category = Category.objects.get(name=foo)
-		products = Product.objects.filter(category=category)
+		products = Product.objects.filter(category=category, is_on_shelf=True)
 		return render(request, 'category.html', {'products':products, 'category':category, 'categories':categories})
 	except:
 		messages.error(request, ('Nothing available here at the moment.'))

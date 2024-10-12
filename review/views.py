@@ -65,6 +65,7 @@ def inactive_reviews_table(request):
 
 		return render(request, 'review/inactive_reviews_table.html', {'reviews':reviews})
 	else:
+		messages.error(request, 'ah ah ah what is the magic word?')
 		return redirect('index')
 
 
@@ -83,4 +84,5 @@ def active_reviews_table(request):
 			return redirect('active_reviews_table')
 		return render(request, 'review/active_reviews_table.html', {'reviews':reviews})
 	else:
+		messages.error(request, 'nope.')
 		return redirect('index')
