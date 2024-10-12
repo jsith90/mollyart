@@ -93,7 +93,7 @@ def order_shipped_email(request, order):
 	except ValidationError:
 		is_valid_email = False
 	if is_valid_email:
-		subject = "Your order has been shipped!"
+		subject = "Molly ST | Your order has been shipped!"
 		from_email = "j.sinclairthomson@gmail.com"
 		to_email = [order_email] 
 		html_template = get_template('payment/shipped_email.html')
@@ -380,7 +380,7 @@ def handle_payment_intent_succeeded(order):
 def send_email(order):
 	items = OrderItem.objects.filter(order=order)
 	order_email = order.email
-	subject = "Your order has been placed!"
+	subject = "Molly ST | Your order has been placed!"
 	from_email = "j.sinclairthomson@gmail.com"
 	to_email = [order_email] 
 	html_template = get_template('payment/order_email.html')

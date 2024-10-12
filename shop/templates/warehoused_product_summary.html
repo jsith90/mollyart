@@ -25,7 +25,7 @@
                                     {% for product in products %}
                                         {% if not product.is_on_shelf %}
                                             <tr>
-                                                <td><a href="{% url 'product' product.id %}">{{ product.name }}</a></td>
+                                                <td><a href="{% url 'warehoused_product' product.id %}">{{ product.name }}</a></td>
                                                 <td>In the Warehouse</td>
                                                 <td>
                                                     <label for="portfolios_{{ portfolio.id }}_is_published">Is product on shop floor:</label>

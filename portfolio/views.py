@@ -47,8 +47,22 @@ def draft_portfolio_summary(request):
 def portfolio(request, pk):
     portfolio = Portfolio.objects.get(id=pk)
     images = portfolio.image.all()
-    return render(request, 'portfolio/portfolio.html', {'portfolio':portfolio, 'images':images})
+    if portfolio.is_published:
+        return render(request, 'portfolio/portfolio.html', {'portfolio':portfolio, 'images':images})
+    else:
+        messages.error(request, 'That portfolio is currently unavailable.')
+        return redirect('index')
 
+def draft_portfolio(request, pk):
+    user = request.user
+    portfolio = Portfolio.objects.get(id=pk)
+    images = portfolio.image.all()
+    if user.is_superuser:
+        if not portfolio.is_published:
+            return render(request, 'portfolio/draft_portfolio.html', {'portfolio':portfolio, 'images':images})
+        else:
+            messages.error(request, 'That portfolio is published.')
+            return redirect('portfolio_summary')
 
 def portfolio_title_page(request):
     portfolios = Portfolio.objects.filter(is_published=True)

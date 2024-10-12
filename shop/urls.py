@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin_dash/', views.admin_dash, name="admin_dash"),
     path('shop/', views.shop, name="shop"),
     path('product/<int:pk>/', views.product, name='product'),
+    path('warehoused_product/<int:pk>/', views.warehoused_product, name='warehoused_product'),
     path('warehoused_product_summary/', views.warehoused_product_summary, name='warehoused_product_summary'),
     path('products_summary/', views.products_summary, name='products_summary'),
     path('category/<str:foo>/', views.category, name='category'),

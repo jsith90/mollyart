@@ -24,7 +24,7 @@
                                     {% for portfolio in portfolios %}
                                         {% if not portfolio.is_published %}
                                             <tr>
-                                                <td><a href="{% url 'portfolio' portfolio.id %}">{{ portfolio.title }}</a></td>
+                                                <td><a href="{% url 'draft_portfolio' portfolio.id %}">{{ portfolio.title }}</a></td>
                                                 <td>Draft</td>
                                                 <td>
                                                     <label for="portfolios_{{ portfolio.id }}_is_published">Is Portfolio Published:</label>

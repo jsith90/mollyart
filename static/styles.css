@@ -336,6 +336,12 @@ nav {
 	margin-right: 1rem;
 }
 
+/* login page */
+#login-main {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /* landing page */
 
@@ -2365,6 +2371,11 @@ footer {
 	text-align: center;
 }
 
+.insta-up {
+	position: relative;
+	top: -10%;
+}
+
 .insta {
 	font-size: 5rem;
 	color: black;
@@ -3837,8 +3848,12 @@ footer {
 		font-size: 3rem;
 	}
 
+	#me {
+		font-size: 1.4rem;
+	}
+
 	.footer-text {
-		font-size: 1.8rem;
+		font-size: 1.4rem;
 	}
 
 }

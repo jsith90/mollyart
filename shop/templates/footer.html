@@ -19,16 +19,16 @@ transform-origin: top;}</style><path fill="rgba(231, 229, 213, 1)" d="M 0 40 C 2
 		</div>
 	    {% if user.is_authenticated %}
 			<div class="footer-bottom">
-				<a class="insta" href="https://www.instagram.com/mollyst.art/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+				<a class="insta insta-up" href="https://www.instagram.com/mollyst.art/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
 				<p class="footer-text">&copy; All Rights Reserved, Molly ST 2024</p>
 				<p class="footer-text">Website Created by <a id="me" class="insta" href="https://www.linkedin.com/in/joshsinclairt/" target="_blank">Josh S-Thomson</a></p>
 			</div>
 		{% else %}
 			<div class="footer-bottom">
-				<a class="insta" href="https://www.instagram.com/mollyst.art/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-				<p class="footer-text"><a class="insta" href="{% url 'login_user' %}">&copy;</a>All Rights Reserved, Molly ST 2024</p>
+				<a class="insta insta-up" href="https://www.instagram.com/mollyst.art/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+				<p class="footer-text"><a href="{% url 'login_user' %}">&copy;</a>All Rights Reserved, Molly ST 2024</p>
 				<p class="footer-text">Website Created by <a id="me" class="insta" href="https://www.linkedin.com/in/joshsinclairt/" target="_blank">Josh S-Thomson</a></p>
 			</div>
 		{% endif %}
 	</div>
-</footer>
+</footer>  

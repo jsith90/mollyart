@@ -87,7 +87,7 @@ def subscription_email_confirmation(request, email):
     except ValidationError:
         is_valid_email = False
     if is_valid_email:
-        subject = "Welcome to the newsletter club!"
+        subject = "Molly ST | Welcome to the newsletter club!"
         from_email = "j.sinclairthomson@gmail.com"
         to_email = [email] 
         html_template = get_template('newsletter/newsletter_signup.html')
@@ -142,6 +142,7 @@ def create_newsletter(request):
             article_form = CreateArticle()
             return render(request, 'newsletter/create_newsletter.html', { 'article_form': article_form })
     else:
+        messages.error(request, 'You are not permitted in here.')
         return redirect('index')
 
 

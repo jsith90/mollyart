@@ -1,8 +1,7 @@
 <h1>Hello {{ order.full_name }}</h1>
 <pre>Your order has been shipped and will arrive soon.</pre>
-<pre>You can leave me a review when your delivery arrives, here:
-https://mollyart-production.up.railway.app/review/write_review/</pre>
-<pre>Please see the details of your order below:</pre>
+<pre>I'd really appreciate it if you could leave me a review when your delivery arrives - <a href="https://mollyart-production.up.railway.app/review/write_review/">click here</a></pre>
+<pre>For now, please see the details of your order below:</pre>
 <div>
     <pre>Order Total: £{{ order.amount_paid }}</pre>
 </div>
@@ -16,6 +15,8 @@ https://mollyart-production.up.railway.app/review/write_review/</pre>
        <pre>Price: £{{ item.price }}</pre>
     {% endfor %}
 </div>
+<pre>Many thanks again!</pre>
+<pre>Molly ST</pre>
 
 
 

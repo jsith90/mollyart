@@ -30,6 +30,7 @@ def login_user(request):
 # logs users out
 def logout_user(request):
     logout(request)
+    messages.success(request, 'You are now logged out.')
     return redirect('index')
 
 # Create your views here.
@@ -44,6 +45,7 @@ def admin_dash(request):
 	if user.is_superuser:
 		return render(request, 'admin.html', {})
 	else:
+		messages.error(request, 'You do not have access.')
 		return redirect('index')
 
 
@@ -94,12 +96,34 @@ def product(request, pk):
 	categories = Category.objects.all()
 	trolley = Trolley(request)
 	product_ids = trolley.get_product_ids()
-	if product.is_size:
-		if all(size.is_sold_out for size in sizes):
-			product.is_sold_out = True
-			product.save()
-	return render(request, 'product.html', {'product_ids':product_ids, 'product':product, 'sizes':sizes, 'trolley':trolley, 'categories':categories})
+	if product.is_on_shelf:
+		if product.is_size:
+			if all(size.is_sold_out for size in sizes):
+				product.is_sold_out = True
+				product.save()
+		return render(request, 'product.html', {'product_ids':product_ids, 'product':product, 'sizes':sizes, 'trolley':trolley, 'categories':categories})
+	else:
+		messages.error(request, 'That product is currently unavailable.')
+		return redirect('shop')
 
+def warehoused_product(request, pk):
+	user = request.user
+	product = Product.objects.get(id=pk)
+	sizes = product.size.all() 
+	categories = Category.objects.all()
+	if user.is_superuser:
+		if not product.is_on_shelf:
+			if product.is_size:
+				if all(size.is_sold_out for size in sizes):
+					product.is_sold_out = True
+					product.save()
+			return render(request, 'warehoused_product.html', {'product':product, 'sizes':sizes, 'categories':categories})
+		else:
+			messages.error(request, 'That product is currently unavailable.')
+			return redirect('shop')
+	else:
+		messages.error(request, 'You not authorised in here, get out!')
+		return redirect('shop')
 
 def add_product(request):
     user = request.user
@@ -114,10 +138,10 @@ def add_product(request):
                 for size in sizes:
                 	size.product = product
                 	size.save()
-                messages.success(request, 'Product added to database.')
+                messages.success(request, 'Product added to warehouse.')
                 return redirect('warehoused_product_summary')
             else:
-            	messages.error(request, 'There was an error and product was not created')
+            	messages.error(request, 'There was an error and the product was not created')
             	return render(request, 'add_product.html', { 'product_form': product_form, 'size_formset': size_formset })
         else:
             product_form = ProductForm()
@@ -147,18 +171,19 @@ def product_update(request, product_id):
 					if form.instance.product_id:
 						form.instance.delete()
 				messages.success(request, 'Product updated!')
-				return redirect('shop')
+				return redirect('product_summary')
 			# Redirect to a suitable page after updating
 			else:
 				print("Product form errors:", product_form.errors)
 				print("Size formset errors:", size_formset.errors)
-				messages.error(request, 'There was an error with the forms')
+				messages.error(request, 'There was an error with the update.')
 				return render(request, 'product_update.html', { 'product':product, 'product_form': product_form, 'size_formset': size_formset })
 		else:
 			product_form = ProductForm(instance=product)
 			size_formset = SizeFormSet(instance=product) 
 			return render(request, 'product_update.html', { 'product': product, 'product_form': product_form, 'size_formset': size_formset })
 	else:
+		messages.error(request, 'You do not have the right permit to enter this room.')
 		return redirect('index')
 
 
@@ -177,7 +202,8 @@ def add_category(request):
             category_form = CategoryForm()
             return render(request, 'add_category.html', { 'category_form': category_form })
     else:
-        return redirect('index')
+    	messages.error(request, 'Get out!')
+    	return redirect('index')
 
 # Create your views here.
 def category_update(request, category_id):
@@ -196,6 +222,7 @@ def category_update(request, category_id):
 			category_form = CategoryForm(instance=category)
 			return render(request, 'category_update.html', { 'category': category, 'category_form': category_form })
 	else:
+		messages.error(request, 'No authorisation to do that.')
 		return redirect('index')
 
 
@@ -204,8 +231,10 @@ def delete_product(request, pk):
     product = Product.objects.get(id=pk)
     if user.is_superuser:
         Product.objects.get(id=pk).delete()
+        messages.success(request, 'Product deleted.')
         return redirect('shop')
     else:
+    	messages.error(request, 'Sorry old boy, you cannot do that here.')
     	return redirect('index')
 
 
@@ -214,8 +243,10 @@ def delete_category(request, pk):
     category = Category.objects.get(id=pk)
     if user.is_superuser:
         Category.objects.get(id=pk).delete()
+        messages.success(request, 'Category deleted.')
         return redirect('shop')
     else:
+    	messages.error(request, 'Ah ah ah, you did not say the magic word.')
     	return redirect('index')
 
 
@@ -235,7 +266,8 @@ def products_summary(request):
             return redirect('products_summary')
         return render(request, 'products_summary.html', {'products':products})
     else:
-        return redirect('index')
+    	messages.error(request, 'Ah ah ah, you did not say the magic word.')
+    	return redirect('index')
 
 
 def warehoused_product_summary(request):
