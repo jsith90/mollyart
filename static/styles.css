@@ -3106,12 +3106,12 @@ footer {
 	.image-control img {
 		display: block;
 		width: 100%;
+		border-radius: 15px;
 	}
 
 	.about-div .image-control img {
 		  position: relative;
       top: -50%;
-      border-radius: 15px;
 	}
 
 	.icon-reel-images .reel-image img {
@@ -3663,10 +3663,6 @@ footer {
 	.alert > div {
 		width: 30%;
 
-	}
-
-	nav {
-		margin: 2rem 0 0 0;
 	}
 
 	.toggle-div {
