@@ -1,3 +1,20 @@
+function about() {
+    const aboutDiv = document.querySelector('.about-div');
+    const aboutImage = document.querySelector('.about-image');
+    const contactDiv = document.querySelector('.contact-div');
+    const contactImage = document.querySelector('.contact-image');
+
+    if (aboutDiv) {
+        const divHeight = aboutDiv.offsetHeight;
+        const divHeightTwo = contactDiv.offsetHeight;
+        aboutImage.style.minHeight = `${divHeight}px`; 
+        aboutImage.style.maxHeight = `${divHeight}px`;
+        contactImage.style.height = `${divHeightTwo}px`; 
+        console.log('Contact Div Height:', divHeightTwo)
+    }
+
+}
+
 function imageCarousel() {
     const galleryContainer = document.querySelector('.gallery-container');
     const galleryControlsContainer = document.querySelector('.gallery-controls');
@@ -304,7 +321,7 @@ function navBar() {
         navToggleClose.style.opacity = "1";
         navToggleOpen.style.zIndex = "0";
         navToggleClose.style.zIndex = "10";
-        nav.style.marginBottom = "0";
+        nav.style.paddingBottom = "0";
     });
 
     navToggleClose.addEventListener("click", function () {
@@ -321,7 +338,7 @@ function navBar() {
         navToggleClose.style.opacity = "0";
         navToggleOpen.style.zIndex = "10";
         navToggleClose.style.zIndex = "0";
-        nav.style.marginBottom = "2rem";
+        nav.style.paddingBottom = "2rem";
     });
 }
 
@@ -594,3 +611,4 @@ paymentLoading();
 toggleCommissionForm();
 imageCarousel();
 deleteModal();
+about();

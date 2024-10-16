@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("about/", views.about, name="about"),
     path('admin_dash/', views.admin_dash, name="admin_dash"),
     path('shop/', views.shop, name="shop"),
     path('product/<int:pk>/', views.product, name='product'),

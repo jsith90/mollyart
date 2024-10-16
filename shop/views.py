@@ -39,6 +39,10 @@ def index(request):
 	portfolios = Portfolio.objects.filter(is_published=True)
 	return render(request, 'index.html', { 'reviews':reviews, 'portfolios':portfolios })
 
+# Create your views here.
+def about(request):
+	return render(request, 'about.html', {})
+
 
 def admin_dash(request):
 	user = request.user
