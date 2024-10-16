@@ -448,6 +448,15 @@ nav {
   font-size: 1rem;
 }
 
+.contact-link {
+  text-decoration: underline;
+}
+
+.contact-link:hover {
+	text-decoration: none;
+	cursor: pointer;
+}
+
 .contact-image {
 	background-image: url(/static/images/contact-div.JPG);
 	background-position: center;
@@ -837,7 +846,7 @@ nav {
 .review-link:hover {
 	text-decoration: none;
 	cursor: pointer;
-}
+}  
 
 .review-link:nth-of-type(1) {
 	top: 24%;
