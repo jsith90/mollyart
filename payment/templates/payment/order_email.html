@@ -2,7 +2,9 @@
 <pre>Your order has been made and will now be processed.</pre>
 <pre>Please see the details of your order below:</pre>
 <div>
-    <pre>Order Total: £{{ order.amount_paid }}</pre>
+   <pre>Trolley Total: £{{ order.trolley_totals }}</pre>
+   <pre>Postage and Packaging: {{ order.postage_cost }}</pre>
+   <pre>Order Total: £{{ order.amount_paid }}</pre>
 </div>
  <div>
    <pre>Date Ordered: {{ order.date_ordered }}</pre><br>

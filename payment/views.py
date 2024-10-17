@@ -192,7 +192,7 @@ def billing_info(request):
 		# create order
 		paypal_dict = {
 			'business': settings.PAYPAL_RECEIVER_EMAIL,
-			'amount': trolley_totals,
+			'amount': amount_paid,
 			'item_name': "Molly's Art Order",
 			'no_shipping': '2',
 			'invoice': my_Invoice,
