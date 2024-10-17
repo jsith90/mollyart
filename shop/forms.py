@@ -6,10 +6,11 @@ from django.forms import inlineformset_factory
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'price', 'category', 'description', 'image', 'image2', 'image3', 'image4', 'is_sale', 'sale_price', 'is_sold_out', 'is_size', 'quantity']
+        fields = ['name', 'price', 'weight', 'category', 'description', 'image', 'image2', 'image3', 'image4', 'is_sale', 'sale_price', 'is_sold_out', 'is_size', 'quantity']
         labels = {
             'name': 'Product Name:',
             'price': 'Price:',
+            'weight': 'Weight:',
             'category':'Category:',
             'description': 'Description:',
             'image': 'Uploade main image:',
@@ -25,6 +26,7 @@ class ProductForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter product name...'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'weight': forms.NumberInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your product description...'}),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control image-control'}),

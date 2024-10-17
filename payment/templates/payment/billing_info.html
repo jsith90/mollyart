@@ -68,8 +68,12 @@
                 <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>
             <div class="payment-total">
-                <p>Total:</p> 
-                <h3>£{{ totals }}</h3>
+                <p>Postage and Packaging:</p>
+                <p>£{{ postage }}</p>
+                <p>Trolley Total:</p> 
+                <p>£{{ trolley_totals }}</p>
+                <p>Total to Pay:</p>
+                <h3>£{{ absolute_total }}</h3>
             </div>
         </div>
         <br>
@@ -112,7 +116,7 @@
                     <div id="payment-element">
                     <!-- placeholder for Elements -->
                     </div>
-                    <button class="payment-button" id="submit">Pay £{{ totals }}</button>
+                    <button class="payment-button" id="submit">Pay £{{ absolute_total }}</button>
                     <div id="error-message">
                     <!-- Display error message to your customers here -->
                     </div>

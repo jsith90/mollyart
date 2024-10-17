@@ -129,8 +129,9 @@ def shipped_dash(request):
 		return redirect('index')
 
 
-def calculate_order_amount(items):
+def calculate_order_amount(request, items):
 	total_amount = 0
+	trolley = Trolley(request)
 	for item in items:
 		product_id = item['id']
 		quantity = item['quantity']
@@ -142,8 +143,11 @@ def calculate_order_amount(items):
 			price = product.price
 		# Multiply price by quantity and add to the total amount
 		total_amount += price * quantity
+
+	postage = trolley.trolley_postage_packaging()
+	final_amount = total_amount + postage
 		# Return the total amount in the smallest currency unit (e.g., pence for GBP)
-	return int(total_amount * 100)  # Convert to pence if using GBP
+	return int(final_amount * 100)  # Convert to pence if using GBP
 
 
 def billing_info(request):
@@ -154,7 +158,9 @@ def billing_info(request):
 	sizes = trolley.get_sizes()
 	quantities = trolley.get_quants
 	current_trolley = trolley.trolley
-	totals = trolley.trolley_total()
+	trolley_totals = trolley.trolley_total()
+	absolute_total = trolley.absolute_total()
+	postage = trolley.trolley_postage_packaging()
 	if request.POST:
 		# create a session with shipping info
 		my_shipping = request.POST
@@ -162,14 +168,16 @@ def billing_info(request):
 		# gather order info
 		full_name = my_shipping['shipping_full_name']
 		email = my_shipping['shipping_email']
-		amount_paid = totals
+		amount_paid = absolute_total
+		postage_cost = postage
+		trolley_totals = trolley_totals
 		# Create shipping address from shipping info
 		shipping_address = f"{my_shipping['shipping_address1']}\n{my_shipping['shipping_address2']}\n{my_shipping['shipping_city']}\n{my_shipping['shipping_region']}\n{my_shipping['shipping_postcode']}\n{my_shipping['shipping_country']}"
 
 		# create payment intent in stripe
 		items = [{'id': product.id, 'quantity': quantities()[str(product.id)]} for product in trolley_products()]
 		intent = stripe.PaymentIntent.create(
-			amount=calculate_order_amount(items),
+			amount=calculate_order_amount(request, items),
 			currency='gbp',
 			automatic_payment_methods={
 				'enabled': True,
@@ -184,7 +192,7 @@ def billing_info(request):
 		# create order
 		paypal_dict = {
 			'business': settings.PAYPAL_RECEIVER_EMAIL,
-			'amount': totals,
+			'amount': trolley_totals,
 			'item_name': "Molly's Art Order",
 			'no_shipping': '2',
 			'invoice': my_Invoice,
@@ -198,7 +206,7 @@ def billing_info(request):
 		paypal_form = PayPalPaymentsForm(initial=paypal_dict)
 		
 		# create an order 
-		create_order = Order(full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid, payment_intent_id=intent.id, invoice=my_Invoice)
+		create_order = Order(full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid, trolley_totals=trolley_totals, postage_cost=postage_cost, payment_intent_id=intent.id, invoice=my_Invoice)
 		create_order.save() 
 		order_id = create_order.pk
 		# get product stuff
@@ -232,7 +240,7 @@ def billing_info(request):
 				create_order_item = OrderItem(is_size=True, order_id=order_id, product_id=product_id, size=sizes_string, price=price,)
 				create_order_item.save()
 				print(create_order_item)
-		return render(request, 'payment/billing_info.html', { 'current_trolley':current_trolley, 'sizes':sizes, 'client_secret':intent.client_secret, 'STRIPE_PUBLIC_KEY':settings.STRIPE_PUBLIC_KEY, 'paypal_form':paypal_form, 'trolley_products':trolley_products, 'quantities':quantities, 'totals':totals, 'shipping_info':request.POST })
+		return render(request, 'payment/billing_info.html', { 'absolute_total':absolute_total, 'postage':postage, 'current_trolley':current_trolley, 'sizes':sizes, 'client_secret':intent.client_secret, 'STRIPE_PUBLIC_KEY':settings.STRIPE_PUBLIC_KEY, 'paypal_form':paypal_form, 'trolley_products':trolley_products, 'quantities':quantities, 'trolley_totals':trolley_totals, 'shipping_info':request.POST })
 
 
 		# shipping_info = request.POST
@@ -250,6 +258,8 @@ def checkout(request):
     sizes = trolley.get_sizes()  # List of sizes in the trolley
     quantities = trolley.get_quants()  # Quantities of products
     totals = trolley.trolley_total()  # Trolley total price
+    postage = trolley.trolley_postage_packaging()
+    absolute_total = trolley.absolute_total()
 
     # Handle sold-out products (those not size-specific)
     sold_out_ids = [product.id for product in trolley_products if not product.is_size and product.is_sold_out]
@@ -278,7 +288,7 @@ def checkout(request):
     		return redirect('trolley_summary')
 
     shipping_form = ShippingForm(request.POST or None)
-    return render(request, 'payment/checkout.html', {'current_trolley': trolley.trolley, 'sizes': sizes, 'trolley_products': trolley_products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form })
+    return render(request, 'payment/checkout.html', {'postage': postage, 'absolute_total': absolute_total, 'current_trolley': trolley.trolley, 'sizes': sizes, 'trolley_products': trolley_products, 'quantities': quantities, 'totals': totals, 'shipping_form': shipping_form })
 
 
 @csrf_exempt

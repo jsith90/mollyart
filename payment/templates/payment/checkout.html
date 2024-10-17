@@ -5,7 +5,7 @@
 {% block title %}Molly ST – Delivery Details{% endblock %}
 
 {% block content %}
-
+  
         <!-- Header-->
 <header class="checkout-header">
      <div class="header-icon">
@@ -69,8 +69,12 @@
                 <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>
             <div class="order-total">
-                <p>Total:</p> 
-                <h3>£{{ totals }}</h3>
+                <p>Postage and Packaging:</p>
+                <p>£{{ postage }}</p>
+                <p>Trolley Total:</p> 
+                <p>£{{ totals }}</p>
+                <p>Total to Pay:</p>
+                <h3>£{{ absolute_total }}</h3>
             </div>
         </div>
     </section>

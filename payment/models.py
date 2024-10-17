@@ -35,6 +35,8 @@ class Order(models.Model):
 	email = models.EmailField(max_length=250)
 	shipping_address = models.TextField(max_length=15000)
 	amount_paid = models.DecimalField(max_digits=7, decimal_places=2)
+	trolley_totals = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+	postage_cost = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
 	date_ordered = models.DateTimeField(auto_now_add=True)
 	shipped = models.BooleanField(default=False)
 	date_shipped = models.DateTimeField(blank=True, null=True)

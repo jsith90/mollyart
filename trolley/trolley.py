@@ -1,4 +1,5 @@
 from shop.models import Product, Size
+from decimal import Decimal, ROUND_HALF_UP
 
 
 class Trolley():
@@ -71,6 +72,44 @@ class Trolley():
 
 	    return total
 
+
+	def trolley_postage_packaging(self):
+		product_keys = self.trolley.keys()
+		product_ids = [key.split('_')[0] for key in product_keys]
+		products = Product.objects.filter(id__in=product_ids)
+		weight_total = 0
+		postage = 0
+
+		for key, value in self.trolley.items():
+			product_id = int(key.split('_')[0])
+			size = key.split('_')[1] if '_' in key else None
+			quantity = value['quantity'] if isinstance(value, dict) else value
+
+			for product in products:
+				if product.id == product_id:
+					if product.weight:
+						weight_total += product.weight * quantity
+
+
+		if weight_total <= 1:
+			postage = Decimal('3.59')
+		elif weight_total <= 2:
+			postage = Decimal('4.50')
+		elif weight_total <= 10:
+			postage = Decimal('10.00')
+		else:
+			postage = Decimal('40.00') 
+
+		return postage
+
+
+	def absolute_total(self):
+		total = self.trolley_total()
+		postage = self.trolley_postage_packaging()
+
+		absolute_total = total + postage
+
+		return absolute_total
 
 
 	def __len__(self):

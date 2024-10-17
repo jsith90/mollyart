@@ -47,6 +47,7 @@ class Product(models.Model):
 	is_size = models.BooleanField(default=False, blank=True, null=True)
 	# on shop floor
 	is_on_shelf = models.BooleanField(default=False, blank=True, null=True)
+	weight = models.DecimalField(default=0, decimal_places=2, max_digits=6, blank=True, null=True)
 
 
 	def __str__(self):
