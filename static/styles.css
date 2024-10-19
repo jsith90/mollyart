@@ -365,7 +365,7 @@ nav {
 }
 
 .about-header .header-div .header-icons .header-icon {
-	width: 15%;
+	width: 20%;
 }
 
 .about-heading {
@@ -3693,6 +3693,10 @@ footer {
 
 	.about-header {
   	margin-bottom: 0;
+  }
+
+  .about-header .header-div .header-icons .header-icon {
+  	width: 25%;
   }
 
 	.add-buttons, .add-size-buttons {

@@ -175,7 +175,7 @@ def product_update(request, product_id):
 					if form.instance.product_id:
 						form.instance.delete()
 				messages.success(request, 'Product updated!')
-				return redirect('product_summary')
+				return redirect('products_summary')
 			# Redirect to a suitable page after updating
 			else:
 				print("Product form errors:", product_form.errors)

@@ -9,8 +9,8 @@ class ProductForm(forms.ModelForm):
         fields = ['name', 'price', 'weight', 'category', 'description', 'image', 'image2', 'image3', 'image4', 'is_sale', 'sale_price', 'is_sold_out', 'is_size', 'quantity']
         labels = {
             'name': 'Product Name:',
-            'price': 'Price:',
-            'weight': 'Weight:',
+            'price': 'Price(£):',
+            'weight': 'Weight(kg):',
             'category':'Category:',
             'description': 'Description:',
             'image': 'Uploade main image:',
@@ -18,7 +18,7 @@ class ProductForm(forms.ModelForm):
             'image3': 'Upload a third image:',
             'image4': 'Upload a fourth image:',
             'is_sale': 'Tick box for Sale:',
-            'sale_price': 'Sale Price:',
+            'sale_price': 'Sale Price(£):',
             'is_sold_out': 'Tick box for Sold Out',
             'is_size': 'Tick the box to add sizes:',
             'quantity': 'Quantity:',

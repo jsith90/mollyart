@@ -24,7 +24,7 @@
     <section class="order-display">
         <div class="order-product">
             <div class="order-summary">
-                <h2>Order Summary {% for size in sizes %} {{ size.id }} {% endfor %}</h2>
+                <h2>Order Summary</h2>
             </div>
             <div class="order-detail">
                 {% for product in trolley_products %}
@@ -69,10 +69,10 @@
                 <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>
             <div class="order-total">
-                <p>Postage and Packaging:</p>
-                <p>£{{ postage }}</p>
                 <p>Trolley Total:</p> 
                 <p>£{{ totals }}</p>
+                <p>Postage and Packaging:</p>
+                <p>£{{ postage }}</p>
                 <p>Total to Pay:</p>
                 <h3>£{{ absolute_total }}</h3>
             </div>
