@@ -66,7 +66,6 @@
                         <hr/ class="product-hr">
                     {% endif %}
                 {% endfor %}
-                <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>
             <div class="order-total">
                 <p>Trolley Total:</p> 
@@ -75,6 +74,8 @@
                 <p>£{{ postage }}</p>
                 <p>Total to Pay:</p>
                 <h3>£{{ absolute_total }}</h3>
+                <br><br>
+                <a href="{% url 'trolley_summary' %}" class="return-button trolley-button">Update Items</a>
             </div>
         </div>
     </section>
