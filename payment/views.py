@@ -190,15 +190,6 @@ def billing_info(request):
 				'enabled': True,
 			},
 			receipt_email=email,
-			billing_details={
-				'name':full_name,
-				'email':email,
-				'address':stripe_shipping_address,
-			},
-			shipping={
-				'name':full_name,
-				'address':stripe_shipping_address,
-			},
 		)
 
 		# paypal form dictionary and stuff
