@@ -1,0 +1,16 @@
+<h1>Hello {{ commission.name }}</h1>
+<pre>Your commission has been sent and I will try to respond as soon as I can.</pre>
+<pre>Many thanks again!</pre>
+<pre>Molly ST</pre>
+<hr><br>
+<h1>{{ commission.commission_title }}</h1>
+<pre>{{ commission.email }}</pre>
+<pre>{{ commission.address }}</pre>
+<pre>{{ commission.contact_number }}</pre>
+<pre>{{ commission.commission_idea }}</pre>
+<pre>{{ commission.canvas_size }}</pre>
+<pre>{{ commission.deadline_date }}</pre>
+<pre>{{ commission.framing_options }}</pre>
+{% for image in images %}
+<img src="{{ image.image.url }}">
+{% endfor %}

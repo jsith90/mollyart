@@ -34,6 +34,7 @@ def create_commission(request):
 				image.commission = commission
 				image.save()
 			commission_email(commission, images)
+			notify_user_email(request, commission)
 			messages.success(request, "Thanks for sending your commission proposal! I'll be in touch soon about your idea.")
 			return redirect('index')
 		else:
@@ -57,27 +58,24 @@ def commission_email(commission, images):
 
 
 
-def order_shipped_email(request, order):
-	items = OrderItem.objects.filter(order=order)
-	order_email = order.email
+def notify_user_email(request, commission):
+	commission_email = commission.email
 	is_valid_email = True
 	try:
-		validate_email(order_email)
+		validate_email(commission_email)
 	except ValidationError:
 		is_valid_email = False
 	if is_valid_email:
-		subject = "Your order has been shipped!"
+		subject = "Your commission has been sent!"
 		from_email = "j.sinclairthomson@gmail.com"
-		to_email = [order_email] 
-		html_template = get_template('payment/shipped_email.html')
-		html_content = html_template.render({'order': order, 'items': items})
+		to_email = [commission_email] 
+		html_template = get_template('commission/notify_user_email.html')
+		html_content = html_template.render({'commission': commission})
 		email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
 		email_message.attach_alternative(html_content, "text/html")
 		email_message.send()
-		messages.success(request, 'An order email has been sent!')
 	else:
-		messages.error(request, 'The email address was invalid and and a shipping confirmation could not be sent.')
-		return redirect('not_shipped_dash')
+		messages.error(request, 'Your email address was invalid.')
 
 
 

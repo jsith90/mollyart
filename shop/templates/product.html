@@ -129,6 +129,7 @@
               <div class="mobile-view">
                 <div class="quantity-box size-quantities">
                   <h5 class="price">Size:</h5>
+                  <div>
                   {% for size in sizes %}
                     <div class="sizes-div">
                       {% if not size.is_sold_out %}
@@ -152,6 +153,7 @@
                       {% endif %}
                     </div>
                   {% endfor %}
+                  </div>
                 </div>
               </div>
             {% endif %}

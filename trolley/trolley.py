@@ -92,14 +92,17 @@ class Trolley():
 
 
 		if weight_total <= 1:
-			postage = Decimal('3.59')
-		elif weight_total <= 2:
+			postage = Decimal('3.50')
+		elif weight_total <= 4:
 			postage = Decimal('4.50')
 		elif weight_total <= 10:
-			postage = Decimal('10.00')
-		else:
-			postage = Decimal('40.00') 
-
+			postage = Decimal('10.50')
+		elif weight_total <= 20:
+			postage = Decimal('21.00')
+		elif weight_total <= 50:
+			postage = Decimal('40.00')
+		elif weight_total <= 100:
+			postage = Decimal('80.00') 
 		return postage
 
 

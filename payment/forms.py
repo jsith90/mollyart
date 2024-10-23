@@ -9,7 +9,7 @@ class ShippingForm(forms.ModelForm):
 	shipping_city = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'City (required)'}), required=True)
 	shipping_region = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Region (required)'}), required=True)
 	shipping_postcode = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Postcode (required)'}), required=True)
-	shipping_country = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'country (required)'}), required=True)
+	shipping_country = forms.CharField(label="", widget=forms.TextInput(attrs={'value':'United Kingdom', 'readonly':'readonly','class':'form-control', 'placeholder':'country (required)'}), required=True)
 
 	class Meta:
 		model = ShippingAddress

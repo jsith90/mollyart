@@ -173,7 +173,14 @@ def billing_info(request):
 		trolley_totals = trolley_totals
 		# Create shipping address from shipping info
 		shipping_address = f"{my_shipping['shipping_address1']}\n{my_shipping['shipping_address2']}\n{my_shipping['shipping_city']}\n{my_shipping['shipping_region']}\n{my_shipping['shipping_postcode']}\n{my_shipping['shipping_country']}"
-
+		stripe_shipping_address = {
+            'line1': my_shipping['shipping_address1'],
+            'line2': my_shipping['shipping_address2'],
+            'city': my_shipping['shipping_city'],
+            'state': my_shipping['shipping_region'],
+            'postal_code': my_shipping['shipping_postcode'],
+            'country': my_shipping['shipping_country'],
+        }
 		# create payment intent in stripe
 		items = [{'id': product.id, 'quantity': quantities()[str(product.id)]} for product in trolley_products()]
 		intent = stripe.PaymentIntent.create(
@@ -181,6 +188,16 @@ def billing_info(request):
 			currency='gbp',
 			automatic_payment_methods={
 				'enabled': True,
+			},
+			receipt_email=email,
+			billing_details={
+				'name':full_name,
+				'email':email,
+				'address':stripe_shipping_address,
+			},
+			shipping={
+				'name':full_name,
+				'address':stripe_shipping_address,
 			},
 		)
 
