@@ -63,6 +63,7 @@
               <p>{{ product.description }}</p>
               <p class="line-through">£{{ product.price }}</p>
               <h4 class="price">£{{ product.sale_price }}</h4>
+               <pre>postage and packaging <button class="weight-button" id="open-pp"><i class="fa-solid fa-circle-info"></i></button></pre>
             </div>
         {% elif product.is_sold_out %}
           <div class="item-image-box">
@@ -87,6 +88,7 @@
               <!-- Product price-->
               <p>{{ product.description }}</p>
               <h4 class="price">£{{ product.price }}</h4>
+              <pre>postage and packaging <button class="weight-button" id="open-pp"><i class="fa-solid fa-circle-info"></i></button></pre>
             </div>
         {% else %}
           <div class="item-image-box">  
@@ -110,6 +112,7 @@
               <!-- Product price-->
               <p>{{ product.description }}</p>
               <h4 class="price">£{{ product.price }}</h4>
+              <pre>postage and packaging <button class="weight-button" id="open-pp"><i class="fa-solid fa-circle-info"></i></button></pre>
             </div>
         {% endif %}
         {% if not product.is_sold_out %}
@@ -171,7 +174,7 @@
           <a class="product-button" href="{% url 'shop' %}">Molly's Shop</a>
           {% if user.is_superuser %}
             <a class="edit product-button" href="{% url 'product_update' product.id %}">Edit</a>
-            <button class="delete product-button" id="open">Delete</button>
+            <button class="delete product-button" id="open">Delete</button> 
           {% endif %}
         </div>
         </div>
@@ -210,7 +213,20 @@
         {% endif %}
       </div>
   </div>
-
+  <div id="weightModal" class="delete-modal">
+    <div>
+        <div class="product-buttons">
+            <h2>Postage and Packaging Guide:</h2>
+            <p>up to 4 x small prints, p&p: £3.50</p>
+            <p>up to 4 x large prints and/or clothing items, p&p: £4.50</p>
+            <p>up to 2 x small paintings, p&p: £10.50</p>
+            <p>up to 2 x large paintings, p&p: £40.00</p>
+            <p>Payment and delivery through the site is only available in the UK.</p>
+            <p>If you live outside of the UK and would like to purchase one of my items, please email me at:</p>
+            <pre><a class="contact-link" href="mailto:mollystartist@gmail.com" target="_blank">mollystartist@gmail.com</a></pre>
+        </div>
+    </div>
+  </div>
   {% if user.is_superuser %}
         <div id="deleteModal" class="delete-modal">
             <div>

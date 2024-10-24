@@ -595,6 +595,34 @@ function deleteModal() {
     });
 }
 
+function weightInfoModal() {
+    const modal = document.getElementById("weightModal");
+    const open = document.getElementById('open-pp');
+    const close = document.getElementById("close");
+
+    if (open && modal) {
+        open.addEventListener("click", function () {
+            modal.style.display = "flex";
+            modal.style.zIndex = "1000";
+        });
+    }
+
+    if (close && modal) {
+        close.addEventListener("click", function() {
+            modal.style.display = "none";
+            modal.style.zIndex = "-10";
+        });
+    }
+
+    // Close modal if clicked outside the modal content
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            modal.style.zIndex = "-10";
+        }
+    });
+}
+
 
 
 // Call these functions to initialize events based on the template
@@ -612,3 +640,4 @@ toggleCommissionForm();
 imageCarousel();
 deleteModal();
 about();
+weightInfoModal()

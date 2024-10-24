@@ -8,6 +8,7 @@
     </div>
 </header>
  <section class="form-section">
+        <pre>Weight input info: <button class="weight-button" id="open-pp"><i class="fa-solid fa-circle-info"></i></button></pre>
         <form class="add-product-form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
             <div class="product-form">
@@ -33,6 +34,18 @@
             </div>
         </form>
     </section>
+    <div id="weightModal" class="delete-modal">
+        <div>
+            <div class="product-buttons">
+                <h2>Weight Guide</h2>
+                <p>up to 4 x small prints, p&p: £3.50 (set small prints at 0.2kg)</p>
+                <p>up to 4 x large prints, p&p: £4.50 (set large prints at 1kg)</p>
+                <p>up to 4 x clothing items, p&p: £4.50 (set clothing items at 1kg)</p>
+                <p>up to 2 x small paintings, p&p: £10.50 (set small paintings at 5kg)</p>
+                <p>up to 2 x large paintings, p&p: £40.00 (set large paintings at 25kg)</p>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
         // document.addEventListener("DOMContentLoaded", function() {
         //     // Get all image input divs

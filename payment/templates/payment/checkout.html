@@ -83,6 +83,7 @@
         <div class="order-product">
             <div class="shipping-summary">
                 <h2>name & address</h2>
+                <h3>deliver to UK only <button class="weight-button" id="open-pp"><i class="fa-solid fa-circle-info"></i></button></h3>
             </div>
             <div class="shipping-detail">
                 <form method="POST" action="{% url 'billing_info' %}">
@@ -125,6 +126,15 @@
         </div>
     </section>
 </section>
+<div id="weightModal" class="delete-modal">
+    <div>
+        <div class="product-buttons">
+            <p>Payment and delivery through the site is only available in the UK.</p>
+            <p>If you live outside of the UK and would like to purchase one of my items, please email me at:</p>
+            <pre><a class="contact-link" href="mailto:mollystartist@gmail.com" target="_blank">mollystartist@gmail.com</a></pre>
+        </div>
+    </div>
+  </div>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
         // Select all elements with the class 'value-quantity'
