@@ -6,7 +6,7 @@
 	margin: 0;
 	padding: 0;
 }
-
+  
 :root {
 	--transition: all 0.3s linear;
 }  
@@ -1936,6 +1936,15 @@ input[type="radio"]:not(:disabled):checked {
   border-right: solid;
   border-left: solid;
   border-top: solid;
+}
+
+.weight-button {
+	background: none;
+	border: none;
+}
+
+.form-section pre {
+	margin: 1rem 0 0 0;
 }
 
 form {
