@@ -4,15 +4,17 @@
 {% block title %}Molly ST – Write a Review{% endblock %}
 
 {% block content %} 
-        <header class="checkout-header">
-             <div class="header-icon">
-                <img src="{% static 'images/molly-eye-tog.png' %}">
-            </div>
-             <div class="default-font">
-                <h1>write a review</h1>
-            </div>
-             <div class="header-icon">
-                <img src="{% static 'images/molly-eye-tog.png' %}">
+        <header class="commission-header">
+            <div class="header-div">
+                <div class="header-icons">
+                    <div class="header-icon">
+                        <img src="{% static 'images/molly-eye-tog.png' %}">
+                    </div>
+                    <a class="commission-heading" href="{% url 'write_review' %}"><img src="{% static 'images/write_review_logo.png' %}"></a>
+                    <div class="header-icon">
+                        <img src="{% static 'images/molly-eye-tog.png' %}">
+                    </div>
+                </div>
             </div>
         </header><div class="svg-wave-under">
         <svg viewBox="0 0 1903 118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style>svg {display: inline-block; animation: dl-wave 15s linear infinite;
