@@ -94,7 +94,7 @@ def order_shipped_email(request, order):
 		is_valid_email = False
 	if is_valid_email:
 		subject = "Molly ST | Your order has been shipped!"
-		from_email = "j.sinclairthomson@gmail.com"
+		from_email = "mollystartist@gmail.com"
 		to_email = [order_email] 
 		html_template = get_template('payment/shipped_email.html')
 		html_content = html_template.render({'order': order, 'items': items})
@@ -399,7 +399,7 @@ def send_email(order):
 	items = OrderItem.objects.filter(order=order)
 	order_email = order.email
 	subject = "Molly ST | Your order has been placed!"
-	from_email = "j.sinclairthomson@gmail.com"
+	from_email = "mollystartist@gmail.com"
 	to_email = [order_email] 
 	html_template = get_template('payment/order_email.html')
 	html_content = html_template.render({'order': order, 'items': items})
@@ -411,8 +411,8 @@ def send_email(order):
 def purchase_notification_email(order):
 	items = OrderItem.objects.filter(order=order)
 	subject = "You have a new customer!"
-	from_email = "j.sinclairthomson@gmail.com"
-	to_email = ["j.sinclairthomson@gmail.com"] 
+	from_email = "mollystartist@gmail.com"
+	to_email = ["mollystartist@gmail.com"] 
 	html_template = get_template('payment/notification.html')
 	html_content = html_template.render({'order': order, 'items': items})
 	email_message = EmailMultiAlternatives(subject, '', from_email, to_email)

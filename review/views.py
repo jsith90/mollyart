@@ -39,8 +39,8 @@ def write_review(request):
 
 def review_notification_email(review):
 	subject = "You have a new review to activate!"
-	from_email = "j.sinclairthomson@gmail.com"
-	to_email = ["j.sinclairthomson@gmail.com"] 
+	from_email = "mollystartist@gmail.com"
+	to_email = ["mollystartist@gmail.com"] 
 	html_template = get_template('review/notification.html')
 	html_content = html_template.render({'review': review})
 	email_message = EmailMultiAlternatives(subject, '', from_email, to_email)

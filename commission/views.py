@@ -48,8 +48,8 @@ def create_commission(request):
 
 def commission_email(commission, images):
 	subject = "A new commission"
-	from_email = "j.sinclairthomson@gmail.com"
-	to_email = ["j.sinclairthomson@gmail.com"] 
+	from_email = "mollystartist@gmail.com"
+	to_email = ["mollystartist@gmail.com"] 
 	html_template = get_template('commission/commission.html')
 	html_content = html_template.render({'commission': commission, 'images': images})
 	email_message = EmailMultiAlternatives(subject, '', from_email, to_email)
@@ -67,7 +67,7 @@ def notify_user_email(request, commission):
 		is_valid_email = False
 	if is_valid_email:
 		subject = "Your commission has been sent!"
-		from_email = "j.sinclairthomson@gmail.com"
+		from_email = "mollystartist@gmail.com"
 		to_email = [commission_email] 
 		html_template = get_template('commission/notify_user_email.html')
 		html_content = html_template.render({'commission': commission})
