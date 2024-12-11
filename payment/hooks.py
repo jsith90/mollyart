@@ -27,3 +27,4 @@ def paypal_payment_received(sender, **kwargs):
 	# print(f'Amount Paid: {paypal_obj.mc_gross}')
 	handle_payment_intent_succeeded(my_Order)
 	send_email(my_Order)
+	purchase_notification_email(my_Order)

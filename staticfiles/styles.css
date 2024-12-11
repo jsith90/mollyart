@@ -2631,7 +2631,7 @@ footer {
 	align-items: flex-start;
 	justify-content: center;
 	position: relative;
-	right: -5%;
+	right: -1%;
 	top: -2%;
 	z-index: 1;
 /*	animation-name: waddle;
@@ -2734,6 +2734,10 @@ footer {
 /*		position: relative;*/
 	}
 
+	.footer-man-one {
+		top: 4%;	
+	}
+
 	.subscribe-div {
 		width: 60%;
 		text-align: center;
@@ -2762,20 +2766,6 @@ footer {
 		text-align: center;
 		border: black solid;
 		background: white;
-	}
-
-	.footer-man-one {
-		width: 30%;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		position: relative;
-		right: -5%;
-		top: 2%;	
-	}
-
-	.footer-man-one > img {
-		width: 100%;
 	}
 
 	.footer-man-two {
@@ -2911,20 +2901,6 @@ footer {
 		text-align: center;
 		border: black solid;
 		background: white;
-	}
-
-	.footer-man-one {
-		width: 30%;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		position: relative;
-		right: -5%;
-		top: 1%;	
-	}
-
-	.footer-man-one > img {
-		width: 100%;
 	}
 
 	.footer-man-two {
@@ -3090,17 +3066,7 @@ footer {
 	}
 
 	.footer-man-one {
-		width: 30%;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		position: relative;
-		right: -5%;
 		top: 4%;	
-	}
-
-	.footer-man-one > img {
-		width: 100%;
 	}
 
 	.footer-man-two {
@@ -3317,12 +3283,6 @@ footer {
 	}
 
 	.footer-man-one {
-		width: 30%;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		position: relative;
-		right: -5%;
 		top: 7%;	
 	}
 
@@ -3425,7 +3385,6 @@ footer {
 	}
 
 	.footer-man-one {
-		right: -5%;
 		top: 8%;	
 	}
 
@@ -3679,11 +3638,6 @@ footer {
 	}
 
 	.footer-man-one {
-		width: 50%;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		position: relative;
 		right: 1%;
 		top: -21%;
 		width: 50%;	
@@ -4080,14 +4034,7 @@ footer {
 	}
 
 	.footer-man-one {
-		width: 50%;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		position: relative;
-		right: 1%;
 		top: -19%;
-		width: 50%;	
 	}
 
 	.footer-man-one > img {

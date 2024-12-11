@@ -395,7 +395,7 @@ def handle_payment_intent_succeeded(order):
                 product.save()  # Save the updated product
  
 
-def send_email(order):
+def send_email(order): 
 	items = OrderItem.objects.filter(order=order)
 	order_email = order.email
 	subject = "Molly ST | Your order has been placed!"
