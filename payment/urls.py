@@ -12,5 +12,5 @@ urlpatterns = [
     path('not_shipped_dash/', views.not_shipped_dash, name="not_shipped_dash"),
     path('orders/<int:pk>/', views.orders, name="orders"),
     path('paypal/', include('paypal.standard.ipn.urls')),
-    path('webhooks/stripe/', views.stripe_webhook, name='stripe_webhook'),
+    path('webhooks/stripe/', stripe_webhook, name='stripe_webhook'),
 ]
