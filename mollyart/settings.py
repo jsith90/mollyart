@@ -160,7 +160,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Add Paypal settings
-# Set sandbox to true
+# Set sandbox to true for testing
 PAYPAL_TEST = False
 
 # sandbox business email

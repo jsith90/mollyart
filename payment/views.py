@@ -350,7 +350,7 @@ def stripe_webhook(request):
 		return HttpResponse({'status': 'success'}, status=200)
 	else:
 		logger.warning(f'Unhandled event type: {event["type"]}')
-		# Process the payment intent as needed
+		# Process the payment intent as needed 
 
 import time
 
