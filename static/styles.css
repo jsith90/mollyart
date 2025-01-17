@@ -857,7 +857,6 @@ nav {
 
 .review-heading {
   color: #e7e5d5;
-  text-transform: lowercase;
   position: absolute;
   font-size: 3rem;
   text-align: center;
@@ -1237,7 +1236,6 @@ nav {
 .commission-intro-paragraph {
 	width: 20%;
 	display: flex;
-	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	position: absolute;
@@ -2410,6 +2408,39 @@ p:has(.sale-price) {
 
 /* portfolio pages */
 /* portfolio title page */
+.portfolios-2 {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.portfolio-2 {
+	padding: 15% 20%;
+  margin: 2%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 119%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  transition: opacity 1s ease-in-out, background-size 1s ease-in-out;
+}
+
+.portfolio-2:hover {
+/*	filter: invert(1);*/
+/*	opacity: 0.5;*/
+	background-size: 159%;
+}
+
+.gallery .check-portfolio-title {
+  font-size: 3rem;
+  font-family: "Space Grotesk", sans-serif;
+}
+
 .portfolios {
 	width: 100%;
 	display: flex;
@@ -2418,8 +2449,12 @@ p:has(.sale-price) {
 	flex-wrap: wrap;
 }
 
+.portfolio-image-apop {
+	width: 50%;
+}
+
 .portfolio {
-  padding: 15% 20%;
+  padding: 30% 20%;
   margin: 2%;
   background-repeat: no-repeat;
   background-position: center;
@@ -2439,18 +2474,11 @@ p:has(.sale-price) {
 
 }
 
-.portfolio:hover .portfolio-title {
-	background-color: black;
-	color: white;
-	opacity: 1;
-}
-
 .portfolio-title {
-	position: absolute;
 	text-align: center;
-	opacity: 0;
-  text-transform: lowercase;
+  text-transform: uppercase;
   padding: 0.5rem;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 1.2rem;
   z-index: 100;
   border-radius: 5%;
@@ -2463,7 +2491,7 @@ p:has(.sale-price) {
 	width: 40%;
 	margin: 0 20px 40px 20px;
 	position: relative;
-	align-self: flex-end;
+	align-self: center;
 }
 
 .portfolio-image {
@@ -2472,14 +2500,8 @@ p:has(.sale-price) {
 }
 
 .portfolio-p {
-	text-shadow: black 2px 2px;
-	color: white;
-	position: absolute;
-	top: 0;
-	padding: 1rem;
-	text-transform: lowercase;
-	opacity: 0;
-	transition: opacity 0.5s ease-in-out;
+	color: black;
+	padding: 0;
 }
 
 .portfolio-image-div:hover .portfolio-p {
@@ -3016,7 +3038,6 @@ footer {
 	}
 
 	.portfolio-p {
-		opacity: 1;
 		cursor: pointer;
 	}
 
@@ -3361,7 +3382,9 @@ footer {
   	font-size: 2.5rem;
 	}
 
-
+	.gallery .check-portfolio-title {
+		font-size: 2.5rem;
+	}
 
 	.nav-options > li {
 		width: 100%;
@@ -3455,6 +3478,10 @@ footer {
 
 	.review-heading {
 	  font-size: 2rem;
+	}
+
+	.gallery .check-portfolio-title {
+		font-size: 2rem;
 	}
 
 	.gallery-container {
@@ -3738,6 +3765,10 @@ footer {
 
 	.review-heading {
 	  font-size: 1.5rem;
+	}
+
+	.gallery .check-portfolio-title {
+		font-size: 1.5rem;
 	}
 
 	.review-link {

@@ -22,9 +22,11 @@
 		<div class="portfolios">
 			{% for portfolio in portfolios %}
 				{% if portfolio.front_image %}
+                <div class="portfolio-image-apop">
 					<a href="{% url 'portfolio' portfolio.id %}" class="portfolio" style="background-image: url('{{ portfolio.front_image.url }}');">
-						<h2 class="portfolio-title">{{ portfolio.title }}</h2>
 					</a>
+                    <h2 class="portfolio-title">{{ portfolio.title }}</h2>
+                </div>
 				{% endif %}
 			{% endfor %}
 		</div>
