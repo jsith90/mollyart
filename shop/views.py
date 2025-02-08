@@ -12,6 +12,7 @@ from newsletter.models import Article
 from review.models import Review
 from portfolio.models import Portfolio
 from django.forms import inlineformset_factory
+from django.db.models import F 
 
 # login page
 def login_user(request):
@@ -54,7 +55,11 @@ def admin_dash(request):
 
 
 def shop(request):
-	products = Product.objects.filter(is_on_shelf=True)
+	displayed_items = Product.objects.filter(is_on_shelf=True)
+	products = displayed_items.order_by(
+		F('is_sold_out').asc(),
+		F('is_sale').asc()
+	)
 	categories = Category.objects.all()
 	return render(request, 'shop.html', {'products':products, 'categories':categories})
 
@@ -87,7 +92,11 @@ def category(request, foo):
 	# grab category from url
 	try:
 		category = Category.objects.get(name=foo)
-		products = Product.objects.filter(category=category, is_on_shelf=True)
+		displayed_items = Product.objects.filter(category=category, is_on_shelf=True)
+		products = displayed_items.order_by(
+			F('is_sold_out').asc(),
+			F('is_sale').asc()
+		)
 		return render(request, 'category.html', {'products':products, 'category':category, 'categories':categories})
 	except:
 		messages.error(request, ('Nothing available here at the moment.'))
