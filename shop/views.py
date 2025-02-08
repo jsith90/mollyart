@@ -57,8 +57,8 @@ def admin_dash(request):
 def shop(request):
 	displayed_items = Product.objects.filter(is_on_shelf=True)
 	products = displayed_items.order_by(
-		F('is_sold_out').asc(),
-		F('is_sale').asc()
+		F('is_sale').desc(),
+		F('is_sold_out').asc()
 	)
 	categories = Category.objects.all()
 	return render(request, 'shop.html', {'products':products, 'categories':categories})
@@ -94,8 +94,8 @@ def category(request, foo):
 		category = Category.objects.get(name=foo)
 		displayed_items = Product.objects.filter(category=category, is_on_shelf=True)
 		products = displayed_items.order_by(
-			F('is_sold_out').asc(),
-			F('is_sale').asc()
+			F('is_sale').desc(),
+			F('is_sold_out').asc()
 		)
 		return render(request, 'category.html', {'products':products, 'category':category, 'categories':categories})
 	except:

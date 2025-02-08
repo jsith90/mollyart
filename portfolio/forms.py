@@ -35,4 +35,4 @@ class ImageForm(forms.ModelForm):
             'caption': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter caption'}),
         }
 
-ImageFormSet = inlineformset_factory(Portfolio, Image, form=ImageForm, max_num=None, extra=50, can_delete=True)
+ImageFormSet = inlineformset_factory(Portfolio, Image, form=ImageForm, max_num=None, extra=200, can_delete=True)
