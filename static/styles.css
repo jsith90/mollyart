@@ -677,7 +677,8 @@ nav {
   margin: 2%;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 119%;
+  background-size: 225%;
+  border-radius: 15px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -710,8 +711,6 @@ nav {
 	transform: translateX(-50%);
 	z-index: 2;
 	padding: 25% 30%;
-	background-size: 150%;
-
 }
 
 .gallery-item-2:hover .portfolio-title {
@@ -2463,7 +2462,6 @@ p:has(.sale-price) {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5%;
   transition: opacity 1s ease-in-out, background-size 1s ease-in-out
 }
 

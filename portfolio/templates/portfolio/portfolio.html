@@ -26,7 +26,9 @@
 		{% for image in images %}
 			<div class="portfolio-image-div">
 				<img class="portfolio-image modal-img" src="{{ image.image.url }}">
+                {% if image.caption %}
 				<p class="portfolio-p">{{ image.caption }}</p>
+                {% endif %}
 			</div>
 		{% endfor %}
 	</section>
