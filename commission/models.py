@@ -12,6 +12,15 @@ class Commission(models.Model):
 		('tray frame', 'Tray Frame'),
 	]
 
+	MEDIUM_OPTIONS = [
+		('canvas', 'Canvas'),
+		('digital file', 'Digital File'),
+		('mural', 'Mural'),
+		('3d', '3D'),
+		('wholesale', 'Wholesale'),
+		('other', 'Other'),
+	]
+
 	name = models.CharField(max_length=500, blank=True, null=True)
 	email = models.EmailField(max_length=250)
 	address = models.TextField(max_length=15000)
@@ -21,6 +30,8 @@ class Commission(models.Model):
 	deadline_date = models.DateField(blank=True, null=True)
 	contact_number = models.CharField(max_length=15, blank=True, null=True)
 	framing_options = models.CharField(max_length=20, choices=FRAMING_OPTIONS, default='n/a')
+	medium = models.CharField(max_length=20, choices=MEDIUM_OPTIONS, blank=False, null=False)
+	other_info = models.TextField(max_length=1500, blank=True, null=True)
 
 
 	def __str__(self):

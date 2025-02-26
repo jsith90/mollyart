@@ -70,8 +70,16 @@
                 {{ commission_form.commission_idea }}
             </div>
             <div class="form">
+                <label for="{{ commission_form.medium.id_for_label }}">{{ commission_form.medium.label }}</label>
+                {{ commission_form.medium }}
+            </div>
+            <div class="form">
                 <label for="{{ commission_form.canvas_size.id_for_label }}">{{ commission_form.canvas_size.label }}</label>
                 {{ commission_form.canvas_size }}
+            </div>
+            <div class="form">
+                <label for="{{ commission_form.other_info.id_for_label }}">{{ commission_form.other_info.label }}</label>
+                {{ commission_form.other_info }}
             </div>
             <div class="form">
                 <label for="{{ commission_form.deadline_date.id_for_label }}">{{ commission_form.deadline_date.label }}</label>
@@ -191,6 +199,73 @@
                     imageInputs[currentImageIndex].style.display = "none";
                 }
             });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Select the medium dropdown and canvas size field
+            const mediumSelect = document.querySelector('#id_medium');
+            const canvasSizeField = document.querySelector('#id_canvas_size');
+            const canvasSizeLabel = document.querySelector('label[for="id_canvas_size"]');
+            const otherInfoField = document.querySelector('#id_other_info');
+            const otherInfoLabel = document.querySelector('label[for="id_other_info"]');
+
+            // Add an event listener to the medium dropdown
+            mediumSelect.addEventListener("change", function () {
+                // Check if the selected value is "canvas"
+                if (mediumSelect.value === "canvas") {
+                    // Show the canvas size field
+                    canvasSizeField.style.display = "block";
+                    canvasSizeLabel.style.display = "block";
+
+                    // Make the canvas size field required
+                    canvasSizeField.setAttribute("required", true);
+                } else {
+                    // Hide the canvas size field
+                    canvasSizeField.style.display = "none";
+                    canvasSizeLabel.style.display = "none";
+
+                    // Remove the required attribute
+                    canvasSizeField.removeAttribute("required");
+                }
+            });
+
+            // Initial check in case the form is reloaded with a selected value
+            if (mediumSelect.value === "canvas") {
+                canvasSizeField.style.display = "block";
+                canvasSizeLabel.style.display = "block";
+                canvasSizeField.setAttribute("required", true);
+            } else {
+                canvasSizeField.style.display = "none";
+                canvasSizeLabel.style.display = "none";
+                canvasSizeField.removeAttribute("required");
+            }
+
+                        // Add an event listener to the medium dropdown
+            mediumSelect.addEventListener("change", function () {
+                // Check if the selected value is "canvas"
+                if (mediumSelect.value === "other") {
+                    // Show the canvas size field
+                    otherInfoField.style.display = "block";
+                    otherInfoLabel.style.display = "block";
+                    otherInfoField.setAttribute("required", true);
+                } else {
+                    // Hide the canvas size field
+                    otherInfoField.style.display = "none";
+                    otherInfoLabel.style.display = "none";
+                    otherInfoField.removeAttribute("required");
+                }
+            });
+
+            // Initial check in case the form is reloaded with a selected value
+            if (mediumSelect.value === "canvas") {
+                otherInfoField.style.display = "block";
+                otherInfoLabel.style.display = "block";
+                otherInfoField.setAttribute("required", true);
+            } else {
+                otherInfoField.style.display = "none";
+                otherInfoLabel.style.display = "none";
+                otherInfoField.removeAttribute("required");
+            }
         });
     </script>
 {% endblock %}
