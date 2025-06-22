@@ -40,7 +40,13 @@
             </div>
         </div>
     </div>
-    <section class="form-section form-display"> 
+    <div class="commission-example">
+            <div class="repeat-image">
+                <img class="relative" src="{% static 'images/commission-example-min.JPG' %}">
+            </div>
+            <h2 class="form-toggle">Commission Form Unavailable</h2>
+        </div>
+<!--     <section class="form-section form-display"> 
         <div class="commission-example">
             <div class="repeat-image">
                 <img class="relative" src="{% static 'images/commission-example-min.JPG' %}">
@@ -48,9 +54,9 @@
             <h2 class="form-toggle">Commission Form</h2>
         </div>
         <form class="commission-form" method="post" enctype="multipart/form-data">
-            <p style="text-align: center;" class="form">I’m taking a pause on family portrait commissions to expand my commissions practise and concentrate on solo works…Tell me your ideas!’</p>
+            <p style="text-align: center;" class="form">I’m taking a pause on family portrait commissions to expand my commissions practise and concentrate on solo works…Tell me your ideas!’</p> -->
         {% csrf_token %}
-            <div class="form">
+<!--             <div class="form">
                 <label for="{{ commission_form.name.id_for_label }}">{{ commission_form.name.label }}</label>
                 {{ commission_form.name }}
             </div>
@@ -113,8 +119,8 @@
             </div>
             <button type="submit" class="commission-button">Send Commission</button>
         </form>
-    </section>
-    <section class="past-commission-slides">
+    </section> -->
+<!--     <section class="past-commission-slides">
         <div class="reel-images">
             <div class="reel-image">
                 {% for image in past_images %}
@@ -126,29 +132,6 @@
                     <img class="modal-img" src="{{ image.image.url }}" alt="{{ image.image_name }}">
                 {% endfor %}
             </div>
-        </div>
-    </section>
-    <!-- <section class="commission-section">
-        <div class="reel-images">
-            <div class="reel-image">
-                <p>
-                    {% for review in reviews %}
-                        <span class="review-span">"{{ review.review }}"</span>  <span class="review-name">{{ review.name }}</span>
-                    {% endfor %}
-                </p>
-            </div>
-            <div class="reel-image">
-                <p>
-                    {% for review in reviews %}
-                        <span class="review-span">"{{ review.review }}"  </span><span class="review-name">{{ review.name }}</span>
-                    {% endfor %}
-                </p>
-            </div>
-        </div>
-        <div class="commission-backdrop">
-        </div>
-        <div class="commission-image">
-            <img src="{% static 'images/commission-image.JPG' %}">
         </div>
     </section> -->
     <!-- The Modal -->
