@@ -40,13 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="commission-example">
-            <div class="repeat-image">
-                <img class="relative" src="{% static 'images/commission-example-min.JPG' %}">
-            </div>
-            <h2 class="form-toggle">Commission Form Unavailable</h2>
-        </div>
-<!--     <section class="form-section form-display"> 
+    <section class="form-section form-display"> 
         <div class="commission-example">
             <div class="repeat-image">
                 <img class="relative" src="{% static 'images/commission-example-min.JPG' %}">
@@ -54,9 +48,9 @@
             <h2 class="form-toggle">Commission Form</h2>
         </div>
         <form class="commission-form" method="post" enctype="multipart/form-data">
-            <p style="text-align: center;" class="form">I’m taking a pause on family portrait commissions to expand my commissions practise and concentrate on solo works…Tell me your ideas!’</p> -->
+            <p style="text-align: center;" class="form">I’m taking a pause on family portrait commissions to expand my commissions practise and concentrate on solo works…Tell me your ideas!’</p>
         {% csrf_token %}
-<!--             <div class="form">
+            <div class="form">
                 <label for="{{ commission_form.name.id_for_label }}">{{ commission_form.name.label }}</label>
                 {{ commission_form.name }}
             </div>
@@ -117,10 +111,19 @@
                     </div>
                 </div>
             </div>
+            <div class="form">
+                <label for="{{ commission_form.captcha.id_for_label }}">{{ commission_form.captcha.label }}</label>
+                {{ commission_form.captcha }}
+                {% if commission_form.captcha.errors %}
+                    {% for error in commission_form.captcha.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
             <button type="submit" class="commission-button">Send Commission</button>
         </form>
-    </section> -->
-<!--     <section class="past-commission-slides">
+    </section>
+    <section class="past-commission-slides">
         <div class="reel-images">
             <div class="reel-image">
                 {% for image in past_images %}
@@ -133,7 +136,7 @@
                 {% endfor %}
             </div>
         </div>
-    </section> -->
+    </section>
     <!-- The Modal -->
     <div id="myModal" class="modal">
       <span class="close">&times;</span>

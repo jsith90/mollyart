@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     "portfolio",
     'whitenoise.runserver_nostatic',
     'paypal.standard.ipn',
-
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -170,6 +170,11 @@ PAYPAL_RECEIVER_EMAIL = 'mollystartist@gmail.com'
 STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET_YO']
 STRIPE_PUBLIC_KEY = os.environ['STRIPE_PUBLIC_YO']
 STRIPE_WEBHOOK_SECRET = os.environ['STRIPE_ENDPOINT_YO']
+
+# Google reCAPTCHA keys
+RECAPTCHA_PUBLIC_KEY = os.environ['RECAPTCHA_SITE_YO']
+RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_SECRET_YO']
+NOCAPTCHA = True
 
 # cloudinary
 cloudinary.config(

@@ -1,11 +1,15 @@
 from django import forms
 from django.forms import inlineformset_factory
 from .models import Commission, Image, Past_Commission_Image
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV2Checkbox
 
 class CommissionForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox, label="Are you a Bot?")
+    
     class Meta:
         model = Commission
-        fields = ['name', 'email', 'address', 'commission_title', 'commission_idea', 'medium', 'canvas_size', 'other_info', 'deadline_date', 'contact_number', 'framing_options']
+        fields = ['name', 'email', 'address', 'commission_title', 'commission_idea', 'medium', 'canvas_size', 'other_info', 'deadline_date', 'contact_number',]
         labels = {
             'name': 'Your Name (required):',
             'email': 'Email (required):',
