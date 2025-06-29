@@ -141,8 +141,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = ['static/']
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
 # whitenoise
@@ -190,3 +190,12 @@ EMAIL_USE_TLS = True  # Use TLS
 EMAIL_HOST_USER = 'mollystartist@gmail.com'  # Your email address
 EMAIL_HOST_PASSWORD = os.environ['HOST_EMAIL']  # Your email password (use app password for Gmail)
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Force HTTPS in production (Railway)
+if not DEBUG:  # This means when DEBUG=False (production)
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    # This ensures static files are served with HTTPS URLs
+    USE_TLS = True
